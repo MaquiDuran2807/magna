@@ -1,0 +1,41 @@
+.statistics{
+    background-image: url(../../assets/img/statistics/statistics2.png);
+    color : #f0f8ff;
+    padding: 50px;
+    @media screen and (max-width: 768px) {
+        background-size: cover;
+        background-position: 30% 100%;
+        
+    }
+}
+.statistic__number{
+    padding: 20px;
+}
+
+.counter{
+    display: inline;
+    font-size: 50px;
+    font-weight: bold;
+
+}
+
+h3 span{
+    font-size: 40px;
+}
+
+.statistics-1{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.statistic__icon{
+    margin-right: 20px;
+
+}
+
+.text-description{
+    font-size: 15px;;
+    margin-top: 20px;
+    text-align: justify;
+}

@@ -1,0 +1,175 @@
+
+header{
+    height: fit-content;
+    padding: 0;
+    
+}
+
+.title{
+    
+    font-size: clamp(2rem, 12vw, 4.5rem);
+    font-weight: 700;
+    color: #7ad9ff;
+    padding-top: clamp(20px, 20vh, 60px);
+
+    @media  screen and (min-height: 801px) {
+        padding-top: clamp(20px, 20vh, 50%);
+        font-size: clamp(3rem, 16vw, 7.5rem);
+    }
+
+}
+
+.custom-next-icon{
+    color: #7ad9ff;
+    
+    @media screen and (max-width: 768px) {
+        position: absolute;
+        top: 85%;
+        left: 65%;
+    }
+
+    @media screen and (max-width: 300px) {
+        display: none;
+    }
+
+}
+
+.custom-prev-icon{
+    color: #7ad9ff;
+    @media screen and (max-width: 768px) {
+        position: absolute;
+        top: 85%;
+        left: 30%;
+    }
+    @media screen and (max-width: 300px) {
+        display: none;
+    }
+}
+
+.description{
+    height: 100vh;
+    
+
+}
+.description p{
+    
+    font-size: clamp(1.3rem, 2vw, 2.5rem);
+    font-weight: 500;
+    color: #000000;
+    padding-bottom: 20px;
+    @media screen and (min-height: 801px) {
+        font-size: clamp(1.4rem, 2.5vw, 2.7rem);
+    }
+}
+
+.slide-1{
+    background-image:linear-gradient(to bottom left,rgba(0, 0, 0, 0.8) 0%,
+    rgba(0, 0, 0, 0.7) 35%,
+    rgba(0, 0, 0, 0.8) 100%), url(./assets/img/app/slide-banner1.webp);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100%;
+}
+
+.slide-2{
+    background-image:linear-gradient(to bottom left,rgba(0, 0, 0, 0.8) 0%,
+    rgba(0, 0, 0, 0.7) 35%,
+    rgba(0, 0, 0, 0.8) 100%), url(./assets/img/app/slide-2.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100%;
+   
+}
+
+
+.slide-3{
+    background-image:linear-gradient(to bottom left,rgba(0, 0, 0, 0.8) 0%,
+    rgba(0, 0, 0, 0.7) 35%,
+    rgba(0, 0, 0, 0.8) 100%), url(./assets/img/app/slide-banner3.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100%;
+}
+
+
+.slide-4{
+    background-image:linear-gradient(to bottom left,rgba(0, 0, 0, 0.8) 0%,
+    rgba(0, 0, 0, 0.7) 35%,
+    rgba(0, 0, 0, 0.8) 100%), url(./assets/img/app/slide-4.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100%;
+}
+
+.llamado{
+    background-color: #163E73;
+    color: #fcfbfb;
+    border-radius: 50px;
+    padding: 10px 30px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 2px solid #fff;
+    text-decoration: none;
+}
+
+
+
+
+
+
+
+.empresa{
+    height: 80vh;
+}
+
+.nosotros{
+    background: linear-gradient(0deg, rgba(11, 60, 164, 0.78) 0%, rgba(255, 192, 61, 0.78) 100%), url("./assets/img/app/nos.jpg"), lightgray 50% / cover no-repeat;
+    background-size: cover;
+    height: 80vh;
+}
+
+.ceo{
+    background: linear-gradient(to top, rgba(0, 4, 28, 0.774) 20%, rgba(0, 4, 28, 0.788) 18.23%, rgba(0, 4, 28, 0.37) 48.44%), url("./assets/img/app/ceo.jpeg"), lightgray 50% / cover no-repeat;
+    background-size: cover;
+    height: 80vh;
+}
+
+.ceo div{
+    margin-top: 18rem;
+    padding: 20px;
+}
+
+.nosotros div{
+    padding: 20px;
+}
+
+.nosotros h2{
+    font-size: 40px;
+    font-weight: 700;
+    color: #163E73;
+    padding-top: 20px;
+}
+
+/* .nosotros p{
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #000000;
+    padding-top: 20px;
+} */
+
+
+
+
+
+
+
+
+
+
+/* contactanos */
+

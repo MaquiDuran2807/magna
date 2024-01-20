@@ -1,0 +1,124 @@
+@import url("https://fonts.googleapis.com/css?family=Inter:400,600|ABeeZee:400");
+
+html, body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-image: linear-gradient(to bottom left, rgba(186, 186, 186, 0.629) 0%, rgba(234, 234, 234, 0.891) 35%, rgba(255, 255, 255, 0.95) 100%);
+    background-size: cover;
+    font-family: 'Raleway';
+    scroll-behavior: ba;
+  }
+  
+  #root {
+    min-height: 100%;
+  }
+
+button{
+    cursor: pointer;
+}
+
+button a{
+    text-decoration: none;
+    color: #fff;
+}
+
+  section{
+    height: fit-content;
+    padding: 50px 0;
+}
+
+.col-card{
+  height: 400px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  margin: 70px 0;
+
+}
+
+.boton-1{
+  background-color: #163E73;
+  color: #fcfbfb;
+  border-radius: 10px;
+  padding: 5px 15px;
+  font-size: 1rem;
+  font-weight: 500;
+  justify-content: center;
+  transition: all 0.3s ease;
+  border: 2px solid ;
+  text-decoration: none;
+}
+
+.spand{
+  height: 59px;
+}
+
+  .container-fluid{
+    padding: 0;
+  }
+
+  .row{
+    margin: 0;
+  }
+
+  .container-lg{
+    padding: 0;
+  }
+
+  .col-lg-6{
+    padding: 0;
+  }
+
+  .description{
+    @media (max-width: 768px) {
+      text-align: center;
+    }
+  }
+
+  p{
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: #000000;
+    padding-bottom: 10px;
+    
+  }
+
+  .tarjeta{
+    height: 21rem;
+    
+}
+
+.tarjeta-12{
+  @media screen and (max-width: 1000px) {
+    height: 17rem;
+    
+  }
+
+}
+
+.tarjetas-12{
+  @media screen and (max-width: 770px) {
+    height: 20rem;
+    
+  }
+}
+
+.proyectos .heading-divider{
+  background-color: #fcfbfb;
+}
+
+.logoMagna{
+  margin: 0px 20px;
+  @media screen and (max-width: 994px) 
+  {
+      width: 240px;
+  }
+  @media screen and (max-width: 768px) 
+  {
+      width: 220px;
+    
+  }
+}
+
+

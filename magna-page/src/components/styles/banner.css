@@ -1,0 +1,68 @@
+.banner-services{
+    background-image: url(../../assets/img/banner/projects.png);
+    background-size: cover;
+}
+
+.servicios-d{
+    width: 100%;
+    height: 40vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.Topografía{
+    background-image: url(../../assets/img/banner/topo.png);
+    color: #fff;
+}
+.Ingeniería{
+    background-image: url(../../assets/img/banner/ingenieria.png);
+    color: #fff;
+}
+.Medio{
+    background-image: url(../../assets/img/banner/medio.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #fff;
+}
+
+.Servicios{
+    background-image: url(../../assets/img/banner/servicios.png);
+    background-size: cover;
+    background-position: 100% 10%;
+    background-repeat: no-repeat;
+    color: #fff;
+
+}
+
+.servicios-d  h1{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.5rem, 5vw, 3rem);
+    color: #fff;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    line-height: 1.5;
+    text-transform: uppercase;
+    letter-spacing: 0.5rem;
+    text-shadow: 0 0 0.5rem rgba(0,0,0,0.5);
+    animation: Topografía 1s ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+.Sobre{
+    width: 100%;
+    height: 40vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(../../assets/img/banner/aboutus.png);
+    background-size: cover;
+    background-position: 100% 2%;
+    background-repeat: no-repeat;
+    color: #fff;
+    @media screen and (max-width: 768px){
+        background-position: center;
+    }
+}
