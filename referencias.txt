@@ -2,3 +2,16 @@ https://anywhereworks.com/contact
 https://www.magnaingenieriaytopografia.com/
 https://moltgeo.ru/
 https://www.geoexpert.com.co/geoexpert/
+
+
+SECRET_KEY='django-insecure-3gc^^v-mqu9hjtgz148b)5q2+b9%ng8#j2f62mr=-75@uayss$'
+DEBUG=True
+ALLOWED_HOSTS_DEV='*'
+ALLOWED_HOSTS_PROD='magnaingenieriaytopografia.com'
+CORS_ORIGIN_WHITELIST_DEV='http://localhost:5173'
+CORS_ORIGIN_WHITELIST_PROD='https://magnaingenieriaytopografia.com'
+CSRF_TRUSTED_ORIGINS_DEV='http://localhost:3000'
+CSRF_TRUSTED_ORIGINS_PROD='https://magnaingenieriaytopografia.com'
+DOMAIN_DEV='localhost:8000/auth/users'
+DOMAIN_PROD='https://magnaingenieriaytopografia.com'
+
