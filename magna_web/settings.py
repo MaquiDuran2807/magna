@@ -27,13 +27,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY")
+SECRET_KEY =  os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG") 
 DOMAIN=os.environ.get('DOMAIN_DEV') if DEBUG else os.environ.get('DOMAIN_PROD')
 
-ALLOWED_HOSTS = env.list("ALLOWED_HOSTS_DEV") if DEBUG else env.list("ALLOWED_HOSTS_PROD")
+ALLOWED_HOSTS = ["*"]  #env.list("ALLOWED_HOSTS_DEV") if DEBUG else env.list("ALLOWED_HOSTS_PROD")
 
 
 # Application definition
@@ -184,7 +184,7 @@ REST_FRAMEWORK={
 
 AUTH_USER_MODEL = 'user.User'
 
-CORS_ORIGIN_WHITELIST = env.list("CORS_ORIGIN_WHITELIST_DEV") if DEBUG else env.list("CORS_ORIGIN_WHITELIST_PROD")
+#CORS_ORIGIN_WHITELIST = env.list("CORS_ORIGIN_WHITELIST_DEV") if DEBUG else env.list("CORS_ORIGIN_WHITELIST_PROD")
 #CSRF_TRUSTED_ORIGINS = env.list("CSRF_TRUSTED_ORIGINS_DEV") if DEBUG else env.list("CSRF_TRUSTED_ORIGINS_PROD")
 
 # Email settings
