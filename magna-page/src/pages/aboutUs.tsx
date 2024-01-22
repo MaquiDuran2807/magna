@@ -4,7 +4,7 @@ import Banner from "../components/banner"
 import { ProyectoPanel } from '../components/sections/proyectoPanel';
 import { Statistics } from '../components/sections/statistics';
 import "./styles/aboutUs.css"
-import { AiOutlineAim } from "react-icons/ai";
+import { FaCheck } from "react-icons/fa6";
 import { BsClipboard2Fill } from "react-icons/bs";
 import Equipos from '../components/sections/Equipos';
 import { Proyectos } from '../components/sections/proyectos';
@@ -23,11 +23,11 @@ const AboutUs: React.FC = () => {
                                 ¿Quiénes somos?___
                             </h4>
                             <h2>
-                                Somos una empresa <span className='title-span'>especializada </span>en la construcción de <span className='title-span'></span> proyectos de ingeniería.
+                            Somos un <span className='title-span'>equipo </span> de profesionales integrales con gran experiencia,que ofrece servicios de ingeniería de <span className='title-span'> alta calidad</span>, brindando a nuestros clientes soluciones eficaces y concretas.
+
+                                 
                             </h2>
-                            <p>
-                                Nuestro objetivo es brindar a nuestros clientes la mejor calidad en nuestros proyectos, con un excelente servicio y atención personalizada.
-                            </p>
+                            
                             <button className='boton-1'>
                                 Contáctanos
                             </button>
@@ -40,7 +40,7 @@ const AboutUs: React.FC = () => {
                         <div className="abautUs row">
                             <details className='acordeon' open>
                                 <summary>
-                                <AiOutlineAim size={30} className="icon-info"/>
+                                <FaCheck size={30} className="icon-info"/>
                                     visión
                                 </summary>
                                 <div>
@@ -59,7 +59,7 @@ const AboutUs: React.FC = () => {
                             </details>
                             <details className='acordeon' open>
                                 <summary>
-                                <BsClipboard2Fill size={30} className="icon-info"/>
+                                <FaCheck size={30} className="icon-info"/>
                                     misión
                                 </summary>
                                 <div>

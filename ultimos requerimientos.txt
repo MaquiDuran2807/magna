@@ -1,0 +1,13 @@
+hectareas medidas 
+presencia en varias en el mapa 
+4 indicador stadistica covertura mapa de colombia  covertura nacional 32 import { GrMap } from "react-icons/gr";
+import { TfiRulerAlt2 } from "react-icons/tfi";
+
+contactanos centrado 
+
+quitar el tutulo de seccion pequeño
+
+cambiar el banner de nosotros
+
+
+agregar linkeed in

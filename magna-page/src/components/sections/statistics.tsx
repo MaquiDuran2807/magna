@@ -2,8 +2,9 @@
 import "../styles/statistics.css"
 import  Contador from "../contador"
 import { GoProjectRoadmap } from "react-icons/go";
-import { FaBuilding } from "react-icons/fa";
-import { TbMapPlus } from "react-icons/tb";
+import { FaRegHandshake } from "react-icons/fa";
+
+import { TfiRulerAlt2 } from "react-icons/tfi";
 
 
 export const Statistics = () => {
@@ -31,9 +32,9 @@ export const Statistics = () => {
         <div className="row justify-content-center">
           <div className="col-lg-4  text-center ">
               <div className="statistic__number">
-                <FaBuilding className="statistic__icon" size={40}/>
+                <FaRegHandshake className="statistic__icon" size={40}/>
                 <h3>
-                  <Contador value={10}/><span className="">+</span>
+                  <Contador value={500}/><span className="">+</span>
                 </h3>
                 <h4 className="statistic__title ">Clientes</h4>
                 <p className="text-white text-description">
@@ -45,7 +46,7 @@ export const Statistics = () => {
               <div className="statistic__number ">
                 <GoProjectRoadmap className="statistic__icon" size={40}/>
                 <h3>
-                  <Contador value={100}/><span className="">+</span>
+                  <Contador value={1000}/><span className="">+</span>
                 </h3>
                 <h4 className="statistic__title ">Proyectos</h4>
                 <p className="text-white text-description">
@@ -55,12 +56,12 @@ export const Statistics = () => {
           </div>
           <div className="col-lg-4 statistics-1  text-center">
               <div className="statistic__number">
-                <TbMapPlus className="statistic__icon" size={40}/>
+                <TfiRulerAlt2  className="statistic__icon" size={40}/>
                 <h3>
-                  <Contador value={1000000}/><span className="">+</span>
+                  <Contador value={200000}/><span className="">+</span>
                 </h3>
                 <h4 className="statistic__title ">
-                  Hectareas intervenidas 
+                  Hectareas medidas
                 </h4>
                 <p className="text-white text-description">
                 Nos enorgullece haber intervenido una amplia superficie de terreno. Nuestra empresa se dedica a transformar ideas en realidad, y es gracias a la diversidad y la envergadura de nuestros proyectos que continuamos innovando y creciendo.

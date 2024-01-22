@@ -23,7 +23,7 @@ details{
 }
 
 details summary{
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     font-weight: 700;
     color: #163E73;
     cursor: pointer;
@@ -42,4 +42,13 @@ details p{
     font-size: 1.5rem;
     color: #000000;
     margin-right: 10px;
+}
+
+.abautUs h2{
+    font-size: clamp(1.5rem, 4vw, 1.8rem);
+    font-weight: 700;
+    text-transform: none;
+    
+    color: #163E73;
+    margin-bottom: 50px;
 }
