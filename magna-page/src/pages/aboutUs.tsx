@@ -5,7 +5,6 @@ import { ProyectoPanel } from '../components/sections/proyectoPanel';
 import { Statistics } from '../components/sections/statistics';
 import "./styles/aboutUs.css"
 import { FaCheck } from "react-icons/fa6";
-import { BsClipboard2Fill } from "react-icons/bs";
 import Equipos from '../components/sections/Equipos';
 import { Proyectos } from '../components/sections/proyectos';
 
