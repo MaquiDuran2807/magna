@@ -1,4 +1,5 @@
 
+import { useState,useEffect } from 'react';
 import PagesLayout from '../layouts/pagesLayouts';
 import Banner from "../components/banner"
 import { ProyectoPanel } from '../components/sections/proyectoPanel';
@@ -8,10 +9,29 @@ import { FaCheck } from "react-icons/fa6";
 import Equipos from '../components/sections/Equipos';
 import { Proyectos } from '../components/sections/proyectos';
 
+function Componente1() {
+    // Este es el primer componente que se renderizará
+    return <Banner title="Sobre Nosotros" paragraph="Sobre Nosotros" />;
+  }
+  
+  
+
+
 const AboutUs: React.FC = () => {
+    const [isComponente1Mounted, setIsComponente1Mounted] = useState(false);
+    useEffect(() => {
+        setIsComponente1Mounted(true);
+      }, []);
+
+    if (!isComponente1Mounted) {
+        return null;
+      }
+
+
     return (
         <PagesLayout>
-            <Banner title="Sobre Nosotros" paragraph="Sobre Nosotros" />
+            <Componente1 />
+            {/* <Banner title="Sobre Nosotros" paragraph="Sobre Nosotros" /> */}
             <ProyectoPanel />
             <Statistics />
             <div className="info container ">

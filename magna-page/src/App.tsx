@@ -10,8 +10,9 @@ import { Servicios } from './components/sections/Servicios';
 import { Proyectos } from './components/sections/proyectos';
 import { Clients } from './components/sections/clients';
 import { Contact } from './components/sections/contact';
+import { Statistics } from './components/sections/statistics'
 import SplashScreen from './components/splashScreen';
-import banner1 from './assets/img/banner/aboutus.png'
+import banner1 from './assets/img/banner/nosotros.svg'
 import banner2 from './assets/img/banner/servicios.png'
 import banner3 from './assets/img/banner/projects.png'
 import banner4 from './assets/img/banner/topo.png'
@@ -53,6 +54,11 @@ export function App() {
       {/* proyectos  todo */}
         <Proyectos/>
       {/* fin proyectos*/}
+      {/* estadisticas  */}
+      <br /> 
+      <br />
+        <Statistics/>
+      {/* fin estadisticas  */}
 
       {/* clientes */}
         <Clients/>
@@ -69,14 +75,15 @@ export function App() {
     {/* estadisticas  */}
     
     {/* fin estadisticas  */}
-
-    </PagesLayout>
     <img src={banner1}className="hidden" alt="banner1" />
     <img src={banner2}  className="hidden" alt="banner2" />
     <img src={banner3}  className="hidden" alt="banner3" />
     <img src={banner4}  className="hidden" alt="banner4" />
     <img src={banner5}  className="hidden" alt="banner5" />
     <img src={banner6}  className="hidden" alt="banner6" />
+
+    </PagesLayout>
+    
 
     </>
   )
