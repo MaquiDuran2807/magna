@@ -43,14 +43,7 @@ const AboutUs: React.FC = () => {
                             </h4>
                             <h2>
                             Somos un <span className='title-span'>equipo </span> de profesionales integrales con gran experiencia,que ofrece servicios de ingeniería de <span className='title-span'> alta calidad</span>, brindando a nuestros clientes soluciones eficaces y concretas.
-
-                                 
                             </h2>
-                            
-                            <button className='boton-1'>
-                                Contáctanos
-                            </button>
-                            
 
                         </div>
                         <br />
@@ -95,7 +88,11 @@ const AboutUs: React.FC = () => {
                                 </div>
                             </details>
                         </div>
+                        
                     </div>
+                    <button className='boton-1'>
+                        Contáctanos
+                    </button>
                 </div>
 
             </div>

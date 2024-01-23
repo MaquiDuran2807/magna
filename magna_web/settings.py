@@ -184,7 +184,7 @@ REST_FRAMEWORK={
 
 AUTH_USER_MODEL = 'user.User'
 
-#CORS_ORIGIN_WHITELIST = env.list("CORS_ORIGIN_WHITELIST_DEV") if DEBUG else env.list("CORS_ORIGIN_WHITELIST_PROD")
+CORS_ORIGIN_WHITELIST =  ["http://localhost:8000","http://54.211.37.134:8000","http://localhost:5173","https://www.magnaingenieriaytopografia.com"]    #env.list("CORS_ORIGIN_WHITELIST_DEV") if DEBUG else env.list("CORS_ORIGIN_WHITELIST_PROD")
 #CSRF_TRUSTED_ORIGINS = env.list("CSRF_TRUSTED_ORIGINS_DEV") if DEBUG else env.list("CSRF_TRUSTED_ORIGINS_PROD")
 
 # Email settings
