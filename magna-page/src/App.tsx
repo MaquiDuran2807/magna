@@ -11,17 +11,27 @@ import { Proyectos } from './components/sections/proyectos';
 import { Clients } from './components/sections/clients';
 import { Contact } from './components/sections/contact';
 import SplashScreen from './components/splashScreen';
+import banner1 from './assets/img/banner/aboutus.png'
+import banner2 from './assets/img/banner/servicios.png'
+import banner3 from './assets/img/banner/projects.png'
+import banner4 from './assets/img/banner/topo.png'
+import banner5 from './assets/img/banner/ingenieria.png'
+import banner6 from './assets/img/banner/medio.png'
 
 
 
 export function App() {
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setIsLoaded(true);
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000); // ajusta este tiempo según tus necesidades
+
+    return () => clearTimeout(timer);
   }, []);
 
-  if (!isLoaded) {
+  if (loading) {
     return <SplashScreen />;
   }
 
@@ -61,6 +71,13 @@ export function App() {
     {/* fin estadisticas  */}
 
     </PagesLayout>
+    <img src={banner1}className="hidden" alt="banner1" />
+    <img src={banner2}  className="hidden" alt="banner2" />
+    <img src={banner3}  className="hidden" alt="banner3" />
+    <img src={banner4}  className="hidden" alt="banner4" />
+    <img src={banner5}  className="hidden" alt="banner5" />
+    <img src={banner6}  className="hidden" alt="banner6" />
+
     </>
   )
 }
