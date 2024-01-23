@@ -1,8 +1,10 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { FaHome } from 'react-icons/fa';
 import { FiArrowRight } from 'react-icons/fi';
 import './styles/banner.css';
 import { Link } from 'react-router-dom';
+
 
 interface BannerProps {
     title: string;
@@ -12,7 +14,13 @@ interface BannerProps {
 const Banner: React.FC<BannerProps> = ({ title, paragraph }) => {
     return (
         <>
-        <div className='banner-services row' id='header'>
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+            className='banner-services row' id='header'
+        >
+            
             <div className={` ${title} servicios-d container-fluid`} id='header' >
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center',color:"whithe" }}>
                     <h1>{title}</h1>
@@ -26,8 +34,8 @@ const Banner: React.FC<BannerProps> = ({ title, paragraph }) => {
                     </div>
                 </div>
             </div>
-        </div>
         {/* tarjetas de servicios */}
+        </motion.div>
         
         </>
     );

@@ -9,6 +9,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    @media screen and (max-width: 900){
+        height: 30vh;
+        
+    }
 }
 .Topografía{
     background-image: url(../../assets/img/banner/topo.png);
@@ -35,7 +39,7 @@
 
 }
 
-.servicios-d  h1{
+.banner-services  h1{
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     font-size: clamp(1.5rem, 5vw, 3rem);
@@ -66,3 +70,50 @@
         background-position: center;
     }
 }
+
+/* .fondo-banner{
+
+    width: 100%;
+
+    z-index: 1;
+
+} */
+
+/* .banner-title{
+    position:relative;
+    bottom: 20vh;
+    z-index: 2;
+    @media screen and (max-width: 768px) {
+        bottom: 5vh;
+    }
+
+} */
+
+/* .banner-content{ */
+    /* position:relative;
+    bottom: 20vh;
+    display: flex;
+    justify-content: center;
+    z-index: 2;
+    @media screen and (max-width: 768px) {
+        bottom: 5vh;
+        
+    } */
+
+/* } */
+
+/* .home-icon{
+    padding-right: 10px;
+}
+
+.home-link{
+    color: #fff;
+    text-decoration: none;
+    font-size: 25px;
+    padding-right: 10px;
+}
+
+.arrow{
+    color: #fff;
+    padding-right: 10px;
+} */
