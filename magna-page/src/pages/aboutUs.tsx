@@ -11,7 +11,7 @@ import { Proyectos } from '../components/sections/proyectos';
 const AboutUs: React.FC = () => {
     return (
         <PagesLayout>
-            <Banner title="Sobre Nosotros " paragraph="Sobre Nosotros" />
+            <Banner title="Sobre Nosotros" paragraph="Sobre Nosotros" />
             <ProyectoPanel />
             <Statistics />
             <div className="info container ">
