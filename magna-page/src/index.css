@@ -7,16 +7,20 @@ html, body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-image: linear-gradient(to bottom left, rgba(186, 186, 186, 0.629) 0%, rgba(234, 234, 234, 0.891) 35%, rgba(255, 255, 255, 0.95) 100%);
     background-size: cover;
     font-family: 'Raleway';
-    scroll-behavior: ba;
-  }
-  
-  #root {
-    min-height: 100%;
+    scroll-behavior: baseline;
   }
 
+.splash-screen{
+    background-color: #163E73;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
 button{
     cursor: pointer;
 }
