@@ -1,4 +1,7 @@
-@import url("https://fonts.googleapis.com/css?family=Inter:400,600|ABeeZee:400");
+@font-face {
+  font-family: 'Raleway';
+  src: local('Raleway'), url(./fonts/Raleway-VariableFont_wght.ttf) format('truetype');
+}
 
 html, body {
     margin: 0;
