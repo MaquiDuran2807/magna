@@ -1,6 +1,6 @@
 
 import { motion } from 'framer-motion';
-import Lottie from 'react-lottie';
+import Lottie from "lottie-react";
 import animationData from '../animations/Animation - 1706024995672.json';
 
 const SplashScreen = () => {
@@ -13,14 +13,8 @@ const SplashScreen = () => {
     >
       <h1 className='text-white'>Bienvenido a Magna</h1>
         <Lottie
-            options={{
-            loop: true,
-            autoplay: true,
-            animationData,
-            rendererSettings: {
-                preserveAspectRatio: 'xMidYMid slice',
-            },
-            }}
+            animationData={animationData}
+            loop={true}
             height={400}
             width={400}
         />
