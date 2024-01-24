@@ -14,7 +14,7 @@ class UserAdmin(admin.ModelAdmin):
             'fields': ('email', 'first_name', 'last_name')
         }),
         ('Permissions', {
-            'fields': ('is_editor', 'is_staff')
+            'fields': ('is_editor', 'is_staff',"is_active")
         }),
         ('Important dates', {
             'fields': ('last_login', 'date_joined')
