@@ -11,7 +11,6 @@ export const Contact = () => {
   const isMobile = width <= 768;
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  let formDatas = {}
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
