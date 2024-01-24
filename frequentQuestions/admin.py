@@ -13,5 +13,4 @@ class PreguntaAdmin(admin.ModelAdmin):
             'fields': ('pregunta', 'respuesta')
         }),
     )
-    readonly_fields = ('pregunta', 'respuesta')
     ordering = ('pregunta', 'respuesta')

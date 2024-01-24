@@ -1,5 +1,6 @@
 import paneles from '../../assets/img/app/paneles.jpeg'
 import '../styles/ProyectPanel.css'
+import { Link } from 'react-router-dom'
 
 
 export  const ProyectoPanel = () => {
@@ -44,7 +45,7 @@ export  const ProyectoPanel = () => {
                         <div className="row">
                             <div className="col-12">
                                 <button className=' boton-1 '>
-                                    Ver más
+                                   <Link to={`/projects`}> Ver más</Link>
                                 </button>
                             </div>
                         </div>

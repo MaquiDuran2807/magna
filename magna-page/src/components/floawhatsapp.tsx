@@ -6,13 +6,17 @@ import logo from '../assets/img/logo6.png'
 export const FloatWhatsapp = () => {
     const [message, setMessage] = useState('');
 
-    const handleSubmit = (event:any) => {
+    const handleSubmit = (event:any,value:any) => {
         event.preventDefault();
         // Aquí puedes cambiar el estado del mensaje si es necesario
-        console.log(message);
+        setMessage(event.target.value);
+        // capturar el mensaje y el destinatario para enviarlo a base de datos
+
+        console.log(value) ;
         
+
         window.open(`https://wa.me/3132356306?text=${encodeURIComponent(message)}`);
-        setMessage('Nuevo mensaje');
+
     };
 
     useEffect(() => {

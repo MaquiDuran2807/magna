@@ -6,6 +6,7 @@ from rest_framework.generics import CreateAPIView
 from rest_framework import permissions
 from .models import Contacto
 from .serializer import ContactoSerializer
+from rest_framework import status
 # Create your views here.
 
 
@@ -19,4 +20,8 @@ class ContactoApiView(CreateAPIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
-        return Response(serializer.errors)
+        else:
+            return Response(serializer.errors,
+                            status=status.HTTP_400_BAD_REQUEST)
+
+        

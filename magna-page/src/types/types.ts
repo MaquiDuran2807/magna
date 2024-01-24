@@ -151,4 +151,11 @@ export interface TypeProject {
   name: string;
 }
 
+export interface PreguntasyrespuestasMagna {
+  id:        number;
+  pregunta:  string;
+  respuesta: string;
+}
+
+
 

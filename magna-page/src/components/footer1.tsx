@@ -1,6 +1,7 @@
 
 import { FaFacebook, FaInstagram, } from 'react-icons/fa';
 import { FaSquareXTwitter,FaTiktok} from "react-icons/fa6";
+import { BsLinkedin } from "react-icons/bs";
 import {LogoMagna} from '../assets/img/logo'
 import "./styles/footer.css"
 
@@ -13,22 +14,14 @@ const Footer1: React.FC = () => {
 
                         <div className="row m-3">
                             <div className="col-12 col-md-9 ">
-                                <LogoMagna />
+                                <LogoMagna className='logo-footer'/>
                             </div>
                         </div>
 
                         <div className="row">
-                            <div className="col-12 col-md-9 m-3">
-                                <p className="text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatem.</p>
+                            <div className="col-12 col-md-9 ">
+                                <p className="text-white">Somos un equipo de profesionales integrales con gran experiencia,que ofrece servicios de ingeniería de alta calidad, brindando a nuestros clientes soluciones eficaces y concretas.</p>
                             </div>
-                        </div>
-                        <div className="row">
-                            <a href="elitit.com" className="text-whithe col-12">
-                            {/* todos los derechos reservados */}
-                            <p className="text-white">
-                                @2023 Elit-it. Todos los derechos reservados.
-                            </p>
-                            </a>
                         </div>
                     </div>
                     
@@ -43,10 +36,13 @@ const Footer1: React.FC = () => {
                         </div>
                     </div>
                     <div className="row">
-                    <h5>Dirección</h5>
-                        <p className="text-white">Calle 17A #7-78</p>
-                        <p className="text-white">Ibagué, Tolima. Colombia</p>
-                    </div>
+                        <div className="col-12">
+                            <h5>Dirección</h5>
+                            <p className="text-white">Calle 17A #7-78</p>
+                            <p className="text-white">Ibagué, Tolima. Colombia</p>
+                        </div>
+                        </div>
+                    
                     
                 </div>
                 
@@ -63,26 +59,41 @@ const Footer1: React.FC = () => {
                         <ul className="list-inline">
                             <li className="list-inline-item">
                                 <a href="https://www.facebook.com">
-                                    <FaFacebook size={50} />
+                                    <FaFacebook size={35} />
                                 </a>
                             </li>
                             <li className="list-inline-item">
                                 <a href="https://www.twitter.com">
-                                <FaSquareXTwitter size={50}/>
+                                <FaSquareXTwitter size={35}/>
                                 </a>
                             </li>
                             <li className="list-inline-item">
                                 <a href="https://www.instagram.com">
-                                    <FaInstagram size={50}/>
+                                    <FaInstagram size={35}/>
                                 </a>
                             </li>
                             <li className="list-inline-item m-2">
                                 <a href="https://www.tiktok.com">
-                                    <FaTiktok size={50}/>
+                                    <FaTiktok size={35}/>
+                                </a>
+                            </li>
+                            <li className="list-inline-item">
+                                <a href="https://www.linkedin.com">
+                                    <BsLinkedin size={35}/>
                                 </a>
                             </li>
                         </ul>
                     </div>
+                </div>
+            </div>
+            <div className="row elit">
+                <div className="col-12">
+                    <a href="elitit.com" className="text-whithe col-12 copy-elit">
+                    {/* todos los derechos reservados */}
+                        <h6 className="text-white">
+                            @2023 Elit-it. Todos los derechos reservados.
+                        </h6>
+                    </a>
                 </div>
             </div>
         </footer>

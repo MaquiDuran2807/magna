@@ -1,5 +1,9 @@
-import { useState } from "react";
+
 import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
+import { PreguntasyrespuestasMagna} from '../types/types'
+import { API_PREGUNTASYRESPUESTAS } from "../constans";
+
 
 interface AccordionProps {
   question: string;
@@ -9,6 +13,7 @@ interface AccordionProps {
 }
 
 const Accordion: React.FC<AccordionProps> = ({ question, answer, isOpen, onClick }) => {
+  
   return (
     <motion.div>
       <AnimatePresence>
@@ -38,17 +43,16 @@ const Accordion: React.FC<AccordionProps> = ({ question, answer, isOpen, onClick
 };
 
 const FAQAccordion: React.FC = () => {
-  const accordionData = [
-    { question: 'Pregunta 1', answer: 'Respuesta 1' },
-    { question: 'Pregunta 2', answer: 'Respuesta 2' },
-    { question: 'Pregunta 3', answer: 'Respuesta 3' },
-    { question: 'Pregunta 4', answer: 'Respuesta 4' },
-    { question: 'Pregunta 5', answer: 'Respuesta 5' },
-    { question: 'Pregunta 6', answer: 'Respuesta 6' },
-    { question: 'Pregunta 7', answer: 'Respuesta 7' },
-    { question: 'Pregunta 8', answer: 'Respuesta 8' },
-    { question: 'Pregunta 9', answer: 'Respuesta 9' },
-  ];
+  const [accordionData, setAccordionData] = useState<PreguntasyrespuestasMagna[]>([]);
+
+  useEffect(() => {
+    // Make API call to fetch data from the database
+    // Replace the URL with your actual API endpoint
+    fetch(API_PREGUNTASYRESPUESTAS)
+      .then(response => response.json())
+      .then(data => setAccordionData(data))
+      .catch(error => console.error(error));
+  }, []);
 
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
@@ -57,8 +61,8 @@ const FAQAccordion: React.FC = () => {
       {accordionData.map((item, index) => (
         <Accordion
           key={index}
-          question={item.question}
-          answer={item.answer}
+          question={item.pregunta}
+          answer={item.respuesta}
           isOpen={openIndex === index}
           onClick={() => setOpenIndex(openIndex === index ? null : index)}
         />
