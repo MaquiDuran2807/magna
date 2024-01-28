@@ -93,7 +93,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         console.log("llego aqui ", accessToken);
         
         //existe access token
-        // const userInfo = await retrieveUserInfo(accessToken);
+        const userInfo = await retrieveUserInfo(accessToken);
         // setUser(userInfo);
         setAccessToken(accessToken);
         setIsAuthenticated(true);
@@ -157,7 +157,7 @@ async function retrieveUserInfo(accessToken: string) {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
+        "Authorization": `JWT ${token}`,
       },
     });
     console.log("response", response);

@@ -16,6 +16,7 @@ import Projects from './pages/projects';
 import { ServecesDetail } from './pages/servecesDetail';
 import ServiciosIdProvider from './hooks/GetsIdServices';
 import ProjectDetail from './pages/projecsDetail'
+import ContactPage from './pages/contact';
 
 const router = createBrowserRouter(
   [
@@ -58,6 +59,10 @@ const router = createBrowserRouter(
     {
       path: '/projects/:id',
       element: <ProjectDetail/>,
+    },
+    {
+      path: '/contact',
+      element: <ContactPage/>,
     },
     {
       path: "/",

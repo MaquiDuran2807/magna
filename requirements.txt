@@ -1,3 +1,5 @@
+argon2-cffi==23.1.0
+argon2-cffi-bindings==21.2.0
 asgiref==3.7.2
 certifi==2023.11.17
 cffi==1.16.0
@@ -6,6 +8,7 @@ colorama==0.4.6
 cors==1.0.1
 cryptography==41.0.7
 defusedxml==0.8.0rc2
+distlib==0.3.6
 Django==5.0
 django-ckeditor==6.7.0
 django-cors-headers==4.3.1
@@ -20,8 +23,11 @@ future==0.18.3
 gevent==23.9.1
 greenlet==3.0.2
 idna==3.6
+mysql-connector-python==8.0.33
+numpy==1.26.1
 oauthlib==3.2.2
 Pillow==10.1.0
+platformdirs==2.5.4
 pycparser==2.21
 PyJWT==2.8.0
 PySocks==1.7.1
@@ -37,5 +43,7 @@ sqlparse==0.4.4
 tldextract==5.1.1
 tzdata==2023.3
 urllib3==2.1.0
+virtualenv==20.17.0
+virtualenv-clone==0.5.7
 zope.event==5.0
 zope.interface==6.1

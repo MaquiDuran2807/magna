@@ -18,9 +18,11 @@ class ContactoApiView(CreateAPIView):
     def post(self, request, *args, **kwargs):
         serializer = ContactoSerializer(data=request.data)
         if serializer.is_valid():
+            print(serializer.validated_data)
             serializer.save()
             return Response(serializer.data)
         else:
+            print(serializer.errors, serializer.validated_data,"error")
             return Response(serializer.errors,
                             status=status.HTTP_400_BAD_REQUEST)
 

@@ -42,6 +42,7 @@ export const NavBar = (  ) => {
                       <Nav className="ms-auto">
                         <Link className={`links nav navbar  ${themeLogin} `} to="/AboutUS" >Quiénes somos</Link>
                         <NavLink className={`links nav navbar  ${themeLogin} `} to="/servicios#header">Servicios</NavLink>
+                        <Link className={`links nav navbar  ${themeLogin} `} to="/contact">Contacto</Link>
                         <NavLink className={`links nav navbar  ${themeLogin} `} to="/projects">Proyectos</NavLink>
                         <a className={`links nav navbar  ${themeLogin} `} href="/cotizador">Cotizar</a>
                         <div onClick={() => setOpen(!open)}>

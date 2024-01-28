@@ -17,14 +17,14 @@ export const Servicios = () => {
         {
             id: 2,
             title: 'Ingeniería  y Consultoría',
-            description: 'Diseño y construcción de obras civiles, Estudios hidrológicos e hidráulicos, Estudios Geologicos y Geotecnicos, entre otros.',
+            description: 'Diseño y construcción de obras civiles, Estudios hidrológicos e hidráulicos, Estudios Geológicos y Geotécnicos, entre otros.',
             img: ingenieria,
             url: '/services_ingenieria'
         },
         {
             id: 3,
             title: 'Medio Ambiente',
-            description: 'Tramites y permisos Ambientales, Estudios de impacto ambiental, auditorías, monitoreo ambiental, programas y proyectos de manejo ambiental, entre otros.',
+            description: 'Trámites y permisos Ambientales, Estudios de impacto ambiental, auditorías, monitoreo ambiental, programas y proyectos de manejo ambiental, entre otros.',
             img: medio,
             url: '/services_ambiental'
         }

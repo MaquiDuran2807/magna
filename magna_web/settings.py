@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
+from datetime import timedelta
 from pathlib import Path
 import os
 import environ
@@ -31,7 +32,7 @@ SECRET_KEY = 'django-insecure-3gc^^v-mqu9hjtgz148b)5q2+b9%ng8#j2f62mr=-75@uayss$
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True #os.environ.get("DEBUG") 
-DOMAIN= 'localhost:8000/auth/users'# os.environ.get('DOMAIN_DEV') if DEBUG else os.environ.get('DOMAIN_PROD')
+DOMAIN="localhost:5173 " #'localhost:8000/auth/users' # os.environ.get('DOMAIN_DEV') if DEBUG else os.environ.get('DOMAIN_PROD')
 
 ALLOWED_HOSTS = ["*"]  #env.list("ALLOWED_HOSTS_DEV") if DEBUG else env.list("ALLOWED_HOSTS_PROD")
 
@@ -62,6 +63,7 @@ INSTALLED_APPS = [
     'proyectos',
     "contact",
     "frequentQuestions",
+    "products",
 ]
 
 CKEDITOR_UPLOAD_PATH = "/media/"
@@ -176,15 +178,23 @@ MEDIA_ROOT = BASE_DIR.joinpath('media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-REST_FRAMEWORK={
-    'DEFAULT_PERMISSION_CLASSES':[
-        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
-    ]
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+
+    ),
+}
+SIMPLE_JWT = {
+   'AUTH_HEADER_TYPES': ('JWT',),
+   'ACCESS_TOKEN_LIFETIME': timedelta(days=20),
 }
 
 AUTH_USER_MODEL = 'user.User'
 
-CORS_ORIGIN_WHITELIST =  ["http://localhost:8000","http://54.211.37.134:8000","http://localhost:5173","https://www.magnaingenieriaytopografia.com"]    #env.list("CORS_ORIGIN_WHITELIST_DEV") if DEBUG else env.list("CORS_ORIGIN_WHITELIST_PROD")
+CORS_ORIGIN_WHITELIST =  ["http://localhost:8000","http://54.211.37.134:8000","http://localhost:5173","https://www.magnaingenieriaytopografia.com","http://localhost:5174"]    #env.list("CORS_ORIGIN_WHITELIST_DEV") if DEBUG else env.list("CORS_ORIGIN_WHITELIST_PROD")
 #CSRF_TRUSTED_ORIGINS = env.list("CSRF_TRUSTED_ORIGINS_DEV") if DEBUG else env.list("CSRF_TRUSTED_ORIGINS_PROD")
 
 # Email settings

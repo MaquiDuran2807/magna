@@ -20,7 +20,7 @@ const Footer1: React.FC = () => {
 
                         <div className="row">
                             <div className="col-12 col-md-9 ">
-                                <p className="text-white">Somos un equipo de profesionales integrales con gran experiencia,que ofrece servicios de ingeniería de alta calidad, brindando a nuestros clientes soluciones eficaces y concretas.</p>
+                                <p className="text-white">Somos un equipo de profesionales integrales con gran experiencia, que ofrece servicios de ingeniería de alta calidad, brindando a nuestros clientes soluciones eficaces y concretas.</p>
                             </div>
                         </div>
                     </div>
@@ -38,7 +38,7 @@ const Footer1: React.FC = () => {
                     <div className="row">
                         <div className="col-12">
                             <h5>Dirección</h5>
-                            <p className="text-white">Calle 17A #7-78</p>
+                            <p className="text-white">Cl. 18 #7-27</p>
                             <p className="text-white">Ibagué, Tolima. Colombia</p>
                         </div>
                         </div>

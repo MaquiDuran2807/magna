@@ -42,7 +42,7 @@ const AboutUs: React.FC = () => {
                                 ¿Quiénes somos?___
                             </h4>
                             <h2>
-                            Somos un <span className='title-span'>equipo </span> de profesionales integrales con gran experiencia,que ofrece servicios de ingeniería de <span className='title-span'> alta calidad</span>, brindando a nuestros clientes soluciones eficaces y concretas.
+                            Somos un <span className='title-span'>equipo </span> de profesionales integrales con gran experiencia, que ofrece servicios de ingeniería de <span className='title-span'> alta calidad</span>, brindando a nuestros clientes soluciones eficaces y concretas.
                             </h2>
 
                         </div>
@@ -58,8 +58,8 @@ const AboutUs: React.FC = () => {
                                 <div>
                                     
                                     <p>
-                                    Para el año 2025 Magna Ingeniería y
-                                        Topografía S.A.S será una empresa líder
+                                        Para el año 2025 Magna Ingeniería y
+                                        Topografía S.A.S. será una empresa líder
                                         en el sector, ofreciendo servicios de
                                         ingeniería en el tratamiento y análisis de
                                         la información geoespacial, adoptando
@@ -90,9 +90,15 @@ const AboutUs: React.FC = () => {
                         </div>
                         
                     </div>
-                    <button className='boton-1'>
-                        Contáctanos
-                    </button>
+                    <div className="row justify-content-center">
+                        <div className="col-4 text-center mt-4">
+                        <button className='boton-1'>
+                            Contáctanos
+                        </button>
+                        </div>
+
+                    </div>
+                    
                 </div>
 
             </div>
