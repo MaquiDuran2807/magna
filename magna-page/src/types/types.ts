@@ -7,16 +7,19 @@ export interface AuthResponse {
       error: string;
     };
   }
+  export type refreshResponse = {
+    access: string;
+  };
   
   export interface User {
-    _id: string;
-    name: string;
-    username: string;
+    first_name: string
+    last_name: string
+    email: string
+    id: number
   }
   
   export interface AccessTokenResponse {
     statusCode: number;
-    
     access: string;
     error?: string;
   }
@@ -55,13 +58,6 @@ export interface AuthResponse {
     imagen: string;
   }
 
-  // equipos types
-  // To parse this data:
-//
-//   import { Convert } from "./file";
-//
-//   const equipos = Convert.toEquipos(json);
-
 export interface Equipos {
   id:          number;
   nombre:      string;
@@ -70,10 +66,6 @@ export interface Equipos {
   imagen:      string;
 }
 
-// Converts JSON strings to/from your types
-//   import { Convert } from "./file";
-//
-//   const equipos = Convert.toEquipos(json);
 export interface Equipos {
   id:          number;
   nombre:      string;

@@ -33,7 +33,7 @@ export const NavBar = (  ) => {
             <div className=' navegacion'>
                 <Navbar className="navbar pt-0 mt-0 " expand="lg"  >
                   <div className='navbarra container-fluid'>
-                    <Navbar.Brand href="/" className='brand '>
+                    <Navbar.Brand  className='brand ' as={Link} to="/">
                       {/* <img src={logo} alt="logo" className='logo' width={"400px"}/> */}
                       <LogoOriginal width={260} className='logoMagna' />
                     </Navbar.Brand>
@@ -44,7 +44,7 @@ export const NavBar = (  ) => {
                         <NavLink className={`links nav navbar  ${themeLogin} `} to="/servicios#header">Servicios</NavLink>
                         <Link className={`links nav navbar  ${themeLogin} `} to="/contact">Contacto</Link>
                         <NavLink className={`links nav navbar  ${themeLogin} `} to="/projects">Proyectos</NavLink>
-                        <a className={`links nav navbar  ${themeLogin} `} href="/cotizador">Cotizar</a>
+                        <Link className={`links nav navbar  ${themeLogin} `} to="/cotizador">Cotizar</Link>
                         <div onClick={() => setOpen(!open)}>
                           
                           <a  className='links nav navbar text-black'>blog <span><img src={drop} alt="" /> </span></a>

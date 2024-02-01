@@ -5,10 +5,10 @@ import { useAuth } from '../auth/AuthProvider';
 export const Cotizador: React.FC = () => {
 
     const auth=useAuth();
-    console.log( "isAuthenticated ",auth.isAuthenticated);
+    console.log( "isAuthenticated ",auth.isTokenValid);
 
     const logout = () => {
-        auth.signout();
+        auth.logout();
       };
     
     const [respuestas, setRespuestas] = useState<{ [pregunta: string]: number }>({});

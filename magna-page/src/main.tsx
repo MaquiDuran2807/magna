@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter,RouterProvider } from 'react-router-dom'
+import { QueryClient,QueryClientProvider } from '@tanstack/react-query';
 import { App} from './App'
 import ProtectedRoute from "./routes/PrivateRoute";
 import store from './store'
@@ -17,6 +18,8 @@ import { ServecesDetail } from './pages/servecesDetail';
 import ServiciosIdProvider from './hooks/GetsIdServices';
 import ProjectDetail from './pages/projecsDetail'
 import ContactPage from './pages/contact';
+
+const queryClient = new QueryClient()
 
 const router = createBrowserRouter(
   [
@@ -83,9 +86,11 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
       <Provider store={store} >
       <React.StrictMode>
     <AuthProvider>
+      <QueryClientProvider client={queryClient}>
       <ServiciosIdProvider>
         <RouterProvider router={router} />
       </ServiciosIdProvider>
+      </QueryClientProvider>
     </AuthProvider>
   </React.StrictMode>
       </Provider>
