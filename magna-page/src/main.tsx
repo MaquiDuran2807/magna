@@ -4,8 +4,6 @@ import { createBrowserRouter,RouterProvider } from 'react-router-dom'
 import { QueryClient,QueryClientProvider } from '@tanstack/react-query';
 import { App} from './App'
 import ProtectedRoute from "./routes/PrivateRoute";
-import store from './store'
-import {Provider} from 'react-redux'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './index.css'
 import { AuthProvider } from './auth/AuthProvider'
@@ -84,7 +82,7 @@ const router = createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <Provider store={store} >
+
       <AuthProvider>
         <QueryClientProvider client={queryClient}>
           <React.Suspense fallback={<Spinner/>}>
@@ -95,6 +93,5 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
           </React.Suspense>
         </QueryClientProvider>
       </AuthProvider>
-    </Provider>
   </React.StrictMode>,
 )
