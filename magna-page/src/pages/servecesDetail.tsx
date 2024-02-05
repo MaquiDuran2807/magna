@@ -2,8 +2,6 @@
 import Banner from "../components/banner"
 import PagesLayout from "../layouts/pagesLayouts";
 import { useState,useRef,useEffect  } from "react";
-import {  useSelector } from 'react-redux';
-import { RootState } from '../store';
 import { AiOutlineDoubleRight } from "react-icons/ai";
 import { AiFillCaretDown } from "react-icons/ai";
 import { SubServicio,Servicio,  ServecesMagna} from "../types/types";
@@ -23,21 +21,14 @@ interface ServecesDetailProps {
 
 export const ServecesDetail: React.FC<ServecesDetailProps> = ({ issue }) => {
     const { id } = useParams<{ id: string }>();
-    console.log('id',id);
     let [title, setTitle] = useState<String>("Nuestros Servicios");
-    // if (!id) {
-    //     return null;
-    // }
     const { data:serveces } = useQuery<ServecesMagna>({
         queryKey: ['services'],
         staleTime: 1000*60*30,refetchOnWindowFocus: false,refetchInterval: 1000*60*30,
     });
     let dispositivo = "container";
-    // const servecesAll:RootInterface = useSelector((state: RootState) => state.serviciosId.data);
     const [servicio_elegido, setServicio_elegido] = useState<Servicio[]>();
     const [subServicio_elegido, setSubServicio_elegido] = useState<SubServicio[]>([]);
-    // let servicio_elegido:Servicio[] =[{id:0,nombre:"Cargando...",descripcion:"Cargando...",imagen:"Cargando..."}];
-    // let subServicio_elegido:SubServicio[] =[];
     const [selectedSubServicio, setSelectedSubServicio] = useState<SubServicio | null>(null);
    useEffect(() => {
     if (serveces) {
@@ -61,10 +52,6 @@ export const ServecesDetail: React.FC<ServecesDetailProps> = ({ issue }) => {
     }
     }, [serveces, id]);
     
-
-
-
-    
     const { width} = useScreenSize();
     const isMobile = width <= 1000;
     const subServicioPaginaRef = useRef<HTMLDivElement >(null);
@@ -72,24 +59,6 @@ if (isMobile) {
     dispositivo = "mobile";
 }
 
-    // if (!servecesAll) {
-    //     servicio_elegido = [{ id: 0, nombre: "Cargando...", descripcion: "Cargando...", imagen: "Cargando..." }];
-    //     subServicio_elegido = [];
-    // }
-    // else {
-       
-        
-    //     if (issue === 'Servicios') {
-    //         servicio_elegido=servecesAll.servicios;
-    //         subServicio_elegido=servecesAll.subServicios;
-    //         title="Nuestros Servicios"
-    //     }
-    //     else {
-    //         servicio_elegido=  servecesAll.servicios.filter((servicio:Servicio) => servicio.nombre === issue);
-    //         subServicio_elegido=servecesAll.subServicios.filter((subServicio:SubServicio) => subServicio.servicio_id === servicio_elegido[0].id);
-    //     }
-    // }
-    
     const handleSubServicioClick = async(subServicio: SubServicio) => {
         setSelectedSubServicio(subServicio);
     };
@@ -98,7 +67,6 @@ if (isMobile) {
         
         if (subServicioPaginaRef.current&&!!selectedSubServicio) {
             // Realizar la lógica de scroll aquí
-            console.log('subServicioPaginaRef',subServicioPaginaRef.current);
             subServicioPaginaRef.current.scrollIntoView({ behavior: 'smooth' });
         }
     }
@@ -204,16 +172,6 @@ if (isMobile) {
                                        </motion.div>
                                      </AnimatePresence>
                                     }
-                                    {/* <h2>
-                                        {
-                                            selectedSubServicio ? selectedSubServicio.nombre : 'Servicios de calidad y con la más alta tecnología'
-                                        }
-                                    </h2>
-                                    <p>
-                                        {
-                                            selectedSubServicio ? selectedSubServicio.descripcion : 'Somos una empresa con más de 10 años de experiencia en el mercado, con profesionales altamente calificados y con amplia experiencia en el sector público y privado, brindando servicios de calidad y con la más alta tecnología.'
-                                        }
-                                    </p> */}
                                 <h2>¿Por qué elegirnos?</h2>
                                 <p>
                                     Somos una empresa con más de 10 años de experiencia en el mercado, con

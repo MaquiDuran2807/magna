@@ -2,12 +2,12 @@
 import { useState,useEffect } from 'react';
 import PagesLayout from '../layouts/pagesLayouts';
 import Banner from "../components/banner"
-import { ProyectoPanel } from '../components/sections/proyectoPanel';
-import { Statistics } from '../components/sections/statistics';
+import LazyProyectoPanel from '../components/sections/proyectoPanel';
+import LazyStatistics from '../components/sections/statistics';
 import "./styles/aboutUs.css"
 import { FaCheck } from "react-icons/fa6";
-import Equipos from '../components/sections/Equipos';
-import { Proyectos } from '../components/sections/proyectos';
+import LazyProyectos from '../components/sections/proyectos';
+import LazyEquipos from '../components/sections/Equipos';
 
 function Componente1() {
     // Este es el primer componente que se renderizará
@@ -32,8 +32,8 @@ const AboutUs: React.FC = () => {
         <PagesLayout>
             <Componente1 />
             {/* <Banner title="Sobre Nosotros" paragraph="Sobre Nosotros" /> */}
-            <ProyectoPanel />
-            <Statistics />
+            <LazyProyectoPanel />
+            <LazyStatistics />
             <div className="info container ">
                 <div className="row">
                     <div className="col-md-6">
@@ -102,8 +102,8 @@ const AboutUs: React.FC = () => {
                 </div>
 
             </div>
-            <Equipos/>
-            <Proyectos/>
+            <LazyEquipos/>
+            <LazyProyectos/>
             <br />
             <br />
         </PagesLayout>

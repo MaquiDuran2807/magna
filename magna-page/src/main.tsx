@@ -12,7 +12,6 @@ import { AuthProvider } from './auth/AuthProvider'
 import { Login } from './pages/login'
 import { Cotizador } from './pages/cotizador';
 import AboutUs from './pages/aboutUs';
-import ServicesPage from './pages/services';
 import Projects from './pages/projects';
 import { ServecesDetail } from './pages/servecesDetail';
 import ServiciosIdProvider from './hooks/GetsIdServices';
@@ -35,10 +34,6 @@ const router = createBrowserRouter(
     {
       path: '/aboutUs',
       element: <AboutUs/>,
-    },
-    {
-      path: '/services',
-      element: <ServicesPage/>,
     },
     {
       path: '/services_topografia',

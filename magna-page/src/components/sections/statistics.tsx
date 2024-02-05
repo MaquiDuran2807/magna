@@ -5,27 +5,10 @@ import { GoProjectRoadmap } from "react-icons/go";
 import { FaRegHandshake } from "react-icons/fa";
 import MapaIcono from "../../assets/img/statistics/mapa-icono.svg";
 import { TfiRulerAlt2 } from "react-icons/tfi";
+import React from "react";
 
 
 export const Statistics = () => {
-  // const controls = useAnimation();
-  // const { ref, inView } = useInView();
-  // const statisticsData = {
-  //   number1: 100000,
-  //   number2: 5000,
-  //   number3: 100,
-  //   number4: 1000
-  // };
-
-  // useEffect(() => {
-  //   if (inView) {
-  //     controls.start({
-  //       scale: [0, statisticsData.number1],
-  //       transition: { duration: 1 }
-  //     });
-  //   }
-  // }, [controls, inView]);
-
   return (
     <section className="statistics container-fluid" >
       <div className="container">
@@ -88,3 +71,36 @@ export const Statistics = () => {
     </section>
   );
 };
+
+export default function LazyStatistics () {
+  const [show, setShow] = React.useState(false);
+  const elementRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+      const onChange = (entries: IntersectionObserverEntry[],observer: { disconnect: () => void; }) => {
+          const { isIntersecting } = entries[0];
+          console.log(isIntersecting, 'aqui estoy en isIntersecting');
+          
+          if (isIntersecting) {
+              setShow(true);
+              observer.disconnect();
+          }
+      };
+
+      const observer = new IntersectionObserver(onChange, {
+          rootMargin: '100px',
+      });
+
+      if (elementRef.current) {
+          observer.observe(elementRef.current);
+      }
+
+  }, []);
+
+  return (
+      <div id="LazyServices" ref={elementRef}>
+          {show ? <Statistics /> : null}
+      </div>
+  );
+}
+

@@ -6,12 +6,16 @@ import equipo3 from '../../assets/img/equipos/3.png'
 import equipo4 from '../../assets/img/equipos/4.png'
 import { SetionHeader } from '../setionHeader'
 import '../styles/equipos.css'
-import {  useSelector } from 'react-redux';
-import { RootState } from '../../store';
+import { useQuery } from '@tanstack/react-query';
+import { Equipos} from '../../types/types';
+import React from 'react'
 
 
-const Equipos = () => {
-    const equipos= useSelector((state: RootState) => state.equipos.data);
+const Equipos1 = () => {
+    const { data:Workers } = useQuery<Equipos[]>({
+        queryKey: ['workers'],
+        staleTime: 1000*60*30,refetchOnWindowFocus: false,refetchOnMount: false,refetchOnReconnect: false,refetchInterval: 1000*60*30,
+    });
     return (
         <section className="equipo">
             <div className="container">
@@ -106,7 +110,7 @@ const Equipos = () => {
                 </div>
                 <div className="row">
                     {
-                        equipos?.map((equipo) => (
+                        Workers?.map((equipo) => (
                            
                             <div key={equipo.id} className="col-xl-3 col-md-5  col-card">
                             <div className=" shadow card-equip" style={{border: 'none', boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)'}}>
@@ -146,6 +150,38 @@ const Equipos = () => {
     );
 };
 
-export default Equipos;
+// export default Equipos;
+
+export default function LazyEquipos () {
+    const [show, setShow] = React.useState(false);
+    const elementRef = React.useRef<HTMLDivElement>(null);
+  
+    React.useEffect(() => {
+        const onChange = (entries: IntersectionObserverEntry[],observer: { disconnect: () => void; }) => {
+            const { isIntersecting } = entries[0];
+            console.log(isIntersecting, 'aqui estoy en isIntersecting');
+            
+            if (isIntersecting) {
+                setShow(true);
+                observer.disconnect();
+            }
+        };
+  
+        const observer = new IntersectionObserver(onChange, {
+            rootMargin: '100px',
+        });
+  
+        if (elementRef.current) {
+            observer.observe(elementRef.current);
+        }
+  
+    }, []);
+  
+    return (
+        <div id="LazyServices" ref={elementRef}>
+            {show ? <Equipos1/> : null}
+        </div>
+    );
+  }
 
 

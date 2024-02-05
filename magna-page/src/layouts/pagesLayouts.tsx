@@ -1,9 +1,8 @@
 import React, { useEffect, useRef } from 'react';
-
 import {NavBar} from '../components/navBar';
-import Footer from '../components/footer1';
 import { FloatWhatsapp } from '../components/floawhatsapp';
 import { useLocation } from 'react-router-dom';
+import LazyFooter1 from '../components/footer1';
 
 
 interface PagesLayoutProps {
@@ -29,7 +28,7 @@ const PagesLayout: React.FC<PagesLayoutProps> = ({ children }) => {
             </header>
             
             {children}
-            <Footer />
+            <LazyFooter1/>
             <FloatWhatsapp />
         </>
     );

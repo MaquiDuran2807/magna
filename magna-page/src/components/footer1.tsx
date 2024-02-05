@@ -4,6 +4,7 @@ import { FaSquareXTwitter,FaTiktok} from "react-icons/fa6";
 import { BsLinkedin } from "react-icons/bs";
 import {LogoMagna} from '../assets/img/logo'
 import "./styles/footer.css"
+import React from 'react';
 
 const Footer1: React.FC = () => {
     return (
@@ -100,4 +101,36 @@ const Footer1: React.FC = () => {
     );
 };
 
-export default Footer1;
+// export default Footer1;
+
+export default function LazyFooter1 () {
+    const [show, setShow] = React.useState(false);
+    const elementRef = React.useRef<HTMLDivElement>(null);
+
+    React.useEffect(() => {
+        const onChange = (entries: IntersectionObserverEntry[],observer: { disconnect: () => void; }) => {
+            const { isIntersecting } = entries[0];
+            console.log(isIntersecting, 'aqui estoy en isIntersecting');
+            
+            if (isIntersecting) {
+                setShow(true);
+                observer.disconnect();
+            }
+        };
+
+        const observer = new IntersectionObserver(onChange, {
+            rootMargin: '100px',
+        });
+
+        if (elementRef.current) {
+            observer.observe(elementRef.current);
+        }
+
+    }, []);
+
+    return (
+        <div id="LazyServices" ref={elementRef}>
+            {show ? <Footer1 /> : null}
+        </div>
+    );
+}

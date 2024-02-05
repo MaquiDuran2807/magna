@@ -62,7 +62,7 @@ header{
     }
 }
 
-.slide-1{
+.sliders{
     background-image:linear-gradient(to bottom left,rgba(0, 0, 0, 0.8) 0%,
     rgba(0, 0, 0, 0.7) 35%,
     rgba(0, 0, 0, 0.8) 100%), url(./assets/img/app/slide-banner1.webp);
@@ -72,38 +72,7 @@ header{
     height: 100%;
 }
 
-.slide-2{
-    background-image:linear-gradient(to bottom left,rgba(0, 0, 0, 0.8) 0%,
-    rgba(0, 0, 0, 0.7) 35%,
-    rgba(0, 0, 0, 0.8) 100%), url(./assets/img/app/slide-2.jpg);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 100%;
-   
-}
 
-
-.slide-3{
-    background-image:linear-gradient(to bottom left,rgba(0, 0, 0, 0.8) 0%,
-    rgba(0, 0, 0, 0.7) 35%,
-    rgba(0, 0, 0, 0.8) 100%), url(./assets/img/app/slide-banner3.jpg);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 100%;
-}
-
-
-.slide-4{
-    background-image:linear-gradient(to bottom left,rgba(0, 0, 0, 0.8) 0%,
-    rgba(0, 0, 0, 0.7) 35%,
-    rgba(0, 0, 0, 0.8) 100%), url(./assets/img/app/slide-4.jpg);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 100%;
-}
 
 .llamado{
     background-color: #163E73;

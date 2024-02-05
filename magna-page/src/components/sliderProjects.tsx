@@ -1,7 +1,5 @@
 // Import Swiper React components
-import {  useSelector } from 'react-redux';
-import { RootState } from '../store';
-import { Proyecto,ProyectosMagna,Imagene } from '../types/types';
+import { useQuery } from '@tanstack/react-query';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import './styles/projects.css'
@@ -14,20 +12,28 @@ import 'swiper/css/scrollbar';
 import 'swiper/css';
 import useScreenSize from '../hooks/ScreenSize';
 import { Link } from 'react-router-dom';
-import { API_URL } from '../constans';
+import { ProyectImagesMagna, ProyectosMagna,Result } from '../types/projects';
 
 export const SwiperProjects= () => {
-    const projectsAll:ProyectosMagna = useSelector((state: RootState) => state.projects.data);
-    // const imagen:Imagene[]=projectsAll.imagenes;
+  const { data:Project } = useQuery<ProyectosMagna>({
+    queryKey: ['projects'],
+    staleTime: 1000*60*30,refetchOnWindowFocus: false,refetchOnMount: false,refetchOnReconnect: false,refetchInterval: 1000*60*30,
+});
+const { data:projectImages } = useQuery<ProyectImagesMagna[]>({
+  queryKey: ['projectsImages'],
+  staleTime: 1000*60*30,refetchOnWindowFocus: false,refetchOnMount: false,refetchOnReconnect: false,refetchInterval: 1000*60*30,
+});
+
+    
+
     const { width} = useScreenSize();
     const isMobile = width <= 768;
     const isTablet = width <= 1000;
     const slidesPerView = isMobile ? 1 : isTablet ? 2 : 3;
 
-    // const imagenProyecto = (id:number) => {
-    //     const imagenProyecto = imagen.filter((imagen) => imagen.proyecto=== id)[0].imagen;
-    //     return imagenProyecto;
-    // }
+  if (!Project || !projectImages) {
+    return null;
+  }
 
   return (
     <Swiper
@@ -43,11 +49,11 @@ export const SwiperProjects= () => {
       modules={[Autoplay, Pagination, Navigation]}
       className="mySwiper"
     >
-      {projectsAll?.proyectos.map((project:Proyecto) => (
+      {Project?.results.map((project:Result) => (
         <SwiperSlide key={project.id}>
           <div className="projects border-0 ">
           <img src={
-                ` ${API_URL}${projectsAll.imagenes.filter((imagen:Imagene) => imagen.proyecto=== project.id)[0].imagen}`
+                ` ${projectImages?.filter((imagen:ProyectImagesMagna) => imagen.proyecto=== project.id)[0].imagen}`
               } alt="" className='project-img' />
             <div className="card-info">
               <h4>{project.nombre}</h4>

@@ -4,20 +4,14 @@ import { useState,useEffect } from 'react'
 import { Slider } from './components/slider'
 import './App.css'
 import PagesLayout from './layouts/pagesLayouts'
-import Equipos from './components/sections/Equipos'
-import { ProyectoPanel } from './components/sections/proyectoPanel'
-import { Proyectos } from './components/sections/proyectos';
-import { Clients } from './components/sections/clients';
-import { Contact } from './components/sections/contact';
-import { Statistics } from './components/sections/statistics'
+import LazyProyectoPanel from './components/sections/proyectoPanel'
+import LazyProyectos from './components/sections/proyectos';
+import LazyClients from './components/sections/clients';
+import LazyContact from './components/sections/contact';
+import LazyStatistics from './components/sections/statistics'
 import SplashScreen from './components/splashScreen';
-import banner1 from './assets/img/banner/nosotros.svg'
-import banner2 from './assets/img/banner/servicios.png'
-import banner3 from './assets/img/banner/projects.png'
-import banner4 from './assets/img/banner/topo.png'
-import banner5 from './assets/img/banner/ingenieria.png'
-import banner6 from './assets/img/banner/medio.png'
 import LazyServicios from './components/sections/Servicios'
+import LazyEquipos from './components/sections/Equipos'
 
 
 
@@ -44,7 +38,7 @@ export function App() {
         <Slider />
       {/* fin slider */}
       {/* quienes somos paneles  */}
-        <ProyectoPanel/>
+        <LazyProyectoPanel/>
       {/* fin quienes somos paneles */}
 
       {/* servicios */}
@@ -52,39 +46,31 @@ export function App() {
       {/* fin servicios */}
 
       {/* proyectos  todo */}
-        <Proyectos/>
+        <LazyProyectos/>
       {/* fin proyectos*/}
       {/* estadisticas  */}
       <br /> 
       <br />
-        <Statistics/>
+        <LazyStatistics/>
       {/* fin estadisticas  */}
 
       {/* clientes */}
-        <Clients/>
+        <LazyClients/>
       {/* fin clientes */}
 +
       {/* equipo y tecnologia y equipo de trabajo */}
-        <Equipos/>
+        <LazyEquipos/>
       {/* fin equipo y tecnologia y equipo de trabajo */}
 
       {/* contacto */}
-      <Contact/>
+      <LazyContact/>
       {/* fin contacto */}
 
     {/* estadisticas  */}
     
     {/* fin estadisticas  */}
-    <img src={banner1}className="hidden" alt="banner1" />
-    <img src={banner2}  className="hidden" alt="banner2" />
-    <img src={banner3}  className="hidden" alt="banner3" />
-    <img src={banner4}  className="hidden" alt="banner4" />
-    <img src={banner5}  className="hidden" alt="banner5" />
-    <img src={banner6}  className="hidden" alt="banner6" />
-
-    </PagesLayout>
     
-
+    </PagesLayout>
     </>
   )
 }
