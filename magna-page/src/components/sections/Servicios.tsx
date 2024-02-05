@@ -1,34 +1,18 @@
-import topografia from '../../assets/img/app/topografia.svg'
-import medio from '../../assets/img/app/medio.svg'
-import ingenieria from '../../assets/img/app/ingenieria.svg'
+
+import { ServecesMagna } from '../../types/types';
+import { useQuery } from '@tanstack/react-query';
 import { SetionHeader } from '../setionHeader'
 import { Link } from 'react-router-dom';
 import '../styles/Servicios.css'
+import { API_URL } from '../../constans';
+import React from 'react';
 
-export const Servicios = () => {
-    const servicios = [
-        {
-            id: 1,
-            title: 'Topografía',
-            description: 'Georreferenciación de puntos geodésicos, Levantamientos topográficos, replanteos, Nivelaciones de precisión, Fotogrametría, entre otros.',
-            img: topografia,
-            url: '/services_topografia'
-        },
-        {
-            id: 2,
-            title: 'Ingeniería  y Consultoría',
-            description: 'Diseño y construcción de obras civiles, Estudios hidrológicos e hidráulicos, Estudios Geológicos y Geotécnicos, entre otros.',
-            img: ingenieria,
-            url: '/services_ingenieria'
-        },
-        {
-            id: 3,
-            title: 'Medio Ambiente',
-            description: 'Trámites y permisos Ambientales, Estudios de impacto ambiental, auditorías, monitoreo ambiental, programas y proyectos de manejo ambiental, entre otros.',
-            img: medio,
-            url: '/services_ambiental'
-        }
-    ]
+
+const Servicios = () => {
+    const { data:servecios } = useQuery<ServecesMagna>({
+        queryKey: ['services'],
+        staleTime: 1000*60*30,refetchOnWindowFocus: false,refetchOnMount: false,refetchOnReconnect: false,refetchInterval: 1000*60*30,
+    });
     return(
         <section className="servicios   ">
             <div className="container servicios-container">
@@ -40,15 +24,15 @@ export const Servicios = () => {
                     <div className="col-12 col-lg-12">
                         <div className="row ">
                             {
-                                servicios.map((servicio) => {
+                                servecios?.servicios.map((servicio) => {
                                     return (
                                         <div key={servicio.id} className="col-12 col-lg-4 col-md-6 order-md-1 ">
                                             <div className="card border-0 p-1 tarjeta tarjetas-12">
                                                 <div className="card-body">
-                                                    <img src={servicio.img} alt={servicio.title} />
-                                                    <h4 className="card-title">{servicio.title}</h4>
-                                                    <p className="card-title">{servicio.description}</p>
-                                                    <button className=' boton-1 '><Link to={servicio.url}>Ver más</Link></button>
+                                                    <img src={`${API_URL+servicio.icon}`} alt={servicio.nombre} /> 
+                                                    <h4 className="card-title">{servicio.nombre}</h4>
+                                                    <p className="card-title">{servicio.descripcion.slice(0, 150)}...</p>
+                                                    <button className=' boton-1 '><Link to={`/servicios/${servicio.id}`}>Ver más</Link></button>
                                                 </div>
                                             </div>
                                         </div>
@@ -62,3 +46,43 @@ export const Servicios = () => {
     </section>
     )
 }
+
+export default function LazyServicios() {
+    const [show, setShow] = React.useState(false);
+    const elementRef = React.useRef<HTMLDivElement>(null);
+
+    React.useEffect(() => {
+        const onChange = (entries: IntersectionObserverEntry[],observer: { disconnect: () => void; }) => {
+            const { isIntersecting } = entries[0];
+            console.log(isIntersecting, 'aqui estoy en isIntersecting');
+            
+            if (isIntersecting) {
+                setShow(true);
+                observer.disconnect();
+            }
+        };
+
+        const observer = new IntersectionObserver(onChange, {
+            rootMargin: '100px',
+        });
+
+        if (elementRef.current) {
+            observer.observe(elementRef.current);
+        }
+
+        // return () => {
+        //     if (elementRef.current) {
+        //         observer.unobserve(elementRef.current);
+        //     }
+        // };
+    }, []);
+
+    return (
+        <div id="LazyServices" ref={elementRef}>
+            {show ? <Servicios /> : null}
+        </div>
+    );
+}
+
+
+

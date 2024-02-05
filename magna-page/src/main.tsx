@@ -18,6 +18,7 @@ import { ServecesDetail } from './pages/servecesDetail';
 import ServiciosIdProvider from './hooks/GetsIdServices';
 import ProjectDetail from './pages/projecsDetail'
 import ContactPage from './pages/contact';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 const queryClient = new QueryClient()
 
@@ -56,6 +57,10 @@ const router = createBrowserRouter(
       element: <ServecesDetail issue='Servicios'/>,
     },
     {
+      path: '/servicios/:id',
+      element: <ServecesDetail issue='detailservices'/>,
+    },
+    {
       path: '/projects',
       element: <Projects/>,
     },
@@ -83,17 +88,15 @@ const router = createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-      <Provider store={store} >
-      <React.StrictMode>
-    <AuthProvider>
-      <QueryClientProvider client={queryClient}>
-      <ServiciosIdProvider>
-        <RouterProvider router={router} />
-      </ServiciosIdProvider>
-      </QueryClientProvider>
-    </AuthProvider>
-  </React.StrictMode>
-      </Provider>
-     
+    <Provider store={store} >
+      <AuthProvider>
+        <QueryClientProvider client={queryClient}>
+          <ServiciosIdProvider>
+            <RouterProvider router={router} />
+            <ReactQueryDevtools initialIsOpen={false} />
+          </ServiciosIdProvider>
+        </QueryClientProvider>
+      </AuthProvider>
+    </Provider>
   </React.StrictMode>,
 )

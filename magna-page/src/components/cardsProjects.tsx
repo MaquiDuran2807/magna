@@ -1,98 +1,82 @@
-import { RootState } from '../store';
-import { useSelector } from 'react-redux';
-// import { useState,useEffect } from 'react';
-// import { Proyecto,ProyectosMagna,Imagene,Servicio,RootInterface,Pais,Ciudad,Departamento,TypeProject } from '../types/types';
-// import { motion } from 'framer-motion';
-// import { API_URL } from '../constans';
-// import { Link } from 'react-router-dom';
-
 
 import { useEffect, useState } from 'react';
-import { Proyecto,Imagene,ProyectosMagna,TypeProject } from '../types/types';
+import { ProyectosMagna,Result,ProyectImagesMagna,Tipo } from '../types/projects';
 import { motion } from 'framer-motion';
-import { API_URL } from '../constans';
+import { useQuery } from '@tanstack/react-query';
+// import { API_URL } from '../constans';
 import { Link } from 'react-router-dom';
 import "./styles/cardsProjects.css";
 
 interface Props {
-    type: number;
-    actualPage: Proyecto[];
-    imagenes: Imagene[];
+    type: Tipo | number | undefined;
+    actualPage: number| null;
+    imagenes: ProyectImagesMagna[];
 }
 
 const CardsProjects = ({ type, actualPage,imagenes }: Props) => {
-    const [proyectos_card_type, setProyectos_card_type] = useState<Proyecto[]>([]);
-    const [imagenesCard, setImagenes] = useState<Imagene[]>([]);
-    const Project:ProyectosMagna = useSelector((state: RootState) => state.projects.data);
-    const [typeProject, setTypeProject] = useState<TypeProject>();
-    console.log(Project,"Project.type_project");
+    const [proyectos_card_type, setProyectos_card_type] = useState<Result[]|Result >([]);
+    const [imagenesCard, setImagenes] = useState<ProyectImagesMagna[]>([]);
+    const [types,setTypes] =  useState<Tipo[]>([]);
+    const [typeProject, setTypeProject] = useState<Tipo>();
+    const { data:Project } = useQuery<ProyectosMagna>({
+        queryKey: ['projects'],
+        staleTime: 1000*60*30,refetchOnWindowFocus: false,refetchOnMount: false,refetchOnReconnect: false,refetchInterval: 1000*60*30,
+    });
+
     
-    const [types,setTypes] =  useState<TypeProject[]>([]);
+    if (!Project) {
+        return null;
+    }
     
     useEffect(() => {
         if (type === 0) {
-            setProyectos_card_type(actualPage);
+            const types1: Tipo[]= Array.isArray(Project.results) ? Project.results.map((proyecto: Result) => proyecto.tipo).filter ((proyecto: Tipo, index: number,self: Tipo[]) => self.findIndex((t: Tipo) => t.id === proyecto.id) === index) : [];
+            setProyectos_card_type(Project.results);
             setImagenes(imagenes);
             setTypes([
                 {
                     id:0,
                     name:"Todos"
                 },
-                ...Project.type_project
+                ...types1
             ]);
             return;
         }
-        const proyectos_card_type_1: Proyecto[] = actualPage.filter((proyecto: Proyecto) => proyecto.tipo === type);
+        const proyectos_card_type_1: Result[] = Project.results
+    .filter((proyecto: Result) => proyecto.tipo.id === type) // Filtra por tipo
+    .filter((proyecto: Result) => proyecto.id !== actualPage)
+
         setProyectos_card_type(proyectos_card_type_1);
         setImagenes(imagenes);
         
     }, [type, actualPage,imagenes]);
 
-    const getFirstImage = (id: number) => {
-        const imagen = imagenesCard.filter((imagen: Imagene) => imagen.proyecto === id)[0];
-        if (imagen) {
-            return `${API_URL}${imagen.imagen}`;
-        }
-        return null;
-    };
-
     const filterProjects = (type: number|undefined) => {
-        console.log(type,"type");
         if (type === 0) {
-            setProyectos_card_type(actualPage);
-            console.log("llego aqui");
+            setProyectos_card_type(Project.results);
             setTypeProject(undefined);
             return;
         }
         if (!type) {
+
             return;
         }
-        console.log(type,"type");
-        
-        
-        const newTypeProject = types.filter((typeProject: TypeProject) => typeProject.id === type)[0];
+        const newTypeProject = types.filter((typeProject: Tipo) => typeProject.id === type)[0];
         if (!newTypeProject) {
             return;
         }
+        const proyectos_card_type_1: Result[] = Array.isArray(Project.results) ? Project.results.filter((proyecto: Result) => proyecto.tipo.id === newTypeProject.id) : [];
         setTypeProject(newTypeProject);
-        setProyectos_card_type(actualPage.filter((proyecto: Proyecto) => proyecto.tipo === newTypeProject.id));
+        setProyectos_card_type(proyectos_card_type_1);
     }
-    
-    useEffect(() => {
-        console.log(types,"types");
-        
-    }, [types]);
-
-
     return (
         <div>
-
             <div className="container">
                 <div className="row">
                 {
                         type === 0 ?
                             !types ? null:
-                                types.map((typeProject: TypeProject) => {
+                                types.map((typeProject: Tipo) => {
                                     return (
                                         <motion.div
                                             key={typeProject.id}
@@ -122,8 +106,8 @@ const CardsProjects = ({ type, actualPage,imagenes }: Props) => {
                     }
                 </div>
                 <div className="row">
-            {proyectos_card_type.map((proyecto: Proyecto) => {
-                const firstImage = getFirstImage(proyecto.id);
+            {Array.isArray(proyectos_card_type) && proyectos_card_type.map((proyecto: Result) => {
+                const firstImage = imagenesCard.filter((imagen: ProyectImagesMagna) => imagen.proyecto === proyecto.id)[0].imagen
                 return (
                     
                     <motion.div
@@ -162,3 +146,5 @@ const CardsProjects = ({ type, actualPage,imagenes }: Props) => {
 };
 
 export default CardsProjects;
+
+

@@ -6,6 +6,7 @@ class Servicio(models.Model):
     nombre = models.CharField(max_length=100)
     descripcion = models.TextField()
     imagen = models.ImageField(upload_to='servicios', null=True, blank=True)
+    icon = models.FileField(upload_to='servicios', null=True, blank=True)
     def __str__(self):
         return self.nombre
     

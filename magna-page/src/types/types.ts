@@ -24,11 +24,9 @@ export interface AuthResponse {
     error?: string;
   }
 
-  export interface RootInterface {
-    getServicios: getServicio;
+  export interface ServecesMagna {
     servicios: Servicio[];
     subServicios: SubServicio[];
-    servicios_: ServiciosId[];
   }
 
   export interface ServiciosId {
@@ -49,6 +47,7 @@ export interface AuthResponse {
     nombre: string;
     descripcion: string;
     imagen: string;
+    icon: string;
   }
 
   export interface getServicio {
@@ -84,64 +83,8 @@ export class Convert {
   }
 }
 
-export interface ProyectosMagna {
-  proyectos:    Proyecto[];
-  imagenes:     Imagene[];
-  ciudad:       Ciudad[];
-  type_project: TypeProject[];
-  pais:         Pais[];
-  departamento: Departamento[];
-  client:       Client[];
-}
 
-export interface Ciudad {
-  id:           number;
-  nombre:       string;
-  departamento: number;
-}
 
-export interface Client {
-  id:    number;
-  name:  string;
-  email: string;
-  phone: string;
-  logo:  string;
-}
-
-export interface Departamento {
-  id:     number;
-  nombre: string;
-  pais:   number;
-}
-
-export interface Imagene {
-  id:       number;
-  imagen:   string;
-  proyecto: number;
-}
-
-export interface Pais {
-  id:     number;
-  nombre: string;
-}
-
-export interface Proyecto {
-  id:           number;
-  nombre:       string;
-  descripcion:  string;
-  fecha_inicio: Date;
-  fecha_fin:    Date;
-  estado:       string;
-  servicios:    number[];
-  subservicios: number[];
-  ciudad:       number;
-  tipo:         number;
-}
-
-export interface TypeProject {
-  id:   number;
-  name: string;
-}
 
 export interface PreguntasyrespuestasMagna {
   id:        number;

@@ -5,6 +5,7 @@ import Footer from '../components/footer1';
 import { FloatWhatsapp } from '../components/floawhatsapp';
 import { useLocation } from 'react-router-dom';
 
+
 interface PagesLayoutProps {
     children: React.ReactNode;
 }

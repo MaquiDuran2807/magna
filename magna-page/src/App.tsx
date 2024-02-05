@@ -6,7 +6,6 @@ import './App.css'
 import PagesLayout from './layouts/pagesLayouts'
 import Equipos from './components/sections/Equipos'
 import { ProyectoPanel } from './components/sections/proyectoPanel'
-import { Servicios } from './components/sections/Servicios';
 import { Proyectos } from './components/sections/proyectos';
 import { Clients } from './components/sections/clients';
 import { Contact } from './components/sections/contact';
@@ -18,6 +17,7 @@ import banner3 from './assets/img/banner/projects.png'
 import banner4 from './assets/img/banner/topo.png'
 import banner5 from './assets/img/banner/ingenieria.png'
 import banner6 from './assets/img/banner/medio.png'
+import LazyServicios from './components/sections/Servicios'
 
 
 
@@ -48,7 +48,7 @@ export function App() {
       {/* fin quienes somos paneles */}
 
       {/* servicios */}
-        <Servicios/>
+        <LazyServicios/>
       {/* fin servicios */}
 
       {/* proyectos  todo */}
