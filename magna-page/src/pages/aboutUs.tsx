@@ -1,13 +1,14 @@
 
-import { useState,useEffect } from 'react';
+import { useState,useEffect,lazy } from 'react';
 import PagesLayout from '../layouts/pagesLayouts';
 import Banner from "../components/banner"
-import LazyProyectoPanel from '../components/sections/proyectoPanel';
-import LazyStatistics from '../components/sections/statistics';
+const LazyProyectoPanel = lazy(() => import('../components/sections/proyectoPanel'));
+const LazyStatistics = lazy(() => import('../components/sections/statistics'));
+const LazyEquipos = lazy(() => import('../components/sections/Equipos'));
+const LazyProyectos = lazy(() => import('../components/sections/proyectos'));
 import "./styles/aboutUs.css"
 import { FaCheck } from "react-icons/fa6";
-import LazyProyectos from '../components/sections/proyectos';
-import LazyEquipos from '../components/sections/Equipos';
+
 
 function Componente1() {
     // Este es el primer componente que se renderizará

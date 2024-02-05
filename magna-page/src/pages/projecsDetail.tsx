@@ -1,16 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect,lazy } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Link, useParams } from 'react-router-dom';
 import Banner from '../components/banner';
 import { Result,ProyectosMagna,ProyectImagesMagna,Servicio } from '../types/projects';
-// import {RootInterface} from '../types/types';
 import SliderProjectDetail from '../components/sliderProjectDetail';
 import PagesLayout from '../layouts/pagesLayouts';
 import { Proyectos } from '../components/sections/proyectos';
-// import CardsProjects from '../components/cardsProjects';
 import './styles/projectsDetail.css'
-import LazyCardsProjects from '../components/cardsProjects';
-
+const LazyCardsProjects = lazy(() => import('../components/cardsProjects'));
 const ProjectDetail: React.FC= () => {
     const [project, setProject] = React.useState<Result>();
     const [imagen, setImagen] = React.useState<ProyectImagesMagna[]>([]);

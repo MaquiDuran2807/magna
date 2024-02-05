@@ -1,17 +1,18 @@
 
 
-import { useState,useEffect } from 'react'
+import { useState,useEffect,lazy } from 'react'
 import { Slider } from './components/slider'
 import './App.css'
 import PagesLayout from './layouts/pagesLayouts'
 import LazyProyectoPanel from './components/sections/proyectoPanel'
-import LazyProyectos from './components/sections/proyectos';
-import LazyClients from './components/sections/clients';
-import LazyContact from './components/sections/contact';
-import LazyStatistics from './components/sections/statistics'
+const  LazyProyectos = lazy(() => import('./components/sections/proyectos'))
+const LazyServicios = lazy(() => import('./components/sections/Servicios'))
+const LazyStatistics = lazy(() => import('./components/sections/statistics'))
+const LazyClients = lazy(() => import('./components/sections/clients'))
+const LazyEquipos = lazy(() => import('./components/sections/Equipos'))
+const LazyContact = lazy(() => import('./components/sections/contact'))
+
 import SplashScreen from './components/splashScreen';
-import LazyServicios from './components/sections/Servicios'
-import LazyEquipos from './components/sections/Equipos'
 
 
 
@@ -37,6 +38,7 @@ export function App() {
       {/* slider */}
         <Slider />
       {/* fin slider */}
+
       {/* quienes somos paneles  */}
         <LazyProyectoPanel/>
       {/* fin quienes somos paneles */}

@@ -11,12 +11,13 @@ import './index.css'
 import { AuthProvider } from './auth/AuthProvider'
 import { Login } from './pages/login'
 import { Cotizador } from './pages/cotizador';
-import AboutUs from './pages/aboutUs';
-import Projects from './pages/projects';
-import { ServecesDetail } from './pages/servecesDetail';
+import { Spinner } from './components/spinner';
+const AboutUs = React.lazy(() => import('./pages/aboutUs'));
+const Projects = React.lazy(() => import('./pages/projects'));
+const ServecesDetail = React.lazy(() => import('./pages/servecesDetail'));
 import ServiciosIdProvider from './hooks/GetsIdServices';
-import ProjectDetail from './pages/projecsDetail'
-import ContactPage from './pages/contact';
+const ProjectDetail = React.lazy(() => import('./pages/projecsDetail'));
+const ContactPage = React.lazy(() => import('./pages/contact'));
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 const queryClient = new QueryClient()
@@ -86,10 +87,12 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <Provider store={store} >
       <AuthProvider>
         <QueryClientProvider client={queryClient}>
-          <ServiciosIdProvider>
-            <RouterProvider router={router} />
-            <ReactQueryDevtools initialIsOpen={false} />
-          </ServiciosIdProvider>
+          <React.Suspense fallback={<Spinner/>}>
+            <ServiciosIdProvider>
+              <RouterProvider router={router} />
+              <ReactQueryDevtools initialIsOpen={false} />
+            </ServiciosIdProvider>
+          </React.Suspense>
         </QueryClientProvider>
       </AuthProvider>
     </Provider>

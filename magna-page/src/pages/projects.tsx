@@ -1,9 +1,7 @@
 import Banner from '../components/banner';
 import CardsProjects from '../components/cardsProjects';
-// import { Proyectos } from '../components/sections/proyectos';
 import PagesLayout from '../layouts/pagesLayouts';
 import { useQuery } from '@tanstack/react-query';
-
 import { ProyectosMagna,ProyectImagesMagna} from '../types/projects';
 
 const Projects: React.FC = () => {
@@ -16,9 +14,6 @@ const Projects: React.FC = () => {
         staleTime: 1000*60*30,refetchOnWindowFocus: false,refetchOnMount: false,refetchOnReconnect: false,refetchInterval: 1000*60*30,
     });
 
-    console.log(project, 'aqui estoy en project');
-    
-    // const Project:ProyectosMagna=useSelector((state: RootState) => state.projects.data);
     if(!project || !projectImages){
         return null;
     }

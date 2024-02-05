@@ -1,12 +1,12 @@
 
 import Banner from "../components/banner"
 import PagesLayout from "../layouts/pagesLayouts";
-import { useState,useRef,useEffect  } from "react";
+import { useState,useRef,useEffect,lazy  } from "react";
 import { AiOutlineDoubleRight } from "react-icons/ai";
 import { AiFillCaretDown } from "react-icons/ai";
 import { SubServicio,Servicio,  ServecesMagna} from "../types/types";
 import { AnimatePresence, motion } from 'framer-motion';
-import LazyServicios from "../components/sections/Servicios";
+const LazyServicios = lazy(() => import('../components/sections/Servicios'));
 import SliderServices from "../components/sliderServices";
 import useScreenSize from '../hooks/ScreenSize';
 import { useQuery } from '@tanstack/react-query';
@@ -19,7 +19,7 @@ interface ServecesDetailProps {
 
 
 
-export const ServecesDetail: React.FC<ServecesDetailProps> = ({ issue }) => {
+const ServecesDetail: React.FC<ServecesDetailProps> = ({ issue }) => {
     const { id } = useParams<{ id: string }>();
     let [title, setTitle] = useState<String>("Nuestros Servicios");
     const { data:serveces } = useQuery<ServecesMagna>({
@@ -191,3 +191,5 @@ if (isMobile) {
         </>
     );
 };
+
+export default ServecesDetail;

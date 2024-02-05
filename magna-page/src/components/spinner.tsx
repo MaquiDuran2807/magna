@@ -3,8 +3,10 @@ import Lottie from "lottie-react";
 import animationData from '../animations/Animation - 1706024995672.json';
 
 
-export const Spinner = () => {
+
+export const Spinner  = () => {
   return (
+    <>
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -18,5 +20,6 @@ export const Spinner = () => {
             style={{position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}
         />
     </motion.div>
+    </>
   );
 };
