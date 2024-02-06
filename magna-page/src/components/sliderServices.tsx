@@ -8,13 +8,14 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import 'swiper/css';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
+import { API_URL } from '../constans';
 
 interface SliderServicesProps {
     subServicios?: SubServicio[];
     id_servicio?: number;
     is_services?: boolean;
 }
-const urlMedia = 'http://127.0.0.1:8000/media/'
+
 
 const SliderServices: React.FC<SliderServicesProps> = ({ subServicios,}) => {
 
@@ -34,7 +35,7 @@ const SliderServices: React.FC<SliderServicesProps> = ({ subServicios,}) => {
             {subServicios?.map((subServicio, index) => (
                 <SwiperSlide key={index}>
                     <div className={`slide ${subServicio.nombre}`}>
-                        <img src={urlMedia+subServicio.imagen} alt={subServicio.nombre} className='img-fluid img-subservicio' />
+                        <img src={API_URL+subServicio.imagen} alt={subServicio.nombre} className='img-fluid img-subservicio' />
                         <h3>
                             {subServicio.nombre}
                         </h3>

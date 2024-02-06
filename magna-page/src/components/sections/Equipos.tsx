@@ -9,6 +9,7 @@ import '../styles/equipos.css'
 import { useQuery } from '@tanstack/react-query';
 import { Equipos} from '../../types/types';
 import React from 'react'
+import { API_URL } from '../../constans'
 
 
 const Equipos1 = () => {
@@ -115,7 +116,7 @@ const Equipos1 = () => {
                             <div key={equipo.id} className="col-xl-3 col-md-5  col-card">
                             <div className=" shadow card-equip" style={{border: 'none', boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)'}}>
                                 <div className='equip-4 workers-equip'>
-                                    <img src={"http://127.0.0.1:8000/"+equipo.imagen} alt="Card 1" className="img-fluid rounded mx-auto d-block " />
+                                    <img src={API_URL+equipo.imagen} alt="Card 1" className="img-fluid rounded mx-auto d-block " />
                                     <div className="content-cardequip">
                                         <h3>
                                             {equipo.nombre}
