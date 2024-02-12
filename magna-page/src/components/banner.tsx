@@ -2,48 +2,25 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FaHome } from 'react-icons/fa';
 import { FiArrowRight } from 'react-icons/fi';
-import servicios from '../assets/img/banner/servicios.png';
-import proyectos from '../assets/img/banner/projects.png';
-import topo from '../assets/img/banner/topo.png';
-import ingenieria from '../assets/img/banner/ingenieria.png';
-import medioAmbiente from '../assets/img/banner/medio.png';
-import sobreNosotros from '../assets/img/banner/sobre.webp';
+// import servicios from '../assets/img/banner/servicios.png';
+// import proyectos from '../assets/img/banner/projects.png';
+// import topo from '../assets/img/banner/topo.png';
+// import ingenieria from '../assets/img/banner/ingenieria.png';
+// import medioAmbiente from '../assets/img/banner/medio.png';
+// import sobreNosotros from '../assets/img/banner/sobre.webp';
 import './styles/banner.css';
 import { Link } from 'react-router-dom';
+
+
 
 
 interface BannerProps {
     title: string;
     paragraph: string;
+    image: String;
 }
 
-const Banner: React.FC<BannerProps> = ({ title, paragraph }) => {
-    let img = '';
-    switch (title) {
-        case 'Proyectos':
-            img = proyectos;
-            break;
-        case 'Servicios':
-            img = servicios;
-            break;
-        case 'Topografía':
-            img = topo;
-            break;
-        case 'Ingeniería y Consultoría':
-            img = ingenieria;
-            break;
-        case 'Medio Ambiente':
-            img = medioAmbiente;
-            break;
-        case 'Sobre Nosotros':
-            img = sobreNosotros;
-            break;
-        default:
-            img = servicios;
-            break;
-    }
-
-
+const Banner: React.FC<BannerProps> = ({ title, paragraph,image }) => {
     return (
         <>
         <motion.div
@@ -53,7 +30,7 @@ const Banner: React.FC<BannerProps> = ({ title, paragraph }) => {
             className='banner-services row' id='header'
         >
             
-            <div className={` ${title} servicios-d container-fluid`} id='header' style={{backgroundImage:`url(${img})`,backgroundSize:"cover",backgroundRepeat:"no-repeat"}} > 
+            <div className={` ${title} servicios-d container-fluid`} id='header' style={{backgroundImage:`url(${image})`,}} > 
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center',color:"whithe" }}>
                     <h1>{title}</h1>
                     <div className='row'>

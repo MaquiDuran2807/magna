@@ -1,8 +1,3 @@
-.banner-services{
-    /* background-image: url(../../assets/img/banner/projects.png); */
-    background-size: cover;
-
-}
 
 .servicios-d{
     width: 100%;
@@ -10,8 +5,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-position: 100% 10%;
-    color: #fff;
+    background-size: cover;
+    background-position: center;
+    
 }
 
 
@@ -31,6 +27,10 @@
     animation-fill-mode: forwards;
 }
 
+.Sobre{
+    background-size: cover;
+    background-position: 100% 43%;
+}
 
 /* .fondo-banner{
 

@@ -7,6 +7,7 @@ import { FaSquarePhone } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
 import { IoMdClock } from "react-icons/io";
 import  Maps  from '../components/maps';
+import imagen from '../assets/img/banner/projects.png';
 
 const ContactPage: React.FC = () => {
     return (
@@ -14,7 +15,7 @@ const ContactPage: React.FC = () => {
             
             
             <PagesLayout>
-                <Banner title='Contacto' paragraph='Contacto' />
+                <Banner title='Contacto' paragraph='Contacto' image={imagen} />
                 <div className="container contact-zone pt-5 pb-5">
                     <div className="row">
                         <div className="col-md-5 m-1">

@@ -12,6 +12,7 @@ import 'swiper/css/scrollbar';
 import 'swiper/css';
 import { BotonesSwiper } from './BotonesSwiper';
 import { ServecesMagna, Servicio } from '../types/types';
+import { API_URL } from '../constans';
 export const Slider= () => {
   const { data:servicios } = useQuery<ServecesMagna>({
     queryKey: ['services'],
@@ -54,7 +55,7 @@ if (!servicios) {
     >
       {servicios?.servicios.map((servicio: Servicio, index) => (
         <SwiperSlide key={index}>
-          <div className={`container-fluid sliders`} style={{ backgroundImage: `linear-gradient(to bottom left,rgba(0, 0, 0, 0.8) 0%,rgba(0, 0, 0, 0.7) 35%,rgba(0, 0, 0, 0.8) 100%), url( http://127.0.0.1:8000/${servicio.imagen})` }}>
+          <div className={`container-fluid sliders`} style={{ backgroundImage: `linear-gradient(to bottom left,rgba(0, 0, 0, 0.8) 0%,rgba(0, 0, 0, 0.7) 35%,rgba(0, 0, 0, 0.8) 100%), url( ${API_URL + servicio.imagen})` }}>
 
             <motion.div
               ref={refs[index].ref}

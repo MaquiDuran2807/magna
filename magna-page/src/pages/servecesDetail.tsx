@@ -12,6 +12,10 @@ import useScreenSize from '../hooks/ScreenSize';
 import { useQuery } from '@tanstack/react-query';
 import "./styles/servicesDetail.css";
 import { useParams } from "react-router-dom";
+import imagenServicios from '../assets/img/banner/servicios.png';
+import imagenTopografia from '../assets/img/banner/topo.png';
+import imagenIngenieria from '../assets/img/banner/ingenieria.png';
+import imagenMedioAmbiente from '../assets/img/banner/medio.png';
 
 interface ServecesDetailProps {
     issue: string;
@@ -22,6 +26,7 @@ interface ServecesDetailProps {
 const ServecesDetail: React.FC<ServecesDetailProps> = ({ issue }) => {
     const { id } = useParams<{ id: string }>();
     let [title, setTitle] = useState<String>("Nuestros Servicios");
+    let [imagen, setImagen] = useState<String>(imagenServicios);
     const { data:serveces } = useQuery<ServecesMagna>({
         queryKey: ['services'],
         staleTime: 1000*60*30,refetchOnWindowFocus: false,refetchInterval: 1000*60*30,
@@ -40,6 +45,15 @@ const ServecesDetail: React.FC<ServecesDetailProps> = ({ issue }) => {
                 setServicio_elegido(servicioElegido);
                 const subServiciosElegidos = serveces.subServicios.filter((subServicio: SubServicio) => subServicio.servicio_id === servicioElegido[0].id);
                 setSubServicio_elegido(subServiciosElegidos);
+                if (servicioElegido[0].nombre === "Topografía") {
+                    setImagen(imagenTopografia);
+                }
+                if (servicioElegido[0].nombre === "Ingeniería y Consultoría") {
+                    setImagen(imagenIngenieria);
+                }
+                if (servicioElegido[0].nombre === "Medio Ambiente") {
+                    setImagen(imagenMedioAmbiente);
+                }
                 
                 console.log(title, 'title');
                 
@@ -63,8 +77,6 @@ if (isMobile) {
         setSelectedSubServicio(subServicio);
     };
     useEffect(() => {
-        console.log('subServicioPaginaRef',subServicioPaginaRef.current,selectedSubServicio);
-        
         if (subServicioPaginaRef.current&&!!selectedSubServicio) {
             // Realizar la lógica de scroll aquí
             subServicioPaginaRef.current.scrollIntoView({ behavior: 'smooth' });
@@ -74,11 +86,12 @@ if (isMobile) {
     if (!servicio_elegido || !subServicio_elegido) {
         return <h3>Error</h3>;
     }
-
+    console.log( servicio_elegido, 'servicio_elegido');
+    
     return (
         <>
             <PagesLayout>
-                <Banner title={servicio_elegido.length==1 ? servicio_elegido[0].nombre:"Servicios" } paragraph={title.toString()} />
+                <Banner title={servicio_elegido.length==1 ? servicio_elegido[0].nombre:"Servicios" } paragraph={title.toString()} image={imagen} />
                 <div className={dispositivo}>
                     <div className="row servicio">
                         <div className="col-12">

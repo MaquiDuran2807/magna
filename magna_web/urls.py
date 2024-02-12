@@ -36,9 +36,6 @@ urlpatterns = [
     path('frequentQuestions/',include('frequentQuestions.urls')), 
     path('contact/',include('contact.urls')),
     path("products/",include("products.urls")),
-    path("users/",include("user.urls")),
-    
-    
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += [re_path(r'^.*', indexView.as_view(), name='index')]

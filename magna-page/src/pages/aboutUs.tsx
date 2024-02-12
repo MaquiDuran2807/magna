@@ -2,21 +2,20 @@
 import { useState,useEffect,lazy } from 'react';
 import PagesLayout from '../layouts/pagesLayouts';
 import Banner from "../components/banner"
+
 const LazyProyectoPanel = lazy(() => import('../components/sections/proyectoPanel'));
 const LazyStatistics = lazy(() => import('../components/sections/statistics'));
 const LazyEquipos = lazy(() => import('../components/sections/Equipos'));
 const LazyProyectos = lazy(() => import('../components/sections/proyectos'));
 import "./styles/aboutUs.css"
 import { FaCheck } from "react-icons/fa6";
+import imagen from '../assets/img/banner/nosotros.jpg';
 
 
 function Componente1() {
-    // Este es el primer componente que se renderizará
-    return <Banner title="Sobre Nosotros" paragraph="Sobre Nosotros" />;
+    return <Banner title="Sobre Nosotros" paragraph="Sobre Nosotros" image={imagen} />;
   }
-  
-  
-
+ 
 
 const AboutUs: React.FC = () => {
     const [isComponente1Mounted, setIsComponente1Mounted] = useState(false);

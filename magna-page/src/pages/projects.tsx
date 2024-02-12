@@ -2,6 +2,7 @@ import Banner from '../components/banner';
 import CardsProjects from '../components/cardsProjects';
 import PagesLayout from '../layouts/pagesLayouts';
 import { useQuery } from '@tanstack/react-query';
+import imagen from '../assets/img/banner/projects.png';
 import { ProyectosMagna,ProyectImagesMagna} from '../types/projects';
 
 const Projects: React.FC = () => {
@@ -19,7 +20,7 @@ const Projects: React.FC = () => {
     }
     return (
         <PagesLayout>
-            <Banner title="Proyectos" paragraph='Proyectos' />
+            <Banner title="Proyectos" paragraph='Proyectos' image={imagen} />
             <br />
             <br />
             <div className="container">

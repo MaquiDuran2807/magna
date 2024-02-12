@@ -2,6 +2,7 @@ import React, { useEffect,lazy } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Link, useParams } from 'react-router-dom';
 import Banner from '../components/banner';
+import imagenBanner from '../assets/img/banner/projects.png';
 import { Result,ProyectosMagna,ProyectImagesMagna,Servicio } from '../types/projects';
 import SliderProjectDetail from '../components/sliderProjectDetail';
 import PagesLayout from '../layouts/pagesLayouts';
@@ -44,7 +45,7 @@ const ProjectDetail: React.FC= () => {
     return (
         <>
         <PagesLayout>
-            <Banner title="Proyectos" paragraph='Proyectos' />
+            <Banner title="Proyectos" paragraph='Proyectos' image={imagenBanner}/>
             <div className="container-fluid">
                 <div className="row titulo">
                     <h2 className='col-10'>
