@@ -32,6 +32,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         setIsLoading(false);
         return;
         }
+        setIsLoading(false);
     }
     useEffect(() => {
         validateToken();

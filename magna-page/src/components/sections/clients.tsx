@@ -1,6 +1,7 @@
-import React from "react";
+
 import LogoCarrusel from "../LogoCarrusel"
 import { SetionHeader } from "../setionHeader"
+import useIntersectionObserver from "../../hooks/useLazyload"
 export const Clients = () => {
     return(
         <section className='clientes'>
@@ -17,33 +18,11 @@ export const Clients = () => {
 }
 
 export default function LazyClients () {
-  const [show, setShow] = React.useState(false);
-  const elementRef = React.useRef<HTMLDivElement>(null);
-
-  React.useEffect(() => {
-      const onChange = (entries: IntersectionObserverEntry[],observer: { disconnect: () => void; }) => {
-          const { isIntersecting } = entries[0];
-          console.log(isIntersecting, 'aqui estoy en isIntersecting');
-          
-          if (isIntersecting) {
-              setShow(true);
-              observer.disconnect();
-          }
-      };
-
-      const observer = new IntersectionObserver(onChange, {
-          rootMargin: '100px',
-      });
-
-      if (elementRef.current) {
-          observer.observe(elementRef.current);
-      }
-
-  }, []);
+  const { isVisible, ref } = useIntersectionObserver('100px');
 
   return (
-      <div id="LazyServices" ref={elementRef}>
-          {show ? <Clients/> : null}
+      <div id="LazyServices" ref={ref}>
+          {isVisible ? <Clients/> : null}
       </div>
   );
 }

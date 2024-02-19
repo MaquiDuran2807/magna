@@ -1,5 +1,4 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+
 # importar rest_framework
 from rest_framework.response import Response
 from rest_framework.generics import CreateAPIView

@@ -7,7 +7,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import useScreenSize from '../../hooks/ScreenSize';
 import { API_CONTACTO } from '../../constans';
 import '../styles/contact.css'
-import React from 'react';
+import useIntersectionObserver from "../../hooks/useLazyload"
+
 
 export const Contact = () => {
   const { width } = useScreenSize();
@@ -163,33 +164,10 @@ export const Contact = () => {
 }
 
 export default function LazyContact () {
-  const [show, setShow] = React.useState(false);
-  const elementRef = React.useRef<HTMLDivElement>(null);
-
-  React.useEffect(() => {
-      const onChange = (entries: IntersectionObserverEntry[],observer: { disconnect: () => void; }) => {
-          const { isIntersecting } = entries[0];
-          console.log(isIntersecting, 'aqui estoy en isIntersecting');
-          
-          if (isIntersecting) {
-              setShow(true);
-              observer.disconnect();
-          }
-      };
-
-      const observer = new IntersectionObserver(onChange, {
-          rootMargin: '100px',
-      });
-
-      if (elementRef.current) {
-          observer.observe(elementRef.current);
-      }
-
-  }, []);
-
+  const {  isVisible, ref } = useIntersectionObserver('100px');
   return (
-      <div id="LazyServices" ref={elementRef}>
-          {show ? <Contact/> : null}
+      <div id="LazyServices" ref={ref}>
+          {isVisible ? <Contact/> : null}
       </div>
   );
 }

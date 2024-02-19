@@ -1,15 +1,19 @@
 .statistics{
     background-image: url(../../assets/img/statistics/statistics2.png);
+    background-size: cover;
+    background-position: 30% 100%;
     color : #f0f8ff;
     padding: 50px;
     @media screen and (max-width: 768px) {
-        background-size: cover;
-        background-position: 30% 100%;
-        
+        padding: 10px;
     }
 }
 .statistic__number{
     padding: 20px 100px;
+    @media screen and (max-width: 768px) {
+        padding: 10px;
+        
+    }
 }
 
 .counter{

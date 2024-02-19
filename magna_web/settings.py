@@ -64,15 +64,15 @@ INSTALLED_APPS = [
     "contact",
     "frequentQuestions",
     "products",
+    "blog",
 ]
 
-CKEDITOR_UPLOAD_PATH = "/media/"
+CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_IMAGE_BACKEND = "pillow"
 CKEDITOR_CONFIGS = {
     'default': {
         'toolbar': 'full',
         'height': 300,
-        'width': 300,
     },
 }
 

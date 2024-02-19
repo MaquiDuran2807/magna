@@ -5,7 +5,7 @@ import { SetionHeader } from '../setionHeader'
 import { Link } from 'react-router-dom';
 import '../styles/Servicios.css'
 import { API_URL } from '../../constans';
-import React from 'react';
+import useIntersectionObserver from '../../hooks/useLazyload';
 
 
 const Servicios = () => {
@@ -48,38 +48,10 @@ const Servicios = () => {
 }
 
 export default function LazyServicios() {
-    const [show, setShow] = React.useState(false);
-    const elementRef = React.useRef<HTMLDivElement>(null);
-
-    React.useEffect(() => {
-        const onChange = (entries: IntersectionObserverEntry[],observer: { disconnect: () => void; }) => {
-            const { isIntersecting } = entries[0];
-            console.log(isIntersecting, 'aqui estoy en isIntersecting');
-            
-            if (isIntersecting) {
-                setShow(true);
-                observer.disconnect();
-            }
-        };
-
-        const observer = new IntersectionObserver(onChange, {
-            rootMargin: '100px',
-        });
-
-        if (elementRef.current) {
-            observer.observe(elementRef.current);
-        }
-
-        // return () => {
-        //     if (elementRef.current) {
-        //         observer.unobserve(elementRef.current);
-        //     }
-        // };
-    }, []);
-
+    const {  isVisible, ref } = useIntersectionObserver('100px');
     return (
-        <div id="LazyServices" ref={elementRef}>
-            {show ? <Servicios /> : null}
+        <div id="LazyServices" ref={ref}>
+            {isVisible ? <Servicios /> : null}
         </div>
     );
 }

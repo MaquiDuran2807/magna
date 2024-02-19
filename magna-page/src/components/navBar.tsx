@@ -11,20 +11,6 @@ import { Link,NavLink} from 'react-router-dom';
 
 export const NavBar = (  ) => {
     const [open, setOpen] = useState(false);
-    
-
-    // console.log(props);
-    
-
-    // const [theme, setTheme] = useState('light');
-
-    // const handleTheme = () => {
-    //     if (theme === 'light') {
-    //         setTheme('dark');
-    //     } else {
-    //         setTheme('light');
-    //     }
-    // }
     const themeLogin="text-black"
   
       return (
@@ -47,8 +33,7 @@ export const NavBar = (  ) => {
                         <Link className={`links nav navbar  ${themeLogin} `} to="/cotizador">Login</Link>
                         <div onClick={() => setOpen(!open)}>
                           
-                          <a  className='links nav navbar text-black'>blog <span><img src={drop} alt="" /> </span></a>
-  
+                          <Link to="/blog"  className='links nav navbar text-black'>blog <span><img src={drop} alt="" /> </span></Link>
                         <Collapse in={open}>
                           <div id="example-collapse-text" className='drop ' >
                             <a href='/blog/ia' className='links links-drop text-black'>IA</a>
@@ -75,42 +60,6 @@ export const NavBar = (  ) => {
                 </div>
               </Navbar>
             </div>
-            
-  
-  
-  
-          {/* <Container className='col rounded-9 '>
-          <Row >
-          <Navbar className="navbar navbar-dark bg-ligh  " id='barra ' variant="dark" expand="lg">
-          
-            
-            <Navbar.Brand as={Link} to="/" className="col-6 ">
-              <img
-                alt="kjasnkdansjkdnka"
-                src="../assets/react.svg"
-                width="30"
-                height="30"
-                className="d-inline-block align-top"
-              />{' '}
-              <span className='text-light'>Elit</span>
-            </Navbar.Brand>
-              <Navbar.Toggle aria-controls="basic-navbar-nav" />
-              <Navbar.Collapse id="basic-navbar-nav"  className="   ">
-              <Nav className='row col-12 justify-content-end'> 
-                <div className='col-2'>
-                  <Link to="/" class="nav-item" >Home</Link>
-                </div>
-                <Link to="/about" class="col-2">About</Link>
-                <Link to="/contact" class="col-2">Contact</Link>
-              </Nav>
-              </Navbar.Collapse>
-          
-          </Navbar>
-          </Row>
-          </Container> */}
-            {/* </div> */}
-            
-          
           </>
       );
       }

@@ -24,8 +24,6 @@ const { data:projectImages } = useQuery<ProyectImagesMagna[]>({
   staleTime: 1000*60*30,refetchOnWindowFocus: false,refetchOnMount: false,refetchOnReconnect: false,refetchInterval: 1000*60*30,
 });
 
-    
-
     const { width} = useScreenSize();
     const isMobile = width <= 768;
     const isTablet = width <= 1000;
@@ -71,40 +69,3 @@ const { data:projectImages } = useQuery<ProyectImagesMagna[]>({
     </Swiper>
   );
 };
-
-
-
-
-{/* <SwiperSlide>
-<div className="projects border-0 project-2">
-    <div className="card-info">
-        <h4>
-            urbanización
-        </h4>
-        <p>
-            el bosque
-        </p>
-    </div>
-    <a href="/projects"><img src={iconarrow} alt="" className='icon-arrow'/></a>
-</div>
-</SwiperSlide>
-<SwiperSlide>
-<div className="projects border-0 project-3">
-    <div className="card-info">
-        <h4>
-            via del mar
-        </h4>
-    </div>
-    <a href="/projects"><img src={iconarrow} alt="" className='icon-arrow'/></a>
-</div>
-</SwiperSlide>
-<SwiperSlide>
-<div className="projects border-0 project-4">
-    <div className="card-info">
-        <h4>
-            granja solar
-        </h4>
-    </div>
-    <a href="/projects"><img src={iconarrow} alt="" className='icon-arrow'/></a>
-</div>
-</SwiperSlide> */}

@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.views.generic import TemplateView
 from django.urls import include, path, re_path
 from django.conf.urls.static import static
+from django.http import JsonResponse
 from django.conf import settings
 
 
@@ -25,17 +26,22 @@ from django.conf import settings
 class indexView(TemplateView):
     template_name = 'dist/index.html'
 
+
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     re_path('auth/', include('djoser.urls')),
     re_path('auth/', include('djoser.urls.jwt')),
     re_path('auth/', include('djoser.social.urls')),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
     path('servicios/',include('servicios.urls')),
     path('equipos/',include('equipos.url')),
     path('proyectos/',include('proyectos.urls')),
     path('frequentQuestions/',include('frequentQuestions.urls')), 
     path('contact/',include('contact.urls')),
     path("products/",include("products.urls")),
+    path("blog/",include("blog.urls")),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += [re_path(r'^.*', indexView.as_view(), name='index')]

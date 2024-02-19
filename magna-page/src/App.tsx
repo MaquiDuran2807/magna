@@ -12,6 +12,8 @@ const LazyClients = lazy(() => import('./components/sections/clients'))
 const LazyEquipos = lazy(() => import('./components/sections/Equipos'))
 const LazyContact = lazy(() => import('./components/sections/contact'))
 
+
+
 import SplashScreen from './components/splashScreen';
 
 

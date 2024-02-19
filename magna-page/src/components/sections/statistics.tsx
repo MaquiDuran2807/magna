@@ -6,6 +6,7 @@ import { FaRegHandshake } from "react-icons/fa";
 import MapaIcono from "../../assets/img/statistics/mapa-icono.svg";
 import { TfiRulerAlt2 } from "react-icons/tfi";
 import React from "react";
+import useIntersectionObserver from "../../hooks/useLazyload";
 
 
 export const Statistics = () => {
@@ -73,33 +74,10 @@ export const Statistics = () => {
 };
 
 export default function LazyStatistics () {
-  const [show, setShow] = React.useState(false);
-  const elementRef = React.useRef<HTMLDivElement>(null);
-
-  React.useEffect(() => {
-      const onChange = (entries: IntersectionObserverEntry[],observer: { disconnect: () => void; }) => {
-          const { isIntersecting } = entries[0];
-          console.log(isIntersecting, 'aqui estoy en isIntersecting');
-          
-          if (isIntersecting) {
-              setShow(true);
-              observer.disconnect();
-          }
-      };
-
-      const observer = new IntersectionObserver(onChange, {
-          rootMargin: '100px',
-      });
-
-      if (elementRef.current) {
-          observer.observe(elementRef.current);
-      }
-
-  }, []);
-
+  const {  isVisible, ref } = useIntersectionObserver('100px');
   return (
-      <div id="LazyServices" ref={elementRef}>
-          {show ? <Statistics /> : null}
+      <div id="LazyServices" ref={ref}>
+          {isVisible? <Statistics /> : null}
       </div>
   );
 }

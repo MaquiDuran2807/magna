@@ -1,7 +1,8 @@
-import React from 'react'
+
 import paneles from '../../assets/img/app/paneles.jpeg'
 import '../styles/ProyectPanel.css'
 import { Link } from 'react-router-dom'
+import useIntersectionObserver from '../../hooks/useLazyload'
 
 
 export  const ProyectoPanel = () => {
@@ -58,33 +59,10 @@ export  const ProyectoPanel = () => {
 }
 
 export default function LazyProyectoPanel () {
-    const [show, setShow] = React.useState(false);
-    const elementRef = React.useRef<HTMLDivElement>(null);
-  
-    React.useEffect(() => {
-        const onChange = (entries: IntersectionObserverEntry[],observer: { disconnect: () => void; }) => {
-            const { isIntersecting } = entries[0];
-            console.log(isIntersecting, 'aqui estoy en isIntersecting');
-            
-            if (isIntersecting) {
-                setShow(true);
-                observer.disconnect();
-            }
-        };
-  
-        const observer = new IntersectionObserver(onChange, {
-            rootMargin: '100px',
-        });
-  
-        if (elementRef.current) {
-            observer.observe(elementRef.current);
-        }
-  
-    }, []);
-  
+    const {  isVisible, ref } = useIntersectionObserver('100px');
     return (
-        <div id="LazyServices" ref={elementRef}>
-            {show ? <ProyectoPanel/> : null}
+        <div id="LazyServices" ref={ref}>
+            {isVisible ? <ProyectoPanel/> : null}
         </div>
     );
   }

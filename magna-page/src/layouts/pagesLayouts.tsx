@@ -22,6 +22,7 @@ const PagesLayout: React.FC<PagesLayoutProps> = ({ children }) => {
     return (
         <>
             <header ref={inicioDePaginaRef}>
+                
                 <NavBar />
                 <div className="spand" id='header'>
                 </div>

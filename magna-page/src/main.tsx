@@ -16,6 +16,8 @@ const ServecesDetail = React.lazy(() => import('./pages/servecesDetail'));
 import ServiciosIdProvider from './hooks/GetsIdServices';
 const ProjectDetail = React.lazy(() => import('./pages/projecsDetail'));
 const ContactPage = React.lazy(() => import('./pages/contact'));
+const BlogDetail = React.lazy(() => import('./pages/blogDetail'));
+const Blog = React.lazy(() => import('./pages/blog'));
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 const queryClient = new QueryClient()
@@ -65,6 +67,14 @@ const router = createBrowserRouter(
     {
       path: '/contact',
       element: <ContactPage/>,
+    },
+    {
+      path: '/blog',
+      element: <Blog/>,
+    },
+    {
+      path: '/blog/:id',
+      element: <BlogDetail/>,
     },
     {
       path: "/",
