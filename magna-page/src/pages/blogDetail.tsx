@@ -48,6 +48,15 @@ const BlogDetailPage: React.FC = () => {
     if (blogDetail.author===undefined) {
         return <p>No hay blog</p>;
     }
+
+    const contentBlog = DOMPurify.sanitize(blogDetail.content);
+    const regex = /<img/g;
+    const newContent = contentBlog.replace(regex, '<img class="img-fluid img-blog"');
+    // const newContent2 = newContent.replace(/(<img [^>]*?)style="[^"]*?"([^>]*?>)/g, '$1$2');
+    const newContent2 = newContent.replace(/(<img [^>]*?)style="([^"]*?)(?:\bheight\s*:\s*[^;]*;?)([^"]*?)"([^>]*?>)/g, '$1style="$2$3"$4');
+    console.log(newContent2,"este es el newcomente");
+    
+    
     return (
         <div className='blog-container '>
             <br />
@@ -75,7 +84,7 @@ const BlogDetailPage: React.FC = () => {
                                 <div className="col-12">
                                     {
                                         blogDetail.content && (
-                                            <div  dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(blogDetail.content) }} />
+                                            <div  dangerouslySetInnerHTML={{ __html: newContent2  }} />
                                         )
                                     }
                                 </div>

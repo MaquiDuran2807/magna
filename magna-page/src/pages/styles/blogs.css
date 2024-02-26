@@ -34,6 +34,10 @@
     box-shadow: 0px 0px 10px 0px #000000;
 }
 
+.card-img-top {
+    height: 50%;
+}
+
 .big-image{
     height: 50%;
     width: 100%;
@@ -116,4 +120,10 @@
     align-items: center;
     margin-bottom: 50px;
     color: black;
+}
+
+.img-blog{
+    width: 100%;
+    object-fit: cover;
+    border-radius: 10px;
 }

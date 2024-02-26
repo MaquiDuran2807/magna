@@ -11,7 +11,7 @@ class Category(models.Model):
 
 class BlogPost(models.Model):
     title = models.CharField(max_length=200)
-    description = models.TextField()
+    description = models.TextField(blank=True, null=True)
     content = RichTextUploadingField(blank=True, null=True)
     date_posted = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)

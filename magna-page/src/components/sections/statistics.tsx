@@ -5,7 +5,6 @@ import { GoProjectRoadmap } from "react-icons/go";
 import { FaRegHandshake } from "react-icons/fa";
 import MapaIcono from "../../assets/img/statistics/mapa-icono.svg";
 import { TfiRulerAlt2 } from "react-icons/tfi";
-import React from "react";
 import useIntersectionObserver from "../../hooks/useLazyload";
 
 

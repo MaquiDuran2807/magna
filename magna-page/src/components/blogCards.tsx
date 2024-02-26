@@ -34,7 +34,7 @@ const BlogList: React.FC<BlogListProps> = ({ blogs }) => {
                     <img src={blog.image} className={`card-img-top img-fluid ${imageClass}`} alt={blog.title} />
                     <div className="card-body">
                         <h5 className="card-title">{blog.title}</h5>
-                        <p className="card-text">{blog.description}</p>
+                        <p className="card-text">{blog.description.slice(0, 200)}...</p>
                     </div>
                 </div>
             </Link>
