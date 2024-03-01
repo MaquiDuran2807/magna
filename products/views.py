@@ -1,5 +1,5 @@
 
-# from django.views.generic import TemplateView
+from django.views.generic import TemplateView
 from django.http import HttpResponse
 # importar rest_framework
 # from rest_framework import viewsets
@@ -10,6 +10,8 @@ from rest_framework.views import APIView
 from .models import Category, Product
 from .serializers import  *
 # Create your views here.
+
+
 
 class CategoryList(ListAPIView):
     queryset = Category.objects.all()
@@ -42,6 +44,7 @@ class ProductList(ListAPIView):
     permission_classes = [permissions.AllowAny]
 
 class ProductApiview(APIView):
+    permission_classes = [permissions.AllowAny]
     def get(self, request, slug):
         if slug:
             products = Product.objects.filter(slug=slug)

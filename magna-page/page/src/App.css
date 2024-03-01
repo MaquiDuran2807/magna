@@ -1,0 +1,92 @@
+
+header{
+    height: fit-content;
+    padding: 0;
+    
+}
+
+.title{
+    
+    font-size: clamp(2rem, 12vw, 4.5rem);
+    font-weight: 700;
+    color: #7ad9ff;
+    padding-top: clamp(20px, 20vh, 60px);
+
+    @media  screen and (min-height: 801px) {
+        padding-top: clamp(20px, 20vh, 50%);
+        font-size: clamp(3rem, 16vw, 7.5rem);
+    }
+
+}
+
+.custom-next-icon{
+    color: #7ad9ff;
+    
+    @media screen and (max-width: 768px) {
+        position: absolute;
+        top: 85%;
+        left: 65%;
+    }
+
+    @media screen and (max-width: 300px) {
+        display: none;
+    }
+
+}
+
+.custom-prev-icon{
+    color: #7ad9ff;
+    @media screen and (max-width: 768px) {
+        position: absolute;
+        top: 85%;
+        left: 30%;
+    }
+    @media screen and (max-width: 300px) {
+        display: none;
+    }
+}
+
+.description{
+    height: 100vh;
+    
+
+}
+.description p{
+    
+    font-size: clamp(1.3rem, 2vw, 2.5rem);
+    font-weight: 500;
+    color: #000000;
+    padding-bottom: 20px;
+    @media screen and (min-height: 801px) {
+        font-size: clamp(1.4rem, 2.5vw, 2.7rem);
+    }
+}
+
+.sliders{
+    background-image:linear-gradient(to bottom left,rgba(0, 0, 0, 0.8) 0%,
+    rgba(0, 0, 0, 0.7) 35%,
+    rgba(0, 0, 0, 0.8) 100%), url(./assets/img/app/slide-banner1.webp);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100%;
+}
+
+
+
+.llamado{
+    background-color: #163E73;
+    color: #fcfbfb;
+    border-radius: 50px;
+    padding: 10px 30px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 2px solid #fff;
+    text-decoration: none;
+}
+
+.hidden{
+    display: none;
+}
+

@@ -24,7 +24,10 @@ from django.conf import settings
 
 
 class indexView(TemplateView):
-    template_name = 'dist/index.html'
+    template_name = 'page/dist/index.html'
+
+class storeView(TemplateView):
+    template_name = 'store/dist/index.html'
 
 
 
@@ -43,7 +46,8 @@ urlpatterns = [
     path("products/",include("products.urls")),
     path("blog/",include("blog.urls")),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
+urlpatterns += [re_path(r'^store/', storeView.as_view(), name='store')]
 urlpatterns += [re_path(r'^.*', indexView.as_view(), name='index')]
+
 
 admin.site.site_header = 'Administrador de Magna'

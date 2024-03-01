@@ -1,0 +1,25 @@
+.proyectos{
+    height: fit-content;
+    /* fondo animado sobre gris oscuro */
+    background: linear-gradient(0deg, rgba(2, 19, 40, 1) 0%, rgba(2, 19, 40, 0.756) 100%), url(../../assets/img/projects/3.png);
+    background-size: cover;
+    background-position: center;
+}
+
+.proyectos h6{
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #fcfbfb;
+    padding-top: 20px;
+}
+
+.proyectos h2{
+    font-size: 40px;
+    font-weight: 700;
+    color: #fcfbfb;
+    padding-top: 20px;
+}
+
+.proyectos h2 span{
+    color: #60A4BF;
+}

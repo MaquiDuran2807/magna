@@ -166,7 +166,8 @@ USE_TZ = True
 
 
 STATICFILES_DIRS = (
-    BASE_DIR.joinpath('magna-page','dist'),
+    BASE_DIR.joinpath('magna-page','page/dist'),
+    BASE_DIR.joinpath('magna-page','store/dist'),
 )
 STATIC_URL = 'static/'
 
