@@ -54,9 +54,6 @@ const BlogDetailPage: React.FC = () => {
     const newContent = contentBlog.replace(regex, '<img class="img-fluid img-blog"');
     // const newContent2 = newContent.replace(/(<img [^>]*?)style="[^"]*?"([^>]*?>)/g, '$1$2');
     const newContent2 = newContent.replace(/(<img [^>]*?)style="([^"]*?)(?:\bheight\s*:\s*[^;]*;?)([^"]*?)"([^>]*?>)/g, '$1style="$2$3"$4');
-    console.log(newContent2,"este es el newcomente");
-    
-    
     return (
         <div className='blog-container '>
             <br />
