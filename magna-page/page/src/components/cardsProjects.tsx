@@ -106,8 +106,14 @@ const CardsProjects = ({ type, actualPage,imagenes }: Props) => {
                     }
                 </div>
                 <div className="row">
+
             {Array.isArray(proyectos_card_type) && proyectos_card_type.map((proyecto: Result) => {
-                const firstImage = imagenesCard.filter((imagen: ProyectImagesMagna) => imagen.proyecto === proyecto.id)[0].imagen
+                let firstImage = "no hay imagen";
+               try {
+                firstImage = imagenesCard.filter((imagen: ProyectImagesMagna) => imagen.proyecto === proyecto.id)[0].imagen;
+               } catch (error) {
+                console.error(error);
+               }
                 return (
                     
                     <motion.div
@@ -121,7 +127,7 @@ const CardsProjects = ({ type, actualPage,imagenes }: Props) => {
                         <div >
                             <div className="card-project">
                                 <div className="card-body card-body-projects">
-                                    {firstImage && <img src={firstImage} alt="Project Image" className='img-fluid card-img'/>}        
+                                    {firstImage ? <img src={firstImage} alt="" className="img-fluid" /> : <p>No hay imagen</p>}
                                     <div className="content-1 ">
                                         <div>
                                             <h5 className="card-title text-center">{proyecto.nombre}</h5>

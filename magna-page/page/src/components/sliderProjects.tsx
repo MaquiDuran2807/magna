@@ -50,9 +50,17 @@ const { data:projectImages } = useQuery<ProyectImagesMagna[]>({
       {Project?.results.map((project:Result) => (
         <SwiperSlide key={project.id}>
           <div className="projects border-0 ">
-          <img src={
-                ` ${projectImages?.filter((imagen:ProyectImagesMagna) => imagen.proyecto=== project.id)[0].imagen}`
-              } alt="" className='project-img' />
+          {
+            projectImages.map((imagen:ProyectImagesMagna) => {
+              if (imagen.proyecto === project.id) {
+                return (
+                  <img src={imagen.imagen} alt="" className="img-fluid" />  
+                );
+          }
+
+        })
+      }
+
             <div className="card-info">
               <h4>{project.nombre}</h4>
               <p>{project.descripcion.slice(0,90)} <span>... <Link to={`/projects/${project.id}`}>ver más</Link></span></p>
