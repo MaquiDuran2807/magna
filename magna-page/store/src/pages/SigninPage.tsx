@@ -13,7 +13,7 @@ export default function SigninPage() {
   const navigate = useNavigate()
   const { search } = useLocation()
   const redirectInUrl = new URLSearchParams(search).get('redirect')
-  const redirect = redirectInUrl ? redirectInUrl : '/'
+  const redirect = redirectInUrl ? redirectInUrl : '/store/'
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -31,7 +31,7 @@ export default function SigninPage() {
         password,
       })
       dispatch({ type: 'USER_SIGNIN', payload: data })
-      localStorage.setItem('userInfo', JSON.stringify(data))
+      
       navigate(redirect)
     } catch (err) {
       toast.error(getError(err as ApiError))
@@ -69,13 +69,13 @@ export default function SigninPage() {
         </Form.Group>
         <div className="mb-3">
           <Button disabled={isLoading} type="submit">
-            Sign In
+            Entrar
           </Button>
           {isLoading && <LoadingBox />}
         </div>
         <div className="mb-3">
-          New customer?{' '}
-          <Link to={`/signup?redirect=${redirect}`}>Create your account</Link>
+          Eres nuevo?{' '}
+          <Link to={`/store/signup?redirect=${redirect}`}>Crea tu cuenta</Link>
         </div>
       </Form>
     </Container>

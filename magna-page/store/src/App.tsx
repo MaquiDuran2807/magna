@@ -22,6 +22,7 @@ import MessageBox from './components/MessageBox'
 import { getError } from './utils'
 import { ApiError } from './types/ApiError'
 import SearchBox from './components/SearchBox'
+import { log } from 'console'
 
 function App() {
   const {
@@ -42,7 +43,7 @@ function App() {
     localStorage.removeItem('cartItems')
     localStorage.removeItem('shippingAddress')
     localStorage.removeItem('paymentMethod')
-    window.location.href = '/signin'
+    window.location.href = '/store/signin'
   }
 
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false)
@@ -62,7 +63,7 @@ function App() {
           expand="lg"
         >
           <div className="d-flex justify-content-between align-items-center">
-            <LinkContainer to="/" className="header-link">
+            <LinkContainer to="/store/" className="header-link">
               <Navbar.Brand>Magna</Navbar.Brand>
             </LinkContainer>
             <SearchBox />
@@ -77,19 +78,16 @@ function App() {
                   <i
                     className={mode === 'light' ? 'fa fa-sun' : 'fa fa-moon'}
                   ></i>{' '}
-                  {mode === 'light' ? 'Light' : 'Dark'}
+                  {mode === 'light' ? 'Claro' : 'Oscuro'}
                 </Link>
 
                 {userInfo ? (
                   <NavDropdown
                     className="header-link"
-                    title={`Hello, ${userInfo.name}`}
+                    title={`Hola, ${userInfo.first_name}`}
                   >
-                    <LinkContainer to="/profile">
-                      <NavDropdown.Item>User Profile</NavDropdown.Item>
-                    </LinkContainer>
-                    <LinkContainer to="/orderhistory">
-                      <NavDropdown.Item>Order History</NavDropdown.Item>
+                    <LinkContainer to="/store/profile">
+                      <NavDropdown.Item>Perfil de usuario</NavDropdown.Item>
                     </LinkContainer>
                     <NavDropdown.Divider />
                     <Link
@@ -102,16 +100,13 @@ function App() {
                     </Link>
                   </NavDropdown>
                 ) : (
-                  <NavDropdown className="header-link" title={`Hello, sign in`}>
-                    <LinkContainer to="/signin">
-                      <NavDropdown.Item>Sign In</NavDropdown.Item>
+                  <NavDropdown className="header-link" title={`Hola, haz login`}>
+                    <LinkContainer to="/store/signin">
+                      <NavDropdown.Item>Login</NavDropdown.Item>
                     </LinkContainer>
                   </NavDropdown>
                 )}
-                <Link to="/orderhistory" className="nav-link header-link">
-                  Orders
-                </Link>
-                <Link to="/cart" className="nav-link header-link p-0">
+                <Link to="/store/cart/" className="nav-link header-link p-0">
                   {
                     <span className="cart-badge">
                       {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
@@ -137,17 +132,17 @@ function App() {
                 className="nav-link header-link p-1"
                 onClick={() => setSidebarIsOpen(!sidebarIsOpen)}
               >
-                <i className="fas fa-bars"></i> All
+                <i className="fas fa-bars"></i> Categorías
               </Link>
-              {['Todays Deal', 'Gifts', 'On Sale'].map((x) => (
+              {/* {['Todays Deal', 'Gifts', 'On Sale'].map((x) => (
                 <Link
                   key={x}
                   className="nav-link header-link p-1 px-3"
-                  to={`/search?tag=${x}`}
+                  to={`/store/search?tag=${x}`}
                 >
                   {x}
                 </Link>
-              ))}
+              ))} */}
             </div>
           </div>
         </Navbar>
@@ -170,11 +165,11 @@ function App() {
         <ListGroup variant="flush">
           <ListGroup.Item action className="side-navbar-user">
             <LinkContainer
-              to={userInfo ? `/profile` : `/signin`}
+              to={userInfo ? `/profile` : `/store/signin`}
               onClick={() => setSidebarIsOpen(!sidebarIsOpen)}
             >
               <span>
-                {userInfo ? `Hello, ${userInfo.name}` : `Hello, sign in`}
+                {userInfo ? `Hola, ${userInfo.first_name}` : `Hola, haz login`}
               </span>
             </LinkContainer>
           </ListGroup.Item>
@@ -199,7 +194,7 @@ function App() {
             categories!.map((category) => (
               <ListGroup.Item action key={category.id}>
                 <LinkContainer
-                  to={{ pathname: '/search', search: `category=${category}` }}
+                  to={{ pathname: `/store/search/${category.id}` }}
                   onClick={() => setSidebarIsOpen(false)}
                 >
                   <Nav.Link>{category.name} </Nav.Link>
@@ -216,7 +211,11 @@ function App() {
         </Container>
       </main>
       <footer>
-        <div className="text-center">All rights reserved</div>
+        <div className="">
+          <div className="text-center py-3">
+            <a href="/">Magna</a> &copy; {new Date().getFullYear()}
+          </div>
+        </div>
       </footer>
     </div>
   )

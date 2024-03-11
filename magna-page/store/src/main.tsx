@@ -26,16 +26,17 @@ import OrderPage from './pages/OrderPage'
 import { PayPalScriptProvider } from '@paypal/react-paypal-js'
 import OrderHistoryPage from './pages/OrderHistoryPage'
 import ProfilePage from './pages/ProfilePage'
+import SearchPage from './pages/searchPage'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/store/" element={<App />}>
       <Route index element={<HomePage />} />
       <Route path="product/:slug" element={<ProductPage />} />
-      <Route path="cart" element={<CartPage />} />
+      <Route path="/store/cart" element={<CartPage />} />
       <Route path="signin" element={<SigninPage />} />
       <Route path="signup" element={<SignupPage />} />
-      {/* <Route path="search" element={<SearchPage />} /> Cambia la ruta */}
+      <Route path="search/:categoria" element={<SearchPage />} /> Cambia la ruta
       <Route element={<ProtectedRoute />}>
         <Route path="shipping" element={<ShippingAddressPage />} />
         <Route path="payment" element={<PaymentMethodPage />} />

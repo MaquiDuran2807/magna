@@ -9,6 +9,6 @@ export default function ProtectedRoute() {
   if (userInfo) {
     return <Outlet />
   } else {
-    return <Navigate to="/signin" />
+    return <Navigate to="/store/signin" />
   }
 }

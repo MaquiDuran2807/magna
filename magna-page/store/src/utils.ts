@@ -1,7 +1,7 @@
 import { parse } from 'path'
 import { ApiError } from './types/ApiError'
 import { CartItem } from './types/Cart'
-import { Product} from './types/Product'
+import { Productos} from './types/Product'
 
 export const getError = (error: ApiError) => {
   return error.response && error.response.data.message
@@ -9,13 +9,13 @@ export const getError = (error: ApiError) => {
     : error.message
 }
 
-export const convertProductToCartItem = (product: Product): CartItem => {
+export const convertProductToCartItem = (product: Productos): CartItem => {
   const cartItem: CartItem = {
-    _id: product._id,
+    _id: product.id,
     name: product.name,
     slug: product.slug,
     image: product.image,
-    price: product.price,
+    price: parseFloat(product.price),
     countInStock: product.countInStock,
     quantity: 1,
   }

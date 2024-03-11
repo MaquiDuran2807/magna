@@ -82,5 +82,12 @@ class ProductDelete(DestroyAPIView):
     serializer_class = ProductSerializer
     permission_classes = [permissions.AllowAny]
 
+class ProductByCategory(ListAPIView):
+    serializer_class = ProductSerializer
+    permission_classes = [permissions.AllowAny]
+    def get_queryset(self):
+        category = self.kwargs['pk']
+        return Product.objects.filter(category=category)
+
 
 

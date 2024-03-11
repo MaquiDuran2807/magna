@@ -1,17 +1,17 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { FiSearch } from 'react-icons/fi';
 import { Spinner } from '../components/spinner';
-import { useEffect} from 'react';
+import { useEffect, useState} from 'react';
 import { Result } from '../types/blog';
-import { fetchNextBlogs } from '../api/blog';
+import { fetchNextBlogs,fetchBlogSearch } from '../api/blog';
 import "../pages/styles/blogs.css"
 import BlogLayout from '../layouts/blogLayout';
 import BlogList from '../components/blogCards';
 import Sidebar from '../components/sidebarBolgs';
+import BlogSearch from '../components/search';
 
 const Blog =  () => {
-    // const [filter, setFilter] = useState('');
-    // const [count, setCount] = useState(0);
+    const [filter, setFilter] = useState("");
+    const [filterBlogs, setFilterBlogst] = useState<Result[] | null>(null);
     const { data, isError, isLoading, fetchNextPage,hasNextPage,isFetchingNextPage } = useInfiniteQuery(
         {
           queryKey: ['blogs'],
@@ -30,6 +30,16 @@ const Blog =  () => {
           },
         }
       );
+      useEffect(() => {
+        if (!filter) return;
+        const fetchData = async () => {
+            const response = await fetchBlogSearch(filter);
+            if (!response) return;
+            setFilterBlogst(response);
+        };
+        fetchData();
+    }, [filter]);
+
       
     useEffect(() => {
         if (!data) return;
@@ -59,15 +69,14 @@ const Blog =  () => {
                         <h1>MagnaBlog</h1>
                     </div>
                     <div className=" text-center">
-                        <input type="text" placeholder="Buscar" className='blog-search'/>
-                        <FiSearch className="ms-2" />
+                        <BlogSearch setFilter={setFilter} />
                     </div>
                     <div className="blog-cards ">
                         <div className="row">
-                            <div className="col-lg-9 col-12">
-                                <BlogList blogs={blogs} />
+                            <div className="col-lg-8 col-12">
+                                <BlogList blogs={blogs} search={filterBlogs} />
                             </div>
-                            <div className="col-md-3">
+                            <div className="col-md-4">
                                 <Sidebar />
                             </div>
                         </div>

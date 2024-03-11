@@ -50,3 +50,15 @@ export const fetchinfoImportantBlogs = async () => {
     return
   }
 }
+
+export const fetchBlogSearch = async (search:string) => {
+  try {
+    const response = await apiClient.get<Result[]>(`/blog/search/${search}/`);
+    console.log(response.data);
+    const blogs = response.data;
+    return blogs;
+  } catch (error) {
+    console.log(error);
+    return
+  }
+}

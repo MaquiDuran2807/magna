@@ -60,8 +60,8 @@ const BlogDetailPage: React.FC = () => {
             <BlogLayout>
                 <div className="container content-blog">
                     <div className="row ">
-                        <div className="col-9 blog-izq">
-                                <div className="col-12 text-white text-center pt-3 pb-5 blog-banner" style={{backgroundImage:`url(${blogDetail.category.image})`,}}>
+                        <div className="col-8 blog-izq">
+                                <div className="col-12 text-center pt-3 pb-5 blog-banner" style={{backgroundImage:`url(${blogDetail.category.image})`,}}>
                                     <h3 >
                                         MagnaBlog
                                     </h3>
@@ -90,7 +90,7 @@ const BlogDetailPage: React.FC = () => {
                                 <h3>Comentarios</h3>
                                 <div className="container">
                                     <div className="row">
-                                        <div className="col-10">
+                                        <div className="col-8">
                                             <div className="card">
                                                 <div className="card-body">
                                                     {
@@ -107,7 +107,6 @@ const BlogDetailPage: React.FC = () => {
                                                             )
                                                         }
                                                     )}
-                                                    <p className="card-text">Este es el comentario 1</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -115,7 +114,7 @@ const BlogDetailPage: React.FC = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-3 blog-der">
+                        <div className="col-4 blog-der">
                             <Sidebar />
                         </div>
                     </div>

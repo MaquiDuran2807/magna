@@ -1,21 +1,21 @@
-export type Product = {
-  _id: number
-  name: string
-  slug: string
-  image: string
-  category: number
-  brand: string
-  price: number
-  countInStock: number
-  description: string
-  rating: number
-  numReviews: number
+export interface Productos {
+  id:           number;
+  category:     Category;
+  name:         string;
+  slug:         string;
+  image:        string;
+  brand:        string;
+  price:        string;
+  countInStock: number;
+  description:  string;
+  rating:       string;
+  numReviews:   number;
 }
 
-
-export interface Categories {
+export interface Category {
   id:   number;
   name: string;
 }
+
 
 

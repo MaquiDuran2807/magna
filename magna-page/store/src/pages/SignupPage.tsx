@@ -12,7 +12,7 @@ export default function SignupPage() {
   const navigate = useNavigate()
   const { search } = useLocation()
   const redirectInUrl = new URLSearchParams(search).get('redirect')
-  const redirect = redirectInUrl ? redirectInUrl : '/'
+  const redirect = redirectInUrl ? redirectInUrl : '/store/'
 
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -95,7 +95,7 @@ export default function SignupPage() {
 
         <div className="mb-3">
           Already have an account?{' '}
-          <Link to={`/signin?redirect=${redirect}`}>Sign In</Link>
+          <Link to={`/store/signin?redirect=${redirect}`}>Sign In</Link>
         </div>
       </Form>
     </Container>

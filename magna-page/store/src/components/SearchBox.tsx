@@ -8,7 +8,9 @@ export default function SearchBox() {
 
   const submitHandler = (e: React.SyntheticEvent) => {
     e.preventDefault()
-    navigate(query ? `/search?query=${query}` : '/search')
+    console.log('query', query);
+    
+    navigate(query ? `/store/search?query=${query}` : '/search')
   }
   return (
     <Form className="flex-grow-1 d-flex me-auto" onSubmit={submitHandler}>
@@ -17,7 +19,7 @@ export default function SearchBox() {
           type="text"
           name="q"
           id="q"
-          placeholder="Search Amazona"
+          placeholder="Buscar productos"
           aria-label="Search Amazona"
           aria-describedby="button-search"
           onChange={(e) => setQuery(e.target.value)}

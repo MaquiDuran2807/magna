@@ -24,6 +24,7 @@ export interface BlogimportantMagna {
     author:      Author;
     category:    Category;
     important:   boolean;
+    image:       string;
 }
 
 export interface Author {

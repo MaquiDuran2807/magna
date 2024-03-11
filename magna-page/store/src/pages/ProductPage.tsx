@@ -26,7 +26,7 @@ export default function ProductPage() {
   const navigate = useNavigate()
 
   const addToCartHandler = () => {
-    const existItem = cart.cartItems.find((x) => x._id === product!._id)
+    const existItem = cart.cartItems.find((x) => x._id === product!.id)
     const quantity = existItem ? existItem.quantity + 1 : 1
     if (product!.countInStock < quantity) {
       toast.warn('Sorry. Product is out of stock')
@@ -63,7 +63,7 @@ export default function ProductPage() {
             </ListGroup.Item>
             <ListGroup.Item>
               <Rating
-                rating={product.rating}
+                rating={parseInt(product.rating)}
                 numReviews={product.numReviews}
               ></Rating>
             </ListGroup.Item>

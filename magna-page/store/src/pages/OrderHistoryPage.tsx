@@ -10,7 +10,8 @@ import { getError } from '../utils'
 export default function OrderHistoryPage() {
   const navigate = useNavigate()
   const { data: orders, isLoading, error } = useGetOrderHistoryQuery()
-
+  console.log('orders', orders);
+  
   return (
     <div>
       <Helmet>

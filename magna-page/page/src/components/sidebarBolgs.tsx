@@ -23,8 +23,19 @@ const Sidebar: React.FC = () => {
                 {
                 blogs.map((blog) => {
                     return (
-                            <li key={blog.id}><span className="col-1 icon-row"><AiOutlineDoubleRight /> </span>
-                                <Link to={`/blog/${blog.id}`} className='link-blogs'>{blog.title}</Link>
+                            <li key={blog.id}>
+                                <div className="row">
+                                <Link to={`/blog/${blog.id}`}>
+                                    <div className="col-3">
+                                        <img src={blog.image} alt={blog.title} style={{width:"120px",borderRadius:"10px"}} />
+                                    </div>
+                                    <div className="col-8 fs-4">
+                                        {blog.title} <AiOutlineDoubleRight />
+                                        <p className='text-white '> Autor :  {blog.author.last_name}</p>
+                                    </div>
+                                    <hr />
+                                    </Link>
+                                </div>
                             </li>
                     );
                 })

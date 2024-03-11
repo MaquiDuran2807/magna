@@ -1,6 +1,6 @@
 export type UserInfo = {
-  name: string
+  first_name: string
   email: string
-  token: string
+  access: string
   isAdmin: boolean
 }

@@ -55,7 +55,7 @@ export default function CartPage() {
                   <Row className="align-items-center" key={item.name}>
                     <Col md={4}>
                       <img
-                        src={`${apiClient.defaults.baseURL}${item.image}`}
+                        src={`${item.image}`}
                         alt={item.name}
                         className="img-fluid rounded thumbnail"
                       ></img>{' '}

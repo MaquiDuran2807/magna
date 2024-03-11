@@ -1,8 +1,11 @@
 import axios from 'axios'
 
+// const APIURL = 'http://127.0.0.1:8000/'
+const APIURL ="http://54.211.37.134:8000/"
+
+
 const apiClient = axios.create({
-  baseURL:
-    process.env.NODE_ENV === 'development' ? 'http://localhost:8000/' : '/',
+  baseURL:APIURL ,
   headers: {
     'Content-type': 'application/json',
   },
@@ -10,9 +13,11 @@ const apiClient = axios.create({
 
 apiClient.interceptors.request.use(
   async (config) => {
+    console.log(localStorage.getItem('userInfo'), 'localStorage.getItem(userInfo)');
+    
     if (localStorage.getItem('userInfo'))
       config.headers.authorization = `JWT ${
-        JSON.parse(localStorage.getItem('userInfo')!).token
+        JSON.parse(localStorage.getItem('userInfo')!).access
       }`
     return config
   },

@@ -34,3 +34,12 @@ class BlogPostRecentApiView(ListAPIView):
     def get_queryset(self):
         return BlogPost.objects.filter(important=True).order_by('-date_posted')[:10]
     
+
+class BlogSearchApiView(ListAPIView):
+    serializer_class = BlogPostSerializer
+    permission_classes = (permissions.AllowAny,)
+
+    def get_queryset(self):
+        # Obtenemos el id del post
+        search = self.kwargs['search']
+        return BlogPost.objects.filter(title__icontains=search)

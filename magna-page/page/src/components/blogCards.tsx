@@ -5,12 +5,43 @@ import { Link } from 'react-router-dom';
 
 interface BlogListProps {
     blogs: Result[];
+    search?: Result[] | null;
 }
 
-const BlogList: React.FC<BlogListProps> = ({ blogs }) => {
+const BlogList: React.FC<BlogListProps> = ({ blogs,search  }) => {
     return (
+        <>
         <div className="row">
-           {blogs.map((blog) => {
+            {search && search.length === 0 && <h3>No se encontraron resultados</h3>}
+            {search && search.length > 0 && <h3>Resultados de la búsqueda</h3>}
+            {search &&
+                search?.map((blog) => {
+                    return (
+                        <div key={blog.id} className="col-lg-4 col-md-4 col-sm-6 ">
+                            
+                            <Link to={`/blog/${blog.id}`} className='link-blogs'>
+                                <div className="card card-blog mt-3 small-card">
+                                    <div className="card-img-top">
+                                        <img src={blog.image} className="img-fluid small-image" alt={blog.title} />
+                                    </div>
+                                    <div className="card-body">
+                                        <h5 className="card-title">{blog.title}</h5>
+                                        <p className="card-text">{blog.description.slice(0, 200)}...</p>
+                                    </div>
+                                </div>
+                            </Link>
+                        </div>
+                        
+                    );
+                })
+            }
+            {search && search.length > 0 && 
+            <hr className='mt-5'/>}
+            
+
+        </div>
+        <div className="row">
+            {blogs.map((blog) => {
     let sizeClass = '';
     let imageClass = '';
     let cardClass = '';
@@ -31,7 +62,9 @@ const BlogList: React.FC<BlogListProps> = ({ blogs }) => {
         <div key={blog.id} className={sizeClass}>
             <Link to={`/blog/${blog.id}`} className='link-blogs'>
                 <div className={`card card-blog mt-3 ${cardClass}`}>
-                    <img src={blog.image} className={`card-img-top img-fluid ${imageClass}`} alt={blog.title} />
+                    <div className="card-img-top">
+                        <img src={blog.image} className={` img-fluid ${imageClass}`} alt={blog.title} />
+                    </div>
                     <div className="card-body">
                         <h5 className="card-title">{blog.title}</h5>
                         <p className="card-text">{blog.description.slice(0, 200)}...</p>
@@ -41,8 +74,8 @@ const BlogList: React.FC<BlogListProps> = ({ blogs }) => {
         </div>
     );
 })}
-
         </div>
+    </>
     );
 };
 

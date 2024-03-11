@@ -4,19 +4,21 @@ import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { Store } from '../Store'
 import { CartItem } from '../types/Cart'
-import { Product } from '../types/Product'
+import { Productos } from '../types/Product'
 import { convertProductToCartItem } from '../utils'
 import Rating from './Rating'
 
-function ProductItem({ product }: { product: Product}) {
+function ProductItem({ product }: { product: Productos}) {
   const { state, dispatch } = useContext(Store)
   const {
     cart: { cartItems },
   } = state
 
   const addToCartHandler = (item: CartItem) => {
-    const existItem = cartItems.find((x) => x._id === product._id)
+    const existItem = cartItems.find((x) => x._id === product.id)
     const quantity = existItem ? existItem.quantity + 1 : 1
+    console.log('quantity', quantity, 'existItem', existItem, 'item', item);
+    
     if (product.countInStock < quantity) {
       alert('Sorry. Product is out of stock')
       return
@@ -37,7 +39,7 @@ function ProductItem({ product }: { product: Product}) {
         <Link to={`/store/product/${product.slug}`}>
           <Card.Title>{product.name}</Card.Title>
         </Link>
-        <Rating rating={product.rating} numReviews={product.numReviews} />
+        <Rating rating={parseInt(product.rating)} numReviews={product.numReviews} />
         <Card.Text>${product.price}</Card.Text>
         {product.countInStock === 0 ? (
           <Button variant="light" disabled>
@@ -47,7 +49,7 @@ function ProductItem({ product }: { product: Product}) {
           <Button
             onClick={() => addToCartHandler(convertProductToCartItem(product))}
           >
-            Add to cart
+            Agregar al carrito
           </Button>
         )}
       </Card.Body>

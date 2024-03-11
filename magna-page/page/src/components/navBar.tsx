@@ -31,6 +31,7 @@ export const NavBar = (  ) => {
                         <Link className={`links nav navbar  ${themeLogin} `} to="/contact">Contacto</Link>
                         <NavLink className={`links nav navbar  ${themeLogin} `} to="/projects">Proyectos</NavLink>
                         <Link className={`links nav navbar  ${themeLogin} `} to="/cotizador">Login</Link>
+                        <a className={`links nav navbar  ${themeLogin} `} href="/store/">Magnatienda</a>
                         <div onClick={() => setOpen(!open)}>
                           
                           <Link to="/blog"  className='links nav navbar text-black'>blog <span><img src={drop} alt="" /> </span></Link>
