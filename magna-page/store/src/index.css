@@ -55,8 +55,6 @@ img.thumbnail {
 
 a.header-link,
 .header-link > a {
-  border: 1px rgb(33, 37, 41) solid;
-  border-radius: 2px;
   color: white !important;
   font-weight: bold;
 }
@@ -76,15 +74,15 @@ a.header-link:hover,
   border: 1px rgb(33, 37, 41) solid;
 }
 .sub-header {
-  background-color: #232f3e;
+  background-color: #0e243f;
 }
 
 .cart-badge {
   position: absolute;
   color: #f08000;
   font-weight: bold;
-  margin-left: 16px;
-  margin-top: -3px;
+  margin-left: 10px;
+  margin-top: -8px;
 }
 
 /* Sidebar */
@@ -121,4 +119,29 @@ a.header-link:hover,
 
 button.side-navbar-user:hover {
   color: white;
+}
+
+.navbar{
+  background-color: #021328;
+}
+.logo-footer{
+  position: relative;
+  width: 90%;
+}
+
+.mySwiper{
+  width: 100%;
+  /* background: linear-gradient(to bottom, rgba(11, 10, 101) 0%, rgba(0,0,0) 100%); */
+}
+
+.mySwiper .swiper-image{
+  width: 80%;
+  
+}
+
+.card{
+  background-color: #f0f0f0;
+  border: none;
+  height: 450px;
+
 }

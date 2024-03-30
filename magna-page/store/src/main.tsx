@@ -7,9 +7,8 @@ import {
   RouterProvider,
 } from 'react-router-dom'
 import { HelmetProvider } from 'react-helmet-async'
-// import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
 import App from './App'
-import './index.css'
 import HomePage from './pages/HomePage'
 import ProductPage from './pages/ProductPage'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
@@ -27,6 +26,8 @@ import { PayPalScriptProvider } from '@paypal/react-paypal-js'
 import OrderHistoryPage from './pages/OrderHistoryPage'
 import ProfilePage from './pages/ProfilePage'
 import SearchPage from './pages/searchPage'
+import  SearchPageStr  from "./pages/searchPageStr"
+import './index.css'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -37,6 +38,7 @@ const router = createBrowserRouter(
       <Route path="signin" element={<SigninPage />} />
       <Route path="signup" element={<SignupPage />} />
       <Route path="search/:categoria" element={<SearchPage />} /> Cambia la ruta
+      <Route path="search/byname/:search" element={<SearchPageStr />} /> Cambia la ruta
       <Route element={<ProtectedRoute />}>
         <Route path="shipping" element={<ShippingAddressPage />} />
         <Route path="payment" element={<PaymentMethodPage />} />

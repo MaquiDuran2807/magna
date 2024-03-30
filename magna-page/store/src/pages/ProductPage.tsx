@@ -48,7 +48,6 @@ export default function ProductPage() {
     <MessageBox variant="danger">Product Not Found</MessageBox>
   ) : (
     <div>
-      <h2>hola este es el prod page</h2>
       <Row>
         <Col md={6}>
           <img className="large" src={`${URL_API}${product.image}`} alt={product.name}></img>
@@ -67,9 +66,9 @@ export default function ProductPage() {
                 numReviews={product.numReviews}
               ></Rating>
             </ListGroup.Item>
-            <ListGroup.Item>Price : ${product.price}</ListGroup.Item>
+            <ListGroup.Item><span><strong>Price :</strong></span> ${product.price}</ListGroup.Item>
             <ListGroup.Item>
-              Description:
+              <strong>Descripción:</strong>
               <p>{product.description}</p>
             </ListGroup.Item>
           </ListGroup>
@@ -80,7 +79,7 @@ export default function ProductPage() {
               <ListGroup variant="flush">
                 <ListGroup.Item>
                   <Row>
-                    <Col>Price:</Col>
+                    <Col>Precio:</Col>
                     <Col>${product.price}</Col>
                   </Row>
                 </ListGroup.Item>
@@ -91,7 +90,7 @@ export default function ProductPage() {
                       {product.countInStock > 0 ? (
                         <Badge bg="success">In Stock</Badge>
                       ) : (
-                        <Badge bg="danger">Unavailable</Badge>
+                        <Badge bg="danger">Agotado</Badge>
                       )}
                     </Col>
                   </Row>
@@ -100,7 +99,7 @@ export default function ProductPage() {
                   <ListGroup.Item>
                     <div className="d-grid">
                       <Button onClick={addToCartHandler} variant="primary">
-                        Add to Cart
+                        Agregar al carrito
                       </Button>
                     </div>
                   </ListGroup.Item>

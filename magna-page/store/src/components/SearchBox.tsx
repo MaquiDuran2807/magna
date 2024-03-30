@@ -10,7 +10,7 @@ export default function SearchBox() {
     e.preventDefault()
     console.log('query', query);
     
-    navigate(query ? `/store/search?query=${query}` : '/search')
+    navigate(query ? `/store/search/byname/${query}` : '/search')
   }
   return (
     <Form className="flex-grow-1 d-flex me-auto" onSubmit={submitHandler}>

@@ -33,7 +33,7 @@ function ProductItem({ product }: { product: Productos}) {
   return (
     <Card>
       <Link to={`/store/product/${product.slug}`}>
-        <img src={product.image} className="card-img-top" alt={product.name} />
+        <img src={product.image} className="card-img-top img-fluid" alt={product.name} />
       </Link>
       <Card.Body>
         <Link to={`/store/product/${product.slug}`}>

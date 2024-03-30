@@ -1,3 +1,13 @@
+export interface Promos {
+  id:          number;
+  products:    Productos[];
+  name:        string;
+  image:       string;
+  description: string;
+  discount:    string;
+  timestamp:   Date;
+}
+
 export interface Productos {
   id:           number;
   category:     Category;

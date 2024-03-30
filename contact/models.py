@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.db import models
 
 # Create your models here.
@@ -7,7 +8,7 @@ class Contacto(models.Model):
     telefono = models.CharField(max_length=20)
     email = models.EmailField()
     mensaje = models.TextField()
-    timestamp = models.DateTimeField(auto_now_add=True)
+    timestamp = models.DateTimeField(auto_now_add=True )
     fecha_respuesta = models.DateTimeField(null=True, blank=True)
     contestado = models.BooleanField(default=False)
 

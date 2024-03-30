@@ -1,11 +1,11 @@
 import apiClient from "../apiClient";
-import { Equipos, ServecesMagna } from "../types/types";
+import { EquiposAndTech, ServecesMagna } from "../types/types";
 import { ProyectosMagna,ProyectImagesMagna  } from "../types/projects";
 
 
 export const fetchWorkers = async () => {
     try {
-        const response = await apiClient.get<Equipos[]>('equipos/')
+        const response = await apiClient.get<EquiposAndTech>('equipos/')
         return response.data
     } catch (error) {
         console.log(error);

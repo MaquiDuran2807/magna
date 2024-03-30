@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import apiClient from '../apiClient'
-import { Productos,Category } from '../types/Product'
+import { Productos,Category,Promos } from '../types/Product'
 
 export const useGetProductsQuery = () =>
   useQuery({
@@ -29,4 +29,21 @@ export const useGetProductsByCategoryQuery = (category: string) =>
     queryKey: ['products', category],
     queryFn: async () =>
       (await apiClient.get<Productos[]>(`products/category/${category}/`)).data,
+  })
+
+  export const useGetPromos= () => useQuery({
+    queryKey: ['promos'],
+    queryFn: async () => {
+      const response = await apiClient.get<Promos[]>('products/promos/');
+      return response.data;
+    },
+  });
+
+// ruta para busquedas de productos
+
+export const useSearchProductsQuery = (search: string) =>
+  useQuery({
+    queryKey: ['products', search],
+    queryFn: async () =>
+      (await apiClient.get<Productos[]>(`products/search/${search}/`)).data,
   })

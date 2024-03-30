@@ -13,6 +13,7 @@ import 'swiper/css';
 import { BotonesSwiper } from './BotonesSwiper';
 import { ServecesMagna, Servicio } from '../types/types';
 import { API_URL } from '../constans';
+import { Link } from 'react-router-dom';
 export const Slider= () => {
   const { data:servicios } = useQuery<ServecesMagna>({
     queryKey: ['services'],
@@ -73,7 +74,7 @@ if (!servicios) {
                     <div className="col-12 ">
                       <br />
                       {/* <button className="llamado">Cotizar</button>     */}
-                      <button className="llamado">Contactar</button>
+                      <Link to="/contact"><button className="llamado">Contactar</button></Link>
                     </div>
                     <BotonesSwiper />
                   </div>

@@ -1,21 +1,8 @@
 
-.navegacion{
-    position: fixed;
-    z-index: 1000;
-    padding: 0;
-    margin-top: 0px;
-    width: 100%;
-}
 
 .navbarra {
     background-color: rgb(255, 255, 255);
-    width: 100%;
-    height: fit-content;
-    
-
 }
-
-
 
 
 .links{
@@ -25,10 +12,6 @@
     margin: 0px 15px;
     transition: all 0.3s ease;
     text-decoration: none;
-    @media screen and (max-width: 994px) 
-    {
-        color: black;
-    }
 }
 
 .links:hover{
@@ -37,18 +20,15 @@
     cursor: pointer;
     @media screen and (max-width: 994px) 
     {
-        color: black;
         scale: 0.9;
     }
 }
-
-.links-drop{
-    color: rgb(255, 255, 255);
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 16px;
-    @media screen and (max-width: 994px) 
-    {
-        color: black;
-    }
+.store{
+    width: 100%;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 3px 20px;
+    background-color: #021328;
+    color: white;
+    font-weight: 600;
 }

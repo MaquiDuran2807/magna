@@ -6,8 +6,8 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import permissions
-from .models import Equipo
-from .serializer import EquipoSerializer
+from .models import Equipo, Tenologias
+from .serializer import EquipoSerializer,TenologiasSerializer
 
 # Create your views here.
 
@@ -15,7 +15,14 @@ class EquipoList(APIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     def get(self, request, format=None):
         equipos = Equipo.objects.all()
+        tecnologias = Tenologias.objects.all()
         serializer = EquipoSerializer(equipos, many=True)
-        return Response(serializer.data)
+        tecnologias_serializer = TenologiasSerializer(tecnologias, many=True)
+        return Response(
+            {
+                'equipos': serializer.data,
+                'tecnologias': tecnologias_serializer.data
+            }
+        )
 
 

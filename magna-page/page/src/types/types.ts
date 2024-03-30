@@ -57,31 +57,21 @@ export interface AuthResponse {
     imagen: string;
   }
 
-export interface Equipos {
-  id:          number;
-  nombre:      string;
-  descripcion: string;
-  posicion:    string;
-  imagen:      string;
+  export interface EquiposAndTech {
+    equipos:     Equipo[];
+    tecnologias: Equipo[];
 }
 
-export interface Equipos {
-  id:          number;
-  nombre:      string;
-  descripcion: string;
-  posicion:    string;
-  imagen:      string;
+export interface Equipo {
+    id:            number;
+    nombre:        string;
+    descripcion:   string;
+    posicion?:     string;
+    imagen_height: number;
+    imagen_width:  number;
+    imagen:        string;
 }
 
-export class Convert {
-  public static toEquipos(json: string): Equipos[] {
-      return JSON.parse(json);
-  }
-
-  public static equiposToJson(value: Equipos[]): string {
-      return JSON.stringify(value);
-  }
-}
 
 
 

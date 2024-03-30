@@ -7,6 +7,8 @@ urlpatterns = [
     path('<int:pk>/', views.ProductDetail.as_view()),
     path('category/', views.CategoryList.as_view()),
     path('category/<int:pk>/', views.ProductByCategory.as_view()),
+    path('promos/', views.PromocionesList.as_view()),
+    path('search/<str:name>/', views.SearchProduct.as_view()),
 
     # Add more paths here
 ]

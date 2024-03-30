@@ -25,7 +25,7 @@ export default function PaymentMethodPage() {
     e.preventDefault()
     dispatch({ type: 'SAVE_PAYMENT_METHOD', payload: paymentMethodName })
     localStorage.setItem('paymentMethod', paymentMethodName)
-    navigate('/placeorder')
+    navigate('/store/placeorder')
   }
   return (
     <div>

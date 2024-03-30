@@ -32,7 +32,7 @@ const SearchPage: React.FC = () => {
                 <title>Search Page</title>
             </Helmet>
             <div>
-                <h1>Search Results for: {products[0].category.name}</h1>
+                <h1 className='mt-2 mb-5'>Resulatados de la busquedade : {products[0].category.name}</h1>
                 {/* Llamar al componente ProductItem aquí */}
                 <div className="row">
                 {  

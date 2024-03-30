@@ -5,6 +5,8 @@ import { useState } from "react";
 // Crear el contexto del AuthProvider
 const AuthContext = createContext({
    isTokenValid: false,
+   firstView: 0,
+   firstViewCount: () => {},
    validateToken: () => {},
    logout: () => {},
 });
@@ -13,6 +15,11 @@ const AuthContext = createContext({
 export function AuthProvider({ children }: { children: React.ReactNode }) {
     const [isTokenValid, setIsTokenValid] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
+    const [firstView, setFirstView] = useState(0);
+
+    const firstViewCount = () => {
+        setFirstView(firstView + 1);
+    }
 
     const logout = async () => {
         setIsTokenValid(false);
@@ -39,7 +46,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }, []);
 
     return (
-        <AuthContext.Provider value={{  isTokenValid,validateToken,logout }}>
+        <AuthContext.Provider value={{  isTokenValid, firstView, validateToken, logout,firstViewCount}}>
             {isLoading ? <div>loading...</div> :children}
         </AuthContext.Provider>
     );

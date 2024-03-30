@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView, UpdateAPIView, DestroyAPIView
 from rest_framework import permissions
 from rest_framework.views import APIView
-from .models import Category, Product
+from .models import Category, Product, Promociones
 from .serializers import  *
 # Create your views here.
 
@@ -88,6 +88,18 @@ class ProductByCategory(ListAPIView):
     def get_queryset(self):
         category = self.kwargs['pk']
         return Product.objects.filter(category=category)
+    
+class PromocionesList(ListAPIView):
+    queryset = Promociones.objects.all()
+    serializer_class = PromocionesSerializer
+    permission_classes = [permissions.AllowAny]
+
+class SearchProduct(ListAPIView):
+    serializer_class = ProductSerializer
+    permission_classes = [permissions.AllowAny]
+    def get_queryset(self, *args, **kwargs):
+        name = self.kwargs['name']
+        return Product.objects.filter(name__icontains=name)
 
 
 

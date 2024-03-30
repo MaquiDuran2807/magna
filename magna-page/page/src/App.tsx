@@ -3,6 +3,7 @@
 import { useState,useEffect,lazy } from 'react'
 import { Slider } from './components/slider'
 import './App.css'
+import { useAuth } from './auth/AuthProvider'
 import PagesLayout from './layouts/pagesLayouts'
 import LazyProyectoPanel from './components/sections/proyectoPanel'
 const  LazyProyectos = lazy(() => import('./components/sections/proyectos'))
@@ -19,11 +20,19 @@ import SplashScreen from './components/splashScreen';
 
 
 export function App() {
+  const { firstView,firstViewCount } = useAuth();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    console.log('firstView', firstView);
+    
+    if (firstView > 0 ) {
+      setLoading(false);
+      return;
+    };
     const timer = setTimeout(() => {
       setLoading(false);
+      firstViewCount();
     }, 2000); // ajusta este tiempo según tus necesidades
 
     return () => clearTimeout(timer);
