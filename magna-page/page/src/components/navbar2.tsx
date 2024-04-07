@@ -1,38 +1,32 @@
 // import { Link } from 'react-router-dom';
-import { useState } from 'react';
 import {LogoOriginal} from '../assets/img/logoOriginal'
-import { Collapse,Nav,Navbar,Container} from 'react-bootstrap';
+import {Nav,Navbar,Container} from 'react-bootstrap';
 import './styles/navbar2.css'
-
-
-import drop from '../assets/img/down-arrow-dark.svg'
+import { Link, NavLink } from 'react-router-dom';
 
 export const NavBar = () => {
-  const [open, setOpen] = useState(false);
-
+  const themeLogin="text-black"
     return (
         <>
           {/* <div className="container"> */}
           <Container >
               <Navbar className="navbar" expand="lg"  >
                 <Container>
-                  <Navbar.Brand href="/"><LogoOriginal width='150' height='30' /></Navbar.Brand>
+                  <Navbar.Brand as={Link} to="/"><LogoOriginal width='150' height='30' /></Navbar.Brand>
                   <Navbar.Toggle aria-controls="basic-navbar-nav" />
                   <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ms-auto">
-                      <Nav.Link href="/AboutUS" className="links">Quien somos</Nav.Link >
-                      <Nav.Link href="Productos" className="links">Productos</Nav.Link>
-                      <div onClick={() => setOpen(!open)}>
-                        
-                        <Nav.Link className="links" >blog <span><img src={drop} alt="" /> </span></Nav.Link>
-
-                      <Collapse in={open}>
-                        <div id="example-collapse-text" className='drop' >
-                          <Nav.Link href='/blog/ia'>IA</Nav.Link>
-                        </div>
-                      </Collapse>
-                      </div>
-                      
+                    <Link className={`links nav navbar  ${themeLogin} `} to="/AboutUS" >Quiénes somos</Link>
+                        <NavLink className={`links nav navbar  ${themeLogin} `} to="/servicios#header">Servicios</NavLink>
+                        <Link className={`links nav navbar  ${themeLogin} `} to="/contact">Contacto</Link>
+                        <NavLink className={`links nav navbar  ${themeLogin} `} to="/projects">Proyectos</NavLink>
+                        <Link className={`links nav navbar  ${themeLogin} `} to="/cotizador">Login</Link>
+                        <Link to="/blog"  className='links nav navbar text-black'>blog </Link>
+                        <a className={`links nav navbar  ${themeLogin} `} href="/store/">
+                          <div className='store'>
+                            <span>Magnatienda</span>
+                          </div>
+                        </a>
                     </Nav>
                   </Navbar.Collapse>
               </Container>

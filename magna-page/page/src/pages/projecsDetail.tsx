@@ -21,6 +21,7 @@ const ProjectDetail: React.FC= () => {
         queryKey: ['projectsImages'],
         staleTime: 1000*60*30,refetchOnWindowFocus: false,refetchOnMount: false,refetchOnReconnect: false,refetchInterval: 1000*60*30,
     });
+    
 
     if(!projects || !projectImages || !id){
         return null;
@@ -62,7 +63,7 @@ const ProjectDetail: React.FC= () => {
                     <div className="col-12 col-md-6 ">
                         <SliderProjectDetail images={imagen}/>
                     </div>
-                    <div className="col-12 col-md-6" key={project.id}>
+                    <div className="col-12 col-md-6" key={id}>
                         <br />
                         <br />
                         <h3>

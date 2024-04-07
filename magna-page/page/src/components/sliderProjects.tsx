@@ -23,7 +23,7 @@ const { data:projectImages } = useQuery<ProyectImagesMagna[]>({
   queryKey: ['projectsImages'],
   staleTime: 1000*60*30,refetchOnWindowFocus: false,refetchOnMount: false,refetchOnReconnect: false,refetchInterval: 1000*60*30,
 });
-
+    let proyectosEncontrados:number[] =[]
     const { width} = useScreenSize();
     const isMobile = width <= 768;
     const isTablet = width <= 1000;
@@ -51,15 +51,21 @@ const { data:projectImages } = useQuery<ProyectImagesMagna[]>({
         <SwiperSlide key={project.id}>
           <div className="projects border-0 ">
           {
-            projectImages.map((imagen:ProyectImagesMagna) => {
+            projectImages.map((imagen: ProyectImagesMagna) => {
+              
               if (imagen.proyecto === project.id) {
-                return (
-                  <img src={imagen.imagen} alt="" className="img-fluid" />  
-                );
-          }
-
-        })
-      }
+                // Verifica si ya se encontró una imagen para el proyecto
+                if (!proyectosEncontrados.includes(imagen.proyecto)) {
+                  proyectosEncontrados.push(imagen.proyecto); // Marca el proyecto como encontrado
+                  return (
+                    <img key={imagen.id} src={imagen.imagen} alt="" className="img-fluid " />
+                  );
+                }
+              }
+              return null; // Omitir otras imágenes
+            })
+            };
+            
 
             <div className="card-info">
               <h4>{project.nombre}</h4>

@@ -31,7 +31,10 @@ function App() {
   } = useContext(Store)
 
   useEffect(() => {
-    document.body.setAttribute('data-bs-theme', mode)
+    // document.body.setAttribute('data-bs-theme', mode)
+    document.body.classList.add(mode === 'dark' ? 'dark-mode' : 'light-mode')
+    document.body.classList.remove(mode === 'dark' ? 'light-mode' : 'dark-mode')
+
   }, [mode])
 
   const switchModeHandler = () => {

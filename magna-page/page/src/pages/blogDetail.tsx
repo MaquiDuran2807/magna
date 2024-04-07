@@ -60,7 +60,7 @@ const BlogDetailPage: React.FC = () => {
             <BlogLayout>
                 <div className="container content-blog">
                     <div className="row ">
-                        <div className="col-8 blog-izq">
+                        <div className="col-12 blog-izq col-lg-8">
                                 <div className="col-12 text-center pt-3 pb-5 blog-banner" style={{backgroundImage:`url(${blogDetail.category.image})`,}}>
                                     <h3 >
                                         MagnaBlog
@@ -114,7 +114,7 @@ const BlogDetailPage: React.FC = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-4 blog-der">
+                        <div className="col-4 blog-der ">
                             <Sidebar />
                         </div>
                     </div>

@@ -17,8 +17,8 @@ const Sidebar: React.FC = () => {
     }
 
     return (
-        <div className="blog-sidebar">
-            <h3>Artículos más importantes </h3>
+        <div className="blog-sidebar ">
+            <h3 className='ml-5'>Artículos más importantes </h3>
             <ul>
                 {
                 blogs.map((blog) => {

@@ -54,6 +54,8 @@ export const useRefreshToken = async () =>{
   }
   ).catch((error) => {
     console.log(error, 'error aqui estoy en useRefreshTokenMutation');
+    localStorage.removeItem('token');
+    localStorage.removeItem('refreshToken');
     successrefresh = false;
   });
   return  successrefresh;

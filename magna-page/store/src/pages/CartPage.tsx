@@ -6,7 +6,7 @@ import { toast } from 'react-toastify'
 import MessageBox from '../components/MessageBox'
 import { Store } from '../Store'
 import { CartItem } from '../types/Cart'
-import apiClient from '../apiClient'
+import apiClient, { APIURL } from '../apiClient'
 
 export default function CartPage() {
   const navigate = useNavigate()
@@ -55,7 +55,7 @@ export default function CartPage() {
                   <Row className="align-items-center" key={item.name}>
                     <Col md={4}>
                       <img
-                        src={`${item.image}`}
+                        src={`${APIURL}${item.image}`}
                         alt={item.name}
                         className="img-fluid rounded thumbnail"
                       ></img>{' '}

@@ -8,6 +8,7 @@ import projects from '../assets/img/banner/projects.png';
 import topo from '../assets/img/banner/topo.png';
 import ingenieria from '../assets/img/banner/ingenieria.png';
 import medio from '../assets/img/banner/medio.png';
+import { useAuth } from '../auth/AuthProvider';
 
 const imagesPaths = [
  nosotros,
@@ -26,6 +27,9 @@ imagesPaths.forEach(path => {
   images.push(img);
 });
 export const ServiciosIdProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+    const auth=useAuth()
+    auth.validateToken()
+
 
     const {
         error: errorWorkers,

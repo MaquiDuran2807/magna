@@ -34,7 +34,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         return;
     }
     const successToken = await useVerfyToken();
+    console.log(successToken, 'successToken=====================================');
+    
     if(successToken){
+        console.log('token valido');
+        
         setIsTokenValid(true);
         setIsLoading(false);
         return;

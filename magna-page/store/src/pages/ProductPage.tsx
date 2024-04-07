@@ -10,6 +10,7 @@ import { useGetProductDetailsBySlugQuery } from '../hooks/productHooks'
 import { Store } from '../Store'
 import { ApiError } from '../types/ApiError'
 import { convertProductToCartItem, getError } from '../utils'
+import { APIURL } from '../apiClient'
 
 export default function ProductPage() {
   const params = useParams()
@@ -37,9 +38,9 @@ export default function ProductPage() {
       payload: { ...convertProductToCartItem(product!), quantity },
     })
     toast.success('Product added to the cart')
-    navigate('/cart')
+    navigate('/store/cart')
   }
-  const URL_API = "http://localhost:8000"
+  
   return isLoading ? (
     <LoadingBox />
   ) : error ? (
@@ -50,7 +51,7 @@ export default function ProductPage() {
     <div>
       <Row>
         <Col md={6}>
-          <img className="large" src={`${URL_API}${product.image}`} alt={product.name}></img>
+          <img className="large" src={`${APIURL}${product.image}`} alt={product.name}></img>
         </Col>
         <Col md={3}>
           <ListGroup variant="flush">

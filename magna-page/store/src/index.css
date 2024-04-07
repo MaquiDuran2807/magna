@@ -13,7 +13,7 @@
 }
 
 .rating span {
-  color: #ffc000;
+  color: #021328;
 }
 
 img.large {
@@ -28,12 +28,12 @@ img.thumbnail {
 }
 
 .checkout-steps > div {
-  border-bottom: 0.2rem solid #a0a0a0;
-  color: #a0a0a0;
+  border-bottom: 0.2rem solid #d1d1d1;
+  color: #c1bfbf;
 }
 .checkout-steps > div.active {
-  border-bottom: 0.2rem solid #f08000;
-  color: #f08000;
+  border-bottom: 0.2rem solid #021328;
+  color: #021328;
 }
 
 .dropdown-menu[data-bs-popper] {
@@ -42,7 +42,7 @@ img.thumbnail {
 }
 .btn-primary,
 .btn-outline-primary {
-  background-color: #f0c040;
+  background-color: #fefefd;
   color: #000000;
 }
 
@@ -79,7 +79,7 @@ a.header-link:hover,
 
 .cart-badge {
   position: absolute;
-  color: #f08000;
+  color: #fbfaf9;
   font-weight: bold;
   margin-left: 10px;
   margin-top: -8px;
@@ -140,8 +140,61 @@ button.side-navbar-user:hover {
 }
 
 .card{
-  background-color: #f0f0f0;
+  /* background-color: #f0f0f0; */
   border: none;
-  height: 450px;
+  height: 350px;
+  overflow: hidden; /* Oculta el contenido que desborda */
 
+}
+
+.dark-mode{
+  background-color: #021328;
+  color: white;
+}
+
+.dark-mode .card-text{
+  color: rgb(3, 3, 3);
+}
+
+.dark-mode .checkout-steps > div {
+  border-bottom: 0.2rem solid #636363;
+  color: #797979;
+}
+.dark-mode .checkout-steps > div.active {
+  border-bottom: 0.2rem solid #ffffff;
+  color: #ffffff;
+}
+
+.card-img-top{
+  height: 200px;
+  object-fit: cover;
+}
+
+
+.card-img-top:hover{
+  transform: scale(1.1);
+  transition: 0.5s;
+}
+
+.mask {
+  background-color: rgba(0, 0, 0, 0);
+  height: 100%; /* Comenzamos con altura cero */
+  width: 100%;
+  position: absolute;
+  top: 100%; /* Inicialmente fuera de la tarjeta */
+  left: 0;
+  overflow: hidden; /* Oculta el contenido que desborda */
+  transition: all 0.3s ease-in-out; /* Transición de altura suave */
+}
+
+/* Mostrar la máscara al pasar el ratón por encima de la tarjeta */
+.card:hover .mask {
+  background-color: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%; /* Ajusta la altura para cubrir la tarjeta */
+  top: 0; /* Muestra la máscara completamente */
+  
+  /* transition: height 0.5s ease; */
 }

@@ -31,29 +31,51 @@ function ProductItem({ product }: { product: Productos}) {
   }
 
   return (
-    <Card>
-      <Link to={`/store/product/${product.slug}`}>
-        <img src={product.image} className="card-img-top img-fluid" alt={product.name} />
-      </Link>
-      <Card.Body>
+    <div>
+      <Card style={{ position: 'relative' }}>
         <Link to={`/store/product/${product.slug}`}>
-          <Card.Title>{product.name}</Card.Title>
-        </Link>
-        <Rating rating={parseInt(product.rating)} numReviews={product.numReviews} />
-        <Card.Text>${product.price}</Card.Text>
-        {product.countInStock === 0 ? (
-          <Button variant="light" disabled>
-            Out of stock
-          </Button>
-        ) : (
-          <Button
-            onClick={() => addToCartHandler(convertProductToCartItem(product))}
+          <img
+            src={product.image}
+            className="card-img-top img-fluid card-img"
+            alt={product.name}
+          />
+          <div
+            className="mask"
+            // style={{
+            //   position: 'absolute',
+            //   top: 0,
+            //   left: 0,
+            //   width: '100%',
+            //   height: '100%',
+            //   background: 'rgba(0, 0, 0, 0.6)', // Color de la máscara
+            //   display: 'flex',
+            //   justifyContent: 'center',
+            //   alignItems: 'center',
+            // }}
           >
-            Agregar al carrito
-          </Button>
-        )}
-      </Card.Body>
-    </Card>
+            <p className="text-white mb-0">Ver detalles</p>
+          </div>
+        </Link>
+        <Card.Body>
+          <Link to={`/store/product/${product.slug}`}>
+            <Card.Title>{product.name}</Card.Title>
+          </Link>
+          <Rating rating={parseInt(product.rating)} numReviews={product.numReviews} />
+          <Card.Text>${product.price}</Card.Text>
+          
+        </Card.Body>
+        
+      </Card>
+      {product.countInStock === 0 ? (
+            <Button variant="light" disabled className='w-100'>
+              Sin stock
+            </Button>
+          ) : (
+            <Button onClick={() => addToCartHandler(convertProductToCartItem(product))} className='w-100'>
+              Agregar al carrito
+            </Button>
+          )}
+    </div>
   )
 }
 
