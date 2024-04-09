@@ -6,6 +6,7 @@ import {LogoMagna} from '../assets/img/logo'
 import "./styles/footer.css"
 import React from 'react';
 import useIntersectionObserver from '../hooks/useLazyload';
+import { Link } from 'react-router-dom';
 
 const Footer1: React.FC = () => {
     return (
@@ -51,36 +52,36 @@ const Footer1: React.FC = () => {
                     <div className="col-6 col-md-2">
                         <h5>Mapa del sitio</h5>
                         {/* Add your site map here */}
-                        <p className="text-white">Inicio</p>
-                        <p className="text-white">Proyectos</p>
-                        <p className="text-white">Clientes</p>
-                        <p className="text-white">Contáctanos</p>
+                        <p><Link to="/" className="text-white">Inicio</Link></p>
+                        <p><Link to="/projects" className="text-white">Proyectos</Link></p>
+                        <p><Link to="/servicios" className="text-white">Servicios</Link></p>
+                        <p><Link to="/contact" className="text-white">Contáctanos</Link></p>
                     </div>
                     <div className="col-6 col-md-2">
                         <h5>Redes Sociales</h5>
                         <ul className="list-inline">
                             <li className="list-inline-item">
-                                <a href="https://www.facebook.com">
+                                <a href="https://web.facebook.com/profile.php?id=61554522674036" target="_blank">
                                     <FaFacebook size={35} />
                                 </a>
                             </li>
                             <li className="list-inline-item">
-                                <a href="https://www.twitter.com">
+                                <a href="https://www.twitter.com" target="_blank">
                                 <FaSquareXTwitter size={35}/>
                                 </a>
                             </li>
                             <li className="list-inline-item">
-                                <a href="https://www.instagram.com">
+                                <a href="https://www.instagram.com/magna_ingenieria/" target="_blank">
                                     <FaInstagram size={35}/>
                                 </a>
                             </li>
                             <li className="list-inline-item m-2">
-                                <a href="https://www.tiktok.com">
+                                <a href="https://www.tiktok.com" target="_blank">
                                     <FaTiktok size={35}/>
                                 </a>
                             </li>
                             <li className="list-inline-item">
-                                <a href="https://www.linkedin.com">
+                                <a href="https://www.linkedin.com/in/magna-ingenier%C3%ADa-topograf%C3%ADa-b40a912a5/" target="_blank">
                                     <BsLinkedin size={35}/>
                                 </a>
                             </li>

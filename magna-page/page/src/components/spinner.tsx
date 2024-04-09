@@ -8,6 +8,7 @@ export const Spinner  = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
+      className='container'
     >
         <Lottie
             animationData={animationData}

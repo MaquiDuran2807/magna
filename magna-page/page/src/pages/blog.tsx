@@ -76,7 +76,7 @@ const Blog =  () => {
                             <div className="col-lg-8 col-12">
                                 <BlogList blogs={blogs} search={filterBlogs} />
                             </div>
-                            <div className="col-md-4">
+                            <div className="col-md-4 col-12">
                                 <Sidebar />
                             </div>
                         </div>

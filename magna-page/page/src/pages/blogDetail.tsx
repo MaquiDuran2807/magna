@@ -114,7 +114,7 @@ const BlogDetailPage: React.FC = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-4 blog-der ">
+                        <div className="col-md-4 blog-der col-12 ">
                             <Sidebar />
                         </div>
                     </div>
