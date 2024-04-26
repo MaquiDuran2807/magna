@@ -12,13 +12,13 @@ import { API_URL } from '../constans';
 
 interface SliderServicesProps {
     subServicios?: SubServicio[];
-    id_servicio?: number;
-    is_services?: boolean;
+
 }
 
 
 const SliderServices: React.FC<SliderServicesProps> = ({ subServicios,}) => {
-
+    console.log("se reinicio el slider");
+    
     return (
         <Swiper
             spaceBetween={30}

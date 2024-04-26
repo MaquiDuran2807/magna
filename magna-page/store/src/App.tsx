@@ -17,12 +17,14 @@ import { LinkContainer } from 'react-router-bootstrap'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { Store } from './Store'
+import Footer from './components/footer1'
 import { useGetCategoriesQuery } from './hooks/productHooks'
 import LoadingBox from './components/LoadingBox'
 import MessageBox from './components/MessageBox'
 import { getError } from './utils'
 import { ApiError } from './types/ApiError'
 import SearchBox from './components/SearchBox'
+import { FloatWhatsapp } from './components/floawhatsapp'
 
 function App() {
   const {
@@ -65,7 +67,7 @@ function App() {
         >
           <div className="d-flex justify-content-between align-items-center py-1">
             <LinkContainer to="/store/" className="header-link mx-2">
-              <Navbar.Brand>
+              <Navbar.Brand className='px-5' style={{ paddingLeft: '15px',border:"whithe 2px" }}>
                 <LogoMagna className='logo-footer' />
               </Navbar.Brand>
             </LinkContainer>
@@ -238,10 +240,10 @@ function App() {
         </Container>
       </main>
       <footer>
+      <FloatWhatsapp/>
+        <Footer/>
         <div className="">
-          <div className="text-center py-3">
-            <a href="/">Magna</a> &copy; {new Date().getFullYear()}
-          </div>
+          
         </div>
       </footer>
     </div>

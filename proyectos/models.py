@@ -80,6 +80,9 @@ class Proyecto(models.Model):
 class ProyectoImagen(models.Model):
     proyecto = models.ForeignKey(Proyecto, on_delete=models.CASCADE)
     imagen = models.ImageField(upload_to='proyectos')
+    # campos para referenciar las imagenes y deben admitir blank y null
+    references_url =models.URLField(max_length=200, blank=True, null=True)
+    references_name = models.CharField(max_length=150, blank=True, null=True)
     def __str__(self):
         return self.proyecto.nombre
     class Meta:

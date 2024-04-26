@@ -31,7 +31,7 @@ function ProductItem({ product }: { product: Productos}) {
   }
 
   return (
-    <div>
+    <div className='my-3'>
       <Card style={{ position: 'relative' }}>
         <Link to={`/store/product/${product.slug}`}>
           <img

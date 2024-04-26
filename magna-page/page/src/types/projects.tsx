@@ -50,7 +50,9 @@ export interface Tipo {
 }
 
 export interface ProyectImagesMagna {
-    id:       number;
-    imagen:   string;
-    proyecto: number;
+    id:              number;
+    imagen:          string;
+    references_url:  null | string;
+    references_name: null | string;
+    proyecto:        number;
 }

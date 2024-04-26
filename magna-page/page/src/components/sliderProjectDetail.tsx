@@ -35,6 +35,11 @@ const SliderProjectDetail = (
                         animate={{ opacity: 1, y: 0 }}
                     >
                         <img src={`${image.imagen}`} alt={`proyecto-${image.proyecto} `} className="img-fluid imagen-proecto" />
+                        <a href={image.references_url? image.references_url : 'https://www.Magnaingenieriaytopografia.com'} target="_blank" rel="noreferrer">
+                      {
+                        image.references_name? image.references_name : 'Magnaingenieriaytopografia.com'
+                      }
+                    </a>
                     </motion.div>
                 </SwiperSlide>
             ))}

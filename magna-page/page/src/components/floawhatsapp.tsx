@@ -15,7 +15,7 @@ export const FloatWhatsapp = () => {
         console.log(value) ;
         
 
-        window.open(`https://wa.me/3132356306?text=${encodeURIComponent(message)}`);
+        window.open(`https://wa.me/3015490115?text=${encodeURIComponent(message)}`);
 
     };
 

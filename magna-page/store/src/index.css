@@ -142,7 +142,7 @@ button.side-navbar-user:hover {
 .card{
   /* background-color: #f0f0f0; */
   border: none;
-  height: 350px;
+  height: 400px;
   overflow: hidden; /* Oculta el contenido que desborda */
 
 }

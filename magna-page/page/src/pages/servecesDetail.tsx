@@ -34,7 +34,9 @@ const ServecesDetail: React.FC<ServecesDetailProps> = ({ issue }) => {
     let dispositivo = "container";
     const [servicio_elegido, setServicio_elegido] = useState<Servicio[]>();
     const [subServicio_elegido, setSubServicio_elegido] = useState<SubServicio[]>([]);
-    const [selectedSubServicio, setSelectedSubServicio] = useState<SubServicio | null>(null);
+    const [selectedSubServicio, setSelectedSubServicio] = useState<SubServicio[] | null>(null);
+    const [slider, setSlider] = useState<SubServicio[] | null>(null);
+
    useEffect(() => {
     if (serveces) {
         if (id){
@@ -45,6 +47,8 @@ const ServecesDetail: React.FC<ServecesDetailProps> = ({ issue }) => {
                 setServicio_elegido(servicioElegido);
                 const subServiciosElegidos = serveces.subServicios.filter((subServicio: SubServicio) => subServicio.servicio_id === servicioElegido[0].id);
                 setSubServicio_elegido(subServiciosElegidos);
+                setSlider(subServiciosElegidos);
+                setSelectedSubServicio(null)
                 if (servicioElegido[0].nombre === "Topografía") {
                     setImagen(imagenTopografia);
                 }
@@ -61,6 +65,7 @@ const ServecesDetail: React.FC<ServecesDetailProps> = ({ issue }) => {
         }else{
             setServicio_elegido(serveces.servicios)
             setSubServicio_elegido(serveces.subServicios)
+            setSlider(serveces.subServicios)
             setTitle("Nuestros Servicios");
         }
     }
@@ -74,7 +79,18 @@ if (isMobile) {
 }
 
     const handleSubServicioClick = async(subServicio: SubServicio) => {
-        setSelectedSubServicio(subServicio);
+        const listSubservicios:SubServicio[] =[]
+        listSubservicios.push(subServicio)
+        setSelectedSubServicio(listSubservicios);
+        setSlider(listSubservicios);
+
+        setTimeout(() => {
+            setSelectedSubServicio(null);
+            if (!serveces) {
+                return
+            }
+            setSlider(serveces.subServicios);
+        }, 20000);
     };
     useEffect(() => {
         if (subServicioPaginaRef.current&&!!selectedSubServicio) {
@@ -83,10 +99,10 @@ if (isMobile) {
         }
     }
     , [selectedSubServicio]);
-    if (!servicio_elegido || !subServicio_elegido) {
+    if (!servicio_elegido || !subServicio_elegido || !slider ) {
         return <h3>Error</h3>;
     }
-    console.log( servicio_elegido, 'servicio_elegido');
+    
     
     return (
         <>
@@ -155,9 +171,9 @@ if (isMobile) {
                         </div>
                         <div className="col-12 col-md-8 " >
                             <div className="row slider">
-                                <SliderServices subServicios={subServicio_elegido}/>
+                                <SliderServices subServicios={slider} />
                             </div>
-                            <div ref={subServicioPaginaRef} key={selectedSubServicio?.descripcion}>
+                            <div ref={subServicioPaginaRef} key={selectedSubServicio && selectedSubServicio[0]?.descripcion}>
                                 <br />
                             </div>
                             <br />
@@ -170,16 +186,16 @@ if (isMobile) {
                                          animate={{ height: "auto", opacity: 1 }}
                                          exit={{ height: 0, opacity: 0, scale: 0.5 }}
                                          transition={{ duration: 0.3, delay: 1, delayChildren: 0.3, staggerChildren: 0.3 }}
-                                         key={selectedSubServicio?.id}
+                                         key={selectedSubServicio && selectedSubServicio[0]?.id}
                                        >
                                          <h2>
                                            {selectedSubServicio
-                                             ? selectedSubServicio.nombre
+                                             ? selectedSubServicio[0].nombre
                                              : "Servicios de calidad y con la más alta tecnología"}
                                          </h2>
                                          <p>
                                            {selectedSubServicio
-                                             ? selectedSubServicio.descripcion
+                                             ? selectedSubServicio[0].descripcion
                                              : "Somos una empresa con más de 10 años de experiencia en el mercado, con profesionales altamente calificados y con amplia experiencia en el sector público y privado, brindando servicios de calidad y con la más alta tecnología."}
                                          </p>
                                        </motion.div>

@@ -27,7 +27,7 @@ export  const ProyectoPanel = () => {
                         <div className="row">
                             <div className="col-12">
                                 <h6>
-                                    <strong>Proyectos___</strong>
+                                    <strong>Proyectos</strong>
                                 </h6>
                                 <h2 className='titulo-proyectos'>
                                     Innovación y Precisión: <span>Nuestra Huella</span> en la Energía Solar

@@ -10,6 +10,7 @@ const LazyProyectos = lazy(() => import('../components/sections/proyectos'));
 import "./styles/aboutUs.css"
 import { FaCheck } from "react-icons/fa6";
 import imagen from '../assets/img/banner/nosotros.jpg';
+// import mapa from '../assets/img/app/mapa colombia cobertura trabajos.png';
 
 
 function Componente1() {
@@ -34,12 +35,15 @@ const AboutUs: React.FC = () => {
             {/* <Banner title="Sobre Nosotros" paragraph="Sobre Nosotros" /> */}
             <LazyProyectoPanel />
             <LazyStatistics />
+            <div>
+                
+            </div>
             <div className="info container ">
                 <div className="row">
                     <div className="col-md-6">
                         <div className="abautUs row">
                             <h4>
-                                ¿Quiénes somos?___
+                                ¿Quiénes somos?
                             </h4>
                             <h2>
                             Somos un <span className='title-span'>equipo </span> de profesionales integrales con gran experiencia, que ofrece servicios de ingeniería de <span className='title-span'> alta calidad</span>, brindando a nuestros clientes soluciones eficaces y concretas.

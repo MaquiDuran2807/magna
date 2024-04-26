@@ -35,7 +35,7 @@ const Footer1: React.FC = () => {
                             <h5>Contacto</h5>
                             <p className="text-white">Cel: 3015490115</p>
                             <p className="text-white">Tel: 2706488</p>
-                            <a href='mailto:magnaingenieriaytopografia@magna.co' className="text-white">Envíame un correo</a>
+                            <a href='mailto:info@magnaingenieriaytopografia.com' className="text-white">Envíame un correo:info@magnaingenieriaytopografia.com </a>
                         </div>
                     </div>
                     <div className="row">
@@ -61,7 +61,7 @@ const Footer1: React.FC = () => {
                         <h5>Redes Sociales</h5>
                         <ul className="list-inline">
                             <li className="list-inline-item">
-                                <a href="https://web.facebook.com/profile.php?id=61554522674036" target="_blank">
+                                <a href="https://m.facebook.com/MAGNAINGENIERIAYTOPOGRAFIA" target="_blank">
                                     <FaFacebook size={35} />
                                 </a>
                             </li>
