@@ -3,12 +3,13 @@ import { FaFacebook, FaInstagram, } from 'react-icons/fa';
 import { FaSquareXTwitter,FaTiktok} from "react-icons/fa6";
 import { BsLinkedin } from "react-icons/bs";
 import {LogoMagna} from '../assets/img/logo'
-import "./styles/footer.css"
-import React from 'react';
+import "./styles/footer.css";
 import useIntersectionObserver from '../hooks/useLazyload';
 import { Link } from 'react-router-dom';
 
+
 const Footer1: React.FC = () => {
+    
     return (
         <footer className="bg-footer text-white">
             <div className="container">
@@ -40,7 +41,7 @@ const Footer1: React.FC = () => {
                                 enviar correo
                                 </button>
                             </a>
-                            <div className='overflow-scroll'>
+                            <div className="overflow-auto" style={{scrollbarColor:"black",scrollbarWidth:"thin"}}>
                             info@magnaingenieriaytopografia.com
                             </div>
                         </div>
