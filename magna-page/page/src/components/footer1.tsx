@@ -35,7 +35,14 @@ const Footer1: React.FC = () => {
                             <h5>Contacto</h5>
                             <p className="text-white">Cel: 3015490115</p>
                             <p className="text-white">Tel: 2706488</p>
-                            <a href='mailto:info@magnaingenieriaytopografia.com' className="text-white">Envíame un correo:info@magnaingenieriaytopografia.com </a>
+                            <a href='mailto:info@magnaingenieriaytopografia.com' className="text-white "  >
+                                <button className='boton-1 mb-2'>
+                                enviar correo
+                                </button>
+                            </a>
+                            <div className='overflow-scroll'>
+                            info@magnaingenieriaytopografia.com
+                            </div>
                         </div>
                     </div>
                     <div className="row">
