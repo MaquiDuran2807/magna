@@ -59,11 +59,7 @@ const { data:projectImages } = useQuery<ProyectImagesMagna[]>({
                   proyectosEncontrados.push(imagen.proyecto); // Marca el proyecto como encontrado
                   return (
                     <>
-                    <img key={imagen.id} src={imagen.imagen} alt="" className="img-fluid " />
-                    
-                    <a>
-                      
-                    </a>
+                    <img key={imagen.id} src={imagen.imagen} alt="" className="img-fluid slider-project-img " />
                     </>
                   );
                 }

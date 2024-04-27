@@ -23,3 +23,10 @@
 .proyectos h2 span{
     color: #60A4BF;
 }
+
+.slider-project-img{
+    width: 100%;
+    height: 80%;
+    object-fit: cover;
+    transition: all 0.5s ease-in-out;
+}

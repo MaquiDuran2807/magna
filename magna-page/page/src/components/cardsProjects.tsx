@@ -127,7 +127,7 @@ const CardsProjects = ({ type, actualPage,imagenes }: Props) => {
                         <div >
                             <div className="card-project">
                                 <div className="card-body card-body-projects">
-                                    {firstImage ? <img src={firstImage} alt="" className="img-fluid" /> : <p>No hay imagen</p>}
+                                    {firstImage ? <img src={firstImage} alt="" className="img-fluid card-img" /> : <p>No hay imagen</p>}
                                     <div className="content-1 ">
                                         <div>
                                             <h5 className="card-title text-center">{proyecto.nombre}</h5>

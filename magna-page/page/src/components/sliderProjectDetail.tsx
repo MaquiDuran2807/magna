@@ -28,18 +28,22 @@ const SliderProjectDetail = (
             className="projectDetailSlider"
         >
             {images.map((image, index) => (
-                <SwiperSlide key={index}>
+                <SwiperSlide key={index}
+                style={{height: '100%', width: '100%',backgroundColor: 'white'}}
+                >
                     <motion.div
                         initial={{ opacity: 0, y: 50 }}
                         transition={{ duration: 0.5 }}
                         animate={{ opacity: 1, y: 0 }}
                     >
                         <img src={`${image.imagen}`} alt={`proyecto-${image.proyecto} `} className="img-fluid imagen-proecto" />
+                        <div>
                         <a href={image.references_url? image.references_url : 'https://www.Magnaingenieriaytopografia.com'} target="_blank" rel="noreferrer">
                       {
                         image.references_name? image.references_name : 'Magnaingenieriaytopografia.com'
                       }
                     </a>
+                        </div>
                     </motion.div>
                 </SwiperSlide>
             ))}

@@ -2,18 +2,6 @@
     height: 300px;
 }
 
-.project-1{
-    /* background-image:linear-gradient(to bottom left,rgba(0, 0, 0, 0.8) 0%,
-    rgba(0, 0, 0, 0.106) 35%,
-    rgba(0, 0, 0, 0.453) 100%), url("../../assets/img/projects/project-1.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat; */
-    
-}
-
-
-
 .card-info{
     background-image: linear-gradient(to bottom left,rgba(255, 255, 255, 0.8) 0%,
     rgba(255, 255, 255, 0.821) 35%,
