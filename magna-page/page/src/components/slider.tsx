@@ -11,7 +11,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import 'swiper/css';
 import { BotonesSwiper } from './BotonesSwiper';
-import { Servicio, Servicio2 } from '../types/types';
+import {  Servicio2 } from '../types/types';
 
 import { Link } from 'react-router-dom';
 export const Slider= () => {
@@ -52,7 +52,7 @@ if (!servicios) {
       className="mySwiper"
       
     >
-      {servicios?.map((servicio: Servicio, index) => (
+      {servicios?.map((servicio: Servicio2, index) => (
         <SwiperSlide key={index}>
           <div className={`container-fluid sliders`} style={{ backgroundImage: `linear-gradient(to bottom left,rgba(0, 0, 0, 0.8) 0%,rgba(0, 0, 0, 0.7) 35%,rgba(0, 0, 0, 0.8) 100%), url( ${servicio.imagen})` }}>
 

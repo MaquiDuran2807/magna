@@ -1,6 +1,6 @@
 // Date: 2021/09/03
 import { useQuery } from '@tanstack/react-query';
-import { fetchProjects, fetchProjectsImages,  fetchServices1, fetchWorkers,fetchBrochure} from '../api/pagesInfo';
+import { fetchProjects, fetchProjectsImages,  fetchServices1, fetchWorkers} from '../api/pagesInfo';
 import {Spinner} from '../components/spinner';
 import nosotros from '../assets/img/banner/nosotros.jpg';
 import servicios from '../assets/img/banner/servicios.png';
