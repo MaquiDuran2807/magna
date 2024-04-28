@@ -5,9 +5,9 @@ import Acordeon from '../acordeon';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import useScreenSize from '../../hooks/ScreenSize';
-import { API_CONTACTO } from '../../constans';
 import '../styles/contact.css'
 import useIntersectionObserver from "../../hooks/useLazyload"
+import { APIURL} from '../../apiClient';
 
 
 export const Contact = () => {
@@ -15,7 +15,8 @@ export const Contact = () => {
   const isMobile = width <= 768;
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-
+  console.log(APIURL+"contact/");
+ 
   const handleSubmit = async (values: any) => {
     setIsSubmitting(true);
 
@@ -23,7 +24,7 @@ export const Contact = () => {
       // Perform the POST request to API_CONTACTO using the form data
       // Replace the following line with your actual API call
 
-      await fetch(API_CONTACTO, {
+      await fetch(APIURL+"contact/", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

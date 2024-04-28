@@ -5,9 +5,11 @@ from django.http import HttpResponse
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .models import Servicio, SubServicio
-from .serializer import ServicioSerializer, subServicesSerializer, GetIdServiciosSerializer
+from rest_framework.generics import ListAPIView
+from .models import Servicio, SubServicio, Brochure
+from .serializer import BrochureSerializer, ServicioSerializer, subServicesSerializer, GetIdServiciosSerializer,ServicesAndSubservicesSerializer
 from rest_framework import permissions
+
 
 # # Create your views here.
 
@@ -68,6 +70,30 @@ class ServicioId(APIView):
         servicios = Servicio.objects.filter().values('id', 'nombre')
         serializer = GetIdServiciosSerializer(servicios, many=True)
         return Response(serializer.data)
+    
+
+class ServiciosAndSubservices(ListAPIView):
+    queryset = Servicio.objects.all()
+    serializer_class = ServicioSerializer
+    permission_classes = [
+        permissions.AllowAny
+    ]
+
+    def get_queryset(self):
+        # Incluye los subservicios relacionados en el queryset
+        return Servicio.objects.prefetch_related('subservicio_set').all()
+    
+
+class BrochureApiView(APIView):
+    permission_classes = [
+        permissions.AllowAny
+    ]
+
+    def get(self, request):
+        brochures = Brochure.objects.all()
+        serializer = BrochureSerializer(brochures, many=True)
+        return Response(serializer.data)
+
 
 
 

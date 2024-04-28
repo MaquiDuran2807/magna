@@ -11,18 +11,18 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import 'swiper/css';
 import { BotonesSwiper } from './BotonesSwiper';
-import { ServecesMagna, Servicio } from '../types/types';
-import { API_URL } from '../constans';
+import { Servicio, Servicio2 } from '../types/types';
+
 import { Link } from 'react-router-dom';
 export const Slider= () => {
-  const { data:servicios } = useQuery<ServecesMagna>({
+  const { data:servicios } = useQuery<Servicio2[]>({
     queryKey: ['services'],
     staleTime: 1000*60*30,refetchOnWindowFocus: false,refetchOnMount: false,refetchOnReconnect: false,refetchInterval: 1000*60*30,
 });
 if (!servicios) {
   return null;
 }
-  const refs = servicios?.servicios.map(() => useInView({ triggerOnce: false, threshold: 0.5
+  const refs = servicios?.map(() => useInView({ triggerOnce: false, threshold: 0.5
    }));
 
 
@@ -39,8 +39,6 @@ if (!servicios) {
       };
   return (
 
-    
-
     <Swiper
       spaceBetween={0}
       slidesPerView={1}
@@ -54,9 +52,9 @@ if (!servicios) {
       className="mySwiper"
       
     >
-      {servicios?.servicios.map((servicio: Servicio, index) => (
+      {servicios?.map((servicio: Servicio, index) => (
         <SwiperSlide key={index}>
-          <div className={`container-fluid sliders`} style={{ backgroundImage: `linear-gradient(to bottom left,rgba(0, 0, 0, 0.8) 0%,rgba(0, 0, 0, 0.7) 35%,rgba(0, 0, 0, 0.8) 100%), url( ${API_URL + servicio.imagen})` }}>
+          <div className={`container-fluid sliders`} style={{ backgroundImage: `linear-gradient(to bottom left,rgba(0, 0, 0, 0.8) 0%,rgba(0, 0, 0, 0.7) 35%,rgba(0, 0, 0, 0.8) 100%), url( ${servicio.imagen})` }}>
 
             <motion.div
               ref={refs[index].ref}
@@ -73,7 +71,6 @@ if (!servicios) {
                     <p className="text-white col-12 col-lg-10 ">{servicio.descripcion}</p>
                     <div className="col-12 ">
                       <br />
-                      {/* <button className="llamado">Cotizar</button>     */}
                       <Link to="/contact"><button className="llamado">Contactar</button></Link>
                     </div>
                     <BotonesSwiper />
@@ -81,12 +78,10 @@ if (!servicios) {
 
                 </div>
               </div>
-
             </motion.div>
           </div>
         </SwiperSlide>
       ))}
-      ...
     </Swiper>
   );
 };

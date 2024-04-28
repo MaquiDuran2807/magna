@@ -2,7 +2,8 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { PreguntasyrespuestasMagna} from '../types/types'
-import { API_PREGUNTASYRESPUESTAS } from "../constans";
+import { APIURL } from "../apiClient";
+// import { API_PREGUNTASYRESPUESTAS } from "../constans";
 
 
 interface AccordionProps {
@@ -48,7 +49,7 @@ const FAQAccordion: React.FC = () => {
   useEffect(() => {
     // Make API call to fetch data from the database
     // Replace the URL with your actual API endpoint
-    fetch(API_PREGUNTASYRESPUESTAS)
+    fetch(APIURL+"/frequentQuestions/")
       .then(response => response.json())
       .then(data => setAccordionData(data))
       .catch(error => console.error(error));

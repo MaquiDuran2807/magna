@@ -2,7 +2,7 @@
 import { FaFacebook, FaInstagram, } from 'react-icons/fa';
 import { FaSquareXTwitter,FaTiktok} from "react-icons/fa6";
 import { BsLinkedin } from "react-icons/bs";
-import {LogoMagna} from '../assets/img/logo'
+import {Icon} from '../assets/img/imgfooter'
 import "./styles/footer.css";
 import useIntersectionObserver from '../hooks/useLazyload';
 import { Link } from 'react-router-dom';
@@ -18,7 +18,7 @@ const Footer1: React.FC = () => {
 
                         <div className="row m-3">
                             <div className="col-12 col-md-9 ">
-                                <LogoMagna className='logo-footer'/>
+                                <Icon  className='logo-footer'/>
                             </div>
                         </div>
 

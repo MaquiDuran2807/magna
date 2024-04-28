@@ -4,7 +4,7 @@ import { SetionHeader } from '../setionHeader'
 import '../styles/equipos.css'
 import { useQuery } from '@tanstack/react-query';
 import { EquiposAndTech} from '../../types/types';
-import { API_URL } from '../../constans'
+import { APIURL } from '../../apiClient';
 import useIntersectionObserver from '../../hooks/useLazyload'
 import { useState } from 'react';
 
@@ -43,7 +43,7 @@ const handleCardClick = (id: string,card:string) => {
                                         () => handleCardClick(tecnologia.id.toString(),"tecnologia")
                                     } className= {`shadow card-equip ${selectedCard === tecnologia.id.toString()+"tecnologia" ? 'card-equipHover' : ''}`} style={{border: 'none', boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)'}}>
                                         <div key={"equip-1"} className='equip-1'>
-                                            <img src={API_URL+tecnologia.imagen} alt="Card 1" className="img-fluid rounded mx-auto d-block" />
+                                            <img src={APIURL+tecnologia.imagen} alt="Card 1" className="img-fluid rounded mx-auto d-block" />
                                             <img src={logo} alt="Company Logo" className="logo"  />
                                         </div>
                                     </div>
@@ -78,7 +78,7 @@ const handleCardClick = (id: string,card:string) => {
                                 <div onClick={
                                         () => handleCardClick(equipo.id.toString(),"equipo")
                                     } className={`equip-4 workers-equip `}>
-                                    <img src={API_URL+equipo.imagen} alt="Card 1" className="img-fluid rounded mx-auto d-block " />
+                                    <img src={APIURL+equipo.imagen} alt="Card 1" className="img-fluid rounded mx-auto d-block " />
                                     <div className="content-cardequip">
                                         <h3>
                                             {equipo.nombre}

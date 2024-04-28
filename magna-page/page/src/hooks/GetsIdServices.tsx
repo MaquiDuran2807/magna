@@ -1,6 +1,6 @@
 // Date: 2021/09/03
 import { useQuery } from '@tanstack/react-query';
-import { fetchProjects, fetchProjectsImages, fetchServices, fetchWorkers} from '../api/pagesInfo';
+import { fetchProjects, fetchProjectsImages,  fetchServices1, fetchWorkers,fetchBrochure} from '../api/pagesInfo';
 import {Spinner} from '../components/spinner';
 import nosotros from '../assets/img/banner/nosotros.jpg';
 import servicios from '../assets/img/banner/servicios.png';
@@ -44,7 +44,7 @@ export const ServiciosIdProvider: React.FC<{ children: React.ReactNode }> = ({ c
         isLoading: isLoadingServices,
         isError: isErrorServices,
     }=useQuery(
-        {queryKey:['services'], queryFn: fetchServices,staleTime: 1000*60*30,refetchOnWindowFocus: false,refetchInterval: 1000*60*30,}
+        {queryKey:['services'], queryFn: fetchServices1,staleTime: 1000*60*30,refetchOnWindowFocus: false,refetchInterval: 1000*60*30,}
         );
     
     const{
@@ -60,8 +60,6 @@ export const ServiciosIdProvider: React.FC<{ children: React.ReactNode }> = ({ c
     }=useQuery(
         {queryKey:['projectsImages'], queryFn: fetchProjectsImages,staleTime: 1000*60*30,refetchOnWindowFocus: false,refetchInterval: 1000*60*30,}
         );
-    
-    
 
     if (isLoadingWorkers || isLoadingServices || isLoadingProjects||isLoadingProjectsImages) {
         return <Spinner/>;

@@ -24,38 +24,32 @@ export interface AuthResponse {
     error?: string;
   }
 
-  export interface ServecesMagna {
-    servicios: Servicio[];
-    subServicios: SubServicio[];
-  }
+  export interface Servicio2 {
+    id:           number;
+    nombre:       string;
+    descripcion:  string;
+    imagen:       string;
+    icon:         string;
+    subservicios: Subservicio[];
+    caracteristicas: Caracteristica[];
+}
 
-  export interface ServiciosId {
-    id: number;
-    nombre: string;
-  }
-  
-  export interface SubServicio {
-    id: number;
-    servicio_id: number;
-    nombre: string;
-    descripcion: string;
-    imagen: string;
-  }
-  
-  export interface Servicio {
-    id: number;
-    nombre: string;
-    descripcion: string;
-    imagen: string;
-    icon: string;
-  }
+export interface Caracteristica {
+  id:          number;
+  nombre:      string;
+  descripcion: string;
+  servicio:    number;
+}
 
-  export interface getServicio {
-    id: number;
-    nombre: string;
+
+export interface Subservicio {
+    id:          number;
+    nombre:      string;
     descripcion: string;
-    imagen: string;
-  }
+    imagen:      string;
+    servicio:    number;
+}
+
 
   export interface EquiposAndTech {
     equipos:     Equipo[];
@@ -72,15 +66,14 @@ export interface Equipo {
     imagen:        string;
 }
 
-
-
-
-
 export interface PreguntasyrespuestasMagna {
   id:        number;
   pregunta:  string;
   respuesta: string;
 }
 
-
+export interface Brochure {
+  nombre:  string;
+  archivo: string;
+}
 

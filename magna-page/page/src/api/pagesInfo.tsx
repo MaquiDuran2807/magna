@@ -1,5 +1,5 @@
 import apiClient from "../apiClient";
-import { EquiposAndTech, ServecesMagna } from "../types/types";
+import { Brochure, EquiposAndTech,  Servicio2 } from "../types/types";
 import { ProyectosMagna,ProyectImagesMagna  } from "../types/projects";
 
 
@@ -13,9 +13,10 @@ export const fetchWorkers = async () => {
     }
 }
 
-export const fetchServices = async () => {
+
+export const fetchServices1 = async () => {
     try {
-        const response = await apiClient.get<ServecesMagna>('servicios/')
+        const response = await apiClient.get<Servicio2>('servicios/servicios-and-subservicios/')
         console.log(response.data, 'aqui estoy en fetchServices');
         
         return response.data
@@ -24,6 +25,7 @@ export const fetchServices = async () => {
         return
     }
 }
+
 export const fetchProjects = async () => {
     try {
         const response = await apiClient.get<ProyectosMagna>('proyectos/')
@@ -43,4 +45,16 @@ export const fetchProjectsImages = async () => {
         return
     }
 }
+
+export const fetchBrochure = async () => {
+    try {
+        const response = await apiClient.get<Brochure[]>('servicios/brochure/')
+        return response.data
+    } catch (error) {
+        console.log(error);
+        return
+    }
+}
+
+
 

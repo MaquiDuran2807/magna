@@ -1,54 +1,48 @@
 
-import Banner from "../components/banner"
-import PagesLayout from "../layouts/pagesLayouts";
-import { useState,useRef,useEffect,lazy  } from "react";
-import { AiOutlineDoubleRight } from "react-icons/ai";
-import { AiFillCaretDown } from "react-icons/ai";
-import { SubServicio,Servicio,  ServecesMagna} from "../types/types";
-import { AnimatePresence, motion } from 'framer-motion';
-const LazyServicios = lazy(() => import('../components/sections/Servicios'));
-import SliderServices from "../components/sliderServices";
-import useScreenSize from '../hooks/ScreenSize';
 import { useQuery } from '@tanstack/react-query';
-import "./styles/servicesDetail.css";
+import { AnimatePresence, motion } from 'framer-motion';
+import { lazy, useEffect, useRef, useState } from "react";
+import { AiFillCaretDown, AiOutlineDoubleRight } from "react-icons/ai";
 import { useParams } from "react-router-dom";
-import imagenServicios from '../assets/img/banner/servicios.png';
-import imagenTopografia from '../assets/img/banner/topo.png';
 import imagenIngenieria from '../assets/img/banner/ingenieria.png';
 import imagenMedioAmbiente from '../assets/img/banner/medio.png';
+import imagenServicios from '../assets/img/banner/servicios.png';
+import imagenTopografia from '../assets/img/banner/topo.png';
+import Banner from "../components/banner";
+import SliderServices from "../components/sliderServices";
+import useScreenSize from '../hooks/ScreenSize';
+import PagesLayout from "../layouts/pagesLayouts";
+import {  Servicio2,  Subservicio } from "../types/types";
+import PdfViewer from '../components/brochure';
+import "./styles/servicesDetail.css";
+const LazyServicios = lazy(() => import('../components/sections/Servicios'));
 
 interface ServecesDetailProps {
     issue: string;
 }
 
 
-
 const ServecesDetail: React.FC<ServecesDetailProps> = ({ issue }) => {
     const { id } = useParams<{ id: string }>();
     let [title, setTitle] = useState<String>("Nuestros Servicios");
     let [imagen, setImagen] = useState<String>(imagenServicios);
-    const { data:serveces } = useQuery<ServecesMagna>({
+    const { data:serveces } = useQuery<Servicio2[]>({
         queryKey: ['services'],
         staleTime: 1000*60*30,refetchOnWindowFocus: false,refetchInterval: 1000*60*30,
     });
     let dispositivo = "container";
-    const [servicio_elegido, setServicio_elegido] = useState<Servicio[]>();
-    const [subServicio_elegido, setSubServicio_elegido] = useState<SubServicio[]>([]);
-    const [selectedSubServicio, setSelectedSubServicio] = useState<SubServicio[] | null>(null);
-    const [slider, setSlider] = useState<SubServicio[] | null>(null);
+    const [servicio_elegido, setServicio_elegido] = useState<Servicio2[]>();
+    const [selectedSubServicio, setSelectedSubServicio] = useState<Subservicio[] | null>(null);
+    const [slider, setSlider] = useState< Subservicio[] | null>(null);
 
    useEffect(() => {
     if (serveces) {
         if (id){
-            const servicioElegido = serveces.servicios.filter((servicio: Servicio) => servicio.id.toString() === id);
+            const servicioElegido = serveces.filter((servicio: Servicio2) => servicio.id === parseInt(id));
             if (servicioElegido) {
                 const titleString = "servicios de "+ servicioElegido[0].nombre;
                 setTitle(titleString);
                 setServicio_elegido(servicioElegido);
-                const subServiciosElegidos = serveces.subServicios.filter((subServicio: SubServicio) => subServicio.servicio_id === servicioElegido[0].id);
-                setSubServicio_elegido(subServiciosElegidos);
-                setSlider(subServiciosElegidos);
-                setSelectedSubServicio(null)
                 if (servicioElegido[0].nombre === "Topografía") {
                     setImagen(imagenTopografia);
                 }
@@ -58,16 +52,13 @@ const ServecesDetail: React.FC<ServecesDetailProps> = ({ issue }) => {
                 if (servicioElegido[0].nombre === "Medio Ambiente") {
                     setImagen(imagenMedioAmbiente);
                 }
-                
-                console.log(title, 'title');
-                
             }
         }else{
-            setServicio_elegido(serveces.servicios)
-            setSubServicio_elegido(serveces.subServicios)
-            setSlider(serveces.subServicios)
+            setServicio_elegido(serveces);
             setTitle("Nuestros Servicios");
         }
+        const subServicios = serveces.flatMap((subServicio) => subServicio.subservicios);
+        setSlider(subServicios);
     }
     }, [serveces, id]);
     
@@ -78,10 +69,18 @@ if (isMobile) {
     dispositivo = "mobile";
 }
 
-    const handleSubServicioClick = async(subServicio: SubServicio) => {
-        const listSubservicios:SubServicio[] =[]
+    const handleSubServicioClick = async(subServicio: Subservicio) => {
+        if (!subServicio) {
+            return;
+        }
+
+        const listSubservicios:Subservicio[] =[]
         listSubservicios.push(subServicio)
         setSelectedSubServicio(listSubservicios);
+        console.log(listSubservicios, 'selectedSubServicio');
+        if (!listSubservicios) {
+            return
+        }
         setSlider(listSubservicios);
 
         setTimeout(() => {
@@ -89,7 +88,8 @@ if (isMobile) {
             if (!serveces) {
                 return
             }
-            setSlider(serveces.subServicios);
+            const subServicios = serveces.flatMap((subServicio) => subServicio.subservicios);
+            setSlider(subServicios);
         }, 20000);
     };
     useEffect(() => {
@@ -99,15 +99,14 @@ if (isMobile) {
         }
     }
     , [selectedSubServicio]);
-    if (!servicio_elegido || !subServicio_elegido || !slider ) {
+    
+    if (!servicio_elegido) {
         return <h3>Error</h3>;
     }
-    
-    
     return (
         <>
             <PagesLayout>
-                <Banner title={servicio_elegido.length==1 ? servicio_elegido[0].nombre:"Servicios" } paragraph={title.toString()} image={imagen} />
+                <Banner title={servicio_elegido.length == 1 ? servicio_elegido[0].nombre : "Servicios"} paragraph={title.toString()} image={imagen} />
                 <div className={dispositivo}>
                     <div className="row servicio">
                         <div className="col-12">
@@ -116,56 +115,54 @@ if (isMobile) {
                     </div>
                     <div className="row content">
                         <div className="col-12 col-md-4 ">
-                            <div  className={`aside ${issue}-template`} >
+                            <div className={`aside ${issue}-template`} >
                                 {
-                                servicio_elegido.map((servicio) => {
-                                    return (
-                                        <div key={servicio.id}>
-                                            <div  className="row">
-                                                <div className="col-12">
-                                                    <motion.div
-                                                        initial={{ opacity: 0 }}
-                                                        animate={{ opacity: 1 }}
-                                                        transition={{ duration: 0.6}}
-                                                        className="servicio"
-                                                        key={servicio.id}
-                                                    >
-                                                        <h3>{servicio?.nombre}</h3>
-                                                        <p>{servicio?.descripcion}</p> 
-                                                    </motion.div>
-                                                </div>
-                                                <div>
-                                                    {
-                                                    subServicio_elegido.filter((subServicio) => subServicio.servicio_id === servicio.id)
-                                                    .map((subServicio) => {
-                                                        return (
-                                                            <div key={subServicio.id} className="row">
-                                                                <div className="col-12">
-                                                                    <motion.div
-                                                                        onClick={() => handleSubServicioClick(subServicio)}
-                                                                        initial={{ opacity: 0 }}
-                                                                        animate={{ opacity: 1 }}
-                                                                        transition={{ duration: 0.3 }}
-                                                                        className="subservicio"
-                                                                        key={subServicio.id}
-                                                                    >
-                                                                        <div className="row items">
-                                                                        <span className="col-1 icon-row"><AiOutlineDoubleRight /></span>
-                                                                        <h5 className="col-10">{subServicio.nombre+"   "}<span><AiFillCaretDown /></span></h5>
+                                    servicio_elegido.map((servicio) => {
+                                        return (
+                                            <div key={servicio.id}>
+                                                <div className="row">
+                                                    <div className="col-12">
+                                                        <motion.div
+                                                            initial={{ opacity: 0 }}
+                                                            animate={{ opacity: 1 }}
+                                                            transition={{ duration: 0.6 }}
+                                                            className="servicio"
+                                                            key={servicio.id}
+                                                        >
+                                                            <h3>{servicio?.nombre}</h3>
+                                                            <p>{servicio?.descripcion}</p>
+                                                        </motion.div>
+                                                    </div>
+                                                    <div>
+                                                        {
+                                                            servicio.subservicios.map((subServicio) => {
+                                                                    return (
+                                                                        <div key={subServicio.id} className="row">
+                                                                            <div className="col-12">
+                                                                                <motion.div
+                                                                                    onClick={() => handleSubServicioClick(subServicio)}
+                                                                                    initial={{ opacity: 0 }}
+                                                                                    animate={{ opacity: 1 }}
+                                                                                    transition={{ duration: 0.3 }}
+                                                                                    className="subservicio"
+                                                                                    key={subServicio.id}
+                                                                                >
+                                                                                    <div className="row items">
+                                                                                        <span className="col-1 icon-row"><AiOutlineDoubleRight /></span>
+                                                                                        <h5 className="col-10">{subServicio.nombre + "   "}<span><AiFillCaretDown /></span></h5>
+                                                                                    </div>
+                                                                                </motion.div>
+                                                                            </div>
                                                                         </div>
-                                                                        
-                                                                    </motion.div>
-                                                                </div>
-                                                            </div>
-                                                        );
-                                                    })
-                                                }
+                                                                    );
+                                                                })
+                                                        }
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    );
-                                }
-                            )
+                                        );
+                                    }
+                                    )
                                 }
                             </div>
                         </div>
@@ -179,36 +176,90 @@ if (isMobile) {
                             <br />
                             <br />
                             <div className="row porque-elegirnos" >
+                                {
+                                    <AnimatePresence>
+                                        <motion.div
+                                            initial={{ height: 0, opacity: 0 }}
+                                            animate={{ height: "auto", opacity: 1 }}
+                                            exit={{ height: 0, opacity: 0, scale: 0.5 }}
+                                            transition={{ duration: 0.3, delay: 1, delayChildren: 0.3, staggerChildren: 0.3 }}
+                                            key={selectedSubServicio && selectedSubServicio[0]?.id}
+                                        >
+                                            <h2>
+                                                {selectedSubServicio
+                                                    ? selectedSubServicio[0].nombre
+                                                    : "Servicios de calidad y con la más alta tecnología"}
+                                            </h2>
+                                            <p>
+                                                {selectedSubServicio
+                                                    ? selectedSubServicio[0].descripcion
+                                                    : "Somos una empresa con más de 10 años de experiencia en el mercado, con profesionales altamente calificados y con amplia experiencia en el sector público y privado, brindando servicios de calidad y con la más alta tecnología."}
+                                            </p>
+                                            
+                                        </motion.div>
+                                        
+                                        
+                                    </AnimatePresence>
+                                }
+                                <div>
                                     {
-                                       <AnimatePresence>
-                                       <motion.div
-                                         initial={{ height: 0, opacity: 0 }}
-                                         animate={{ height: "auto", opacity: 1 }}
-                                         exit={{ height: 0, opacity: 0, scale: 0.5 }}
-                                         transition={{ duration: 0.3, delay: 1, delayChildren: 0.3, staggerChildren: 0.3 }}
-                                         key={selectedSubServicio && selectedSubServicio[0]?.id}
-                                       >
-                                         <h2>
-                                           {selectedSubServicio
-                                             ? selectedSubServicio[0].nombre
-                                             : "Servicios de calidad y con la más alta tecnología"}
-                                         </h2>
-                                         <p>
-                                           {selectedSubServicio
-                                             ? selectedSubServicio[0].descripcion
-                                             : "Somos una empresa con más de 10 años de experiencia en el mercado, con profesionales altamente calificados y con amplia experiencia en el sector público y privado, brindando servicios de calidad y con la más alta tecnología."}
-                                         </p>
-                                       </motion.div>
-                                     </AnimatePresence>
+                                        servicio_elegido.map((servicio) => {
+                                            return (
+                                                <div key={servicio.id}>
+                                                    <div className="row">
+                                                        <div className="col-12">
+                                                            <motion.div
+                                                                initial={{ opacity: 0 }}
+                                                                animate={{ opacity: 1 }}
+                                                                transition={{ duration: 0.6 }}
+                                                                className="servicio"
+                                                                key={servicio.id}
+                                                            >
+                                                                <h2>{servicio?.nombre}</h2>
+                                                                <p>{servicio?.descripcion}</p>
+                                                            </motion.div>
+                                                        </div>
+                                                        <div>
+                                                            {
+                                                                servicio.caracteristicas.map((caracteristica) => {
+                                                                    return (
+                                                                        <div key={caracteristica.id} className="row">
+                                                                            <div className="col-12">
+                                                                                <motion.div
+                                                                                    initial={{ opacity: 0 }}
+                                                                                    animate={{ opacity: 1 }}
+                                                                                    transition={{ duration: 0.3 }}
+                                                                                    className="subservicio"
+                                                                                    key={caracteristica.id}
+                                                                                >
+                                                                                    <div className="row items">
+                                                                                        <span className="col-1 icon-row"><AiOutlineDoubleRight /></span>
+                                                                                        <h5 className="col-10">{caracteristica.nombre + "   "}</h5>
+                                                                                    </div>
+                                                                                </motion.div>
+                                                                            </div>
+                                                                        </div>
+                                                                    );
+                                                                })
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            );
+                                        }
+                                        )
                                     }
-                                <h2>¿Por qué elegirnos?</h2>
-                                <p>
-                                    Somos una empresa con más de 10 años de experiencia en el mercado, con
-                                    profesionales altamente calificados y con amplia experiencia en el sector
-                                    público y privado, brindando servicios de calidad y con la más alta
-                                    tecnología.
-                                </p>
+                                </div>
+                                <div>
+                                    <h2>Brochure</h2>
+                                    <p>
+                                        Descarga nuestro brochure para más información.
+                                    </p>
+                                    <PdfViewer />
+                                </div>
+
                             </div>
+                            
 
                         </div>
                     </div>
