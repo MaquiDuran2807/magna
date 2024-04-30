@@ -19,6 +19,7 @@ const ContactPage = React.lazy(() => import('./pages/contact'));
 const BlogDetail = React.lazy(() => import('./pages/blogDetail'));
 const Blog = React.lazy(() => import('./pages/blog'));
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import Sitemap from './sitemap/sitemap';
 
 const queryClient = new QueryClient()
 
@@ -29,24 +30,16 @@ const router = createBrowserRouter(
       element: <App/>,
     },
     {
+      path: '/sitemap.xml',
+      element: <Sitemap/>,
+    },
+    {
       path: '/login',
       element: <Login/>,
     },
     {
       path: '/aboutUs',
       element: <AboutUs/>,
-    },
-    {
-      path: '/services_topografia',
-      element: <ServecesDetail issue='Topografía'/>,
-    },
-    {
-      path: '/services_ingenieria',
-      element: <ServecesDetail issue='Ingeniería y Consultoría'/>,
-    },
-    {
-      path: '/services_ambiental',
-      element: <ServecesDetail issue='Medio Ambiente'/>,
     },
     {
       path: '/servicios',
@@ -61,7 +54,7 @@ const router = createBrowserRouter(
       element: <Projects/>,
     },
     {
-      path: '/projects/:id',
+      path: '/projects/:servicioArg',
       element: <ProjectDetail/>,
     },
     {

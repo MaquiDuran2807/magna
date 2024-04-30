@@ -30,7 +30,7 @@ const Servicios = () => {
                                                     <img src={`${servicio.icon}`} alt={servicio.nombre} /> 
                                                     <h4 className="card-title">{servicio.nombre}</h4>
                                                     <p className="card-title">{servicio.descripcion.slice(0, 150)}...</p>
-                                                    <button className=' boton-1 '><Link to={`/servicios/${servicio.id}`}>Ver más</Link></button>
+                                                    <button className=' boton-1 '><Link to={`/servicios/${servicio.nombre}`}>Ver más</Link></button>
                                                 </div>
                                             </div>
                                         </div>

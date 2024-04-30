@@ -1,6 +1,7 @@
 
 
 import { useState,useEffect,lazy } from 'react'
+const SplashScreen = lazy(() => import('./components/splashScreen'));
 import { Slider } from './components/slider'
 import './App.css'
 import { useAuth } from './auth/AuthProvider'
@@ -15,7 +16,8 @@ const LazyContact = lazy(() => import('./components/sections/contact'))
 
 
 
-import SplashScreen from './components/splashScreen';
+// import SplashScreen from './components/splashScreen'; importar lazy
+
 
 
 

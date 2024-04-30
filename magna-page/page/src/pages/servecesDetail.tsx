@@ -15,6 +15,7 @@ import PagesLayout from "../layouts/pagesLayouts";
 import {  Servicio2,  Subservicio } from "../types/types";
 import PdfViewer from '../components/brochure';
 import "./styles/servicesDetail.css";
+
 const LazyServicios = lazy(() => import('../components/sections/Servicios'));
 
 interface ServecesDetailProps {
@@ -23,7 +24,14 @@ interface ServecesDetailProps {
 
 
 const ServecesDetail: React.FC<ServecesDetailProps> = ({ issue }) => {
-    const { id } = useParams<{ id: string }>();
+    const parametros = useParams();
+    console.log(parametros, 'parametros');
+    
+    const { id} = useParams<{ id: string }>();
+    if (!id) {
+        return <h3>Error</h3>;
+    }
+
     let [title, setTitle] = useState<String>("Nuestros Servicios");
     let [imagen, setImagen] = useState<String>(imagenServicios);
     const { data:serveces } = useQuery<Servicio2[]>({
@@ -39,7 +47,7 @@ const ServecesDetail: React.FC<ServecesDetailProps> = ({ issue }) => {
    useEffect(() => {
     if (serveces) {
         if (id){
-            const servicioElegido = serveces.filter((servicio: Servicio2) => servicio.id === parseInt(id));
+            const servicioElegido:Servicio2[] = serveces.filter((servicio: Servicio2) => servicio.nombre === id);
             setSlider(servicioElegido[0].subservicios);
             if (servicioElegido) {
                 const titleString = "servicios de "+ servicioElegido[0].nombre;
@@ -108,6 +116,7 @@ if (isMobile) {
     if (!servicio_elegido) {
         return <h3>Error</h3>;
     }
+    console.log(id, 'servicio');
     return (
         <>
             <PagesLayout>
