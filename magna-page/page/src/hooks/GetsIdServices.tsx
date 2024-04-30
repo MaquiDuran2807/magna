@@ -40,12 +40,14 @@ export const ServiciosIdProvider: React.FC<{ children: React.ReactNode }> = ({ c
         );
 
     const {
+        data: serveces,
         error: errorServices,
         isLoading: isLoadingServices,
         isError: isErrorServices,
     }=useQuery(
         {queryKey:['services'], queryFn: fetchServices1,staleTime: 1000*60*30,refetchOnWindowFocus: false,refetchInterval: 1000*60*30,}
         );
+    console.log(serveces, 'aqui estoy en servicios');
     
     const{
         error: errorProjects,

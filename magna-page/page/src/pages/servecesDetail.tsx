@@ -39,6 +39,7 @@ const ServecesDetail: React.FC<ServecesDetailProps> = ({ issue }) => {
     if (serveces) {
         if (id){
             const servicioElegido = serveces.filter((servicio: Servicio2) => servicio.id === parseInt(id));
+            setSlider(servicioElegido[0].subservicios);
             if (servicioElegido) {
                 const titleString = "servicios de "+ servicioElegido[0].nombre;
                 setTitle(titleString);
@@ -56,9 +57,10 @@ const ServecesDetail: React.FC<ServecesDetailProps> = ({ issue }) => {
         }else{
             setServicio_elegido(serveces);
             setTitle("Nuestros Servicios");
+            const subServicios = serveces.flatMap((subServicio) => subServicio.subservicios);
+            setSlider(subServicios);
         }
-        const subServicios = serveces.flatMap((subServicio) => subServicio.subservicios);
-        setSlider(subServicios);
+        
     }
     }, [serveces, id]);
     
@@ -108,11 +110,17 @@ if (isMobile) {
             <PagesLayout>
                 <Banner title={servicio_elegido.length == 1 ? servicio_elegido[0].nombre : "Servicios"} paragraph={title.toString()} image={imagen} />
                 <div className={dispositivo}>
-                    <div className="row servicio">
+                <div className="row servicio">
+                    {servicio_elegido.length === 1 ? (
                         <div className="col-12">
-                            <h2 className="text-center"> {title}</h2>
+                        <h2 className="text-center">{title}</h2>
                         </div>
-                    </div>
+                    ) : (
+                        <div className="row">
+                        <LazyServicios />
+                        </div>
+                    )}
+                </div>
                     <div className="row content">
                         <div className="col-12 col-md-4 ">
                             <div className={`aside ${issue}-template`} >
@@ -202,58 +210,12 @@ if (isMobile) {
                                     </AnimatePresence>
                                 }
                                 <div>
-                                    {
-                                        servicio_elegido.map((servicio) => {
-                                            return (
-                                                <div key={servicio.id}>
-                                                    <div className="row">
-                                                        <div className="col-12">
-                                                            <motion.div
-                                                                initial={{ opacity: 0 }}
-                                                                animate={{ opacity: 1 }}
-                                                                transition={{ duration: 0.6 }}
-                                                                className="servicio"
-                                                                key={servicio.id}
-                                                            >
-                                                                <h2>{servicio?.nombre}</h2>
-                                                                <p>{servicio?.descripcion}</p>
-                                                            </motion.div>
-                                                        </div>
-                                                        <div>
-                                                            {
-                                                                servicio.caracteristicas.map((caracteristica) => {
-                                                                    return (
-                                                                        <div key={caracteristica.id} className="row">
-                                                                            <div className="col-12">
-                                                                                <motion.div
-                                                                                    initial={{ opacity: 0 }}
-                                                                                    animate={{ opacity: 1 }}
-                                                                                    transition={{ duration: 0.3 }}
-                                                                                    className="subservicio"
-                                                                                    key={caracteristica.id}
-                                                                                >
-                                                                                    <div className="row items">
-                                                                                        <span className="col-1 icon-row"><AiOutlineDoubleRight /></span>
-                                                                                        <h5 className="col-10">{caracteristica.nombre + "   "}</h5>
-                                                                                    </div>
-                                                                                </motion.div>
-                                                                            </div>
-                                                                        </div>
-                                                                    );
-                                                                })
-                                                            }
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            );
-                                        }
-                                        )
-                                    }
+                                    
                                 </div>
-                                <div>
+                                <div className='my-5'>
                                     <h2>Brochure</h2>
                                     <p>
-                                        Descarga nuestro brochure para más información.
+                                    Para obtener una visión completa de nuestros servicios y ventajas, te invitamos a descargar nuestro brochure informativo. Aquí encontrarás detalles exhaustivos sobre nuestras ofertas, testimonios de clientes satisfechos y la información de contacto necesaria para dar el siguiente paso hacia una colaboración exitosa. ¡Descubre cómo podemos ayudarte a alcanzar tus objetivos hoy mismo!
                                     </p>
                                     <PdfViewer />
                                 </div>
@@ -262,10 +224,15 @@ if (isMobile) {
                             
 
                         </div>
+                        {servicio_elegido.length === 1 ? (
+                                <div className="row">
+                                <LazyServicios />
+                                </div>
+                            ) : (
+                                ""
+                            )}
                     </div>
-                    <div className="row">
-                        <LazyServicios />
-                    </div>
+                    
                 </div>
             </PagesLayout>
         </>
