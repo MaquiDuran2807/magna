@@ -12,11 +12,12 @@ import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 
 interface SliderServicesProps {
     subServicios?: Subservicio[] | null;
+    subtitle?: boolean;
 }
 
 
-const SliderServices: React.FC<SliderServicesProps> = ({ subServicios}) => {
-    console.log("se reinicio el slider");
+const SliderServices: React.FC<SliderServicesProps> = ({ subServicios,subtitle}) => {
+    console.log("se reinicio el slider",subServicios,subtitle);
     
     return (
         <Swiper
@@ -36,7 +37,9 @@ const SliderServices: React.FC<SliderServicesProps> = ({ subServicios}) => {
                     <div className={`slide ${subServicio.nombre}`}>
                         <img src={subServicio.imagen} alt={subServicio.nombre} className='img-fluid img-subservicio' />
                         <h3>
-                            {subServicio.nombre}
+                            {
+                                subtitle ? subServicio.nombre :  '' 
+                            }
                         </h3>
                     </div>
                 </SwiperSlide>

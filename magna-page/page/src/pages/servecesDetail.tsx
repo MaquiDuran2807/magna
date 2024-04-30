@@ -34,6 +34,7 @@ const ServecesDetail: React.FC<ServecesDetailProps> = ({ issue }) => {
     const [servicio_elegido, setServicio_elegido] = useState<Servicio2[]>();
     const [selectedSubServicio, setSelectedSubServicio] = useState<Subservicio[] | null>(null);
     const [slider, setSlider] = useState< Subservicio[] | null>(null);
+    const [subtitle, setSubtitle] = useState<boolean>(true);
 
    useEffect(() => {
     if (serveces) {
@@ -79,6 +80,7 @@ if (isMobile) {
         const listSubservicios:Subservicio[] =[]
         listSubservicios.push(subServicio)
         setSelectedSubServicio(listSubservicios);
+        setSubtitle(false);
         console.log(listSubservicios, 'selectedSubServicio');
         if (!listSubservicios) {
             return
@@ -87,6 +89,7 @@ if (isMobile) {
 
         setTimeout(() => {
             setSelectedSubServicio(null);
+            setSubtitle(true);
             if (!serveces) {
                 return
             }
@@ -176,7 +179,7 @@ if (isMobile) {
                         </div>
                         <div className="col-12 col-md-8 " >
                             <div className="row slider">
-                                <SliderServices subServicios={slider} />
+                                <SliderServices subServicios={slider} subtitle={subtitle} />
                             </div>
                             <div ref={subServicioPaginaRef} key={selectedSubServicio && selectedSubServicio[0]?.descripcion}>
                                 <br />
