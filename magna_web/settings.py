@@ -14,6 +14,8 @@ from datetime import timedelta
 from pathlib import Path
 import os
 import environ
+import dj_database_url
+
 
 env = environ.Env()
 environ.Env.read_env()
@@ -29,9 +31,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-3gc^^v-mqu9hjtgz148b)5q2+b9%ng8#j2f62mr=-75@uayss$' #os.environ.get("SECRET_KEY")
-
+# SECRET_KEY = os.environ.get("SECRET_KEY",default='your secret key')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True #os.environ.get("DEBUG") 
+DEBUG = "RENDER" not in os.environ
 DOMAIN="localhost:5173 " #'localhost:8000/auth/users' # os.environ.get('DOMAIN_DEV') if DEBUG else os.environ.get('DOMAIN_PROD')
 
 ALLOWED_HOSTS = ["*"]  #env.list("ALLOWED_HOSTS_DEV") if DEBUG else env.list("ALLOWED_HOSTS_PROD")
@@ -78,6 +80,7 @@ CKEDITOR_CONFIGS = {
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
@@ -113,12 +116,22 @@ WSGI_APPLICATION = 'magna_web.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
+else:
+    # Replace the SQLite DATABASES configuration with PostgreSQL:
+    DATABASES = {
+        'default': dj_database_url.config(
+            # Replace this value with your local database's connection string.
+            default='postgresql://postgres:postgres@localhost:5432/magna_db',
+            conn_max_age=600
+        )
+    }
 
 
 # Password validation
@@ -173,6 +186,10 @@ STATIC_URL = 'static/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR.joinpath('media')
+if not DEBUG:
+    # STATIC_ROOT = BASE_DIR.joinpath('staticfiles')
+    # MEDIA_ROOT = BASE_DIR.joinpath('mediafiles')
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
