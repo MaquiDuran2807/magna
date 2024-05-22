@@ -187,7 +187,7 @@ STATIC_URL = 'static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR.joinpath('media')
 if not DEBUG:
-    # STATIC_ROOT = BASE_DIR.joinpath('staticfiles')
+    STATIC_ROOT = BASE_DIR.joinpath('staticfiles')
     # MEDIA_ROOT = BASE_DIR.joinpath('mediafiles')
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
