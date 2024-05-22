@@ -183,11 +183,11 @@ STATICFILES_DIRS = (
     BASE_DIR.joinpath('magna-page','store/dist'),
 )
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR.joinpath('staticfiles')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR.joinpath('media')
 if not DEBUG:
-    STATIC_ROOT = BASE_DIR.joinpath('staticfiles')
     # MEDIA_ROOT = BASE_DIR.joinpath('mediafiles')
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
