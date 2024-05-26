@@ -1,7 +1,7 @@
 import axios from 'axios'
 // export const APIURL = 'http://127.0.0.1:8000/'
-// export const APIURL ="http://54.211.37.134:8000/"
-export const APIURL = 'https://rn1nb289-8000.use2.devtunnels.ms/'
+export const APIURL ="54.234.168.96:8000/"
+
 
 const apiClient = axios.create({
   baseURL:APIURL ,
