@@ -10,9 +10,13 @@ import { Proyectos } from '../components/sections/proyectos';
 import './styles/projectsDetail.css'
 const LazyCardsProjects = lazy(() => import('../components/cardsProjects'));
 const ProjectDetail: React.FC= () => {
+    const parametros = useParams();
+    console.log(parametros, 'parametros');
     const [project, setProject] = React.useState<Result>();
     const [imagen, setImagen] = React.useState<ProyectImagesMagna[]>([]);
-    const { id } = useParams<{ id: string }>();
+    const { projectArg} = useParams<{ projectArg: string }>();
+    console.log(projectArg, 'id');
+    
     const { data:projects } = useQuery<ProyectosMagna>({
         queryKey: ['projects'],
         staleTime: 1000*60*30,refetchOnWindowFocus: false,refetchOnMount: false,refetchOnReconnect: false,refetchInterval: 1000*60*30,
@@ -23,13 +27,13 @@ const ProjectDetail: React.FC= () => {
     });
     
 
-    if(!projects || !projectImages || !id){
-        return null;
+    if(!projects || !projectImages || !projectArg){
+        return <div>no hay </div>;
     }
     
     useEffect(() => {
-        const project_select: Result | null = projects.results.find((project: Result) => project.id === parseInt(id)) || null;
-        const images: ProyectImagesMagna[] = projectImages.filter((imagen: ProyectImagesMagna) => imagen.proyecto === parseInt(id));
+        const project_select: Result | null = projects.results.find((project: Result) => project.id === parseInt(projectArg)) || null;
+        const images: ProyectImagesMagna[] = projectImages.filter((imagen: ProyectImagesMagna) => imagen.proyecto === parseInt(projectArg));
         console.log(project_select, 'aqui estoy en project_select',images,"images");
         
         if (!project_select) {
@@ -37,7 +41,7 @@ const ProjectDetail: React.FC= () => {
         }
         setProject(project_select);
         setImagen(images);
-        }, [projects,projectImages,id]);
+        }, [projects,projectImages,projectArg]);
 
     if (!project || !imagen) {
         return null;
@@ -63,7 +67,7 @@ const ProjectDetail: React.FC= () => {
                     <div className="col-12 col-md-6 ">
                         <SliderProjectDetail images={imagen}/>
                     </div>
-                    <div className="col-12 col-md-6" key={id}>
+                    <div className="col-12 col-md-6" key={projectArg}>
                         <br />
                         <br />
                         <h3>

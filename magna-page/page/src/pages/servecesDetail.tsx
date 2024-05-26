@@ -28,9 +28,6 @@ const ServecesDetail: React.FC<ServecesDetailProps> = ({ issue }) => {
     console.log(parametros, 'parametros');
     
     const { id} = useParams<{ id: string }>();
-    if (!id) {
-        return <h3>Error</h3>;
-    }
 
     let [title, setTitle] = useState<String>("Nuestros Servicios");
     let [imagen, setImagen] = useState<String>(imagenServicios);
