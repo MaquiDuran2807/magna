@@ -116,22 +116,14 @@ WSGI_APPLICATION = 'magna_web.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-if DEBUG:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+        "READ_ONLY": False,
     }
-else:
-    # Replace the SQLite DATABASES configuration with PostgreSQL:
-    DATABASES = {
-        'default': dj_database_url.config(
-            # Replace this value with your local database's connection string.
-            default='postgresql://postgres:postgres@localhost:5432/magna_db',
-            conn_max_age=600
-        )
-    }
+}
 
 
 # Password validation
