@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 // export const APIURL = 'http://127.0.0.1:8000/'
-export const APIURL ="http://54.211.37.134:8000/"
+export const APIURL ="https://magnaingenieriaytopografia.com/"
 
 
 const apiClient = axios.create({
