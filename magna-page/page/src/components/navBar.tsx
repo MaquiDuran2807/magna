@@ -14,7 +14,7 @@ export const NavBar = (  ) => {
                       {/* <img src={logo} alt="logo" className='logo' width={"400px"}/> */}
                       <LogoOriginal width={260} className='logoMagna' />
                     </Navbar.Brand>
-                    <Navbar.Toggle  aria-controls="basic-navbar-nav  " />
+                    <Navbar.Toggle  aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav ">
                       <Nav className="ms-auto">
                         <Link className={`links nav navbar  ${themeLogin} `} to="/AboutUS" >Quiénes somos</Link>

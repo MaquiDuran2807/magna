@@ -9,5 +9,8 @@ export default defineConfig({
       strict: false
     },
   },
+  build: {
+    sourcemap: true,
+  },
   base: '/static/',
 })

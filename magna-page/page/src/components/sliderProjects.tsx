@@ -71,7 +71,7 @@ const { data:projectImages } = useQuery<ProyectImagesMagna[]>({
 
             <div className="card-info">
               <h4>{project.nombre}</h4>
-              <p>{project.descripcion.slice(0,90)} <span>... <Link to={`/projects/${project.id}`}>ver más</Link></span></p>
+              <p>{project.descripcion.slice(0,90)} <span>... <Link to={`/projects/${project.id}`}>ver más <span><img src="" alt={`ver más del proyecto ${project.nombre}`} /></span></Link></span></p>
               
             </div>
             <Link to={`/projects/${project.id}`}>
