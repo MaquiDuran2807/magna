@@ -10,25 +10,9 @@ import ingenieria from '../assets/img/banner/ingenieria.png';
 import medio from '../assets/img/banner/medio.png';
 import { useAuth } from '../auth/AuthProvider';
 
-const imagesPaths = [
- nosotros,
-  servicios,
-  projects,
-  topo,
-  ingenieria,
-  medio,
-];
 
-const images: HTMLImageElement[] = [];
-
-imagesPaths.forEach(path => {
-  const img = new Image();
-  img.src = path;
-  images.push(img);
-});
 export const ServiciosIdProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    const auth=useAuth()
-    auth.validateToken()
+
 
 
     const {
@@ -70,9 +54,27 @@ export const ServiciosIdProvider: React.FC<{ children: React.ReactNode }> = ({ c
         console.log(errorWorkers, errorServices, errorProjects, errorProjectsImages, 'aqui estoy en error');
         ;
     }
+    const auth=useAuth()
+    auth.validateToken()
     return <>{children}</>;
 };
 
 
 export default ServiciosIdProvider;
 
+const imagesPaths = [
+    nosotros,
+     servicios,
+     projects,
+     topo,
+     ingenieria,
+     medio,
+   ];
+   
+   const images: HTMLImageElement[] = [];
+   
+   imagesPaths.forEach(path => {
+     const img = new Image();
+     img.src = path;
+     images.push(img);
+   });

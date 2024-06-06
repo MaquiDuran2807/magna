@@ -41,11 +41,18 @@ const ServecesDetail: React.FC<ServecesDetailProps> = ({ issue }) => {
     const [slider, setSlider] = useState< Subservicio[] | null>(null);
     const [subtitle, setSubtitle] = useState<boolean>(true);
 
+    const filterServicio = (id: string) => {
+        if (!serveces) {
+            return;
+        }
+        const servicio:Servicio2[] =  serveces.filter((servicio: Servicio2) => servicio.nombre === id);
+        setSlider(servicio[0].subservicios);
+        return servicio;
+    }
    useEffect(() => {
     if (serveces) {
         if (id){
-            const servicioElegido:Servicio2[] = serveces.filter((servicio: Servicio2) => servicio.nombre === id);
-            setSlider(servicioElegido[0].subservicios);
+            const servicioElegido = filterServicio(id);
             if (servicioElegido) {
                 const titleString = "servicios de "+ servicioElegido[0].nombre;
                 setTitle(titleString);
@@ -91,15 +98,16 @@ if (isMobile) {
             return
         }
         setSlider(listSubservicios);
-
+        if (!id) {
+            return
+        }
         setTimeout(() => {
             setSelectedSubServicio(null);
             setSubtitle(true);
             if (!serveces) {
                 return
             }
-            const subServicios = serveces.flatMap((subServicio) => subServicio.subservicios);
-            setSlider(subServicios);
+            filterServicio(id);
         }, 20000);
     };
     useEffect(() => {
