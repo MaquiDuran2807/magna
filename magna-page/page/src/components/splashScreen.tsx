@@ -1,16 +1,13 @@
 
-import { motion } from 'framer-motion';
+
 import Lottie from "lottie-react";
 import animationData from '../animations/Animation - 1706024995672.json';
 
 const SplashScreen = () => {
   return (
-    <motion.div
+    <div
       className="splash-screen "
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1 }}
-      
+
     >
       <header>
         <h1 className='text-white container'>Bienvenido a Magna</h1>
@@ -22,7 +19,7 @@ const SplashScreen = () => {
           />
       </header>
       
-    </motion.div>
+    </div>
   );
 };
 
