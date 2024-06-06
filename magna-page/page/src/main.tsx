@@ -7,9 +7,9 @@ import ProtectedRoute from "./routes/PrivateRoute";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './index.css'
 import { AuthProvider } from './auth/AuthProvider'
-import { Login } from './pages/login'
-import { Cotizador } from './pages/cotizador';
-import { Spinner } from './components/spinner';
+const Login = React.lazy(() => import('./pages/login'));
+const Cotizador = React.lazy(() => import('./pages/cotizador'));
+const Spinner = React.lazy(() => import('./components/spinner'));
 const AboutUs = React.lazy(() => import('./pages/aboutUs'));
 const Projects = React.lazy(() => import('./pages/projects'));
 const ServecesDetail = React.lazy(() => import('./pages/servecesDetail'));

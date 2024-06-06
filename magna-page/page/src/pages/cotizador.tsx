@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { NavBar } from '../components/navBar';
 import { useAuth } from '../auth/AuthProvider';
 
-export const Cotizador: React.FC = () => {
+const Cotizador: React.FC = () => {
 
     const auth=useAuth();
     console.log( "isAuthenticated ",auth.isTokenValid);
@@ -90,49 +90,8 @@ export const Cotizador: React.FC = () => {
     );
 };
 
+export default Cotizador;
 
 
-// export const Cotizador: React.FC = () => {
-//   const [respuestas, setRespuestas] = useState<{ [pregunta: string]: number }>({});
-
-//   // Aquí puedes obtener las preguntas y sus valores desde la base de datos
-//   const preguntas = [
-//     { pregunta: 'Pregunta 1', valor: 10 },
-//     { pregunta: 'Pregunta 2', valor: 20 },
-//     { pregunta: 'Pregunta 3', valor: 15 },
-//     // Agrega más preguntas aquí
-//   ];
-
-//   const handleRespuesta = (pregunta: string, valor: number) => {
-//     setRespuestas((prevRespuestas) => ({
-//       ...prevRespuestas,
-//       [pregunta]: valor,
-//     }));
-//   };
-
-//   const calcularCostoServicio = () => {
-//     const costoTotal = Object.values(respuestas).reduce(
-//       (total, valor) => total + valor,
-//       0
-//     );
-//     // Aquí puedes hacer algo con el costo total, como mostrarlo en pantalla o enviarlo al servidor
-//     console.log('Costo total del servicio:', costoTotal);
-//   };
-
-//   return (
-//     <div>
-//       <h1>Cotizador de Servicios</h1>
-//       {preguntas.map((pregunta) => (
-//         <div key={pregunta.pregunta}>
-//           <p>{pregunta.pregunta}</p>
-//           <button onClick={() => handleRespuesta(pregunta.pregunta, pregunta.valor)}>
-//             Responder
-//           </button>
-//         </div>
-//       ))}
-//       <button onClick={calcularCostoServicio}>Calcular Costo</button>
-//     </div>
-//   );
-// };
 
 

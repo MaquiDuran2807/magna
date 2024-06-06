@@ -1,7 +1,8 @@
 import { motion } from 'framer-motion';
 import Lottie from "lottie-react";
 import animationData from '../animations/Animation - 1706024995672.json';
-export const Spinner  = () => {
+
+const Spinner  = () => {
   return (
     <>
     <motion.div
@@ -21,3 +22,5 @@ export const Spinner  = () => {
     </>
   );
 };
+
+export default Spinner;

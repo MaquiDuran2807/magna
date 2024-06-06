@@ -1,7 +1,7 @@
 
 
 import { useState,useEffect,lazy } from 'react'
-import  SplashScreen  from './components/splashScreen'
+const SplashScreen = lazy(() => import('./components/splashScreen'));
 import { Slider } from './components/slider'
 import './App.css'
 import { useAuth } from './auth/AuthProvider'

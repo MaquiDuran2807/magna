@@ -9,7 +9,7 @@ import './styles/login.css'
 import { Navigate } from 'react-router-dom';
 import { useSigninMutation } from '../api/user';
 
-export const Login: React.FC =  () => {
+const Login: React.FC =  () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const { mutateAsync: signin } = useSigninMutation()
@@ -82,4 +82,6 @@ export const Login: React.FC =  () => {
     </div>
   );
 };
+
+export default Login;
 

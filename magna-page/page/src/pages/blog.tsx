@@ -1,5 +1,5 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { Spinner } from '../components/spinner';
+const Spinner = React.lazy(() => import('../components/spinner'));
 import { useEffect, useState} from 'react';
 import { Result } from '../types/blog';
 import { fetchNextBlogs,fetchBlogSearch } from '../api/blog';
@@ -8,6 +8,7 @@ import BlogLayout from '../layouts/blogLayout';
 import BlogList from '../components/blogCards';
 import Sidebar from '../components/sidebarBolgs';
 import BlogSearch from '../components/search';
+import React from 'react';
 
 const Blog =  () => {
     const [filter, setFilter] = useState("");

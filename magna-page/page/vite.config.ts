@@ -14,7 +14,7 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          // 'react': ['react'],
+          'react': ['react'],
           'react-dom': ['react-dom'],
           'react-router-dom': ['react-router-dom'],
           '@motionone/utils': ['@motionone/utils'],

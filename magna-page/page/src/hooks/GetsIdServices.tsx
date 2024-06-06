@@ -1,7 +1,7 @@
 // Date: 2021/09/03
 import { useQuery } from '@tanstack/react-query';
 import { fetchProjects, fetchProjectsImages,  fetchServices1, fetchWorkers} from '../api/pagesInfo';
-import {Spinner} from '../components/spinner';
+const Spinner = React.lazy(() => import('../components/spinner'));
 import nosotros from '../assets/img/banner/nosotros.jpg';
 import servicios from '../assets/img/banner/servicios.png';
 import projects from '../assets/img/banner/projects.png';
@@ -9,6 +9,7 @@ import topo from '../assets/img/banner/topo.png';
 import ingenieria from '../assets/img/banner/ingenieria.png';
 import medio from '../assets/img/banner/medio.png';
 import { useAuth } from '../auth/AuthProvider';
+import React from 'react';
 
 
 export const ServiciosIdProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
