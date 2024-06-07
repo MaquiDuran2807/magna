@@ -54,7 +54,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             {isLoading ? <div>loading...</div> :children}
         </AuthContext.Provider>
     );
+
+
 }
+// export default AuthProvider;
 // Hook personalizado para acceder al contexto del AuthProvider
 export function useAuth() {
     const context = useContext(AuthContext);

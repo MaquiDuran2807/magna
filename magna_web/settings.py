@@ -79,6 +79,7 @@ CKEDITOR_CONFIGS = {
 }
 
 MIDDLEWARE = [
+    'django.middleware.gzip.GZipMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -179,9 +180,8 @@ STATIC_ROOT = BASE_DIR.joinpath('staticfiles')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR.joinpath('media')
-if not DEBUG:
-    # MEDIA_ROOT = BASE_DIR.joinpath('mediafiles')
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

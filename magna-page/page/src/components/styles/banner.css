@@ -1,80 +1,20 @@
-
-.servicios-d{
-    width: 100%;
+.servicios-d {
     height: 45vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     background-size: cover;
     background-position: center;
-    
 }
 
-
-.banner-services  h1{
+.banner-services h1 {
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     font-size: clamp(1.5rem, 5vw, 3rem);
     color: #fff;
-    text-align: center;
-    margin: 0;
-    padding-top: 15%;
     line-height: 1.5;
     text-transform: uppercase;
     letter-spacing: 0.5rem;
-    text-shadow: 0 0 0.5rem rgba(0,0,0,0.5);
-    animation: Topografía 1s ease-in-out;
-    animation-fill-mode: forwards;
+    text-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
 }
 
-.Sobre{
-    background-size: cover;
+.Sobre {
     background-position: 100% 43%;
 }
-
-/* .fondo-banner{
-
-    width: 100%;
-
-    z-index: 1;
-
-} */
-
-/* .banner-title{
-    position:relative;
-    bottom: 20vh;
-    z-index: 2;
-    @media screen and (max-width: 768px) {
-        bottom: 5vh;
-    }
-
-} */
-
-/* .banner-content{ */
-    /* position:relative;
-    bottom: 20vh;
-    display: flex;
-    justify-content: center;
-    z-index: 2;
-    @media screen and (max-width: 768px) {
-        bottom: 5vh;
-        
-    } */
-
-/* } */
-
-/* .home-icon{
-    padding-right: 10px;
-}
-
-.home-link{
-    color: #fff;
-    text-decoration: none;
-    font-size: 25px;
-    padding-right: 10px;
-}
-
-.arrow{
-    color: #fff;
-    padding-right: 10px;
-} */

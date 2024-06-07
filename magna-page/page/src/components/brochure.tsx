@@ -1,5 +1,7 @@
 
-import { pdfjs } from 'react-pdf';
+
+import { pdfjs } from 'react-pdf';  
+
 import { fetchBrochure } from '../api/pagesInfo';
 import { useEffect ,useState} from 'react';
 import brochure from '../../../../media/brochures/largo_brochure_A4_8.pdf';

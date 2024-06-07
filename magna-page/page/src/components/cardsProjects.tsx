@@ -71,83 +71,83 @@ const CardsProjects = ({ type, actualPage,imagenes }: Props) => {
     }
     return (
         <div>
-            <div className="container">
-                <div className="row">
-                {
-                        type === 0 ?
-                            !types ? null:
-                                types.map((typeProject: Tipo) => {
-                                    return (
-                                        <motion.div
-                                            key={typeProject.id}
-                                            initial={{ opacity: 0 }}
-                                            animate={{ opacity: 1 }}
-                                            exit={{ opacity: 0 }}
-                                            transition={{ duration: 0.5 }}
-                                            className="col-12 col-sm-6 col-lg-3 col-md-4"
-                                        >
-                                            <button className="boton-1 " onClick={() => filterProjects(typeProject.id)}>{typeProject.name}</button>
-                                        </motion.div>
-                                    )
-                                },
-                                )
-                                :
-                                <motion.div
-                                    key={typeProject?.id}
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    exit={{ opacity: 0 }}
-                                    transition={{ duration: 0.5 }}
-                                    className="col-4 col-lg-3"
-                                >
-                                    <button className="boton-1" onClick={() => filterProjects(typeProject?.id)}>{typeProject?.name}</button>
-                                </motion.div>
-                                
-                    }
-                </div>
-                <div className="row">
-
-            {Array.isArray(proyectos_card_type) && proyectos_card_type.map((proyecto: Result) => {
-                let firstImage = "no hay imagen";
-               try {
-                firstImage = imagenesCard.filter((imagen: ProyectImagesMagna) => imagen.proyecto === proyecto.id)[0].imagen;
-               } catch (error) {
-                console.error(error);
-               }
-                return (
-                    
+    <div className="container">
+        <div className="row">
+        {
+            type === 0 ?
+                !types ? null:
+                    types.map((typeProject: Tipo) => {
+                        return (
+                            <motion.div
+                                key={typeProject.id}
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{ duration: 0.5 }}
+                                className="col-12 col-sm-6 col-lg-3 col-md-4"
+                            >
+                                <button className="boton-1 " onClick={() => filterProjects(typeProject.id)}>{typeProject.name}</button>
+                            </motion.div>
+                        )
+                    },
+                    )
+                    :
                     <motion.div
-                        key={proyecto.id}
+                        key={typeProject?.id}
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        exit={{ opacity: 0, x: -100 }}
-                        transition={{ duration: 0.6 }}
-                        className="col-md-6 col-lg-4 col-12 col-xl-3"
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.5 }}
+                        className="col-4 col-lg-3"
                     >
-                        <div >
-                            <div className="card-project">
-                                <div className="card-body card-body-projects">
-                                    {firstImage ? <img src={firstImage} alt="" className="img-fluid card-img" /> : <p>No hay imagen</p>}
-                                    <div className="content-1 ">
-                                        <div>
-                                            <h5 className="card-title text-center">{proyecto.nombre}</h5>
-                                            <p className="card-text text-center">{`${proyecto.descripcion.slice(0, 100)} ...`
-                                            }</p>
-                                        </div>
+                        <button className="boton-1" onClick={() => filterProjects(typeProject?.id)}>{typeProject?.name}</button>
+                    </motion.div>
+                    
+        }
+        </div>
+        <div className="row">
+
+        {Array.isArray(proyectos_card_type) && proyectos_card_type.map((proyecto: Result) => {
+            let firstImage = "no hay imagen";
+            try {
+            firstImage = imagenesCard.filter((imagen: ProyectImagesMagna) => imagen.proyecto === proyecto.id)[0].imagen;
+            } catch (error) {
+            console.error(error);
+            }
+            return (
+                
+                <motion.div
+                    key={proyecto.id}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0, x: -100 }}
+                    transition={{ duration: 0.6 }}
+                    className="col-md-6 col-lg-4 col-12 col-xl-3"
+                >
+                    <div className='my-5' >
+                        <div className="card-project bg-white rounded  transition cursor-pointer m-auto ">
+                            <div className="card-body card-body-projects d-flex flex-column justify-content-between h-98">
+                                {firstImage ? <img src={firstImage} alt="" className="img-fluid card-img w-100 h-160" /> : <p>No hay imagen</p>}
+                                <div className="content-1 d-flex flex-column align-items-stretch flex-grow-1 p-20">
+                                    <div>
+                                        <h5 className="card-title text-center fw-bold text-black mb-5 mt-4">{proyecto.nombre}</h5>
+                                        <p className="card-text text-center">{`${proyecto.descripcion.slice(0, 100)} ...`
+                                        }</p>
                                     </div>
-                                    <Link to={`/projects/${proyecto.id}`} className="boton-1 text-center end-boton">Ver más</Link>
                                 </div>
+                                <Link to={`/projects/${proyecto.id}`} className="boton-1 text-center end-boton">Ver más</Link>
                             </div>
                         </div>
-                            
-                    </motion.div>
-                );
-            }
-            )}
-                </div>
-            </div>
+                    </div>
+                        
+                </motion.div>
+            );
+        }
+        )}
         </div>
-    );
+    </div>
+</div>
+);
 };
 
 export default function LazyCardsProjects ({ type, actualPage,imagenes }: Props) {

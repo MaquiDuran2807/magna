@@ -13,7 +13,8 @@ import SliderServices from "../components/sliderServices";
 import useScreenSize from '../hooks/ScreenSize';
 import PagesLayout from "../layouts/pagesLayouts";
 import {  Servicio2,  Subservicio } from "../types/types";
-import PdfViewer from '../components/brochure';
+// import PdfViewer from '../components/brochure';
+const PdfViewer = lazy(() => import('../components/brochure'));
 import "./styles/servicesDetail.css";
 
 const LazyServicios = lazy(() => import('../components/sections/Servicios'));
@@ -145,7 +146,7 @@ if (isMobile) {
                                     servicio_elegido.map((servicio) => {
                                         return (
                                             <div key={servicio.id}>
-                                                <div className="row">
+                                                <div className="row px-2">
                                                     <div className="col-12">
                                                         <motion.div
                                                             initial={{ opacity: 0 }}
@@ -155,7 +156,7 @@ if (isMobile) {
                                                             key={servicio.id}
                                                         >
                                                             <h3>{servicio?.nombre}</h3>
-                                                            <p>{servicio?.descripcion}</p>
+                                                            <p className='px-2'>{servicio?.descripcion}</p>
                                                         </motion.div>
                                                     </div>
                                                     <div>
@@ -172,7 +173,7 @@ if (isMobile) {
                                                                                     className="subservicio"
                                                                                     key={subServicio.id}
                                                                                 >
-                                                                                    <div className="row items">
+                                                                                    <div className="row items mx-3">
                                                                                         <span className="col-1 icon-row"><AiOutlineDoubleRight /></span>
                                                                                         <h5 className="col-10">{subServicio.nombre + "   "}<span><AiFillCaretDown /></span></h5>
                                                                                     </div>

@@ -1,6 +1,5 @@
 .contact{
     height: fit-content;
-    /* fondo animado sobre gris oscuro */
     background: linear-gradient(0deg, rgba(2, 19, 40, 0.307) 0%, rgba(2, 19, 40, 0.256) 100%), url(../../assets/img/app/fondotopo.png), no-repeat;
     background-size: cover;
     background-position: center;
@@ -8,25 +7,17 @@
 
 .contact-izq{
     background-color: rgb(2, 19, 40);
-    color: #fcfbfb;
-    padding: 30px; 
 }
 
 .contact-izq h3{
     font-size: 35px;
     font-weight: 700;
-    color: #fcfbfb;
     margin: 10px 0 40px 0;
 }
 
 .contact-izq h5{
     font-size: 1.2rem;
-    color: #fcfbfb;
     margin: 10px 0 40px 0;
-}
-
-.frecuentes{
-    background-color: #dcdcdc;
 }
 
 .toggle-icon{

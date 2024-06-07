@@ -1,9 +1,11 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
+
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(),
+  ],
   server: {
     fs: {
       strict: false
@@ -12,14 +14,20 @@ export default defineConfig({
   build: {
     sourcemap: 'inline',
     rollupOptions: {
+      input: {
+        main : 'index.html',
+        splashScreen: 'src/components/splashScreen.tsx',
+        GetsIdServices: 'src/hooks/GetsIdServices.tsx',
+        spinner: 'src/components/spinner.tsx',
+      },
       output: {
         manualChunks: {
           'react': ['react'],
           'react-dom': ['react-dom'],
           'react-router-dom': ['react-router-dom'],
-          '@motionone/utils': ['@motionone/utils'],
           '@react-pdf/renderer': ['@react-pdf/renderer'],
           '@tanstack/react-query-devtools': ['@tanstack/react-query-devtools'],
+          '@motionone/utils': ['@motionone/utils'],
           'axios': ['axios'],
           'dompurify': ['dompurify'],
           'formik': ['formik'],

@@ -61,35 +61,11 @@ button a{
   height: 59px;
 }
 
-  .container-fluid{
-    padding: 0;
+.description{
+  @media (max-width: 768px) {
+    text-align: center;
   }
-
-  .row{
-    margin: 0;
-  }
-
-  .container-lg{
-    padding: 0;
-  }
-
-  .col-lg-6{
-    padding: 0;
-  }
-
-  .description{
-    @media (max-width: 768px) {
-      text-align: center;
-    }
-  }
-
-  p{
-    font-size: 0.9rem;
-    font-weight: 400;
-    color: #000000;
-    padding-bottom: 10px;
-    
-  }
+}
 
   .tarjeta{
     height: 21rem;
@@ -99,9 +75,7 @@ button a{
 .tarjeta-12{
   @media screen and (max-width: 1000px) {
     height: 17rem;
-    
   }
-
 }
 
 .tarjetas-12{
@@ -109,10 +83,6 @@ button a{
     height: 20rem;
     
   }
-}
-
-.proyectos .heading-divider{
-  background-color: #fcfbfb;
 }
 
 .logoMagna{
@@ -124,12 +94,7 @@ button a{
   @media screen and (max-width: 768px) 
   {
       width: 220px;
-    
   }
-}
-
-.navbar{
-  padding: 0;
 }
 
 
