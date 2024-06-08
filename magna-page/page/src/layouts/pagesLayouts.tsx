@@ -1,35 +1,29 @@
-import React, { useEffect, useRef } from 'react';
-import {NavBar} from '../components/navBar';
-import { FloatWhatsapp } from '../components/floawhatsapp';
+import React, { useEffect, useRef, lazy} from 'react';
 import { useLocation } from 'react-router-dom';
-import LazyFooter1 from '../components/footer1';
-
+import NavBar from '../components/navBar';
+const FloatWhatsapp = lazy(() => import('../components/floawhatsapp'));
+const LazyFooter1 = lazy(() => import('../components/footer1'));
 
 interface PagesLayoutProps {
     children: React.ReactNode;
 }
 
 const PagesLayout: React.FC<PagesLayoutProps> = ({ children }) => {
-    const inicioDePaginaRef = useRef<HTMLDivElement | null>(null); // Corregir el tipo de inicioDePaginaRef
+    const inicioDePaginaRef = useRef<HTMLDivElement | null>(null);
     const location = useLocation();
     useEffect(() => {
-        // Si hay un cambio en la ruta, realiza el scroll al inicio de la página
         if (inicioDePaginaRef.current) {
-            // Realizar la lógica de scroll aquí
             inicioDePaginaRef.current.scrollIntoView({ behavior: 'smooth' });
         }
     }, [location]);
+
     return (
         <>
-            <header ref={inicioDePaginaRef}>
-                
+            <div ref={inicioDePaginaRef}>
                 <NavBar />
-                <div className="spand" id='header'>
-                </div>
-            </header>
-            
+            </div>
             {children}
-            <LazyFooter1/>
+            <LazyFooter1 />
             <FloatWhatsapp />
         </>
     );

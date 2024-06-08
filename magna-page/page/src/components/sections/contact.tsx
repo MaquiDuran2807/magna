@@ -10,7 +10,9 @@ import useIntersectionObserver from "../../hooks/useLazyload"
 import { APIURL} from '../../apiClient';
 
 
-export const Contact = () => {
+const Contact = () => {
+  console.log("e renderi Contact()#$%#$%#$%#$%#%$&$%&/$%&$%&$%&$%&$%#/$");
+  
   const { width } = useScreenSize();
   const isMobile = width <= 768;
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -167,7 +169,7 @@ export const Contact = () => {
 export default function LazyContact () {
   const {  isVisible, ref } = useIntersectionObserver('100px');
   return (
-      <div id="LazyServices" ref={ref}>
+      <div id="LazyContact" ref={ref}>
           {isVisible ? <Contact/> : null}
       </div>
   );

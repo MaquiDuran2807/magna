@@ -10,6 +10,7 @@ import { useState } from 'react';
 
 
 const Equipos1 = () => {
+    console.log("me rendericé Equipos seccion=====================");
     const [selectedCard, setSelectedCard] = useState('');
 
 const handleCardClick = (id: string,card:string) => {
@@ -118,7 +119,7 @@ const handleCardClick = (id: string,card:string) => {
 export default function LazyEquipos () {
     const {  isVisible, ref } = useIntersectionObserver('150px');
     return (
-        <div id="LazyServices" ref={ref}>
+        <div id="LazyEquip" ref={ref}>
             {isVisible ? <Equipos1/> : null}
         </div>
     );

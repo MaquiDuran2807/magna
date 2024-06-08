@@ -14,7 +14,7 @@ import { BotonesSwiper } from './BotonesSwiper';
 import {  Servicio2 } from '../types/types';
 
 import { Link } from 'react-router-dom';
-export const Slider= () => {
+const Slider= () => {
   const { data:servicios } = useQuery<Servicio2[]>({
     queryKey: ['services'],
     staleTime: 1000*60*30,refetchOnWindowFocus: false,refetchOnMount: false,refetchOnReconnect: false,refetchInterval: 1000*60*30,
@@ -85,3 +85,5 @@ if (!servicios) {
     </Swiper>
   );
 };
+
+export default Slider ;

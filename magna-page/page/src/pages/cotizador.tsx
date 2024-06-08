@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { NavBar } from '../components/navBar';
+import PagesLayout from '../layouts/pagesLayouts';
 import { useAuth } from '../auth/AuthProvider';
+import useIntersectionObserver from '../hooks/useLazyload';
 
 const Cotizador: React.FC = () => {
 
-    const auth=useAuth();
+    const auth=useAuth()
+    auth.validateToken()
     console.log( "isAuthenticated ",auth.isTokenValid);
 
     const logout = () => {
@@ -46,7 +48,7 @@ const Cotizador: React.FC = () => {
 
     return (
         <div>
-            <NavBar />
+        <PagesLayout >
             <button onClick={logout} style={{padding:"100px"}}>Logout</button>
             <br />
             <br />
@@ -86,11 +88,19 @@ const Cotizador: React.FC = () => {
                 </div>
             </div>
             <button onClick={calcularCostoServicio}>Calcular Costo</button>
+            </PagesLayout>
         </div>
     );
 };
 
-export default Cotizador;
+export default function LazyCotizador() {
+    const {  isVisible, ref } = useIntersectionObserver('100px');
+    return (
+        <div id="LazyCotizador" ref={ref}>
+            {isVisible ? <Cotizador /> : null}
+        </div>
+    );
+}
 
 
 

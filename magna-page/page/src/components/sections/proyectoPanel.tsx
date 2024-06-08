@@ -1,11 +1,12 @@
 
 import paneles from '../../assets/img/app/paneles.jpeg'
 import '../styles/ProyectPanel.css'
-import { Link } from 'react-router-dom'
-import useIntersectionObserver from '../../hooks/useLazyload'
+import { Link } from 'react-router-dom';
 
 
-export  const ProyectoPanel = () => {
+const ProyectoPanel = () => {
+    console.log("me rendericé ProyectoPanel=====================");
+    
     return(
         <section className="about-us">
             <div className="container">
@@ -58,11 +59,4 @@ export  const ProyectoPanel = () => {
     )
 }
 
-export default function LazyProyectoPanel () {
-    const {  isVisible, ref } = useIntersectionObserver('100px');
-    return (
-        <div id="LazyServices" ref={ref}>
-            {isVisible ? <ProyectoPanel/> : null}
-        </div>
-    );
-  }
+export default ProyectoPanel;

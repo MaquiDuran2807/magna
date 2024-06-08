@@ -5,7 +5,9 @@ import '../styles/proyectos.css'
 import useIntersectionObserver from '../../hooks/useLazyload'
 
 
-export const Proyectos = () => {
+const Proyectos = () => {
+    console.log("me rendericé Proyectos seccion=====================");
+    
     return (
         
         <section className="proyectos">
@@ -24,7 +26,7 @@ export const Proyectos = () => {
 export default function LazyProyectos () {
     const {  isVisible, ref } = useIntersectionObserver('100px');
     return (
-        <div id="LazyServices" ref={ref}>
+        <div id="LazyProyectos" ref={ref}>
             {isVisible ? <Proyectos /> : null}
         </div>
     );

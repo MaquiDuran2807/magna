@@ -1,6 +1,5 @@
-import React from 'react';
+import React,{lazy} from 'react';
 import  PagesLayout from '../layouts/pagesLayouts';
-import {Contact} from '../components/sections/contact';
 import Banner from '../components/banner';
 import { FaDirections } from "react-icons/fa";
 import { FaSquarePhone } from "react-icons/fa6";
@@ -8,6 +7,7 @@ import { MdEmail } from "react-icons/md";
 import { IoMdClock } from "react-icons/io";
 import  Maps  from '../components/maps';
 import imagen from '../assets/img/banner/projects.png';
+const Contact = lazy(() => import('../components/sections/contact'));
 
 const ContactPage: React.FC = () => {
     return (

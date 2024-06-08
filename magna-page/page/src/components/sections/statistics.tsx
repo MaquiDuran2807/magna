@@ -8,7 +8,9 @@ import { TfiRulerAlt2 } from "react-icons/tfi";
 import useIntersectionObserver from "../../hooks/useLazyload";
 
 
-export const Statistics = () => {
+const Statistics = () => {
+  console.log("me rendericé Statistics seccion=====================");
+  
   return (
     <section className="statistics container-fluid" >
       <div className="container">
@@ -75,7 +77,7 @@ export const Statistics = () => {
 export default function LazyStatistics () {
   const {  isVisible, ref } = useIntersectionObserver('100px');
   return (
-      <div id="LazyServices" ref={ref}>
+      <div id="LazyStatics" ref={ref}>
           {isVisible? <Statistics /> : null}
       </div>
   );

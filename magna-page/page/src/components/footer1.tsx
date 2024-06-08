@@ -2,13 +2,14 @@
 import { FaFacebook, FaInstagram, } from 'react-icons/fa';
 import { FaSquareXTwitter,FaTiktok} from "react-icons/fa6";
 import { BsLinkedin } from "react-icons/bs";
-import {Icon} from '../assets/img/imgfooter'
+import { Icon } from '../assets/img/imgfooter';
 import "./styles/footer.css";
 import useIntersectionObserver from '../hooks/useLazyload';
 import { Link } from 'react-router-dom';
 
 
 const Footer1: React.FC = () => {
+    console.log("me rendericé Footer1=====================");
     
     return (
         <footer className="bg-footer text-white">
@@ -114,7 +115,7 @@ const Footer1: React.FC = () => {
 // export default Footer1;
 
 export default function LazyFooter1 () {
-    const {  isVisible, ref } = useIntersectionObserver('100px');
+    const {  isVisible, ref } = useIntersectionObserver('20px');
     return (
         <div id="LazyServices" ref={ref}>
             {isVisible ? <Footer1 /> : null}

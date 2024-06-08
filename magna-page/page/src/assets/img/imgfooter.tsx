@@ -1,4 +1,5 @@
 import { SVGProps } from "react"
+
 interface Props extends SVGProps<SVGSVGElement> {
   colorText?: string;
   colorBackground?: string;
@@ -87,3 +88,4 @@ function Icon(props: Props) {
 }
 
 export { Icon as Icon } ;
+

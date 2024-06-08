@@ -2,7 +2,9 @@
 import LogoCarrusel from "../LogoCarrusel"
 import { SetionHeader } from "../setionHeader"
 import useIntersectionObserver from "../../hooks/useLazyload"
-export const Clients = () => {
+const Clients = () => {
+  console.log("me rendericé Clientes seccion=====================");
+  
     return(
         <section className='clientes'>
       <div className="container">
@@ -21,7 +23,7 @@ export default function LazyClients () {
   const { isVisible, ref } = useIntersectionObserver('100px');
 
   return (
-      <div id="LazyServices" ref={ref}>
+      <div id="LazyClients" ref={ref}>
           {isVisible ? <Clients/> : null}
       </div>
   );

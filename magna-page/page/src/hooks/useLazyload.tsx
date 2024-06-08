@@ -3,11 +3,18 @@ import  { useState, useEffect, useRef } from 'react';
 const useIntersectionObserver = (rootMargin = '100px') => {
     const [isVisible, setIsVisible] = useState(false);
     const ref = useRef<HTMLDivElement>(null);
-  
+    
+    
+    
     useEffect(() => {
       const observer = new IntersectionObserver(
+
+        
         ([entry]) => {
+          console.log("useIntersectionObserver", entry.isIntersecting,ref);
+          
           if (entry.isIntersecting) {
+            console.log("useIntersectionObserver", entry.isIntersecting,ref);
             setIsVisible(true);
             observer.disconnect(); // Desconecta el observador cuando el componente es visible
           }

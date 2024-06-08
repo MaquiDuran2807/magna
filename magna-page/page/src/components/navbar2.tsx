@@ -3,8 +3,9 @@ import {LogoOriginal} from '../assets/img/logoOriginal'
 import {Nav,Navbar,Container} from 'react-bootstrap';
 import './styles/navbar2.css'
 import { Link, NavLink } from 'react-router-dom';
+import useIntersectionObserver from '../hooks/useLazyload';
 
-export const NavBar = () => {
+const NavBar = () => {
   const themeLogin="text-black"
     return (
         <>
@@ -70,4 +71,13 @@ export const NavBar = () => {
         
         </>
     );
+    }
+
+    export default function LazyNavbar2 () {
+      const {  isVisible, ref } = useIntersectionObserver('100px');
+      return (
+          <div id="LazyServices" ref={ref}>
+              {isVisible ? <NavBar /> : null}
+          </div>
+      );
     }

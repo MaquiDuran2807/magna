@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import {NavBar} from '../components/navbar2';
+import NavBar from '../components/navbar2';
 import { FloatWhatsapp } from '../components/floawhatsapp';
 import { useLocation } from 'react-router-dom';
 import LazyFooter1 from '../components/footer1';

@@ -6,7 +6,8 @@ import imagenBanner from '../assets/img/banner/projects.png';
 import { Result,ProyectosMagna,ProyectImagesMagna,Servicio } from '../types/projects';
 import SliderProjectDetail from '../components/sliderProjectDetail';
 import PagesLayout from '../layouts/pagesLayouts';
-import { Proyectos } from '../components/sections/proyectos';
+// import { Proyectos } from '../components/sections/proyectos';
+const Proyectos = lazy(() => import('../components/sections/proyectos'));
 import './styles/projectsDetail.css'
 const LazyCardsProjects = lazy(() => import('../components/cardsProjects'));
 const ProjectDetail: React.FC= () => {

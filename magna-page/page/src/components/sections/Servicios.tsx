@@ -7,6 +7,8 @@ import '../styles/Servicios.css'
 import useIntersectionObserver from '../../hooks/useLazyload';
 
 const Servicios = () => {
+    console.log("me rendericé Servicios seccion=====================");
+    
     const { data:servecios } = useQuery<Servicio2[]>({
         queryKey: ['services'],
         staleTime: 1000*60*30,refetchOnWindowFocus: false,refetchOnMount: false,refetchOnReconnect: false,refetchInterval: 1000*60*30,

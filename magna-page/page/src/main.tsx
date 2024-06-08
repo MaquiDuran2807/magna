@@ -1,11 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import ServiciosIdProvider from './hooks/GetsIdServices';
-// const Spinner = React.lazy(() => import('./components/spinner'));
+
 import Spinner from './components/spinner'
+
 import { createBrowserRouter,RouterProvider } from 'react-router-dom'
 import { QueryClient,QueryClientProvider } from '@tanstack/react-query';
-import { App} from './App'
+import ServiciosIdProvider from './hooks/GetsIdServices';
+// const App = React.lazy(() => import('./App'));
+import App from './App';
 import ProtectedRoute from "./routes/PrivateRoute";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './index.css'
@@ -15,13 +17,14 @@ const Cotizador = React.lazy(() => import('./pages/cotizador'));
 const AboutUs = React.lazy(() => import('./pages/aboutUs'));
 const Projects = React.lazy(() => import('./pages/projects'));
 const ServecesDetail = React.lazy(() => import('./pages/servecesDetail'));
-
 const ProjectDetail = React.lazy(() => import('./pages/projecsDetail'));
 const ContactPage = React.lazy(() => import('./pages/contact'));
 const BlogDetail = React.lazy(() => import('./pages/blogDetail'));
 const Blog = React.lazy(() => import('./pages/blog'));
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import Sitemap from './sitemap/sitemap';
+
+
 
 
 
@@ -92,16 +95,16 @@ const router = createBrowserRouter(
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   
     <React.StrictMode>
-      <React.Suspense fallback={<Spinner/>}>
-        <AuthProvider>
-          <QueryClientProvider client={queryClient}>
-            <ServiciosIdProvider>
-              <RouterProvider router={router} />
-              <ReactQueryDevtools initialIsOpen={false} />
-            </ServiciosIdProvider>
-          </QueryClientProvider>
-        </AuthProvider>
-        </React.Suspense>
+      <AuthProvider>
+        <QueryClientProvider client={queryClient}>
+          <ServiciosIdProvider>
+          <React.Suspense fallback={<Spinner></Spinner>}>
+            <RouterProvider router={router} />
+            <ReactQueryDevtools initialIsOpen={false} />
+          </React.Suspense>
+          </ServiciosIdProvider>
+        </QueryClientProvider>
+      </AuthProvider>
     </React.StrictMode>
   
 )

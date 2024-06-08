@@ -3,7 +3,8 @@ import { Nav,Navbar} from 'react-bootstrap';
 import './styles/navbar.css'
 import {LogoOriginal} from '../assets/img/logoOriginal'
 import { Link,NavLink} from 'react-router-dom';
-export const NavBar = (  ) => {
+
+const NavBar = (  ) => {
     const themeLogin="text-black"
       return (
           <>
@@ -36,3 +37,5 @@ export const NavBar = (  ) => {
           </>
       );
       }
+
+      export default NavBar;
