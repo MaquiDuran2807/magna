@@ -4,7 +4,8 @@ import { useAuth } from '../auth/AuthProvider';
 import useIntersectionObserver from '../hooks/useLazyload';
 
 const Cotizador: React.FC = () => {
-
+    console.log('cotizador');
+    
     const auth=useAuth()
     auth.validateToken()
     console.log( "isAuthenticated ",auth.isTokenValid);

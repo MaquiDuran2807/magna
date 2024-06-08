@@ -1,12 +1,10 @@
 
 
-import { lazy,Suspense } from 'react'
-// const SplashScreen = lazy(() => import('./components/splashScreen'));
+import { lazy} from 'react'
+
+import PagesLayout from './layouts/pagesLayouts'
 import Slider from './components/slider'
 import './App.css'
-// import { useAuth } from './auth/AuthProvider'
-import PagesLayout from './layouts/pagesLayouts'
-// import useIntersectionObserver from './hooks/useLazyload'
 import ProyectoPanel from './components/sections/proyectoPanel'
 const  LazyProyectos = lazy(() => import('./components/sections/proyectos'))
 const LazyServicios = lazy(() => import('./components/sections/Servicios'))
@@ -14,12 +12,6 @@ const LazyStatistics = lazy(() => import('./components/sections/statistics'))
 const LazyClients = lazy(() => import('./components/sections/clients'))
 const LazyEquipos = lazy(() => import('./components/sections/Equipos'))
 const LazyContact = lazy(() => import('./components/sections/contact'))
-
-
-
-// import SplashScreen from './components/splashScreen'; importar lazy
-
-
 
 
 function App() {
@@ -44,65 +36,44 @@ function App() {
   // if (loading) {
   //   return <SplashScreen />;
   // }
-
-
+  
   return (
-   <>
-   <PagesLayout >
-
-      {/* slider */}
+    <>
+      <PagesLayout>
+        {/* slider */}
         <Slider />
-      {/* fin slider */}
-
-      <Suspense>
+        {/* fin slider */}
+        
         {/* quienes somos paneles  */}
         <ProyectoPanel/>
-      {/* fin quienes somos paneles */}
-      </Suspense>
-      <Suspense>
+        {/* fin quienes somos paneles */}
+        
         {/* servicios */}
         <LazyServicios/>
-      {/* fin servicios */}
-      </Suspense>
-      <Suspense>
+        {/* fin servicios */}
+        
         {/* proyectos  todo */}
         <LazyProyectos/>
-      {/* fin proyectos*/}
-      </Suspense>
-      <Suspense>
+        {/* fin proyectos*/}
+        
         {/* estadisticas  */}
-      <br /> 
-      <br />
+        <br /> 
+        <br />
         <LazyStatistics/>
-      {/* fin estadisticas  */}
-      </Suspense>
-      <Suspense>
+        {/* fin estadisticas  */}
+        
         {/* clientes */}
         <LazyClients/>
-      {/* fin clientes */}
-      </Suspense>
-      <Suspense>
+        {/* fin clientes */}
+        
         {/* equipo y tecnologia y equipo de trabajo */}
         <LazyEquipos/>
-      {/* fin equipo y tecnologia y equipo de trabajo */}
-      </Suspense>
-      <Suspense>
+        {/* fin equipo y tecnologia y equipo de trabajo */}
+        
         {/* contacto */}
-      <LazyContact/>
-      {/* fin contacto */}
-      </Suspense>
-      
-+
-      
-
-      
-
-    {/* estadisticas  */}
-    
-    {/* fin estadisticas  */}
-    
-    </PagesLayout>
-
+        <LazyContact/>
+        {/* fin contacto */}
+      </PagesLayout>
     </>
   )
 }

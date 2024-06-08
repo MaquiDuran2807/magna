@@ -1,4 +1,5 @@
 
+import React from 'react';
 import { Servicio2 } from '../../types/types';
 import { useQuery } from '@tanstack/react-query';
 import { SetionHeader } from '../setionHeader'
@@ -6,7 +7,8 @@ import { Link } from 'react-router-dom';
 import '../styles/Servicios.css'
 import useIntersectionObserver from '../../hooks/useLazyload';
 
-const Servicios = () => {
+
+const Servicios = React.memo(() => {
     console.log("me rendericé Servicios seccion=====================");
     
     const { data:servecios } = useQuery<Servicio2[]>({
@@ -45,7 +47,7 @@ const Servicios = () => {
             </div>
     </section>
     )
-}
+});
 
 export default function LazyServicios() {
     const {  isVisible, ref } = useIntersectionObserver('100px');

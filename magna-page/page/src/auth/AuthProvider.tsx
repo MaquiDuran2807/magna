@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect } from "react";
 import {  useVerfyToken} from "../api/user";
 import { useState } from "react";
 
+
 // Crear el contexto del AuthProvider
 const AuthContext = createContext({
    isTokenValid: false,
@@ -10,7 +11,7 @@ const AuthContext = createContext({
    validateToken: () => {},
    logout: () => {},
 });
-
+let contador = 0;
 // Crear el AuthProvider
 export function AuthProvider({ children }: { children: React.ReactNode }) {
     const [isTokenValid, setIsTokenValid] = useState(false);
@@ -22,6 +23,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
 
     const logout = async () => {
+        console.log('logout'+contador++);
+        await localStorage.removeItem('token')
+        await localStorage.removeItem('refreshToken')
+        
         setIsTokenValid(false);
     }
 
@@ -48,7 +53,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     useEffect(() => {
         validateToken();
     }, []);
-
     return (
         <AuthContext.Provider value={{  isTokenValid, firstView, validateToken, logout,firstViewCount}}>
             {isLoading ? <div>loading...</div> :children}

@@ -1,12 +1,45 @@
 
+import { memo, useEffect } from 'react';
 import paneles from '../../assets/img/app/paneles.jpeg'
 import '../styles/ProyectPanel.css'
 import { Link } from 'react-router-dom';
 
+import nosotros from '../../assets/img/banner/nosotros.jpg';
+import servicios from '../../assets/img/banner/servicios.png';
+import projects from '../../assets/img/banner/projects.png';
+import topo from '../../assets/img/banner/topo.png';
+import ingenieria from '../../assets/img/banner/ingenieria.png';
+import medio from '../../assets/img/banner/medio.png';
 
-const ProyectoPanel = () => {
-    console.log("me rendericé ProyectoPanel=====================");
+const AsyncImages = async () => {
+    const imagesPaths = await[
+        nosotros,
+        servicios,
+        projects,
+        topo,
+        ingenieria,
+        medio,
+       ];
     
+    const images: HTMLImageElement[] =await  [];
+    
+    await imagesPaths.forEach(path => {
+        const img = new Image();
+        img.src = path;
+        images.push(img);
+    });
+    console.log(images, 'imagenes cargadas');
+    
+
+}
+
+
+
+const ProyectoPanel = memo(() => {
+
+    useEffect(() => {
+          AsyncImages();
+    }, []);
     return(
         <section className="about-us">
             <div className="container">
@@ -57,6 +90,6 @@ const ProyectoPanel = () => {
             </div>
         </section>
     )
-}
+});
 
 export default ProyectoPanel;
