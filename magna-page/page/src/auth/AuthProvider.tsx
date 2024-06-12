@@ -1,72 +1,67 @@
-import { createContext, useContext, useEffect } from "react";
-import {  useVerfyToken} from "../api/user";
-import { useState } from "react";
+import React, { createContext, useContext, useState } from "react";
+import { useVerfyToken } from "../api/user";
 
+// interfaz para el contexto
+interface AuthContextType {
+  isTokenValid: boolean;
+//   firstView: number;
+//   firstViewCount: () => void;
+  validateToken: () => Promise<void>;
+  logout: () => Promise<void>;
+}
 
-// Crear el contexto del AuthProvider
-const AuthContext = createContext({
-   isTokenValid: false,
-   firstView: 0,
-   firstViewCount: () => {},
-   validateToken: () => {},
-   logout: () => {},
+// creación del contexto con la interfaz
+const AuthContext = createContext<AuthContextType>({
+  isTokenValid: false,
+//   firstView: 0,
+//   firstViewCount: () => {},
+  validateToken: async () => {},
+  logout: async () => {},
 });
-let contador = 0;
-// Crear el AuthProvider
+
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-    const [isTokenValid, setIsTokenValid] = useState(false);
-    const [isLoading, setIsLoading] = useState(true);
-    const [firstView, setFirstView] = useState(0);
+  const [isTokenValid, setIsTokenValid] = useState(false);
+//   const [firstView, setFirstView] = useState(0);
 
-    const firstViewCount = () => {
-        setFirstView(firstView + 1);
-    }
+//   const firstViewCount = () => {
+//     setFirstView(firstView + 1);
+//   };
 
-    const logout = async () => {
-        console.log('logout'+contador++);
-        await localStorage.removeItem('token')
-        await localStorage.removeItem('refreshToken')
-        
-        setIsTokenValid(false);
-    }
+  const logout = async () => {
+    console.log('logout');
+    await localStorage.removeItem('token');
+    await localStorage.removeItem('refreshToken');
+    setIsTokenValid(false);
+  };
 
-   const validateToken = async () => {
+  const validateToken = async () => {
     const tokens = await localStorage.getItem('token');
-    if(!tokens){
-        console.log('no hay token');
-        setIsTokenValid(false);
-        setIsLoading(false);
-        return;
+    if (!tokens) {
+      console.log('no hay token');
+      setIsTokenValid(false);
+      return;
     }
     const successToken = await useVerfyToken();
-    console.log(successToken, 'successToken=====================================');
-    
-    if(successToken){
-        console.log('token valido');
-        
-        setIsTokenValid(true);
-        setIsLoading(false);
-        return;
-        }
-        setIsLoading(false);
+    if (successToken) {
+      console.log('token valido');
+      setIsTokenValid(true);
+      return;
     }
-    useEffect(() => {
-        validateToken();
-    }, []);
-    return (
-        <AuthContext.Provider value={{  isTokenValid, firstView, validateToken, logout,firstViewCount}}>
-            {isLoading ? <div>loading...</div> :children}
-        </AuthContext.Provider>
-    );
 
+  };
 
+  return (
+    <AuthContext.Provider value={{ isTokenValid,  validateToken, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
 }
-// export default AuthProvider;
-// Hook personalizado para acceder al contexto del AuthProvider
+
+//hook useAuth 
 export function useAuth() {
-    const context = useContext(AuthContext);
-    if (!context) {
-        throw new Error("useAuth must be used within an AuthProvider");
-    }
-    return context;
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error("useAuth must be used within an AuthProvider");
+  }
+  return context;
 }

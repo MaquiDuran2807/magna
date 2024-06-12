@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, lazy} from 'react';
 import { useLocation } from 'react-router-dom';
 import NavBar from '../components/navBar';
-const FloatWhatsapp = lazy(() => import('../components/floawhatsapp'));
+import FloatWhatsapp from '../components/floawhatsapp';
 const LazyFooter1 = lazy(() => import('../components/footer1'));
 
 interface PagesLayoutProps {

@@ -2,7 +2,6 @@
 import { useState,useEffect } from 'react';
 import { FloatingWhatsApp } from 'react-floating-whatsapp';
 import logo from '../assets/img/logo6.png';
-import useIntersectionObserver from '../hooks/useLazyload';
 
 export const FloatWhatsapp = () => {
     const [message, setMessage] = useState('');
@@ -40,11 +39,4 @@ export const FloatWhatsapp = () => {
     );
 }
 
-export default function LazyFloatWhatsapp() {
-    const {  isVisible, ref } = useIntersectionObserver('100px');
-    return (
-        <div id="LazyFloatWhatsapp" ref={ref}>
-            {isVisible ? <FloatWhatsapp /> : null}
-        </div>
-    );
-}
+export default FloatWhatsapp;

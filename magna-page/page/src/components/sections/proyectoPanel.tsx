@@ -10,6 +10,7 @@ import projects from '../../assets/img/banner/projects.png';
 import topo from '../../assets/img/banner/topo.png';
 import ingenieria from '../../assets/img/banner/ingenieria.png';
 import medio from '../../assets/img/banner/medio.png';
+import useIntersectionObserver from '../../hooks/useLazyload';
 
 const AsyncImages = async () => {
     const imagesPaths = await[
@@ -92,4 +93,11 @@ const ProyectoPanel = memo(() => {
     )
 });
 
-export default ProyectoPanel;
+export default function LazyProyectoPanel () {
+    const {  isVisible, ref } = useIntersectionObserver('100px');
+    return (
+        <div id="LazyProyectoPanel" ref={ref}>
+            {isVisible? <ProyectoPanel /> : null}
+        </div>
+    );
+  }

@@ -31,7 +31,6 @@ button a{
 }
 
   section{
-    height: fit-content;
     padding: 50px 0;
 }
 
@@ -41,7 +40,6 @@ button a{
   align-items: center;
   display: flex;
   margin: 70px 0;
-
 }
 
 .boton-1{

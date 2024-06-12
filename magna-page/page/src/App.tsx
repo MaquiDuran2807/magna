@@ -5,7 +5,8 @@ import { lazy} from 'react'
 import PagesLayout from './layouts/pagesLayouts'
 import Slider from './components/slider'
 import './App.css'
-import ProyectoPanel from './components/sections/proyectoPanel'
+const ProyectoPanel = lazy(() => import('./components/sections/proyectoPanel'))
+// import ProyectoPanel from './components/sections/proyectoPanel'
 const  LazyProyectos = lazy(() => import('./components/sections/proyectos'))
 const LazyServicios = lazy(() => import('./components/sections/Servicios'))
 const LazyStatistics = lazy(() => import('./components/sections/statistics'))
@@ -43,11 +44,13 @@ function App() {
         {/* slider */}
         <Slider />
         {/* fin slider */}
-        
+            
         {/* quienes somos paneles  */}
-        <ProyectoPanel/>
+        <div style={{ minHeight: '300px' }}>
+          <ProyectoPanel/>
+        </div>
         {/* fin quienes somos paneles */}
-        
+            
         {/* servicios */}
         <LazyServicios/>
         {/* fin servicios */}
