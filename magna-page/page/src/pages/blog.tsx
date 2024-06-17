@@ -1,3 +1,4 @@
+import React from 'react';
 import { useInfiniteQuery } from '@tanstack/react-query';
 const Spinner = React.lazy(() => import('../components/spinner'));
 import { useEffect, useState} from 'react';
@@ -8,7 +9,6 @@ import BlogLayout from '../layouts/blogLayout';
 import BlogList from '../components/blogCards';
 import Sidebar from '../components/sidebarBolgs';
 import BlogSearch from '../components/search';
-import React from 'react';
 import useIntersectionObserver from '../hooks/useLazyload';
 
 const Blog =  () => {
@@ -23,10 +23,7 @@ const Blog =  () => {
           initialPageParam: '1',
           staleTime: 1000*60*30,refetchOnWindowFocus: false,refetchInterval: 1000*60*30,
           getNextPageParam: (lastPage) => {
-            console.log(lastPage, 'lastPage');
             if (lastPage?.nextPage) {
-                console.log(lastPage.nextPage, 'lastPage.nextPage');
-                
               return lastPage.nextPage.split('=')[1];
             }
           },
@@ -42,25 +39,14 @@ const Blog =  () => {
         fetchData();
     }, [filter]);
 
-      
-    useEffect(() => {
-        if (!data) return;
-        if (data.pages[0] ) {
-            console.log(data.pages[0].blogs, 'data.pages[0].blogs');
-            
-            // setCount(data.pages[0].blogs);
-        }
-    }, []);
     if (isError) {
         return <div>Error</div>;
     }
     if (isLoading) {
         return <Spinner />;
     }
-    console.log(data, 'data');
     if (!data) {
         return
-        
     }
     const blogs: Result[] = data.pages.flatMap((page) => page?.blogs ?? []);
     return (

@@ -15,10 +15,7 @@ interface SliderServicesProps {
     subtitle?: boolean;
 }
 
-
 const SliderServices: React.FC<SliderServicesProps> = ({ subServicios,subtitle}) => {
-    console.log("se reinicio el slider",subServicios,subtitle);
-    
     return (
         <Swiper
             spaceBetween={30}

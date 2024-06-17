@@ -6,7 +6,7 @@ import { FaSquarePhone } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
 import { IoMdClock } from "react-icons/io";
 import  Maps  from '../components/maps';
-import imagen from '../assets/img/banner/projects.png';
+import imagen from '../assets/img/banner/projects.webp';
 const Contact = lazy(() => import('../components/sections/contact'));
 
 const ContactPage: React.FC = () => {

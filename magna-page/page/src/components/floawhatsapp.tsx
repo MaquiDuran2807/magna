@@ -1,19 +1,16 @@
 
 import { useState,useEffect } from 'react';
 import { FloatingWhatsApp } from 'react-floating-whatsapp';
-import logo from '../assets/img/logo6.png';
+import logo from '../assets/img/logo6.webp';
 
 export const FloatWhatsapp = () => {
     const [message, setMessage] = useState('');
 
-    const handleSubmit = (event:any,value:any) => {
+    const handleSubmit = (event:any) => {
         event.preventDefault();
         // Aquí puedes cambiar el estado del mensaje si es necesario
         setMessage(event.target.value);
         // capturar el mensaje y el destinatario para enviarlo a base de datos
-
-        console.log(value) ;
-        
 
         window.open(`https://wa.me/3015490115?text=${encodeURIComponent(message)}`);
 

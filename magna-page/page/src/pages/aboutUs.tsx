@@ -9,7 +9,7 @@ const LazyEquipos = lazy(() => import('../components/sections/Equipos'));
 const LazyProyectos = lazy(() => import('../components/sections/proyectos'));
 import "./styles/aboutUs.css"
 import { FaCheck } from "react-icons/fa6";
-import imagen from '../assets/img/banner/nosotros.jpg';
+import imagen from '../assets/img/banner/nosotros.webp';
 // import mapa from '../assets/img/app/mapa colombia cobertura trabajos.png';
 
 

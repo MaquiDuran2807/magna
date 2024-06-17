@@ -6,14 +6,12 @@ import { fetchProjects, fetchProjectsImages,  fetchServices1, fetchWorkers} from
 const ServiciosIdProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
     const {
-        data: serveces,
         error: errorServices,
         isLoading: isLoadingServices,
         isError: isErrorServices,
     }=useQuery(
         {queryKey:['services'], queryFn: fetchServices1,staleTime: 1000*60*30,refetchOnWindowFocus: false,refetchInterval: 1000*60*30,}
         );
-    console.log(serveces, 'aqui estoy en servicios');
     const {
         error: errorWorkers,
         isError: isErrorWorkers,
@@ -34,7 +32,7 @@ const ServiciosIdProvider: React.FC<{ children: React.ReactNode }> = ({ children
             );
     
             if (isErrorWorkers || isErrorProjects) {
-                console.log(errorWorkers, errorProjects, errorProjectsImages, 'aqui estoy en error');
+                console.error(errorWorkers, errorProjects, errorProjectsImages, 'aqui estoy en error');
                 ;
             }
     
@@ -46,7 +44,7 @@ const ServiciosIdProvider: React.FC<{ children: React.ReactNode }> = ({ children
     
 
     if ( isErrorServices ) {
-        console.log( errorServices,  'aqui estoy en error');
+        console.error( errorServices,  'aqui estoy en error');
         ;
     }
     return <>{children}</>;

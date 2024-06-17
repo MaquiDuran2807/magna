@@ -1,2 +1,0 @@
-const s="/static/assets/nosotros-f0edd203.jpg";export{s as i};
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibm9zb3Ryb3MtZTQ1MGQxMGMuanMiLCJzb3VyY2VzIjpbIi4uLy4uL3NyYy9hc3NldHMvaW1nL2Jhbm5lci9ub3NvdHJvcy5qcGciXSwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0IGRlZmF1bHQgXCJfX1ZJVEVfQVNTRVRfX2MwM2U0YTZmX19cIiJdLCJuYW1lcyI6WyJpbWFnZW4iXSwibWFwcGluZ3MiOiJBQUFBLE1BQWVBLEVBQUEifQ==

@@ -25,7 +25,7 @@ const Login: React.FC =  () => {
                     await auth.validateToken();
                 }
             } catch (error) {
-                console.log(error)
+                console.error(error)
             }
         }
   

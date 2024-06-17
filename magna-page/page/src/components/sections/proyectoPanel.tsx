@@ -1,15 +1,15 @@
 
 import { memo, useEffect } from 'react';
-import paneles from '../../assets/img/app/paneles.jpeg'
+import paneles from '../../assets/img/app/paneles1.webp'
 import '../styles/ProyectPanel.css'
 import { Link } from 'react-router-dom';
 
-import nosotros from '../../assets/img/banner/nosotros.jpg';
-import servicios from '../../assets/img/banner/servicios.png';
-import projects from '../../assets/img/banner/projects.png';
-import topo from '../../assets/img/banner/topo.png';
-import ingenieria from '../../assets/img/banner/ingenieria.png';
-import medio from '../../assets/img/banner/medio.png';
+import nosotros from '../../assets/img/banner/nosotros.webp';
+import servicios from '../../assets/img/banner/servicios.webp';
+import projects from '../../assets/img/banner/projects.webp';
+import topo from '../../assets/img/banner/converted_topo.webp';
+import ingenieria from '../../assets/img/banner/ingenieria.webp';
+import medio from '../../assets/img/banner/medio.webp';
 import useIntersectionObserver from '../../hooks/useLazyload';
 
 const AsyncImages = async () => {
@@ -29,8 +29,6 @@ const AsyncImages = async () => {
         img.src = path;
         images.push(img);
     });
-    console.log(images, 'imagenes cargadas');
-    
 
 }
 
@@ -47,7 +45,7 @@ const ProyectoPanel = memo(() => {
                 <div className="row">
                     <div className="col-12 col-lg-6 d-flex justify-content-center  ">
                         <div className="marco">
-                            <img src={paneles} alt="paneles" className='img-paneles' />
+                            <img src={paneles} alt="paneles" className='img-paneles  ' />
                             <div className="experiencia">
                                 <h4 className='text-center'>
                                     <strong>10 +</strong>

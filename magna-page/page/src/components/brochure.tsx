@@ -9,14 +9,10 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/$
 
 const PdfViewer = () => {
     const [pdf, setPdf] = useState<string>("");
-    console.log(brochure, 'brochure');
     const brochurePath = brochure.replace('/media/brochures/largo_brochure_A4_8.pdf', '');
-    console.log(brochurePath, 'brochurePath');
-    
     const fetchPdf = async () => {
             await fetchBrochure().then((data) => {
                 if (!data) return;
-                console.log(data[0].archivo, 'data');
                 setPdf(data[0].archivo);
             }
             );

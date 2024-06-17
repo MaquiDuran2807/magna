@@ -2,12 +2,6 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FaHome } from 'react-icons/fa';
 import { FiArrowRight } from 'react-icons/fi';
-// import servicios from '../assets/img/banner/servicios.png';
-// import proyectos from '../assets/img/banner/projects.png';
-// import topo from '../assets/img/banner/topo.png';
-// import ingenieria from '../assets/img/banner/ingenieria.png';
-// import medioAmbiente from '../assets/img/banner/medio.png';
-// import sobreNosotros from '../assets/img/banner/sobre.webp';
 import './styles/banner.css';
 import { Link } from 'react-router-dom';
 

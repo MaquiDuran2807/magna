@@ -6,8 +6,6 @@ import useIntersectionObserver from '../../hooks/useLazyload'
 
 
 const Proyectos = () => {
-    console.log("me rendericé Proyectos seccion=====================");
-    
     return (
         
         <section className="proyectos">

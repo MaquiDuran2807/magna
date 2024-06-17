@@ -9,8 +9,6 @@ import useIntersectionObserver from '../../hooks/useLazyload';
 
 
 const Servicios = React.memo(() => {
-    console.log("me rendericé Servicios seccion=====================");
-    
     const { data:servecios } = useQuery<Servicio2[]>({
         queryKey: ['services'],
         staleTime: 1000*60*30,refetchOnWindowFocus: false,refetchOnMount: false,refetchOnReconnect: false,refetchInterval: 1000*60*30,
@@ -29,7 +27,7 @@ const Servicios = React.memo(() => {
                                 servecios?.map((servicio) => {
                                     return (
                                         <div key={servicio.id} className="col-12 col-lg-4 col-md-6 order-md-1 ">
-                                            <div className="card border-0 p-1 tarjeta tarjetas-12">
+                                            <div className="card border-0 p-1 tarjeta">
                                                 <div className="card-body">
                                                     <img src={`${servicio.icon}`} alt={servicio.nombre} /> 
                                                     <h4 className="card-title">{servicio.nombre}</h4>

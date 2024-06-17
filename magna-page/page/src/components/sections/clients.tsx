@@ -3,8 +3,6 @@ import LogoCarrusel from "../LogoCarrusel"
 import { SetionHeader } from "../setionHeader"
 import useIntersectionObserver from "../../hooks/useLazyload"
 const Clients = () => {
-  console.log("me rendericé Clientes seccion=====================");
-  
     return(
         <section className='clientes'>
       <div className="container">

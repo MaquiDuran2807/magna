@@ -2,7 +2,7 @@ import React, { useEffect,lazy } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Link, useParams } from 'react-router-dom';
 import Banner from '../components/banner';
-import imagenBanner from '../assets/img/banner/projects.png';
+import imagenBanner from '../assets/img/banner/projects.webp';
 import { Result,ProyectosMagna,ProyectImagesMagna,Servicio } from '../types/projects';
 import SliderProjectDetail from '../components/sliderProjectDetail';
 import PagesLayout from '../layouts/pagesLayouts';
@@ -11,13 +11,9 @@ const Proyectos = lazy(() => import('../components/sections/proyectos'));
 import './styles/projectsDetail.css'
 const LazyCardsProjects = lazy(() => import('../components/cardsProjects'));
 const ProjectDetail: React.FC= () => {
-    const parametros = useParams();
-    console.log(parametros, 'parametros');
     const [project, setProject] = React.useState<Result>();
     const [imagen, setImagen] = React.useState<ProyectImagesMagna[]>([]);
     const { projectArg} = useParams<{ projectArg: string }>();
-    console.log(projectArg, 'id');
-    
     const { data:projects } = useQuery<ProyectosMagna>({
         queryKey: ['projects'],
         staleTime: 1000*60*30,refetchOnWindowFocus: false,refetchOnMount: false,refetchOnReconnect: false,refetchInterval: 1000*60*30,
@@ -35,8 +31,6 @@ const ProjectDetail: React.FC= () => {
     useEffect(() => {
         const project_select: Result | null = projects.results.find((project: Result) => project.id === parseInt(projectArg)) || null;
         const images: ProyectImagesMagna[] = projectImages.filter((imagen: ProyectImagesMagna) => imagen.proyecto === parseInt(projectArg));
-        console.log(project_select, 'aqui estoy en project_select',images,"images");
-        
         if (!project_select) {
             return;
         }

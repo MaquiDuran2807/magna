@@ -2,7 +2,7 @@ import Banner from '../components/banner';
 import CardsProjects from '../components/cardsProjects';
 import PagesLayout from '../layouts/pagesLayouts';
 import { useQuery } from '@tanstack/react-query';
-import imagen from '../assets/img/banner/projects.png';
+import imagen from '../assets/img/banner/projects.webp';
 import { ProyectosMagna,ProyectImagesMagna} from '../types/projects';
 
 const Projects: React.FC = () => {

@@ -4,11 +4,8 @@ import { useAuth } from '../auth/AuthProvider';
 import useIntersectionObserver from '../hooks/useLazyload';
 
 const Cotizador: React.FC = () => {
-    console.log('cotizador');
-    
     const auth=useAuth()
     auth.validateToken()
-    console.log( "isAuthenticated ",auth.isTokenValid);
 
     const logout = () => {
         auth.logout();
@@ -43,7 +40,6 @@ const Cotizador: React.FC = () => {
             0
         );
         // Aquí puedes hacer algo con el costo total, como mostrarlo en pantalla o enviarlo al servidor
-        console.log('Costo total del servicio:', costoTotal);
         setTotal(costoTotal);
     };
 

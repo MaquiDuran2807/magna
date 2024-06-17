@@ -10,8 +10,7 @@ import { useState, Suspense } from 'react';
 import TarjetaEquipo from '../tarjetaEquipo';
 
 
-const Equipos1 = () => {
-    console.log("me rendericé Equipos seccion=====================");
+const Equipos1 = () => {;
     const [selectedCard, setSelectedCard] = useState('');
 
 const handleCardClick = (id: string,card:string) => {
@@ -20,8 +19,6 @@ const handleCardClick = (id: string,card:string) => {
         return;
     }
     setSelectedCard(id+card); 
-    console.log(selectedCard,"click");
-    
 };
     const { data:Workers } = useQuery<EquiposAndTech>({
         queryKey: ['workers'],

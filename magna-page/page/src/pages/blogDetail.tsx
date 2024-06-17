@@ -42,9 +42,6 @@ const BlogDetailPage: React.FC = () => {
         return <p>No hay blog</p>;
     }
 
-    console.log(blog, 'blog detail');
-    console.log(blogDetail, 'blogDetail');
-
     if (blogDetail.author===undefined) {
         return <p>No hay blog</p>;
     }

@@ -1,95 +1,40 @@
+import React, { Suspense } from 'react';
+import PagesLayout from './layouts/pagesLayouts';
+import Slider from './components/slider';
+import './App.css';
 
-
-import { lazy} from 'react'
-
-import PagesLayout from './layouts/pagesLayouts'
-import Slider from './components/slider'
-import './App.css'
-const ProyectoPanel = lazy(() => import('./components/sections/proyectoPanel'))
-// import ProyectoPanel from './components/sections/proyectoPanel'
-const  LazyProyectos = lazy(() => import('./components/sections/proyectos'))
-const LazyServicios = lazy(() => import('./components/sections/Servicios'))
-const LazyStatistics = lazy(() => import('./components/sections/statistics'))
-const LazyClients = lazy(() => import('./components/sections/clients'))
-const LazyEquipos = lazy(() => import('./components/sections/Equipos'))
-const LazyContact = lazy(() => import('./components/sections/contact'))
-
+// Agrupación de importaciones lazy
+const LazySections = {
+  ProyectoPanel: React.lazy(() => import('./components/sections/proyectoPanel')),
+  LazyProyectos: React.lazy(() => import('./components/sections/proyectos')),
+  LazyServicios: React.lazy(() => import('./components/sections/Servicios')),
+  LazyStatistics: React.lazy(() => import('./components/sections/statistics')),
+  LazyClients: React.lazy(() => import('./components/sections/clients')),
+  LazyEquipos: React.lazy(() => import('./components/sections/Equipos')),
+  LazyContact: React.lazy(() => import('./components/sections/contact')),
+};
 
 function App() {
-  // const { firstView,firstViewCount } = useAuth();
-  // const [loading, setLoading] = useState(true);
-
-  // useEffect(() => {
-  //   console.log('firstView', firstView);
-    
-  //   if (firstView > 0 ) {
-  //     setLoading(false);
-  //     return;
-  //   };
-  //   const timer = setTimeout(() => {
-  //     setLoading(false);
-  //     firstViewCount();
-  //   }, 2000); // ajusta este tiempo según tus necesidades
-
-  //   return () => clearTimeout(timer);
-  // }, []);
-
-  // if (loading) {
-  //   return <SplashScreen />;
-  // }
-  
   return (
     <>
-      <PagesLayout>
-        {/* slider */}
-        <Slider />
-        {/* fin slider */}
-            
-        {/* quienes somos paneles  */}
-        <div style={{ minHeight: '300px' }}>
-          <ProyectoPanel/>
-        </div>
-        {/* fin quienes somos paneles */}
-            
-        {/* servicios */}
-        <LazyServicios/>
-        {/* fin servicios */}
-        
-        {/* proyectos  todo */}
-        <LazyProyectos/>
-        {/* fin proyectos*/}
-        
-        {/* estadisticas  */}
-        <br /> 
-        <br />
-        <LazyStatistics/>
-        {/* fin estadisticas  */}
-        
-        {/* clientes */}
-        <LazyClients/>
-        {/* fin clientes */}
-        
-        {/* equipo y tecnologia y equipo de trabajo */}
-        <LazyEquipos/>
-        {/* fin equipo y tecnologia y equipo de trabajo */}
-        
-        {/* contacto */}
-        <LazyContact/>
-        {/* fin contacto */}
+    <PagesLayout>
+      <Slider />
+      <Suspense fallback={<div>Cargando...</div>}>
+          <div style={{ minHeight: '300px' }}>
+            <LazySections.ProyectoPanel />
+          </div>
+          <LazySections.LazyServicios />
+          <LazySections.LazyProyectos />
+          <br /> <br />
+          <LazySections.LazyStatistics />
+          <LazySections.LazyClients />
+          <LazySections.LazyEquipos />
+          <LazySections.LazyContact />
+        </Suspense>
       </PagesLayout>
+    
     </>
-  )
+  );
 }
-export default App
 
-// export default function LazyApp(){
-//   const {  isVisible, ref } = useIntersectionObserver('100px');
-//   return (
-//       <div id="LazyServices" ref={ref}>
-//           {isVisible ? <App /> : null}
-//       </div>
-//   );
-// }
-
-
-
+export default App;

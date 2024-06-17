@@ -9,8 +9,6 @@ import useIntersectionObserver from "../../hooks/useLazyload";
 
 
 const Statistics = () => {
-  console.log("me rendericé Statistics seccion=====================");
-  
   return (
     <section className="statistics container-fluid" >
       <div className="container">

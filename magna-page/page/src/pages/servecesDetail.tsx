@@ -3,10 +3,10 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { lazy, useEffect, useRef, useState } from "react";
 import { AiFillCaretDown, AiOutlineDoubleRight } from "react-icons/ai";
 import { useParams } from "react-router-dom";
-import imagenIngenieria from '../assets/img/banner/ingenieria.png';
-import imagenMedioAmbiente from '../assets/img/banner/medio.png';
-import imagenServicios from '../assets/img/banner/servicios.png';
-import imagenTopografia from '../assets/img/banner/topo.png';
+import imagenIngenieria from '../assets/img/banner/ingenieria.webp';
+import imagenMedioAmbiente from '../assets/img/banner/medio.webp';
+import imagenServicios from '../assets/img/banner/servicios.webp';
+import imagenTopografia from '../assets/img/banner/converted_topo.webp';
 import Banner from "../components/banner";
 import SliderServices from "../components/sliderServices";
 import useScreenSize from '../hooks/ScreenSize';
@@ -22,9 +22,6 @@ interface ServecesDetailProps {
 }
 
 const ServecesDetail: React.FC<ServecesDetailProps> = ({ issue }) => {
-    const parametros = useParams();
-    console.log(parametros, 'parametros');
-
     const { id } = useParams<{ id: string }>();
 
     let [title, setTitle] = useState<String>("Nuestros Servicios");
@@ -93,7 +90,6 @@ const ServecesDetail: React.FC<ServecesDetailProps> = ({ issue }) => {
         listSubservicios.push(subServicio)
         setSelectedSubServicio(listSubservicios);
         setSubtitle(false);
-        console.log(listSubservicios, 'selectedSubServicio');
         if (!listSubservicios) {
             return
         }

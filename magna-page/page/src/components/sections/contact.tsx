@@ -11,14 +11,10 @@ import { APIURL} from '../../apiClient';
 
 
 const Contact = () => {
-  console.log("e renderi Contact()#$%#$%#$%#$%#%$&$%&/$%&$%&$%&$%&$%#/$");
-  
   const { width } = useScreenSize();
   const isMobile = width <= 768;
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  console.log(APIURL+"contact/");
- 
   const handleSubmit = async (values: any) => {
     setIsSubmitting(true);
 
@@ -34,14 +30,14 @@ const Contact = () => {
         },
         body: JSON.stringify(values),
       }).then(response => {
-        console.log(response);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
       });
         
-
       toast.success('Formulario enviado con éxito, nos comunicaremos pronto');
       setIsSuccess(true);
     } catch (error) {
-      console.error(error);
       toast.error('Hubo un error al enviar el formulario');
     } finally {
       setIsSubmitting(false);

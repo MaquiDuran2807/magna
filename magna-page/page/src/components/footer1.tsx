@@ -9,8 +9,6 @@ import { Link } from 'react-router-dom';
 
 
 const Footer1: React.FC = () => {
-    console.log("me rendericé Footer1=====================");
-    
     return (
         <footer className="bg-footer text-white">
             <div className="container">
