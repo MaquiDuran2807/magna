@@ -2,9 +2,11 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import {  fetchServices1} from '../api/pagesInfo';
+// import { Spinner } from 'react-bootstrap';
+import Spinner from '../components/spinner';
 
 const ServiciosIdProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-
+    const [loadingImages, setLoadingImages] = React.useState<boolean>(true);
     const {
         data: services,
         error: errorServices,
@@ -34,7 +36,12 @@ const ServiciosIdProvider: React.FC<{ children: React.ReactNode }> = ({ children
             images[images.length - 1].src = service.imagen;
         }
         );
-
+        images[images.length - 1].onload = () => {
+            setLoadingImages(false);
+        };
+    }
+    if (loadingImages) {
+        return <div><Spinner/></div>
     }
     
     return <>{children}</>;

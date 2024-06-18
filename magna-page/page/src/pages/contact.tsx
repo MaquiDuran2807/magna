@@ -1,12 +1,13 @@
-import React,{lazy} from 'react';
+import React,{lazy,Suspense} from 'react';
 import  PagesLayout from '../layouts/pagesLayouts';
 import Banner from '../components/banner';
 import { FaDirections } from "react-icons/fa";
 import { FaSquarePhone } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
 import { IoMdClock } from "react-icons/io";
-import  Maps  from '../components/maps';
+const LazyMapComponents = lazy(() => import('../components/maps'));
 import imagen from '../assets/img/banner/projects.webp';
+
 const Contact = lazy(() => import('../components/sections/contact'));
 
 const ContactPage: React.FC = () => {
@@ -34,10 +35,13 @@ const ContactPage: React.FC = () => {
                             
                     </div>
                 </div>
-                <Contact />
-                <div className="container mt-5 mb-5 ">
-                <Maps />
-                </div>
+                <Suspense fallback={<div>Cargando Contacto...</div>}>
+                    <Contact />
+                    <div className="container mt-5 mb-5 ">
+                        <LazyMapComponents/>
+                    </div>
+                </Suspense>
+                
             </PagesLayout>
         </div>
     );

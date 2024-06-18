@@ -8,7 +8,6 @@ import  NavBar  from '../components/navBar';
 import './styles/login.css'
 import { Navigate } from 'react-router-dom';
 import { useSigninMutation } from '../api/user';
-import useIntersectionObserver from '../hooks/useLazyload';
 
 const Login: React.FC =  () => {
     const [email, setEmail] = useState('');
@@ -84,13 +83,4 @@ const Login: React.FC =  () => {
   );
 };
 
-export default function LazyLogin() {
-    const {  isVisible, ref } = useIntersectionObserver('100px');
-    return (
-        <div id="LazyLogin" ref={ref}>
-            {isVisible ? <Login /> : null}
-        </div>
-    );
-}
-
-
+export default Login;

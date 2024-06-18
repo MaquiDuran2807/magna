@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PagesLayout from '../layouts/pagesLayouts';
 import { useAuth } from '../auth/AuthProvider';
-import useIntersectionObserver from '../hooks/useLazyload';
+
 
 const Cotizador: React.FC = () => {
     const auth=useAuth()
@@ -90,14 +90,7 @@ const Cotizador: React.FC = () => {
     );
 };
 
-export default function LazyCotizador() {
-    const {  isVisible, ref } = useIntersectionObserver('100px');
-    return (
-        <div id="LazyCotizador" ref={ref}>
-            {isVisible ? <Cotizador /> : null}
-        </div>
-    );
-}
+export default Cotizador;
 
 
 

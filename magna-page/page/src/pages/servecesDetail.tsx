@@ -13,6 +13,7 @@ import useScreenSize from '../hooks/ScreenSize';
 import PagesLayout from "../layouts/pagesLayouts";
 import { Servicio2, Subservicio } from "../types/types";
 import "./styles/servicesDetail.css";
+import Spinner from '../components/spinner';
 const PdfViewer = lazy(() => import('../components/brochure'));
 
 const LazyServicios = lazy(() => import('../components/sections/Servicios'));
@@ -119,7 +120,7 @@ const ServecesDetail: React.FC<ServecesDetailProps> = ({ issue }) => {
     }, [selectedSubServicio]);
 
     if (!servicio_elegido) {
-        return <h3>Error</h3>;
+        return <Spinner/>;
     }
 
     return (
