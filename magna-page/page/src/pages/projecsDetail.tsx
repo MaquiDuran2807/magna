@@ -1,45 +1,36 @@
-import React, { useEffect,lazy } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import React, { useEffect, lazy } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Banner from '../components/banner';
 import imagenBanner from '../assets/img/banner/projects.webp';
-import { Result,ProyectosMagna,ProyectImagesMagna,Servicio } from '../types/projects';
+import { Result, ProyectImagesMagna, Servicio } from '../types/projects';
 import SliderProjectDetail from '../components/sliderProjectDetail';
 import PagesLayout from '../layouts/pagesLayouts';
-// import { Proyectos } from '../components/sections/proyectos';
+import './styles/projectsDetail.css';
+import { useGetProjects } from '../hooks/getProjects';
+
 const Proyectos = lazy(() => import('../components/sections/proyectos'));
-import './styles/projectsDetail.css'
 const LazyCardsProjects = lazy(() => import('../components/cardsProjects'));
+
 const ProjectDetail: React.FC= () => {
     const [project, setProject] = React.useState<Result>();
     const [imagen, setImagen] = React.useState<ProyectImagesMagna[]>([]);
-    const { projectArg} = useParams<{ projectArg: string }>();
-    const { data:projects } = useQuery<ProyectosMagna>({
-        queryKey: ['projects'],
-        staleTime: 1000*60*30,refetchOnWindowFocus: false,refetchOnMount: false,refetchOnReconnect: false,refetchInterval: 1000*60*30,
-    });
-    const { data:projectImages } = useQuery<ProyectImagesMagna[]>({
-        queryKey: ['projectsImages'],
-        staleTime: 1000*60*30,refetchOnWindowFocus: false,refetchOnMount: false,refetchOnReconnect: false,refetchInterval: 1000*60*30,
-    });
-    
+    const { projectArg } = useParams<{ projectArg: string }>();
+    const { projects, projectImages } = useGetProjects();
 
-    if(!projects || !projectImages || !projectArg){
-        return <div>no hay </div>;
-    }
-    
     useEffect(() => {
-        const project_select: Result | null = projects.results.find((project: Result) => project.id === parseInt(projectArg)) || null;
-        const images: ProyectImagesMagna[] = projectImages.filter((imagen: ProyectImagesMagna) => imagen.proyecto === parseInt(projectArg));
-        if (!project_select) {
+        if (!projects || !projectImages || !projectArg) {
             return;
         }
-        setProject(project_select);
-        setImagen(images);
-        }, [projects,projectImages,projectArg]);
+        const project_select: Result | undefined = projects.results.find((project: Result) => project.id === parseInt(projectArg));
+        const images: ProyectImagesMagna[] = projectImages.filter((imagen: ProyectImagesMagna) => imagen.proyecto === parseInt(projectArg));
+        if (project_select) {
+            setProject(project_select);
+            setImagen(images);
+        }
+    }, [projects, projectImages, projectArg]);
 
-    if (!project || !imagen) {
-        return null;
+    if (!project || !imagen || !projects || !projectImages || !projectArg) {
+        return <div>No hay información disponible</div>;
     }
 
     return (
@@ -103,7 +94,7 @@ const ProjectDetail: React.FC= () => {
                 </div>
                 <div className="row">
                     <div className="col-12">
-                        <LazyCardsProjects type={project.tipo.id} actualPage={project.id} imagenes={projectImages}/>
+                        <LazyCardsProjects type={project.tipo.id} actualPage={project.id} imagenes={projectImages} projects={projects}/>
                     </div>
                 </div>
                 <div className="row">

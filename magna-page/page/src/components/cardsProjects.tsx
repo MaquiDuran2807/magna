@@ -1,83 +1,60 @@
 
-import { useEffect, useState } from 'react';
-import { ProyectosMagna,Result,ProyectImagesMagna,Tipo } from '../types/projects';
 import { motion } from 'framer-motion';
-import { useQuery } from '@tanstack/react-query';
+import { memo, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import "./styles/cardsProjects.css";
 import useIntersectionObserver from '../hooks/useLazyload';
+import { ProyectImagesMagna, ProyectosMagna, Result, Tipo } from '../types/projects';
+import "./styles/cardsProjects.css";
 
 interface Props {
     type: Tipo | number | undefined;
-    actualPage: number| null;
+    actualPage: number | null;
     imagenes: ProyectImagesMagna[];
+    projects: ProyectosMagna;
 }
 
-const CardsProjects = ({ type, actualPage,imagenes }: Props) => {
-    const [proyectos_card_type, setProyectos_card_type] = useState<Result[]|Result >([]);
-    const [imagenesCard, setImagenes] = useState<ProyectImagesMagna[]>([]);
-    const [types,setTypes] =  useState<Tipo[]>([]);
-    const [typeProject, setTypeProject] = useState<Tipo>();
-    const { data:Project } = useQuery<ProyectosMagna>({
-        queryKey: ['projects'],
-        staleTime: 1000*60*30,refetchOnWindowFocus: false,refetchOnMount: false,refetchOnReconnect: false,refetchInterval: 1000*60*30,
-    });
+const CardsProjects =memo( ({ type, actualPage, imagenes, projects }: Props) => {
+    const [proyectosCardType, setProyectosCardType] = useState<Result[]>([]);
+    const [imagenesCard] = useState<ProyectImagesMagna[]>(imagenes);
+    const [types, setTypes] = useState<Tipo[]>([]);
+    const [typeProject, setTypeProject] = useState<Tipo | undefined>();
 
-    
-    if (!Project) {
-        return null;
-    }
-    
     useEffect(() => {
-        if (type === 0) {
-            const types1: Tipo[]= Array.isArray(Project.results) ? Project.results.map((proyecto: Result) => proyecto.tipo).filter ((proyecto: Tipo, index: number,self: Tipo[]) => self.findIndex((t: Tipo) => t.id === proyecto.id) === index) : [];
-            setProyectos_card_type(Project.results);
-            setImagenes(imagenes);
-            setTypes([
-                {
-                    id:0,
-                    name:"Todos"
-                },
-                ...types1
-            ]);
-            return;
+        if (!projects) return;
+        let filteredProjects = projects.results;
+        if (type !== 0) {
+            filteredProjects = filteredProjects.filter((proyecto: Result) => proyecto.tipo.id === type && proyecto.id !== actualPage);
         }
-        const proyectos_card_type_1: Result[] = Project.results
-    .filter((proyecto: Result) => proyecto.tipo.id === type) // Filtra por tipo
-    .filter((proyecto: Result) => proyecto.id !== actualPage)
 
-        setProyectos_card_type(proyectos_card_type_1);
-        setImagenes(imagenes);
-        
-    }, [type, actualPage,imagenes]);
+        const uniqueTypes = Array.from(new Set(filteredProjects.map((proyecto: Result) => proyecto.tipo.id)))
+            .map(id => {
+                return projects.results.find((proyecto: Result) => proyecto.tipo.id === id)?.tipo;
+            }).filter((tipo): tipo is Tipo => Boolean(tipo));
 
-    const filterProjects = (type: number|undefined) => {
-        if (type === 0) {
-            setProyectos_card_type(Project.results);
-            setTypeProject(undefined);
-            return;
-        }
-        if (!type) {
+        setProyectosCardType(filteredProjects);
+        setTypes([{ id: 0, name: "Todos" }, ...uniqueTypes]);
+    }, [type, actualPage, imagenes, projects]);
 
+    const filterProjects = (typeId: number | undefined) => {
+        if (!projects || typeId === undefined) return;
+
+        const newTypeProject = types.find((typeProject: Tipo) => typeProject.id === typeId);
+        if (!newTypeProject) return;
+        if (typeId === 0) {
+            setProyectosCardType(projects.results);
             return;
         }
-        const newTypeProject = types.filter((typeProject: Tipo) => typeProject.id === type)[0];
-        if (!newTypeProject) {
-            return;
-        }
-        const proyectos_card_type_1: Result[] = Array.isArray(Project.results) ? Project.results.filter((proyecto: Result) => proyecto.tipo.id === newTypeProject.id) : [];
+        const filteredProjects = projects.results.filter((proyecto: Result) => proyecto.tipo.id === newTypeProject.id);
         setTypeProject(newTypeProject);
-        setProyectos_card_type(proyectos_card_type_1);
-    }
+        setProyectosCardType(filteredProjects);
+    };
+
     return (
         <div>
-    <div className="container">
-        <div className="row">
-        {
-            type === 0 ?
-                !types ? null:
-                    types.map((typeProject: Tipo) => {
-                        return (
+            <div className="container">
+                <div className="row">
+                    {type === 0 ?
+                        types.map((typeProject: Tipo) => (
                             <motion.div
                                 key={typeProject.id}
                                 initial={{ opacity: 0 }}
@@ -86,77 +63,65 @@ const CardsProjects = ({ type, actualPage,imagenes }: Props) => {
                                 transition={{ duration: 0.5 }}
                                 className="col-12 col-sm-6 col-lg-3 col-md-4"
                             >
-                                <button className="boton-1 " onClick={() => filterProjects(typeProject.id)}>{typeProject.name}</button>
+                                <button className="boton-1" onClick={() => filterProjects(typeProject.id)}>{typeProject.name}</button>
+                            </motion.div>
+                        ))
+                        :
+                        typeProject && (
+                            <motion.div
+                                key={typeProject.id}
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{ duration: 0.5 }}
+                                className="col-4 col-lg-3"
+                            >
+                                <button className="boton-1" onClick={() => filterProjects(typeProject.id)}>{typeProject.name}</button>
                             </motion.div>
                         )
-                    },
-                    )
-                    :
-                    <motion.div
-                        key={typeProject?.id}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.5 }}
-                        className="col-4 col-lg-3"
-                    >
-                        <button className="boton-1" onClick={() => filterProjects(typeProject?.id)}>{typeProject?.name}</button>
-                    </motion.div>
-                    
-        }
-        </div>
-        <div className="row">
-
-        {Array.isArray(proyectos_card_type) && proyectos_card_type.map((proyecto: Result) => {
-            let firstImage = "no hay imagen";
-            try {
-            firstImage = imagenesCard.filter((imagen: ProyectImagesMagna) => imagen.proyecto === proyecto.id)[0].imagen;
-            } catch (error) {
-            console.error(error);
-            }
-            return (
-                
-                <motion.div
-                    key={proyecto.id}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0, x: -100 }}
-                    transition={{ duration: 0.6 }}
-                    className="col-md-6 col-lg-4 col-12 col-xl-3"
-                >
-                    <div className='my-5' >
-                        <div className="card-project bg-white rounded  transition cursor-pointer m-auto ">
-                            <div className="card-body card-body-projects d-flex flex-column justify-content-between h-98">
-                                {firstImage ? <img src={firstImage} alt="" className="img-fluid card-img w-100 h-160" /> : <p>No hay imagen</p>}
-                                <div className="content-1 d-flex flex-column align-items-stretch flex-grow-1 p-20">
-                                    <div>
-                                        <h5 className="card-title text-center fw-bold text-black mb-5 mt-4">{proyecto.nombre}</h5>
-                                        <p className="card-text text-center">{`${proyecto.descripcion.slice(0, 100)} ...`
-                                        }</p>
+                    }
+                </div>
+                <div className="row">
+                    {proyectosCardType.map((proyecto: Result) => {
+                        let firstImage = imagenesCard.find((imagen: ProyectImagesMagna) => imagen.proyecto === proyecto.id)?.imagen || "no hay imagen";
+                        return (
+                            <Link to={`/projects/${proyecto.id}`} key={proyecto.id} className="col-md-6 col-lg-4 col-12 col-xl-3 text-decoration-none">
+                                <motion.div
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    exit={{ opacity: 0, x: -100 }}
+                                    transition={{ duration: 0.6 }}
+                                    
+                                >
+                                    <div className='my-5'>
+                                        <div className="card-project bg-white rounded transition cursor-pointer m-auto">
+                                            <div className="card-body card-body-projects d-flex flex-column justify-content-between h-98">
+                                                {firstImage !== "no hay imagen" ? <img src={firstImage} alt="" className="img-fluid card-img w-100 h-160" /> : <p>No hay imagen</p>}
+                                                <div className="content-1 d-flex flex-column align-items-stretch flex-grow-1 p-20">
+                                                    <div>
+                                                        <h5 className="card-title text-center fw-bold text-black mb-5 mt-4">{proyecto.nombre}</h5>
+                                                        <p className="card-text text-center text-black">{`${proyecto.descripcion.slice(0, 100)} ...`}</p>
+                                                    </div>
+                                                </div>
+                                                <button className="boton-1 text-center end-boton">Ver más</button>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <Link to={`/projects/${proyecto.id}`} className="boton-1 text-center end-boton">Ver más</Link>
-                            </div>
-                        </div>
-                    </div>
-                        
-                </motion.div>
-            );
-        }
-        )}
+                                </motion.div>
+                            </Link>
+                        );
+                    })}
+                </div>
+            </div>
         </div>
-    </div>
-</div>
-);
-};
+    );
+});
 
-export default function LazyCardsProjects ({ type, actualPage,imagenes }: Props) {
-    const {  isVisible, ref } = useIntersectionObserver('100px');
+export default function LazyCardsProjects({ type, actualPage, imagenes,projects }: Props) {
+    const { isVisible, ref } = useIntersectionObserver('100px');
     return (
         <div id="LazyServices" ref={ref}>
-            {isVisible ? <CardsProjects type={type} actualPage={actualPage} imagenes={imagenes}  /> : null}
+            {isVisible ? <CardsProjects type={type} actualPage={actualPage} imagenes={imagenes} projects={projects} /> : null}
         </div>
     );
 }
-
-

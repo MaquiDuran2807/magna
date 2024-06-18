@@ -38,6 +38,8 @@ if (!servicios) {
         },
         exit: { opacity: 0, y: 50 },
       };
+      console.log("slider servicios",servicios);
+      
   return (
 
     <Swiper

@@ -15,20 +15,33 @@ const LazySections = {
 };
 
 function App() {
+  console.log("App");
+  
   return (
     <>
     <PagesLayout>
-      <Slider />
-      <Suspense fallback={<div>Cargando...</div>}>
+        <Slider />
+        <Suspense fallback={<div>Cargando ProyectoPanel...</div>}>
           <div style={{ minHeight: '300px' }}>
             <LazySections.ProyectoPanel />
           </div>
+        </Suspense>
+        <Suspense fallback={<div>Cargando Servicios...</div>}>
           <LazySections.LazyServicios />
-          <LazySections.LazyProyectos />
-          <br /> <br />
+        </Suspense>
+        <Suspense fallback={<div>Cargando Estadísticas...</div>}>
           <LazySections.LazyStatistics />
+        </Suspense>
+        <Suspense fallback={<div>Cargando Proyectos...</div>}>
+          <LazySections.LazyProyectos />
+        </Suspense>
+        <Suspense fallback={<div>Cargando Clientes...</div>}>
           <LazySections.LazyClients />
+        </Suspense>
+        <Suspense fallback={<div>Cargando Equipos...</div>}>
           <LazySections.LazyEquipos />
+        </Suspense>
+        <Suspense fallback={<div>Cargando Contacto...</div>}>
           <LazySections.LazyContact />
         </Suspense>
       </PagesLayout>

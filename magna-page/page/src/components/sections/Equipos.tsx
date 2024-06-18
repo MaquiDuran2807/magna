@@ -2,28 +2,26 @@
 import logo from '../../assets/img/SVG/Recurso 1.svg'
 import { SetionHeader } from '../setionHeader'
 import '../styles/equipos.css'
-import { useQuery } from '@tanstack/react-query';
-import { EquiposAndTech} from '../../types/types';
 import { APIURL } from '../../apiClient';
 import useIntersectionObserver from '../../hooks/useLazyload'
-import { useState, Suspense } from 'react';
+import { useState, Suspense, memo } from 'react';
 import TarjetaEquipo from '../tarjetaEquipo';
+import useGetWorjers from '../../hooks/getProjects';
 
 
-const Equipos1 = () => {;
+const Equipos1 = memo(() => {;
     const [selectedCard, setSelectedCard] = useState('');
 
-const handleCardClick = (id: string,card:string) => {
-    if (selectedCard === id+card) {
-        setSelectedCard('');
-        return;
-    }
-    setSelectedCard(id+card); 
-};
-    const { data:Workers } = useQuery<EquiposAndTech>({
-        queryKey: ['workers'],
-        staleTime: 1000*60*30,refetchOnWindowFocus: false,refetchOnMount: false,refetchOnReconnect: false,refetchInterval: 1000*60*30,
-    });
+    const handleCardClick = (id: string,card:string) => {
+        if (selectedCard === id+card) {
+            setSelectedCard('');
+            return;
+        }
+        setSelectedCard(id+card); 
+    };
+
+    const { workers} = useGetWorjers(); 
+
     return (
         <section className="equipo">
             <div className="container">
@@ -33,7 +31,7 @@ const handleCardClick = (id: string,card:string) => {
                 <div >
                     <div className="row  justify-content-center">
                         <Suspense fallback={<div>Cargando...</div>}>
-                            {Workers?.tecnologias.map((tecnologia) => (
+                            {workers?.tecnologias.map((tecnologia) => (
                                 <TarjetaEquipo
                                     key={tecnologia.id}
                                     id={tecnologia.id.toString()}
@@ -59,7 +57,7 @@ const handleCardClick = (id: string,card:string) => {
                         </div>
                     </div>
                     <div className="row">
-                        {Workers?.equipos.map((equipo) => (
+                        {workers?.equipos.map((equipo) => (
                             <TarjetaEquipo
                                 key={equipo.id}
                                 id={equipo.id.toString()}
@@ -78,7 +76,7 @@ const handleCardClick = (id: string,card:string) => {
             </div>
         </section>
     );
-};
+});
 
 // export default Equipos;
 
@@ -90,5 +88,3 @@ export default function LazyEquipos () {
         </div>
     );
   }
-
-

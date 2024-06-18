@@ -1,7 +1,6 @@
 
 import Lottie from "lottie-react";
 import animationData from '../animations/Animation - 1706024995672.json';
-import { useState, useEffect } from "react";
 
 const styles = {
   container: {
@@ -21,22 +20,7 @@ const styles = {
 };
 
 const Spinner = () => {
-  const [progress, setProgress] = useState(0);
-          useEffect(() => {
-            const timer = setInterval(() => {
-              setProgress((prevProgress) => {
-                if (prevProgress === 100) {
-                  clearInterval(timer);
-                  return prevProgress;
-                } else {
-                  return prevProgress + 1;
-                }
-              });
-            }, 50);
-            return () => {
-              clearInterval(timer);
-            };
-          }, []);
+  console.log('Spinner');
   return (
     <div style={styles.container}>
       <Lottie
@@ -46,14 +30,6 @@ const Spinner = () => {
         width={200}
         // style={styles.lottie}
       />
-      <div>
-          <div style={styles.container}>
-            <div>
-              {progress}% Loaded
-            </div>
-          </div>
-          );
-      </div>
     </div>
   );
 };

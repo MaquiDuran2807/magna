@@ -16,7 +16,8 @@ export const fetchWorkers = async () => {
 
 export const fetchServices1 = async () => {
     try {
-        const response = await apiClient.get<Servicio2>('servicios/servicios-and-subservicios/')
+        const response = await apiClient.get<Servicio2[]>('servicios/servicios-and-subservicios/')
+        console.log(response.data, 'aqui estoy en fetchServices');
         console.log(response.data, 'aqui estoy en fetchServices');
         
         return response.data
@@ -38,7 +39,7 @@ export const fetchProjects = async () => {
 
 export const fetchProjectsImages = async () => {
     try {
-        const response = await apiClient.get<ProyectImagesMagna>('proyectos/images/')
+        const response = await apiClient.get<ProyectImagesMagna[]>('proyectos/images/')
         return response.data
     } catch (error) {
         console.log(error);

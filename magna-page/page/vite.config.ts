@@ -13,6 +13,17 @@ export default defineConfig({
   },
   build: {
     sourcemap: 'inline',
+    rollupOptions: {
+      // input: {
+      //   main: 'index.html',
+      //   // getServices: 'src/hooks/GetsIdServices.tsx',
+      // },
+      output: {
+        entryFileNames: '[name].js',
+        chunkFileNames: '[name]-[hash].js',
+        assetFileNames: '[name]-[hash].[ext]',
+      },
+    },
   },
   base: '/static/',
 })

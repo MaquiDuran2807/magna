@@ -9,6 +9,8 @@ interface PagesLayoutProps {
 }
 
 const PagesLayout: React.FC<PagesLayoutProps> = ({ children }) => {
+    console.log("PagesLayout");
+    
     const inicioDePaginaRef = useRef<HTMLDivElement | null>(null);
     const location = useLocation();
     useEffect(() => {

@@ -115,7 +115,7 @@ const Footer1: React.FC = () => {
 export default function LazyFooter1 () {
     const {  isVisible, ref } = useIntersectionObserver('20px');
     return (
-        <div id="LazyServices" ref={ref}>
+        <div id="LazyFooter" ref={ref}>
             {isVisible ? <Footer1 /> : null}
         </div>
     );

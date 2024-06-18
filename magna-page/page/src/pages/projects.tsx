@@ -1,21 +1,15 @@
 import Banner from '../components/banner';
 import CardsProjects from '../components/cardsProjects';
 import PagesLayout from '../layouts/pagesLayouts';
-import { useQuery } from '@tanstack/react-query';
 import imagen from '../assets/img/banner/projects.webp';
-import { ProyectosMagna,ProyectImagesMagna} from '../types/projects';
+import { useGetProjects } from '../hooks/getProjects';
+import { memo } from 'react';
 
-const Projects: React.FC = () => {
-    const { data:project } = useQuery<ProyectosMagna>({
-        queryKey: ['projects'],
-        staleTime: 1000*60*30,refetchOnWindowFocus: false,refetchOnMount: false,refetchOnReconnect: false,refetchInterval: 1000*60*30,
-    });
-    const { data:projectImages } = useQuery<ProyectImagesMagna[]>({
-        queryKey: ['projectsImages'],
-        staleTime: 1000*60*30,refetchOnWindowFocus: false,refetchOnMount: false,refetchOnReconnect: false,refetchInterval: 1000*60*30,
-    });
+const Projects: React.FC = memo(() => {
+    // 
+    const { projects, projectImages } = useGetProjects();
 
-    if(!project || !projectImages){
+    if( !projectImages || !projects){
         return null;
     }
     return (
@@ -25,7 +19,7 @@ const Projects: React.FC = () => {
             <br />
             <div className="container">
                 <div className="row">
-                <CardsProjects type={0} actualPage={null} imagenes={projectImages} />
+                <CardsProjects type={0} actualPage={null} imagenes={projectImages} projects={projects} />
                 </div>
             </div>
             {/* <Proyectos/> */}
@@ -36,6 +30,6 @@ const Projects: React.FC = () => {
             </div>
         </PagesLayout>
     );
-};
+});
 
 export default Projects;

@@ -6,6 +6,8 @@ import { Link,NavLink} from 'react-router-dom';
 
 const NavBar = (  ) => {
     const themeLogin="text-black"
+    console.log("navbar");
+    
       return (
           <>
             <div className='  '>

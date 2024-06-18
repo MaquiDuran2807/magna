@@ -43,6 +43,7 @@ const router = createBrowserRouter([
     children: [{ path: '/cotizador', element: <Cotizador /> }],
   },
 ]);
+console.log("main.tsx");
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
