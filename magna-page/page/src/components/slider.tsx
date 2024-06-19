@@ -15,6 +15,7 @@ import {  Servicio2 } from '../types/types';
 
 import { Link } from 'react-router-dom';
 import { memo } from 'react';
+import useIntersectionObserver from '../hooks/useLazyload';
 const Slider=memo( () => {
   const { data:servicios } = useQuery<Servicio2[]>({
     queryKey: ['services'],
@@ -89,4 +90,13 @@ if (!servicios) {
   );
 });
 
-export default Slider ;
+
+export default function LazySlider  () {
+  const { isVisible, ref } = useIntersectionObserver('100px');
+
+  return (
+      <div id="LazySlider " ref={ref}>
+          {isVisible ? <Slider /> : null}
+      </div>
+  );
+}

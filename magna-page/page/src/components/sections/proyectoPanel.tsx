@@ -45,7 +45,7 @@ const ProyectoPanel = memo(() => {
                 <div className="row">
                     <div className="col-12 col-lg-6 d-flex justify-content-center  ">
                         <div className="marco">
-                            <img src={paneles} alt="paneles" className='img-paneles  ' />
+                            <img src={paneles} alt="paneles" className='img-paneles' loading='lazy' />
                             <div className="experiencia">
                                 <h4 className='text-center'>
                                     <strong>10 +</strong>

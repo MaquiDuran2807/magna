@@ -12,35 +12,36 @@ import { AuthProvider } from './auth/AuthProvider';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 // Componentes importados de manera normal
-import Login from './pages/login';
-import Cotizador from './pages/cotizador';
-import AboutUs from './pages/aboutUs';
-import Projects from './pages/projects';
-import ServecesDetail from './pages/servecesDetail';
-import ProjectDetail from './pages/projecsDetail';
-import ContactPage from './pages/contact';
-import BlogDetail from './pages/blogDetail';
-import Blog from './pages/blog';
+const LazyLogin = React.lazy(() => import('./pages/login'));
+const LazyCotizador = React.lazy(() => import('./pages/cotizador'));
+const LazyAboutUs = React.lazy(() => import('./pages/aboutUs'));
+const LazyProjects = React.lazy(() => import('./pages/projects'));
+const LazyServecesDetail = React.lazy(() => import('./pages/servecesDetail'));
+const LazyProjectDetail = React.lazy(() => import('./pages/projecsDetail'));
+const LazyContactPage = React.lazy(() => import('./pages/contact'));
+const LazyBlogDetail = React.lazy(() => import('./pages/blogDetail'));
+const LazyBlog = React.lazy(() => import('./pages/blog'));
 import Sitemap from './sitemap/sitemap';
+import Spinner from './components/spinner';
 
 const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   { path: '/', element: <App /> },
   { path: '/sitemap.xml', element: <Sitemap /> },
-  { path: '/login', element: <Login /> },
-  { path: '/aboutUs', element: <AboutUs /> },
-  { path: '/servicios', element: <ServecesDetail issue='Servicios' /> },
-  { path: '/servicios/:id', element: <ServecesDetail issue='detailservices' /> },
-  { path: '/projects', element: <Projects /> },
-  { path: '/projects/:projectArg', element: <ProjectDetail /> },
-  { path: '/contact', element: <ContactPage /> },
-  { path: '/blog', element: <Blog /> },
-  { path: '/blog/:id', element: <BlogDetail /> },
+  { path: '/login', element: <React.Suspense fallback={<Spinner />}><LazyLogin /></React.Suspense> },
+  { path: '/aboutUs', element: <React.Suspense fallback={<Spinner />}><LazyAboutUs /></React.Suspense> },
+  { path: '/servicios', element: <React.Suspense fallback={<Spinner />}><LazyServecesDetail /></React.Suspense> },
+  { path: '/servicios/:id', element: <React.Suspense fallback={<Spinner />}><LazyServecesDetail /></React.Suspense> },
+  { path: '/projects', element: <React.Suspense fallback={<Spinner />}><LazyProjects /></React.Suspense> },
+  { path: '/projects/:projectArg', element: <React.Suspense fallback={<Spinner />}><LazyProjectDetail /></React.Suspense> },
+  { path: '/contact', element: <React.Suspense fallback={<Spinner />}><LazyContactPage /></React.Suspense> },
+  { path: '/blog', element: <React.Suspense fallback={<Spinner />}><LazyBlog /></React.Suspense> },
+  { path: '/blog/:id', element: <React.Suspense fallback={<Spinner />}><LazyBlogDetail /></React.Suspense> },
   {
     path: '/',
     element: <ProtectedRoute />,
-    children: [{ path: '/cotizador', element: <Cotizador /> }],
+    children: [{ path: '/cotizador', element: <React.Suspense fallback={<Spinner />}><LazyCotizador /></React.Suspense> }],
   },
 ]);
 console.log("main.tsx");

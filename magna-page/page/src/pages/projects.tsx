@@ -4,6 +4,7 @@ import PagesLayout from '../layouts/pagesLayouts';
 import imagen from '../assets/img/banner/projects.webp';
 import { useGetProjects } from '../hooks/getProjects';
 import { memo } from 'react';
+import useIntersectionObserver from '../hooks/useLazyload';
 
 const Projects: React.FC = memo(() => {
     // 
@@ -32,4 +33,12 @@ const Projects: React.FC = memo(() => {
     );
 });
 
-export default Projects;
+export default function LazyProjects () {
+    const { isVisible, ref } = useIntersectionObserver('100px');
+  
+    return (
+        <div id="LazyProjects" ref={ref}>
+            {isVisible ? <Projects/> : null}
+        </div>
+    );
+  }

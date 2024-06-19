@@ -14,10 +14,10 @@ export default defineConfig({
   build: {
     sourcemap: 'inline',
     rollupOptions: {
-      // input: {
-      //   main: 'index.html',
-      //   // getServices: 'src/hooks/GetsIdServices.tsx',
-      // },
+      input: {
+        main: 'index.html',
+        slider:'src/components/slider.tsx',
+      },
       output: {
         entryFileNames: '[name].js',
         chunkFileNames: '[name]-[hash].js',

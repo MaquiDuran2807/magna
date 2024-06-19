@@ -9,6 +9,7 @@ import BlogLayout from '../layouts/blogLayout';
 import BlogList from '../components/blogCards';
 import Sidebar from '../components/sidebarBolgs';
 import BlogSearch from '../components/search';
+import useIntersectionObserver from '../hooks/useLazyload';
 
 
 const Blog =  () => {
@@ -88,8 +89,16 @@ const Blog =  () => {
     );
 };
 
-export default Blog;
 
+export default function LazyBlog () {
+    const { isVisible, ref } = useIntersectionObserver('100px');
+  
+    return (
+        <div id="LazyBlog" ref={ref}>
+            {isVisible ? <Blog/> : null}
+        </div>
+    );
+  }
 
 
     

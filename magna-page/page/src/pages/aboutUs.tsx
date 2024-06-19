@@ -10,6 +10,7 @@ const LazyProyectos = lazy(() => import('../components/sections/proyectos'));
 import "./styles/aboutUs.css"
 import { FaCheck } from "react-icons/fa6";
 import imagen from '../assets/img/banner/nosotros.webp';
+import useIntersectionObserver from '../hooks/useLazyload';
 // import mapa from '../assets/img/app/mapa colombia cobertura trabajos.png';
 
 
@@ -115,4 +116,13 @@ const AboutUs: React.FC = () => {
     );
 };
 
-export default AboutUs;
+
+export default function LazyAboutUs () {
+    const { isVisible, ref } = useIntersectionObserver('100px');
+  
+    return (
+        <div id="LazyAboutUs" ref={ref}>
+            {isVisible ? <AboutUs/> : null}
+        </div>
+    );
+  }

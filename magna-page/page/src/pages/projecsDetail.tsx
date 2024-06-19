@@ -7,6 +7,7 @@ import SliderProjectDetail from '../components/sliderProjectDetail';
 import PagesLayout from '../layouts/pagesLayouts';
 import './styles/projectsDetail.css';
 import { useGetProjects } from '../hooks/getProjects';
+import useIntersectionObserver from '../hooks/useLazyload';
 
 const Proyectos = lazy(() => import('../components/sections/proyectos'));
 const LazyCardsProjects = lazy(() => import('../components/cardsProjects'));
@@ -108,4 +109,13 @@ const ProjectDetail: React.FC= () => {
     );
 };
 
-export default ProjectDetail;
+
+export default function LazyProjectDetail () {
+    const { isVisible, ref } = useIntersectionObserver('100px');
+  
+    return (
+        <div id="LazyProjectDetail" ref={ref}>
+            {isVisible ? <ProjectDetail/> : null}
+        </div>
+    );
+  }

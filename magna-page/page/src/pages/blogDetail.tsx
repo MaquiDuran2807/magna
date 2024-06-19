@@ -8,6 +8,7 @@ import DOMPurify from 'dompurify';
 import "../pages/styles/blogs.css"
 import BlogLayout from '../layouts/blogLayout';
 import Sidebar from '../components/sidebarBolgs';
+import useIntersectionObserver from '../hooks/useLazyload';
 
 
 const BlogDetailPage: React.FC = () => {
@@ -126,4 +127,14 @@ const BlogDetailPage: React.FC = () => {
     );
 };
 
-export default BlogDetailPage;
+
+
+export default function LazyBlogDetailPage () {
+    const { isVisible, ref } = useIntersectionObserver('100px');
+  
+    return (
+        <div id="LazyBlogDetailPage" ref={ref}>
+            {isVisible ? <BlogDetailPage/> : null}
+        </div>
+    );
+  }

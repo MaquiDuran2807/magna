@@ -14,15 +14,14 @@ import PagesLayout from "../layouts/pagesLayouts";
 import { Servicio2, Subservicio } from "../types/types";
 import "./styles/servicesDetail.css";
 import Spinner from '../components/spinner';
+import useIntersectionObserver from '../hooks/useLazyload';
 const PdfViewer = lazy(() => import('../components/brochure'));
 
 const LazyServicios = lazy(() => import('../components/sections/Servicios'));
 
-interface ServecesDetailProps {
-    issue: string;
-}
 
-const ServecesDetail: React.FC<ServecesDetailProps> = ({ issue }) => {
+
+const ServecesDetail: React.FC = () => {
     const { id } = useParams<{ id: string }>();
 
     let [title, setTitle] = useState<String>("Nuestros Servicios");
@@ -141,7 +140,7 @@ const ServecesDetail: React.FC<ServecesDetailProps> = ({ issue }) => {
                     </div>
                     <div className="row content">
                         <div className="col-12 col-md-4 ">
-                            <div className={`aside ${issue}-template`} >
+                            <div className={`aside -template`} >
                                 {servicio_elegido.map((servicio) => {
                                     return (
                                         <div key={servicio.id}>
@@ -237,4 +236,13 @@ const ServecesDetail: React.FC<ServecesDetailProps> = ({ issue }) => {
     );
 };
 
-export default ServecesDetail;
+
+export default function LazyServecesDetail () {
+    const { isVisible, ref } = useIntersectionObserver('100px');
+  
+    return (
+        <div id="LazyServecesDetail" ref={ref}>
+            {isVisible ? <ServecesDetail /> : null}
+        </div>
+    );
+  }

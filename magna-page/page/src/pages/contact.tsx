@@ -7,6 +7,7 @@ import { MdEmail } from "react-icons/md";
 import { IoMdClock } from "react-icons/io";
 const LazyMapComponents = lazy(() => import('../components/maps'));
 import imagen from '../assets/img/banner/projects.webp';
+import useIntersectionObserver from '../hooks/useLazyload';
 
 const Contact = lazy(() => import('../components/sections/contact'));
 
@@ -47,4 +48,13 @@ const ContactPage: React.FC = () => {
     );
 };
 
-export default ContactPage;
+
+export default function LazyContactPage () {
+    const { isVisible, ref } = useIntersectionObserver('100px');
+  
+    return (
+        <div id="LazyContactPage" ref={ref}>
+            {isVisible ? <ContactPage/> : null}
+        </div>
+    );
+  }
