@@ -1,2 +1,0 @@
-const t="/static/projects-2782dd4c.webp";export{t as i};
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHJvamVjdHMtY2MwMjAzZjAuanMiLCJzb3VyY2VzIjpbIi4uL3NyYy9hc3NldHMvaW1nL2Jhbm5lci9wcm9qZWN0cy53ZWJwIl0sInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCBkZWZhdWx0IFwiX19WSVRFX0FTU0VUX19jOWJlNDUwZl9fXCIiXSwibmFtZXMiOlsiaW1hZ2VuIl0sIm1hcHBpbmdzIjoiQUFBQSxNQUFlQSxFQUFBIn0=
