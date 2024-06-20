@@ -33,10 +33,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-3gc^^v-mqu9hjtgz148b)5q2+b9%ng8#j2f62mr=-75@uayss$' #os.environ.get("SECRET_KEY")
 # SECRET_KEY = os.environ.get("SECRET_KEY",default='your secret key')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 DOMAIN="localhost:5173 " #'localhost:8000/auth/users' # os.environ.get('DOMAIN_DEV') if DEBUG else os.environ.get('DOMAIN_PROD')
 
-ALLOWED_HOSTS = ["*","https://magnaingenieriaytopografia.com"]  #env.list("ALLOWED_HOSTS_DEV") if DEBUG else env.list("ALLOWED_HOSTS_PROD")
+ALLOWED_HOSTS = ["https://magnaingenieriaytopografia.com","https://www.magnaingenieriaytopografia.com"]  #env.list("ALLOWED_HOSTS_DEV") if DEBUG else env.list("ALLOWED_HOSTS_PROD")
 
 
 # Application definition
@@ -204,8 +204,8 @@ SIMPLE_JWT = {
 
 AUTH_USER_MODEL = 'user.User'
 
-CORS_ORIGIN_WHITELIST =  ["http://localhost:8000","http://54.211.37.134:8000","http://localhost:5173","https://magnaingenieriaytopografia.com","http://localhost:5174"]    #env.list("CORS_ORIGIN_WHITELIST_DEV") if DEBUG else env.list("CORS_ORIGIN_WHITELIST_PROD")
-CSRF_TRUSTED_ORIGINS = ["http://localhost:8000","http://54.211.37.134:8000","http://localhost:5173","https://magnaingenieriaytopografia.com","http://localhost:5174"]
+CORS_ORIGIN_WHITELIST =  ["http://localhost:8000","http://54.211.37.134:8000","http://localhost:5173","https://magnaingenieriaytopografia.com","https://www.magnaingenieriaytopografia.com","http://localhost:5174"]    #env.list("CORS_ORIGIN_WHITELIST_DEV") if DEBUG else env.list("CORS_ORIGIN_WHITELIST_PROD")
+CSRF_TRUSTED_ORIGINS = ["http://localhost:8000","http://54.211.37.134:8000","http://localhost:5173","https://magnaingenieriaytopografia.com","https://www.magnaingenieriaytopografia.com","http://localhost:5174"]
 
 # Email settings
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
