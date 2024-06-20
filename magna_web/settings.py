@@ -33,7 +33,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-3gc^^v-mqu9hjtgz148b)5q2+b9%ng8#j2f62mr=-75@uayss$' #os.environ.get("SECRET_KEY")
 # SECRET_KEY = os.environ.get("SECRET_KEY",default='your secret key')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 DOMAIN="localhost:5173 " #'localhost:8000/auth/users' # os.environ.get('DOMAIN_DEV') if DEBUG else os.environ.get('DOMAIN_PROD')
 
 ALLOWED_HOSTS = ["https://magnaingenieriaytopografia.com","https://www.magnaingenieriaytopografia.com"]  #env.list("ALLOWED_HOSTS_DEV") if DEBUG else env.list("ALLOWED_HOSTS_PROD")
