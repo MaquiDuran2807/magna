@@ -29,11 +29,15 @@ class indexView(TemplateView):
 class storeView(TemplateView):
     template_name = 'store/dist/index.html'
 
+class Robots(TemplateView):
+    template_name = 'page/dist/robot.txt'
+
 
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('robots.txt', Robots.as_view(), name='robots'),
     re_path('auth/', include('djoser.urls')),
     re_path('auth/', include('djoser.urls.jwt')),
     re_path('auth/', include('djoser.social.urls')),

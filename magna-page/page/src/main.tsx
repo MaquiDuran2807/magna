@@ -22,7 +22,6 @@ const LazyContactPage = React.lazy(() => import('./pages/contact'));
 const LazyBlogDetail = React.lazy(() => import('./pages/blogDetail'));
 const LazyBlog = React.lazy(() => import('./pages/blog'));
 import Sitemap from './sitemap/sitemap';
-import Robot from '../public/robot.txt';
 import Spinner from './components/spinner';
 
 const queryClient = new QueryClient();
@@ -30,7 +29,6 @@ const queryClient = new QueryClient();
 const router = createBrowserRouter([
   { path: '/', element: <App /> },
   { path: '/sitemap.xml', element: <Sitemap /> },
-  {path: '/robots.txt', element: <Robot />},
   { path: '/login', element: <React.Suspense fallback={<Spinner />}><LazyLogin /></React.Suspense> },
   { path: '/aboutUs', element: <React.Suspense fallback={<Spinner />}><LazyAboutUs /></React.Suspense> },
   { path: '/servicios', element: <React.Suspense fallback={<Spinner />}><LazyServecesDetail /></React.Suspense> },
