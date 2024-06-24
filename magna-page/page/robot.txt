@@ -2,4 +2,4 @@ User-agent: *
 Disallow: /login
 Disallow: /cotizador
 
-Sitemap: http://54.211.37.134:8000/sitemap.xml
+Sitemap: https://magnaingenieriaytopografia.com/sitemap.xml
