@@ -2,6 +2,7 @@ import React, { Suspense } from 'react';
 import PagesLayout from './layouts/pagesLayouts';
 import Slider from './components/slider';
 import './App.css';
+import useIntersectionObserver from './hooks/useLazyload';
 
 // Agrupación de importaciones lazy
 const LazySections = {
@@ -50,4 +51,14 @@ function App() {
   );
 }
 
-export default App;
+
+
+export default function LazyApp () {
+  const { isVisible, ref } = useIntersectionObserver('100px');
+
+  return (
+      <div id="LazyApp" ref={ref}>
+          {isVisible ? <App/> : null}
+      </div>
+  );
+}

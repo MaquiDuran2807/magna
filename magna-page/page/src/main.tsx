@@ -4,7 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 // import Spinner from './components/spinner';
 import ServiciosIdProvider from './hooks/GetsIdServices';
-import App from './App';
+
 import ProtectedRoute from "./routes/PrivateRoute";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
@@ -12,6 +12,7 @@ import { AuthProvider } from './auth/AuthProvider';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 // Componentes importados de manera normal
+const App = React.lazy(() => import('./App'));
 const LazyLogin = React.lazy(() => import('./pages/login'));
 const LazyCotizador = React.lazy(() => import('./pages/cotizador'));
 const LazyAboutUs = React.lazy(() => import('./pages/aboutUs'));
