@@ -11,9 +11,6 @@ class Category(models.Model):
         return self.name
     
 
-class Thumbnail(models.Model):
-    image = models.ImageField(upload_to='comment_images/thumbnails')
-
 class BlogPost(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True, null=True)
@@ -21,7 +18,7 @@ class BlogPost(models.Model):
     date_posted = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     important = models.BooleanField(default=False)
-    image = models.ImageField(upload_to='comment_images', blank=True, null=True)
+    image_blog = models.ImageField(upload_to='comment_images', blank=True, null=True)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
 
 

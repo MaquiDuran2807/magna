@@ -30,6 +30,8 @@ export interface AuthResponse {
     descripcion:  string;
     imagen:       string;
     icon:         string;
+    imagen_tablet:string;
+    imagen_celular:string;
     subservicios: Subservicio[];
     caracteristicas: Caracteristica[];
 }
@@ -47,6 +49,8 @@ export interface Subservicio {
     nombre:      string;
     descripcion: string;
     imagen:      string;
+    imagen_tablet:string;
+    imagen_celular:string;
     servicio:    number;
 }
 

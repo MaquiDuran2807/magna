@@ -1,7 +1,6 @@
 
 .content{
-    margin: 10vh 0;
-    padding-right: .5rem;
+    padding: 5%;
 }
 
 .aside{
@@ -15,7 +14,7 @@
     margin: 0 2% 20vh;
 }
 
-h2{
+h3{
 
     font-weight: 700;
     font-size: clamp(1.5rem, 2.5vw, 3rem);
@@ -28,7 +27,6 @@ h2{
     text-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.205);
     animation: Topografía 1s ease-in-out;
     animation-fill-mode: forwards;
-
 }
 
 
@@ -56,16 +54,6 @@ h2{
     cursor: pointer;
     margin: 2px;
     border-radius: 10px;
-}
-
-.slider{
-    height: 40vh;
-    @media screen and (max-width: 768px) {
-        height: 48vh;
-    }
-    @media screen and (min-width: 1025px) {
-        height: 80vh;
-    }
 }
 
 .descripcion{

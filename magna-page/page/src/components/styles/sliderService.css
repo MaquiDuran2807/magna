@@ -1,22 +1,26 @@
 
 .slide-service {
-    height: 35vh;
-    @media screen and (max-width: 768px) {
-        height: 35vh;
+    height: 75vw;
+    @media screen and (min-height: 1024px) {
+        height: 50vw;
     }
-    @media screen and (min-width: 1025px) {
-        height: 75vh;
+}
+/* Para dispositivos en orientación paisaje (ancho mayor que alto) */
+@media screen and (orientation: landscape) {
+    .slide-service {
+        height: 75vh; /* Ajusta esto según necesites */
     }
 }
 
+
 .img-subservicio{
     width: 100%;
-    height: 95%;
+    height: 100%;
     object-fit: cover;
     object-position: 50% 20%;
 }
 
-.slide-service  h3{
+.title-slider-service{
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     font-size: clamp(1.5rem, 1vw, 2.1rem);

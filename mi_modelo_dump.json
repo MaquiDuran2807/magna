@@ -1,0 +1,906 @@
+[
+{
+  "model": "proyectos.client",
+  "pk": 1,
+  "fields": {
+    "name": "VENTUS COLOMBIA",
+    "email": "proveedores.col@ventus.global",
+    "phone": "3157376308",
+    "logo": ""
+  }
+},
+{
+  "model": "proyectos.typeproject",
+  "pk": 1,
+  "fields": {
+    "name": "PLANTAS SOLARES"
+  }
+},
+{
+  "model": "proyectos.pais",
+  "pk": 1,
+  "fields": {
+    "nombre": "COLOMBIA"
+  }
+},
+{
+  "model": "proyectos.departamento",
+  "pk": 1,
+  "fields": {
+    "nombre": "TOLIMA",
+    "pais": 1
+  }
+},
+{
+  "model": "proyectos.departamento",
+  "pk": 2,
+  "fields": {
+    "nombre": "Valle del cauca",
+    "pais": 1
+  }
+},
+{
+  "model": "proyectos.departamento",
+  "pk": 3,
+  "fields": {
+    "nombre": "HUILA",
+    "pais": 1
+  }
+},
+{
+  "model": "proyectos.departamento",
+  "pk": 4,
+  "fields": {
+    "nombre": "SANTANDER",
+    "pais": 1
+  }
+},
+{
+  "model": "proyectos.departamento",
+  "pk": 5,
+  "fields": {
+    "nombre": "ATLÁNTICO",
+    "pais": 1
+  }
+},
+{
+  "model": "proyectos.ciudad",
+  "pk": 1,
+  "fields": {
+    "nombre": "ESPINAL",
+    "departamento": 1
+  }
+},
+{
+  "model": "proyectos.ciudad",
+  "pk": 2,
+  "fields": {
+    "nombre": "Carmelo",
+    "departamento": 2
+  }
+},
+{
+  "model": "proyectos.ciudad",
+  "pk": 3,
+  "fields": {
+    "nombre": "AIPE",
+    "departamento": 3
+  }
+},
+{
+  "model": "proyectos.ciudad",
+  "pk": 4,
+  "fields": {
+    "nombre": "CHICAMOCHA",
+    "departamento": 4
+  }
+},
+{
+  "model": "proyectos.ciudad",
+  "pk": 5,
+  "fields": {
+    "nombre": "SABANALARGA",
+    "departamento": 5
+  }
+},
+{
+  "model": "proyectos.proyecto",
+  "pk": 1,
+  "fields": {
+    "nombre": "Planta Solar fotovoltaica Espinal 10 MW",
+    "descripcion": "La granja está construida en 17 hectáreas donde por muchos años operó la antigua Coltabaco. está compuesta por 37.876 paneles solares y su producción de energía limpia equivale al consumo de 6.000 familias colombianas.",
+    "tipo": 1,
+    "fecha_inicio": "2020-11-01",
+    "fecha_fin": "2020-06-30",
+    "estado": "Finalizado",
+    "presupuesto": null,
+    "cliente": 1,
+    "lider": 1,
+    "ciudad": 1,
+    "equipo": [],
+    "servicios": [],
+    "subservicios": [
+      1
+    ]
+  }
+},
+{
+  "model": "proyectos.proyecto",
+  "pk": 2,
+  "fields": {
+    "nombre": "PARQUE SOLAR CARMELO 9,8 MW",
+    "descripcion": "Levantamiento topográfico mediante estación total y gnss rtk,\r\ngeorreferenciación con mojones en concreto, red igac - gnss y estudios\r\nfotogramétricos; lo anterior para diseños de ingeniería de detalle.",
+    "tipo": 1,
+    "fecha_inicio": "2024-04-25",
+    "fecha_fin": "2024-04-25",
+    "estado": "Finalizado",
+    "presupuesto": null,
+    "cliente": null,
+    "lider": null,
+    "ciudad": 2,
+    "equipo": [],
+    "servicios": [
+      1
+    ],
+    "subservicios": [
+      5
+    ]
+  }
+},
+{
+  "model": "proyectos.proyecto",
+  "pk": 3,
+  "fields": {
+    "nombre": "FACTIBILIDAD PARQUE SOLAR ESPINAL-TOLIMA",
+    "descripcion": "Levantamiento topográfico mediante estación total y gnss rtk,\r\ngeorreferenciación con mojones en concreto, red igac - gnss y estudios\r\nfotogramétricos; lo anterior para diseños de ingeniería de detalle.",
+    "tipo": 1,
+    "fecha_inicio": "2018-10-04",
+    "fecha_fin": "2018-12-04",
+    "estado": "Finalizado",
+    "presupuesto": null,
+    "cliente": null,
+    "lider": null,
+    "ciudad": 1,
+    "equipo": [],
+    "servicios": [
+      1
+    ],
+    "subservicios": [
+      5
+    ]
+  }
+},
+{
+  "model": "proyectos.proyecto",
+  "pk": 4,
+  "fields": {
+    "nombre": "FACTIBILIDAD PARQUE SOLAR PEÑAS BLANCAS (AIPE HUILA)",
+    "descripcion": "Levantamiento topográfico mediante estación total y gnss rtk,\r\ngeoreferenciación con mojones en concreto red igac-gnss y estudios\r\nfotogramétricos; lo anterior para diseños de ingeniería de detalle",
+    "tipo": 1,
+    "fecha_inicio": "2019-01-01",
+    "fecha_fin": "2019-12-04",
+    "estado": "Finalizado",
+    "presupuesto": null,
+    "cliente": null,
+    "lider": null,
+    "ciudad": 3,
+    "equipo": [],
+    "servicios": [
+      1
+    ],
+    "subservicios": [
+      4,
+      5
+    ]
+  }
+},
+{
+  "model": "proyectos.proyecto",
+  "pk": 5,
+  "fields": {
+    "nombre": "PROYECTO O SOLAR CHICA MOCHA",
+    "descripcion": "Estudio topográfico con gnss rtk de alta precisión para las 200 hay\r\nestudio hidrológico e hidráulico de la zona de influencia del proyecto\r\nchica mocha solar.",
+    "tipo": 1,
+    "fecha_inicio": "2024-04-25",
+    "fecha_fin": "2024-04-25",
+    "estado": "Finalizado",
+    "presupuesto": null,
+    "cliente": null,
+    "lider": null,
+    "ciudad": 4,
+    "equipo": [],
+    "servicios": [
+      1
+    ],
+    "subservicios": [
+      5
+    ]
+  }
+},
+{
+  "model": "proyectos.proyecto",
+  "pk": 6,
+  "fields": {
+    "nombre": "COMPLEJO SOLAR BOSQUES SOLARES DE BOLÍVAR",
+    "descripcion": "Estudio topográfico con lidar y gnss rtk de alta precisión para las 300 ha y\r\nestudio hidrológico e hidráulico de la zona de influencia del proyecto sbs.\r\nservicio de 4 comisiones mensuales para la construcción del proyecto.",
+    "tipo": 1,
+    "fecha_inicio": "2024-04-25",
+    "fecha_fin": "2024-04-25",
+    "estado": "Finalizado",
+    "presupuesto": null,
+    "cliente": null,
+    "lider": null,
+    "ciudad": 5,
+    "equipo": [],
+    "servicios": [
+      1,
+      3
+    ],
+    "subservicios": [
+      5,
+      8
+    ]
+  }
+},
+{
+  "model": "proyectos.proyectoimagen",
+  "pk": 1,
+  "fields": {
+    "proyecto": 1,
+    "imagen": "proyectos/granja_BhQ5CVE.jpeg",
+    "references_url": null,
+    "references_name": null
+  }
+},
+{
+  "model": "proyectos.proyectoimagen",
+  "pk": 2,
+  "fields": {
+    "proyecto": 2,
+    "imagen": "proyectos/GranjaSolarElCarmelo.webp",
+    "references_url": "https://www.eltiempo.com/colombia/cali/ivan-duque-mas-energia-en-el-valle-por-granja-solar-602228",
+    "references_name": "El tiempo"
+  }
+},
+{
+  "model": "proyectos.proyectoimagen",
+  "pk": 3,
+  "fields": {
+    "proyecto": 2,
+    "imagen": "proyectos/1596234380-DJI_0147.JPG",
+    "references_url": null,
+    "references_name": null
+  }
+},
+{
+  "model": "proyectos.proyectoimagen",
+  "pk": 4,
+  "fields": {
+    "proyecto": 6,
+    "imagen": "proyectos/16795704220479_JoXOBIn.webp",
+    "references_url": "https://www.expansion.com/uestudio/2023/03/23/641c3612e5fdea591b8b4630.html",
+    "references_name": "Expansión"
+  }
+},
+{
+  "model": "proyectos.proyectoimagen",
+  "pk": 5,
+  "fields": {
+    "proyecto": 6,
+    "imagen": "proyectos/FOTO_LAUD_PENELES_BOLIVAR.jpeg",
+    "references_url": "https://laud.udistrital.edu.co/medio-ambiente/nueva-planta-solar-en-bolivar-evitara-la-emision-de-50-mil-toneladas-de-co2",
+    "references_name": "Universidad distrital Francisco José De Caldas"
+  }
+},
+{
+  "model": "proyectos.proyectoimagen",
+  "pk": 6,
+  "fields": {
+    "proyecto": 3,
+    "imagen": "proyectos/Celsia-Solar-Espinal-noviembre-1024x576.jpg_i6I131e.webp",
+    "references_url": "https://www.larepublica.co/empresas/celsia-inauguro-granja-solar-en-el-tolima-que-genera-9-9-megavatios-de-energia-limpia-3099797",
+    "references_name": "LaRepublica"
+  }
+},
+{
+  "model": "proyectos.proyectoimagen",
+  "pk": 7,
+  "fields": {
+    "proyecto": 3,
+    "imagen": "proyectos/Inauguración-Celsia-Solar-Espinal_visita-Duque-4-1_tP9xH0O.webp",
+    "references_url": "https://territoriossostenibles.com/ciencia-y-tecnologia/celsia-inauguro-una-granja-solar-que-genera-99-megavatios-de-energia-limpia-en-el-espinal-tolima/",
+    "references_name": "Territorios sostenibles"
+  }
+},
+{
+  "model": "proyectos.proyectoimagen",
+  "pk": 8,
+  "fields": {
+    "proyecto": 4,
+    "imagen": "proyectos/parquesolar-compressed-compressed.jpg",
+    "references_url": "https://www.bancolombia.com/acerca-de/sala-prensa/noticias/responsabilidad-social-ambiental/parque-solar-brisas",
+    "references_name": "Bancolombia"
+  }
+},
+{
+  "model": "proyectos.proyectoimagen",
+  "pk": 9,
+  "fields": {
+    "proyecto": 5,
+    "imagen": "proyectos/LatamSolar-parque-solar-energia.jpg",
+    "references_url": "https://www.valoraanalitik.com/2020/11/01/nueva-planta-de-energia-celsia-chicamocha-generara-80-mw-a-santander/",
+    "references_name": "Valora analitik"
+  }
+},
+{
+  "model": "servicios.servicio",
+  "pk": 1,
+  "fields": {
+    "nombre": "topografía",
+    "descripcion": "Ofrecemos soluciones topográficas profesionales, con equipos de alta tecnología y personal calificado. Estamos presentes en cada momento del proyecto, desde el levantamiento inicial hasta el control de obra, pasando por el diseño, la planificación y la ejecución",
+    "imagen": "servicios/slide-banner1.webp",
+    "icon": "servicios/topografia_sj8gEMh.svg"
+  }
+},
+{
+  "model": "servicios.servicio",
+  "pk": 2,
+  "fields": {
+    "nombre": "Medio Ambiente",
+    "descripcion": "gestión completa, desde trímites y permisos hasta auditoría y monitoreo ambiental.",
+    "imagen": "servicios/converted_slide-2.webp",
+    "icon": "servicios/medio_UFIPqLF.svg"
+  }
+},
+{
+  "model": "servicios.servicio",
+  "pk": 3,
+  "fields": {
+    "nombre": "ingeniería y Consultoría",
+    "descripcion": "ingeniería y Consultoría para soluciones viales, hidrológicas, geotécnicas y construcción civil, con presupuestos detallados.",
+    "imagen": "servicios/project-3_11zon.webp",
+    "icon": "servicios/ingenieria_v3RRA4i.svg"
+  }
+},
+{
+  "model": "servicios.subservicio",
+  "pk": 1,
+  "fields": {
+    "servicio": 3,
+    "nombre": "diseño geométrico de vias",
+    "descripcion": "El diseño geométrico de vías es un proceso crucial en la ingeniería civil que implica la planificación y creación de carreteras que sean seguras, eficientes y económicamente viables. Este proceso toma en cuenta factores como la topografía del terreno, la demanda de tráfico y las condiciones ambientales para crear una red vial que facilite el movimiento de personas y bienes. Manuales como el \"Manual de Carreteras: diseño Geométrico DG 2018\" proporcionan directrices detalladas para el diseño de carreteras, asegurando que se cumplan los estándares de calidad y seguridad.",
+    "imagen": "servicios/temp-1.png"
+  }
+},
+{
+  "model": "servicios.subservicio",
+  "pk": 2,
+  "fields": {
+    "servicio": 2,
+    "nombre": "Trímites y permisos ambientales",
+    "descripcion": "Los trímites y permisos ambientales son un sub servicio que ofrece una empresa de topografía para facilitar el cumplimiento de las normas y leyes que regulan el impacto ambiental de los proyectos de desarrollo. Estos trímites pueden incluir la solicitud, renovación o modificación de licencias, autorizaciones, certificaciones, salvoconductos, registros, concesiones, entre otros, que se requieren para realizar actividades que involucren el uso o aprovechamiento de los recursos naturales, la generación de residuos o desechos peligrosos, la movilización de especies de la biodiversidad, la construcción de obras en zonas costeras o marítimas, entre otras. Al contratar este servicio, nuestros clientes pueden contar con el asesoramiento y la gestión de los trímites ambientales necesarios para sus proyectos, garantizando así el respeto y la protección del medio ambiente.",
+    "imagen": "servicios/medio_ambiente_encabezadi_4ao5Sby.jpg"
+  }
+},
+{
+  "model": "servicios.subservicio",
+  "pk": 3,
+  "fields": {
+    "servicio": 3,
+    "nombre": "Control de obras",
+    "descripcion": "Servicio de control topográfico de obras, replanteo de cotas, pendientes, vértices, cuantificación de movimiento de tierras para reportes  y cualquier necesidad que requiera la obra en cuanto a la topografía.",
+    "imagen": "servicios/20240229_095036_t1N9bOy.jpg"
+  }
+},
+{
+  "model": "servicios.subservicio",
+  "pk": 4,
+  "fields": {
+    "servicio": 1,
+    "nombre": "Georreferenciación de puntos geodésicos",
+    "descripcion": "Técnica de posicionamiento espacial de una entidad en una localización geográfica única y bien definida en un sistema de coordenadas y datum específicos. Esta operación es fundamental en los sistemas de información geográfica (SIG) y se aplica tanto a objetos raster (imágenes de mapa de píxeles) como a objetos vectoriales (puntos, líneas, polilíneas y polígonos que representan objetos físicos).",
+    "imagen": "servicios/mojon.jpg"
+  }
+},
+{
+  "model": "servicios.subservicio",
+  "pk": 5,
+  "fields": {
+    "servicio": 1,
+    "nombre": "Levantamientos topográficos según normativa IGAC",
+    "descripcion": "Los levantamientos topográficos en Colombia deben cumplir con las normativas establecidas por el Instituto Geográfico Agustín Codazzi (IGAC). según la Resolución No. 471 de 2020, se definen las especificaciones técnicas mínimas para los productos de cartografía básica oficial del país. Además, la Resolución 1562 de 2018 y la Resolución 643 de 2018 adaptan las especificaciones técnicas para levantamientos topográficos, incluyendo el uso de sistemas GNSS para un correcto posicionamiento GPS. Estas normativas aseguran la calidad y precisión de la información geodésica y cartográfica en Colombia.",
+    "imagen": "servicios/IMG_5659_68fxkL6.jpg"
+  }
+},
+{
+  "model": "servicios.subservicio",
+  "pk": 6,
+  "fields": {
+    "servicio": 2,
+    "nombre": "Estudios de impacto ambiental.",
+    "descripcion": "Los estudios de impacto ambiental (EIA) son evaluaciones críticas que se realizan para prever las consecuencias que un proyecto puede tener en el medio ambiente. Su objetivo es identificar, predecir y evaluar los efectos tanto negativos como positivos, y proponer medidas para mitigar los impactos adversos. Un EIA completo incluye una descripción detallada del proyecto, una evaluación de los impactos, un análisis de alternativas y un plan de manejo ambiental. Estos estudios son fundamentales para la toma de decisiones informadas y responsables en el desarrollo de proyectos y actividades humanas.",
+    "imagen": "servicios/FOTO_TOPOGRAFIA.jpeg"
+  }
+},
+{
+  "model": "servicios.subservicio",
+  "pk": 7,
+  "fields": {
+    "servicio": 1,
+    "nombre": "Cálculos de movimiento de tierra",
+    "descripcion": "Ofrecemos servicios avanzados de cálculos de movimiento de tierra, fundamentales para la planificación y ejecución de proyectos de construcción y urbanismo. Nuestra experiencia y tecnología de punta garantizan mediciones precisas y resultados confiables, optimizando costos y tiempos en cada fase del proyecto.",
+    "imagen": "servicios/maexmo-movimiento-tierras-01-min.webp"
+  }
+},
+{
+  "model": "servicios.subservicio",
+  "pk": 8,
+  "fields": {
+    "servicio": 3,
+    "nombre": "Estudios hidrológicos e hidráulicos",
+    "descripcion": "Los estudios hidrológicos e hidráulicos son fundamentales en la topografía e ingeniería para entender y gestionar el comportamiento del agua en proyectos de construcción y planificación del territorio. Estos estudios utilizan datos hidroclimatológicos y topográficos para analizar la amenaza de inundaciones y diseñar infraestructuras adecuadas.",
+    "imagen": "servicios/8a897d82-608f-4247-8351-5375feff8087.png"
+  }
+},
+{
+  "model": "servicios.subservicio",
+  "pk": 9,
+  "fields": {
+    "servicio": 1,
+    "nombre": "Nivelaciones de precisión",
+    "descripcion": "En Magna ingeniería y topografía, ofrecemos servicios de nivelaciones de precisión que garantizan la máxima exactitud en sus proyectos de construcción y agrimensura. Utilizando tecnología de punta y un equipo de profesionales altamente cualificados, nos aseguramos de que cada medición sea precisa y confiable.",
+    "imagen": "servicios/nivel.png"
+  }
+},
+{
+  "model": "servicios.subservicio",
+  "pk": 10,
+  "fields": {
+    "servicio": 1,
+    "nombre": "Replanteo y control de obras civiles",
+    "descripcion": "En el ámbito de la topografía e ingeniería, el servicio de Replanteo y Control de Obras Civiles es esencial para garantizar la precisión y la calidad en la construcción. Este proceso implica trasladar la información teórica de los planos a la realidad del terreno, asegurando que cada elemento estructural se ubique con exactitud según las especificaciones. Con equipos de alta tecnología y personal altamente calificado, nuestra empresa se compromete a ofrecer un servicio de replanteo detallado y un control riguroso de la obra, lo que resulta en proyectos ejecutados con la más alta eficiencia y seguridad.",
+    "imagen": "servicios/replanteo.jpg"
+  }
+},
+{
+  "model": "servicios.subservicio",
+  "pk": 11,
+  "fields": {
+    "servicio": 1,
+    "nombre": "Deslinde y amojonamiento de predios.",
+    "descripcion": "Es un proceso esencial para la definición precisa de los límites de su propiedad. Este procedimiento legal garantiza la seguridad jurídica de las propiedades, evitando conflictos con los vecinos y asegurando la certeza sobre los linderos de su inmueble. Con tecnología avanzada y un equipo de expertos, nos comprometemos a proporcionar un servicio de alta calidad que cumple con todas las normativas vigentes.",
+    "imagen": "servicios/107752288.png"
+  }
+},
+{
+  "model": "servicios.subservicio",
+  "pk": 12,
+  "fields": {
+    "servicio": 1,
+    "nombre": "fotogrametría",
+    "descripcion": "La fotogrametría y la Topo-Batimetría son servicios esenciales en el campo de la topografía e ingeniería, ofreciendo mediciones precisas y detalladas de terrenos y cuerpos de agua. Utilizando tecnologías avanzadas como LIDAR y cámaras fotogramétricas de alta resolución, estas técnicas permiten la captura de datos topográficos y batimétricos con una precisión sin precedentes, facilitando la planificación y ejecución de proyectos con eficiencia y exactitud. Estos métodos son fundamentales para estudios hidrográficos, mapeo costero, y análisis ambientales, proveyendo una base sólida para la toma de decisiones en diversos sectores industriales.",
+    "imagen": "servicios/IMG_5678_UKOsUi0.jpg"
+  }
+},
+{
+  "model": "servicios.subservicio",
+  "pk": 13,
+  "fields": {
+    "servicio": 3,
+    "nombre": "Estudios Geológicos y Geotécnicos",
+    "descripcion": "Magna ingeniería y topografía ofrece servicios especializados en Estudios Geológicos y Geotécnicos, proporcionando un conocimiento profundo y detallado del subsuelo que es fundamental para el soporte de diversas actividades humanas. Nuestra metodología integra estudios de campo avanzados, prospección del terreno y análisis de laboratorio, asegurando soluciones óptimas para proyectos de ingeniería civil, obras civiles, industriales y de servicios.",
+    "imagen": "servicios/geo.png"
+  }
+},
+{
+  "model": "servicios.subservicio",
+  "pk": 14,
+  "fields": {
+    "servicio": 3,
+    "nombre": "Construcción de obras civiles.",
+    "descripcion": "Magna ingeniería y topografía se especializa en la construcción de obras civiles, ofreciendo soluciones integrales que abarcan desde el diseño hasta la ejecución de proyectos. Nuestro equipo de profesionales altamente calificados utiliza tecnología de vanguardia para garantizar la precisión y la calidad en cada etapa del proceso constructivo. Nos comprometemos con la innovación y la sostenibilidad, asegurando que cada obra cumpla con los más altos estándares de seguridad y eficiencia ambiental.",
+    "imagen": "servicios/obras-civiles-scaled.jpg"
+  }
+},
+{
+  "model": "servicios.subservicio",
+  "pk": 15,
+  "fields": {
+    "servicio": 3,
+    "nombre": "Presupuestos de obra.",
+    "descripcion": "Magna ingeniería y topografía ofrece un servicio integral de presupuestos de obra, proporcionando cálculos precisos y detallados para proyectos de construcción civil. Nuestro equipo multidisciplinario utiliza tecnología de vanguardia para garantizar estimaciones exactas, optimizando costos y tiempos de ejecución. Comprometidos con la excelencia, brindamos asesoramiento personalizado para satisfacer las necesidades específicas de cada cliente, asegurando resultados que superan las expectativas",
+    "imagen": "servicios/Elaborando_el_Presupuesto_de_Obra.jpg"
+  }
+},
+{
+  "model": "servicios.subservicio",
+  "pk": 16,
+  "fields": {
+    "servicio": 2,
+    "nombre": "Planes, programas y proyectos de manejo ambiental",
+    "descripcion": "Magna ingeniería y topografía se destaca en la creación de planes, programas y proyectos de manejo ambiental, diseñados meticulosamente para garantizar la sostenibilidad y el respeto por el medio ambiente. Nuestro enfoque integral abarca desde la evaluación de impacto ambiental hasta la implementación de estrategias de mitigación y compensación, asegurando que cada proyecto cumpla con las normativas vigentes y contribuya positivamente al entorno natural. Con un equipo multidisciplinario y tecnología de vanguardia, estamos comprometidos con la excelencia y la innovación en cada servicio que ofrecemos.",
+    "imagen": "servicios/Imagen_de_WhatsApp_2024-05-24_a_las_13.19.42_d9a4209a.jpg"
+  }
+},
+{
+  "model": "servicios.subservicio",
+  "pk": 17,
+  "fields": {
+    "servicio": 2,
+    "nombre": "Caracterización y monitoreo de aguas y residuos sólidos",
+    "descripcion": "Magna ingeniería y topografía se especializa en la caracterización y monitoreo de aguas y residuos sólidos, ofreciendo servicios esenciales para la gestión ambiental sostenible. Nuestro enfoque se centra en la evaluación detallada de la calidad del agua y la composición de los residuos sólidos, utilizando metodologías avanzadas que garantizan resultados precisos y confiables. Con un compromiso firme hacia la protección del medio ambiente, proporcionamos soluciones integrales que contribuyen a la conservación de los recursos hídricos y la minimización del impacto ambiental de los residuos sólidos.",
+    "imagen": "servicios/OIP_2.jpeg"
+  }
+},
+{
+  "model": "servicios.subservicio",
+  "pk": 18,
+  "fields": {
+    "servicio": 2,
+    "nombre": "Monitoreo de Fauna y Flora",
+    "descripcion": "En Magna ingeniería y topografía, ofrecemos un servicio especializado de Monitoreo de Fauna y Flora, diseñado para garantizar la protección y conservación del medio ambiente en sus proyectos. Nuestro equipo de expertos utiliza tecnología de vanguardia para realizar estudios detallados que permiten evaluar el impacto ambiental y desarrollar estrategias de mitigación efectivas. Comprometidos con la sostenibilidad, nos aseguramos de que su proyecto avance respetando la rica biodiversidad del entorno.",
+    "imagen": "servicios/banner-planes-de-manejo-ambiental-001_owU2zCV.jpg"
+  }
+},
+{
+  "model": "servicios.subservicio",
+  "pk": 19,
+  "fields": {
+    "servicio": 2,
+    "nombre": "Auditoria e interventoría.",
+    "descripcion": "Magna ingeniería y topografía se especializa en ofrecer servicios integrales de auditoría e interventoría, asegurando la máxima calidad y eficiencia en cada proyecto. Nuestro equipo de trabajo interdisciplinar garantiza el cumplimiento de normativas y la satisfacción total de nuestros clientes. Comprometidos con la excelencia, brindamos soluciones efectivas y adaptadas a las necesidades específicas de cada empresa, con un enfoque proactivo en la gestión de riesgos y la optimización de recursos.",
+    "imagen": "servicios/R_1.jpeg"
+  }
+},
+{
+  "model": "servicios.subservicio",
+  "pk": 20,
+  "fields": {
+    "servicio": 2,
+    "nombre": "Monitoreo de calidad de aire y ruido",
+    "descripcion": "Magna ingeniería y topografía se especializa en el monitoreo avanzado de la calidad del aire y niveles de ruido, garantizando un ambiente laboral óptimo y el cumplimiento de las normativas ambientales. Nuestros servicios incluyen análisis detallados y reportes personalizados, utilizando tecnología de punta para ofrecer resultados precisos y confiables. Comprometidos con la sostenibilidad y la salud pública, somos su aliado estratégico en la gestión ambiental eficiente.",
+    "imagen": "servicios/OIP_4.jpeg"
+  }
+},
+{
+  "model": "servicios.subservicio",
+  "pk": 21,
+  "fields": {
+    "servicio": 2,
+    "nombre": "Asesoría en sistemas de gestión NTC- ISO 14001, ISO 9001 y 45001",
+    "descripcion": "Magna ingeniería y topografía ofrece asesoría especializada en sistemas de gestión conforme a las normas NTC-ISO 14001, ISO 9001 y 45001, garantizando la excelencia y el cumplimiento de los más altos estándares internacionales. Nuestro equipo de expertos proporciona soluciones integrales que se adaptan a las necesidades específicas de su empresa, asegurando una gestión eficiente y la mejora continua de sus procesos. Comprometidos con la sostenibilidad y la seguridad, estamos dedicados a impulsar el éxito y la innovación en su organización.",
+    "imagen": "servicios/CO-22-10-LANDING-FOTO-01.jpg"
+  }
+},
+{
+  "model": "servicios.subservicio",
+  "pk": 22,
+  "fields": {
+    "servicio": 1,
+    "nombre": "Levantamientos Lidar",
+    "descripcion": "son levantamientos lidar",
+    "imagen": "servicios/OldGrowthForest_LiDAR.jpg"
+  }
+},
+{
+  "model": "servicios.subservicio",
+  "pk": 23,
+  "fields": {
+    "servicio": 1,
+    "nombre": "Topobatimetría",
+    "descripcion": "servicio de Topobatimetría",
+    "imagen": "servicios/batimeria.jpg"
+  }
+},
+{
+  "model": "equipos.equipo",
+  "pk": 1,
+  "fields": {
+    "nombre": "Eduardo Huepa Penagos",
+    "descripcion": "Gerente General",
+    "posicion": "Gerente General",
+    "imagen_height": 370,
+    "imagen_width": 270,
+    "imagen": "equipos/ceo_AJY5IlY.png"
+  }
+},
+{
+  "model": "equipos.equipo",
+  "pk": 2,
+  "fields": {
+    "nombre": "Nicolas Casas",
+    "descripcion": "Topógrafo de campo especializado",
+    "posicion": "topógrafo",
+    "imagen_height": 270,
+    "imagen_width": 370,
+    "imagen": "equipos/topografo1_MpLNsOM_CPa7hjq.png"
+  }
+},
+{
+  "model": "equipos.tenologias",
+  "pk": 1,
+  "fields": {
+    "nombre": "Receptor Gnss",
+    "descripcion": "Un receptor GNSS es un dispositivo que usa las señales de los satélites para determinar la ubicación exacta de un objeto en la Tierra. Contámos con receptores GNSS de alta tecnología, que nos permiten hacer mediciones topográficas precisas y rápidas.",
+    "imagen_height": 370,
+    "imagen_width": 270,
+    "imagen": "tecnologias/1_ETbVpBS.png"
+  }
+},
+{
+  "model": "equipos.tenologias",
+  "pk": 2,
+  "fields": {
+    "nombre": "Estación Total",
+    "descripcion": "Una estación total es un instrumento de medición que permite determinar la distancia y ángulo entre dos puntos. Contámos con estaciones totales de alta tecnología, que nos permiten hacer mediciones topográficas precisas y rápidas.",
+    "imagen_height": 370,
+    "imagen_width": 270,
+    "imagen": "tecnologias/2.png"
+  }
+},
+{
+  "model": "equipos.tenologias",
+  "pk": 3,
+  "fields": {
+    "nombre": "Dron",
+    "descripcion": "Un dron es una aeronave no tripulada que puede ser controlada de forma remota por un operador. Contámos con drones de alta tecnología, que nos permiten hacer mediciones topográficas precisas.",
+    "imagen_height": 370,
+    "imagen_width": 270,
+    "imagen": "tecnologias/dron_nuevo.png"
+  }
+},
+{
+  "model": "equipos.tenologias",
+  "pk": 4,
+  "fields": {
+    "nombre": "Nivel óptico",
+    "descripcion": "Un nivel óptico es un instrumento de medición que permite determinar la diferencia de altura entre dos puntos. Contámos con niveles ópticos de alta tecnología, que nos permiten hacer mediciones topográficas precisas y rápidas.",
+    "imagen_height": 370,
+    "imagen_width": 270,
+    "imagen": "tecnologias/4.png"
+  }
+},
+{
+  "model": "equipos.tenologias",
+  "pk": 5,
+  "fields": {
+    "nombre": "dji",
+    "descripcion": "El software de DJI utilizado en topografía e ingeniería transforma la manera en que se capturan y analizan datos del terreno. Herramientas como DJI Terra permiten a los profesionales digitalizar su entorno con facilidad, creando modelos 3D y mapas de",
+    "imagen_height": 370,
+    "imagen_width": 270,
+    "imagen": "tecnologias/dji_IclHUwD.png"
+  }
+},
+{
+  "model": "equipos.tenologias",
+  "pk": 6,
+  "fields": {
+    "nombre": "Autocad civil 3d",
+    "descripcion": "AutoCAD Civil 3D es una solución de diseño asistido por computadora altamente especializada,  Este software permite a los profesionales realizar análisis de pendientes, diseñar infraestructuras como carreteras y sistemas de drenaje, y gestionar datos",
+    "imagen_height": 370,
+    "imagen_width": 270,
+    "imagen": "tecnologias/auto.png"
+  }
+},
+{
+  "model": "equipos.tenologias",
+  "pk": 7,
+  "fields": {
+    "nombre": "Topcon",
+    "descripcion": "El software Topcon es una herramienta esencial en el campo de la topografía e ingeniería, ofreciendo soluciones avanzadas para la medición y el levantamiento del terreno. Con tecnologías como estaciones totales robóticas y receptores GNSS, Topcon fac",
+    "imagen_height": 370,
+    "imagen_width": 270,
+    "imagen": "tecnologias/topcon.png"
+  }
+},
+{
+  "model": "equipos.tenologias",
+  "pk": 8,
+  "fields": {
+    "nombre": "pix 4d",
+    "descripcion": "Pix4D es un software avanzado de fotogrametría utilizado ampliamente en topografía e ingeniería para convertir imágenes aáreas, capturadas por drones o aviones, en modelos 3D precisos, mapas y ortomosaicos. Su capacidad para combinar datos LiDAR y fo",
+    "imagen_height": 370,
+    "imagen_width": 270,
+    "imagen": "tecnologias/pix4d.png"
+  }
+},
+{
+  "model": "frequentQuestions.pregunta",
+  "pk": 1,
+  "fields": {
+    "pregunta": "¿Cuanto cuesta un servicio de medición del terreno?",
+    "respuesta": "El costo de un servicio de medición de terreno puede variar dependiendo de varios factores, como la ubicación, el tamaño del terreno, la complejidad del trabajo y el profesional que realice el servicio"
+  }
+},
+{
+  "model": "frequentQuestions.pregunta",
+  "pk": 2,
+  "fields": {
+    "pregunta": "¿Cuál es la precisión de un levantamiento topográfico?",
+    "respuesta": "La precisión de un levantamiento topográfico depende de varios factores, como el equipo utilizado, la densidad de puntos medidos y la experiencia del topógrafo. En general, se busca una precisión alta para proyectos de ingeniería y construcción, mientras que para aplicaciones más generales, la precisión puede ser menor."
+  }
+},
+{
+  "model": "products.category",
+  "pk": 1,
+  "fields": {
+    "name": "drones"
+  }
+},
+{
+  "model": "products.category",
+  "pk": 2,
+  "fields": {
+    "name": "Accesorios de topografía"
+  }
+},
+{
+  "model": "products.category",
+  "pk": 3,
+  "fields": {
+    "name": "Fotografía"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 1,
+  "fields": {
+    "name": "dron",
+    "slug": "dron",
+    "category": 1,
+    "image": "products/s-l960.jpg",
+    "brand": "super dron",
+    "price": "2500000.00",
+    "countInStock": 5,
+    "description": "super mega dron, super mega conomico",
+    "rating": "2.00",
+    "numReviews": 5
+  }
+},
+{
+  "model": "products.product",
+  "pk": 2,
+  "fields": {
+    "name": "Placas para mojones geodésicos",
+    "slug": "placas-para-mojones-geodesicos",
+    "category": 2,
+    "image": "products/D_NQ_NP_947511-MCO73377594675_122023-O.webp",
+    "brand": "Las mas resistendes placas para mojones geodésicos en aluminio",
+    "price": "16000.00",
+    "countInStock": 400,
+    "description": "Placas en material de aluminio para marcar y usar como referencia en puntos de control geodésico",
+    "rating": "4.50",
+    "numReviews": 15
+  }
+},
+{
+  "model": "products.product",
+  "pk": 3,
+  "fields": {
+    "name": "Mira topográfica de nivel 5 m",
+    "slug": "mira-topografica-de-nivel-5-m",
+    "category": 2,
+    "image": "products/image.png",
+    "brand": "mirar milimétrica",
+    "price": "150000.00",
+    "countInStock": 100,
+    "description": "mirar milimétrica",
+    "rating": "4.50",
+    "numReviews": 30
+  }
+},
+{
+  "model": "products.product",
+  "pk": 4,
+  "fields": {
+    "name": "Bastón de Extensión en Aluminio 5.2 metros, Seguro de Tornillo Lateral. EXTRA DURAción",
+    "slug": "baston-de-extension-en-aluminio-52-metros-seguro-de-tornillo-lateral-extra-duracion",
+    "category": 2,
+    "image": "products/image.jpeg",
+    "brand": "Material: Aluminio",
+    "price": "400000.00",
+    "countInStock": 100,
+    "description": "Seguro de tornillo lateral fabricado con piezas metálicas. Adaptador 5/8\" o estilo Leica opcional. Funda Suave de transporte.",
+    "rating": "4.40",
+    "numReviews": 32
+  }
+},
+{
+  "model": "products.product",
+  "pk": 5,
+  "fields": {
+    "name": "Diana reflectiva",
+    "slug": "diana-reflectiva",
+    "category": 2,
+    "image": "products/diana-reflectiva2.jpg",
+    "brand": "diana reflectiva topográfica de 6 x 6 cm",
+    "price": "50.00",
+    "countInStock": 93,
+    "description": "Diana reflectiva topográfica de 6 x 6 cm en vinilo adhesivo es un componente esencial en trabajos de topografía y medición que requieren una marcación precisa. Esta diana, fabricada con vinilo adhesivo de alta calidad",
+    "rating": "4.40",
+    "numReviews": 98
+  }
+},
+{
+  "model": "products.product",
+  "pk": 6,
+  "fields": {
+    "name": "Prisma",
+    "slug": "prisma",
+    "category": 2,
+    "image": "products/image_1.jpeg",
+    "brand": "Prisma",
+    "price": "230000.00",
+    "countInStock": 100,
+    "description": "Prisma compatible con Topcon, SOKKIA, Nikon y Pentax Total station para obtener rendimiento y durabilidad",
+    "rating": "4.60",
+    "numReviews": 50
+  }
+},
+{
+  "model": "products.product",
+  "pk": 7,
+  "fields": {
+    "name": "tripode de alumnio",
+    "slug": "tripode-de-alumnio",
+    "category": 3,
+    "image": "products/image_3.jpeg",
+    "brand": "tripode-de-alumnio",
+    "price": "120000.00",
+    "countInStock": 100,
+    "description": "Material: Aluminio\r\nColor: Naranja/Plata\r\nLongitud cerrado: 103 cm.\r\nLongitud abierto: 166 cm.\r\nDiámetro de la cabeza: 167 mm\r\nPeso Total: 4.8 Kg",
+    "rating": "4.20",
+    "numReviews": 13
+  }
+},
+{
+  "model": "products.promociones",
+  "pk": 1,
+  "fields": {
+    "name": "drones al 20",
+    "image": "promo/INCREIBLES_OFERTAS_PEbITDt.gif",
+    "description": "estamos de rebaja en nuestros drones",
+    "discount": "10.00",
+    "timestamp": "2024-04-19T01:16:54.392Z",
+    "products": [
+      1
+    ]
+  }
+},
+{
+  "model": "user.user",
+  "pk": 2,
+  "fields": {
+    "password": "argon2$argon2id$v=19$m=102400,t=2,p=8$MHB4NGZkVm9FZm1BRVJ2Y25lQUtjSw$+XW5t9/OUEugJtnyhS7gXroyLX4v3LBgYxXwXd4Myps",
+    "last_login": "2024-06-05T08:46:46.401Z",
+    "is_superuser": true,
+    "date_joined": "2024-01-24T05:00:28.343Z",
+    "email": "migue2807.maqd@gmail.com",
+    "first_name": "miguel angel",
+    "last_name": "quiroga duran",
+    "is_active": true,
+    "is_staff": true,
+    "is_editor": false,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "user.user",
+  "pk": 3,
+  "fields": {
+    "password": "argon2$argon2id$v=19$m=102400,t=2,p=8$TkhoeWx3UFNRdkcwU2xVRVZjbWxmaA$w3JJK3eb7O5JIuRsdDeTgDJQSj2nnYk8xu/xk/rt5RE",
+    "last_login": "2024-03-01T22:18:40.158Z",
+    "is_superuser": true,
+    "date_joined": "2024-01-24T05:13:09.178Z",
+    "email": "eduardohuepapenagos@gmail.com",
+    "first_name": "Eduardo",
+    "last_name": "Huepa Penagos",
+    "is_active": true,
+    "is_staff": true,
+    "is_editor": false,
+    "groups": [],
+    "user_permissions": []
+  }
+}
+]

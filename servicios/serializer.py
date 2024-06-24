@@ -18,7 +18,7 @@ class ServicioSerializer(serializers.ModelSerializer):
     caracteristicas = CharacteristicSerializer(many=True, read_only=True,source='characteristic_set')
     class Meta:
         model = Servicio
-        fields = ['id','nombre', 'descripcion', 'imagen', 'icon', 'subservicios', 'caracteristicas']
+        fields = ['id','nombre', 'descripcion', 'imagen', 'icon','imagen_tablet', 'imagen_celular', 'subservicios', 'caracteristicas']
 
 class GetIdServiciosSerializer(serializers.ModelSerializer):
     class Meta:
@@ -30,9 +30,9 @@ class ServicesAndSubservicesSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Servicio
-        fields = '__all__'
+        fields = ['id', 'nombre','descripcion', 'imagen', 'icon', 'imagen_tablet', 'imagen_celular']
 
 class BrochureSerializer(serializers.ModelSerializer):
     class Meta:
         model = Brochure
-        fields = ['nombre', 'archivo']
+        fields = ['id','nombre', 'archivo']

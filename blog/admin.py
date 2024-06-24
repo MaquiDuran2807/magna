@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import BlogPost, Category, Comment, Thumbnail
+from .models import BlogPost, Category, Comment
 from django.db import models
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
@@ -31,7 +31,3 @@ class CommentAdmin(admin.ModelAdmin):
     date_hierarchy = 'created_date'
     ordering = ('created_date',)
    
-@admin.register(Thumbnail)
-
-class ThumbnailAdmin(admin.ModelAdmin):
-    list_display = ('image',)

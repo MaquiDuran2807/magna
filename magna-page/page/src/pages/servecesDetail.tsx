@@ -74,7 +74,8 @@ const ServecesDetail: React.FC = () => {
         }
     }, [serveces, id]);
 
-    const { width } = useScreenSize();
+    const { width,height } = useScreenSize();
+    console.log(width,height);
     const isMobile = width <= 1000;
     const subServicioPaginaRef = useRef<HTMLDivElement>(null);
     if (isMobile) {
@@ -187,11 +188,11 @@ const ServecesDetail: React.FC = () => {
                             </div>
                         </div>
                         <div className="col-12 col-md-8 " >
-                            <div className="row slider">
+                            <div className="row mb-5">
                                 <SliderServices subServicios={slider} subtitle={subtitle} />
                             </div>
                             
-                            <div className="row porque-elegirnos" ref={subServicioPaginaRef} key={selectedSubServicio && selectedSubServicio[0]?.descripcion}>
+                            <div className="row" ref={subServicioPaginaRef} key={selectedSubServicio && selectedSubServicio[0]?.descripcion}>
                                 <AnimatePresence>
                                     <motion.div
                                         initial={{ height: 0, opacity: 0 }}
@@ -200,11 +201,11 @@ const ServecesDetail: React.FC = () => {
                                         transition={{ duration: 0.3, delay: 1, delayChildren: 0.3, staggerChildren: 0.3 }}
                                         key={selectedSubServicio && selectedSubServicio[0]?.id}
                                     >
-                                        <h2>
+                                        <h3>
                                             {selectedSubServicio
                                                 ? selectedSubServicio[0].nombre
                                                 : "Servicios de calidad y con la más alta tecnología"}
-                                        </h2>
+                                        </h3>
                                         <p>
                                             {selectedSubServicio
                                                 ? selectedSubServicio[0].descripcion
@@ -214,7 +215,7 @@ const ServecesDetail: React.FC = () => {
                                 </AnimatePresence>
                                 <div></div>
                                 <div className='my-5'>
-                                    <h2>Brochure</h2>
+                                    <h3>Brochure</h3>
                                     <p>
                                         Para obtener una visión completa de nuestros servicios y ventajas, te invitamos a descargar nuestro brochure informativo. Aquí encontrarás detalles exhaustivos sobre nuestras ofertas, testimonios de clientes satisfechos y la información de contacto necesaria para dar el siguiente paso hacia una colaboración exitosa. ¡Descubre cómo podemos ayudarte a alcanzar tus objetivos hoy mismo!
                                     </p>

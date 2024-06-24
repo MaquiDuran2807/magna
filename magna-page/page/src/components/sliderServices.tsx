@@ -32,14 +32,23 @@ const SliderServices: React.FC<SliderServicesProps> = ({ subServicios,subtitle})
         >
             {subServicios?.map((subServicio, index) => (
                 <SwiperSlide key={index}>
-                    <div className={`slide-service ${subServicio.nombre} ` }>
-                        <img src={subServicio.imagen} alt={subServicio.nombre} className='img-fluid img-subservicio' />
-                        <h3>
-                            {
-                                subtitle ? subServicio.nombre :  '' 
-                            }
-                        </h3>
+                    <div className={`slide-service ` }>
+                        <img srcSet={`
+                            ${subServicio.imagen_celular} 450w,
+                            ${subServicio.imagen_tablet} 1024w,
+                            ${subServicio.imagen} 5000w
+                        `}
+                        sizes="(max-width: 450px) 280px,
+                            (max-width: 1023px) 736px,
+                            (min-width: 1024px) 1024px"
+                              alt={subServicio.nombre}
+                        className='img-fluid img-subservicio ' />
                     </div>
+                    <h3 className='title-slider-service'>
+                        {
+                            subtitle ? subServicio.nombre :  '' 
+                        }
+                    </h3>
                     
                 </SwiperSlide>
             ))}

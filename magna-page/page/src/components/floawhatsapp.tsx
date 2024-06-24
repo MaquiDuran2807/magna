@@ -22,7 +22,7 @@ export const FloatWhatsapp = () => {
 
     return (
         <FloatingWhatsApp
-            phoneNumber="3132356306"
+            phoneNumber="3015490115"
             accountName="Magna"
             avatar={logo}
             allowClickAway
