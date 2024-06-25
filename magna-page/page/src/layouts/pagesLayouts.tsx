@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, lazy, Suspense } from 'react';
 import { useLocation } from 'react-router-dom';
-import { motion } from 'framer-motion'; // Importa motion de Framer Motion
-import NavBar from '../components/navBar';
-import FloatWhatsapp from '../components/floawhatsapp';
+import { motion } from 'framer-motion';
 
+const LazyNavBar = lazy(() => import('../components/navBar'));
+const LazyFloatWhatsapp = lazy(() => import('../components/floawhatsapp'));
 const LazyFooter1 = lazy(() => import('../components/footer1'));
 
 interface PagesLayoutProps {
@@ -11,8 +11,6 @@ interface PagesLayoutProps {
 }
 
 const PagesLayout: React.FC<PagesLayoutProps> = ({ children }) => {
-    console.log("PagesLayout");
-    
     const inicioDePaginaRef = useRef<HTMLDivElement | null>(null);
     const location = useLocation();
 
@@ -22,9 +20,8 @@ const PagesLayout: React.FC<PagesLayoutProps> = ({ children }) => {
         }
     }, [location]);
 
-    // Define las variantes de animación
     const pageVariants = {
-        initial: { opacity: 0  },
+        initial: { opacity: 0 },
         in: { opacity: 1 },
         out: { opacity: 0 },
     };
@@ -37,14 +34,17 @@ const PagesLayout: React.FC<PagesLayoutProps> = ({ children }) => {
             variants={pageVariants}
             transition={{ type: "tween", duration: 0.7 }}
         >
-            <div ref={inicioDePaginaRef}>
-                <NavBar />
-            </div>
-            {children}
-            <Suspense fallback={<>cargando...</>}>
-                <LazyFooter1 />
+            <Suspense fallback={<div>Cargando...</div>}>
+                <div ref={inicioDePaginaRef}>
+                    <LazyNavBar />
+
+                </div>
             </Suspense>
-            <FloatWhatsapp />
+                {children}
+            <Suspense fallback={<div>Cargando...</div>}>
+                <LazyFooter1 />
+                <LazyFloatWhatsapp />
+            </Suspense>
         </motion.div>
     );
 };

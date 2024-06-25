@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-// import Spinner from './components/spinner';
 import ServiciosIdProvider from './hooks/GetsIdServices';
 
 import ProtectedRoute from "./routes/PrivateRoute";
@@ -28,7 +27,7 @@ import Spinner from './components/spinner';
 const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
-  { path: '/', element: <App /> },
+  { path: '/', element: <React.Suspense fallback={<Spinner />}><App /></React.Suspense> },
   { path: '/sitemap.xml', element: <Sitemap /> },
   { path: '/login', element: <React.Suspense fallback={<Spinner />}><LazyLogin /></React.Suspense> },
   { path: '/aboutUs', element: <React.Suspense fallback={<Spinner />}><LazyAboutUs /></React.Suspense> },

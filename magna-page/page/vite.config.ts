@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(),
@@ -16,6 +17,8 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: 'index.html',
+        getServices: 'src/hooks/GetsIdServices.tsx',
+        PagesLayout: 'src/layouts/pagesLayouts.tsx',
         app: 'src/App.tsx',
       },
       output: {
@@ -25,5 +28,5 @@ export default defineConfig({
       },
     },
   },
-  base: '/static/',
+  // base: '/static/',
 })

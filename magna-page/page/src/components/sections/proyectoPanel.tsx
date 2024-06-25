@@ -12,32 +12,41 @@ import ingenieria from '../../assets/img/banner/ingenieria.webp';
 import medio from '../../assets/img/banner/medio.webp';
 import useIntersectionObserver from '../../hooks/useLazyload';
 
-const AsyncImages = async () => {
-    const imagesPaths = await[
-        nosotros,
-        servicios,
-        projects,
-        topo,
-        ingenieria,
-        medio,
-       ];
-    
-    const images: HTMLImageElement[] =await  [];
-    
-    await imagesPaths.forEach(path => {
-        const img = new Image();
-        img.src = path;
-        images.push(img);
+const preloadImages = async (imagesPaths: any[]) => {
+    const promises = imagesPaths.map(path => {
+        return new Promise((resolve, reject) => {
+            const img = new Image();
+            img.onload = () => {
+                document.body.appendChild(img); // Agrega la imagen al cuerpo del documento
+                img.style.display = 'none'; // Hace que la imagen no sea visible, pero aún se cargue
+                resolve(img);
+            };
+            img.onerror = reject;
+            img.src = path;
+        });
     });
-
-}
+    try {
+        await Promise.all(promises);
+        console.log('Todas las imágenes han sido cargadas en el fondo.');
+    } catch (error) {
+        console.error('Error al cargar una o más imágenes', error);
+    }
+};
 
 
 
 const ProyectoPanel = memo(() => {
 
     useEffect(() => {
-          AsyncImages();
+        const imagesPaths = [
+            nosotros,
+            servicios,
+            projects,
+            topo,
+            ingenieria,
+            medio,
+        ];
+        preloadImages(imagesPaths);
     }, []);
     return(
         <section className="about-us">

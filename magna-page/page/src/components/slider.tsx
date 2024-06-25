@@ -29,7 +29,9 @@ const variantes = {
 
 const Slider=memo( () => {
   
-  const {services}=useServicios();
+  const {services,images}=useServicios();
+  console.log(images);
+  
 if (!services) {
   return null;
 }
@@ -51,15 +53,15 @@ if (!services) {
       className="mySwiper"
       
     >
-      {services?.map((servicio, index) => (
-        <SwiperSlide key={index}>
-          <div className={`container-fluid sliders`} style={{ backgroundImage: `linear-gradient(to bottom left,rgba(0, 0, 0, 0.8) 0%,rgba(0, 0, 0, 0.7) 35%,rgba(0, 0, 0, 0.8) 100%), url( ${servicio.imagen})` }}>
+      {services?.map((servicio) => (
+        <SwiperSlide key={servicio.id}>
+          <div className={`container-fluid sliders`} style={{ backgroundImage: `linear-gradient(to bottom left,rgba(0, 0, 0, 0.8) 0%,rgba(0, 0, 0, 0.7) 35%,rgba(0, 0, 0, 0.8) 100%), url( ${images[servicio.id-1]})` }}>
 
             <motion.div
-              ref={refs[index].ref}
+              ref={refs[servicio.id-1].ref}
               variants={variantes}
               initial='hidden'
-              animate={refs[index].inView ? 'show' : 'hidden'}
+              animate={refs[servicio.id-1].inView ? 'show' : 'hidden'}
               exit='exit'
             >
               <div className="container">
