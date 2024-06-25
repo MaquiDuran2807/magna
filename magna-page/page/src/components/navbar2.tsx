@@ -76,7 +76,7 @@ const NavBar = () => {
     export default function LazyNavbar2 () {
       const {  isVisible, ref } = useIntersectionObserver('100px');
       return (
-          <div id="LazyServices" ref={ref}>
+          <div id="LazyNavbar2" ref={ref}>
               {isVisible ? <NavBar /> : null}
           </div>
       );

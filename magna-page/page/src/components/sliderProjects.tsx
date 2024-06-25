@@ -1,15 +1,15 @@
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Pagination, Navigation } from 'swiper/modules';
-import './styles/projects.css';
-import iconarrow from '../assets/img/SVG/Recurso 1.svg';
+import { Link } from 'react-router-dom';
+import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
-import 'swiper/css';
+import { Autoplay, Navigation, Pagination } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import iconarrow from '../assets/img/SVG/Recurso 1.svg';
 import useScreenSize from '../hooks/ScreenSize';
-import { Link } from 'react-router-dom';
-import {  Result } from '../types/projects';
-import { useGetProjects } from '../hooks/getProjects';
+import { useGetProjects } from '../hooks/getInfoPage';
+import { Result } from '../types/projects';
+import './styles/projects.css';
 
 export const SwiperProjects = () => {
   const { projects, projectImages } = useGetProjects();

@@ -17,7 +17,6 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: 'index.html',
-        getServices: 'src/hooks/GetsIdServices.tsx',
         PagesLayout: 'src/layouts/pagesLayouts.tsx',
         app: 'src/App.tsx',
       },
@@ -28,5 +27,5 @@ export default defineConfig({
       },
     },
   },
-  // base: '/static/',
+  base: '/static/',
 })

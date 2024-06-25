@@ -1,12 +1,12 @@
 
-import logo from '../../assets/img/SVG/Recurso 1.svg'
-import { SetionHeader } from '../setionHeader'
-import '../styles/equipos.css'
+import { Suspense, memo, useState } from 'react';
 import { APIURL } from '../../apiClient';
-import useIntersectionObserver from '../../hooks/useLazyload'
-import { useState, Suspense, memo } from 'react';
+import logo from '../../assets/img/SVG/Recurso 1.svg';
+import useGetWorjers from '../../hooks/getInfoPage';
+import useIntersectionObserver from '../../hooks/useLazyload';
+import { SetionHeader } from '../setionHeader';
+import '../styles/equipos.css';
 import TarjetaEquipo from '../tarjetaEquipo';
-import useGetWorjers from '../../hooks/getProjects';
 
 
 const Equipos1 = memo(() => {;

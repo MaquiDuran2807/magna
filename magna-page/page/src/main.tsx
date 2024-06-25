@@ -2,8 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import ServiciosIdProvider from './hooks/GetsIdServices';
-
 import ProtectedRoute from "./routes/PrivateRoute";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
@@ -23,6 +21,7 @@ const LazyBlogDetail = React.lazy(() => import('./pages/blogDetail'));
 const LazyBlog = React.lazy(() => import('./pages/blog'));
 import Sitemap from './sitemap/sitemap';
 import Spinner from './components/spinner';
+
 
 const queryClient = new QueryClient();
 
@@ -49,12 +48,10 @@ console.log("main.tsx");
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <ServiciosIdProvider>
         <AuthProvider>
           <RouterProvider router={router} />
           <ReactQueryDevtools initialIsOpen={false} />
         </AuthProvider>
-      </ServiciosIdProvider>
     </QueryClientProvider>
   </React.StrictMode>
 );

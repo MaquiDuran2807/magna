@@ -1,11 +1,13 @@
 import React, { Suspense } from 'react';
 import PagesLayout from './layouts/pagesLayouts';
-import Slider from './components/slider';
 import './App.css';
 import useIntersectionObserver from './hooks/useLazyload';
+import { useGetServices } from './hooks/getInfoPage';
+import { Spinner } from 'react-bootstrap';
 
 // Agrupación de importaciones lazy
 const LazySections = {
+  Slider: React.lazy(() => import('./components/slider')),
   ProyectoPanel: React.lazy(() => import('./components/sections/proyectoPanel')),
   LazyProyectos: React.lazy(() => import('./components/sections/proyectos')),
   LazyServicios: React.lazy(() => import('./components/sections/Servicios')),
@@ -16,13 +18,21 @@ const LazySections = {
 };
 
 function App() {
-  console.log("App");
+  const { services } = useGetServices();
+  if (!services) {
+    return null;
+  }
   
   return (
     <>
     <PagesLayout>
-        <Slider />
-        <Suspense fallback={<div>Cargando ProyectoPanel...</div>}>
+      <div style={{minHeight:"100vh"}}>
+        <Suspense  fallback={<Spinner/>}>
+            <LazySections.Slider services={services}/>
+        </Suspense>
+      </div>
+        
+        <Suspense fallback={<div style={{marginBottom:"400px"}}>Cargando ProyectoPanel...</div>}>
           <div style={{ minHeight: '300px' }}>
             <LazySections.ProyectoPanel />
           </div>

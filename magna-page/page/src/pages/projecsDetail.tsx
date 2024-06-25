@@ -1,13 +1,13 @@
-import React, { useEffect, lazy } from 'react';
+import React, { lazy, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import Banner from '../components/banner';
 import imagenBanner from '../assets/img/banner/projects.webp';
-import { Result, ProyectImagesMagna, Servicio } from '../types/projects';
+import Banner from '../components/banner';
 import SliderProjectDetail from '../components/sliderProjectDetail';
-import PagesLayout from '../layouts/pagesLayouts';
-import './styles/projectsDetail.css';
-import { useGetProjects } from '../hooks/getProjects';
+import { useGetProjects } from '../hooks/getInfoPage';
 import useIntersectionObserver from '../hooks/useLazyload';
+import PagesLayout from '../layouts/pagesLayouts';
+import { ProyectImagesMagna, Result, Servicio } from '../types/projects';
+import './styles/projectsDetail.css';
 
 const Proyectos = lazy(() => import('../components/sections/proyectos'));
 const LazyCardsProjects = lazy(() => import('../components/cardsProjects'));

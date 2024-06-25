@@ -1,4 +1,3 @@
-import { useQuery } from '@tanstack/react-query';
 import { AnimatePresence, motion } from 'framer-motion';
 import { lazy, useEffect, useRef, useState } from "react";
 import { AiFillCaretDown, AiOutlineDoubleRight } from "react-icons/ai";
@@ -15,8 +14,8 @@ import { Servicio2, Subservicio } from "../types/types";
 import "./styles/servicesDetail.css";
 import Spinner from '../components/spinner';
 import useIntersectionObserver from '../hooks/useLazyload';
+import { useGetServices } from '../hooks/getInfoPage';
 const PdfViewer = lazy(() => import('../components/brochure'));
-
 const LazyServicios = lazy(() => import('../components/sections/Servicios'));
 
 
@@ -26,12 +25,7 @@ const ServecesDetail: React.FC = () => {
 
     let [title, setTitle] = useState<String>("Nuestros Servicios");
     let [imagen, setImagen] = useState<String>(imagenServicios);
-    const { data: serveces } = useQuery<Servicio2[]>({
-        queryKey: ['services'],
-        staleTime: 1000 * 60 * 30,
-        refetchOnWindowFocus: false,
-        refetchInterval: 1000 * 60 * 30,
-    });
+    const { services } = useGetServices();
     let dispositivo = "container";
     const [servicio_elegido, setServicio_elegido] = useState<Servicio2[]>();
     const [selectedSubServicio, setSelectedSubServicio] = useState<Subservicio[] | null>(null);
@@ -39,16 +33,16 @@ const ServecesDetail: React.FC = () => {
     const [subtitle, setSubtitle] = useState<boolean>(true);
 
     const filterServicio = (id: string) => {
-        if (!serveces) {
+        if (!services) {
             return;
         }
-        const servicio: Servicio2[] = serveces.filter((servicio: Servicio2) => servicio.nombre === id);
+        const servicio: Servicio2[] = services.filter((servicio: Servicio2) => servicio.nombre === id);
         setSlider(servicio[0].subservicios);
         return servicio;
     }
 
     useEffect(() => {
-        if (serveces) {
+        if (services) {
             if (id) {
                 const servicioElegido = filterServicio(id);
                 if (servicioElegido) {
@@ -66,13 +60,13 @@ const ServecesDetail: React.FC = () => {
                     }
                 }
             } else {
-                setServicio_elegido(serveces);
+                setServicio_elegido(services);
                 setTitle("Nuestros Servicios");
-                const subServicios = serveces.flatMap((subServicio) => subServicio.subservicios);
+                const subServicios = services.flatMap((subServicio) => subServicio.subservicios);
                 setSlider(subServicios);
             }
         }
-    }, [serveces, id]);
+    }, [services, id]);
 
     const { width,height } = useScreenSize();
     console.log(width,height);
@@ -101,7 +95,7 @@ const ServecesDetail: React.FC = () => {
         setTimeout(() => {
             setSelectedSubServicio(null);
             setSubtitle(true);
-            if (!serveces) {
+            if (!services) {
                 return
             }
             filterServicio(id);

@@ -1,10 +1,10 @@
+import { memo } from 'react';
+import imagen from '../assets/img/banner/projects.webp';
 import Banner from '../components/banner';
 import CardsProjects from '../components/cardsProjects';
-import PagesLayout from '../layouts/pagesLayouts';
-import imagen from '../assets/img/banner/projects.webp';
-import { useGetProjects } from '../hooks/getProjects';
-import { memo } from 'react';
+import { useGetProjects } from '../hooks/getInfoPage';
 import useIntersectionObserver from '../hooks/useLazyload';
+import PagesLayout from '../layouts/pagesLayouts';
 
 const Projects: React.FC = memo(() => {
     // 

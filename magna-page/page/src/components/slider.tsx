@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo} from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, Navigation,A11y } from 'swiper/modules';
 import { useInView } from 'react-intersection-observer'
@@ -13,30 +13,31 @@ import { BotonesSwiper } from './BotonesSwiper';
 
 import { Link } from 'react-router-dom';
 import useIntersectionObserver from '../hooks/useLazyload';
-import { useServicios } from '../hooks/GetsIdServices';
+import { Servicio2 } from '../types/types';
 
-const variantes = {
-  hidden: { opacity: 0, y: 50 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 1,
-    },
-  },
-  exit: { opacity: 0, y: 50 },
+type SliderProps = {
+  services: Servicio2[] ;
 };
 
-const Slider=memo( () => {
-  
-  const {services,images}=useServicios();
-  console.log(images);
-  
-if (!services) {
-  return null;
-}
+
+const Slider=memo( ({services}: SliderProps) => {
+
   const refs = services?.map(() => useInView({ triggerOnce: false, threshold: 0.5
    }));
+   if (!services) {
+    return null;
+  }
+  const variantes = {
+    hidden: { opacity: 0, y: 50 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 1,
+      },
+    },
+    exit: { opacity: 0, y: 50 },
+  };
 
   return (
 
@@ -53,15 +54,15 @@ if (!services) {
       className="mySwiper"
       
     >
-      {services?.map((servicio) => (
-        <SwiperSlide key={servicio.id}>
-          <div className={`container-fluid sliders`} style={{ backgroundImage: `linear-gradient(to bottom left,rgba(0, 0, 0, 0.8) 0%,rgba(0, 0, 0, 0.7) 35%,rgba(0, 0, 0, 0.8) 100%), url( ${images[servicio.id-1]})` }}>
-
+      {services?.map((servicio,index) => (
+        <SwiperSlide key={index}>
+          <div className={`container-fluid sliders`} style={{ backgroundImage: `linear-gradient(to bottom left,rgba(0, 0, 0, 0.8) 0%,rgba(0, 0, 0, 0.7) 35%,rgba(0, 0, 0, 0.8) 100%), url( ${servicio.imagen})` }}>
+            <img src={servicio.imagen} alt="Service Image" style={{ display: 'none' }} />
             <motion.div
-              ref={refs[servicio.id-1].ref}
+              ref={refs && refs[index]?.ref}
               variants={variantes}
               initial='hidden'
-              animate={refs[servicio.id-1].inView ? 'show' : 'hidden'}
+              animate={refs && refs[index]?.inView ? 'show' : 'hidden'}
               exit='exit'
             >
               <div className="container">
@@ -88,12 +89,12 @@ if (!services) {
 });
 
 
-export default function LazySlider  () {
+// Paso 1: Modificar LazySlider para aceptar services como prop
+export default function LazySlider({ services }: { services: Servicio2[]  }) {
   const { isVisible, ref } = useIntersectionObserver('100px');
-
   return (
-      <div id="LazySlider " ref={ref}>
-          {isVisible ? <Slider /> : null}
+      <div id="LazySlider" ref={ref} >
+          {isVisible ? <Slider services={services} /> : null}
       </div>
   );
 }

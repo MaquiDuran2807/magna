@@ -27,7 +27,6 @@ const preloadImages = async (imagesPaths: any[]) => {
     });
     try {
         await Promise.all(promises);
-        console.log('Todas las imágenes han sido cargadas en el fondo.');
     } catch (error) {
         console.error('Error al cargar una o más imágenes', error);
     }
