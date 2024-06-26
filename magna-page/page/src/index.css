@@ -24,7 +24,7 @@ html, body {
   align-items: center;
 }
 
-button, .boton-1 {
+.boton-1 {
   cursor: pointer;
   background-color: var(--color-fondo);
   color: var(--color-texto);
