@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, Navigation,A11y } from 'swiper/modules';
 import { useInView } from 'react-intersection-observer'
 import { motion} from 'framer-motion';
+import "./styles/slider.css"
 
 // Import Swiper styles
 import 'swiper/css/navigation';
@@ -56,8 +57,25 @@ const Slider=memo( ({services}: SliderProps) => {
     >
       {services?.map((servicio,index) => (
         <SwiperSlide key={index}>
-          <div className={`container-fluid sliders`} style={{ backgroundImage: `linear-gradient(to bottom left,rgba(0, 0, 0, 0.8) 0%,rgba(0, 0, 0, 0.7) 35%,rgba(0, 0, 0, 0.8) 100%), url( ${servicio.imagen})` }}>
-            <img src={servicio.imagen} alt="Service Image" style={{ display: 'none' }} />
+          <div className="container-con-imagen">
+                <img 
+                  srcSet={
+                    `${servicio.imagen_celular} 450w,
+                    ${servicio.imagen_tablet} 1024w,
+                    ${servicio.imagen} 5000w`
+                    }
+                  sizes="(max-width: 450px) 280px,
+                  (max-width: 1023px) 736px,
+                  (min-width: 1024px) 1024px"
+                  alt={`imagen de ${servicio.nombre}`} 
+                  loading='eager'
+                  decoding='async'
+                  className="img-fluid imagen"
+                  fetchPriority="high"
+                />
+              </div>
+          <div className={`container-fluid sliders`} >
+          
             <motion.div
               ref={refs && refs[index]?.ref}
               variants={variantes}
@@ -65,9 +83,11 @@ const Slider=memo( ({services}: SliderProps) => {
               animate={refs && refs[index]?.inView ? 'show' : 'hidden'}
               exit='exit'
             >
+              
               <div className="container">
                 <div className="row">
                   <div className="col-12 col-lg-8  description">
+                  
                     <h1 className="title text-capitalize">{servicio.nombre}</h1>
                     <br />
                     <p className="text-white col-12 col-lg-10 ">{servicio.descripcion}</p>

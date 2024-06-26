@@ -6,15 +6,12 @@ import { Link,NavLink} from 'react-router-dom';
 
 const NavBar = (  ) => {
     const themeLogin="text-black"
-    console.log("navbar");
-    
       return (
           <>
             <div className='  '>
                 <Navbar className=" pt-0 mt-0 p-0" expand="lg"  fixed="top" >
-                  <div className='navbarra container-fluid '>
+                  <div className='navbarra container-fluid bg-white'>
                     <Navbar.Brand  className='brand ' as={Link} to="/">
-                      {/* <img src={logo} alt="logo" className='logo' width={"400px"}/> */}
                       <LogoOriginal width={260} className='logoMagna' />
                     </Navbar.Brand>
                     <Navbar.Toggle  aria-controls="basic-navbar-nav" />

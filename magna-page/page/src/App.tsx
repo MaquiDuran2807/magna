@@ -1,6 +1,5 @@
 import React, { Suspense } from 'react';
 import PagesLayout from './layouts/pagesLayouts';
-import './App.css';
 import useIntersectionObserver from './hooks/useLazyload';
 import { useGetServices } from './hooks/getInfoPage';
 import { Spinner } from 'react-bootstrap';

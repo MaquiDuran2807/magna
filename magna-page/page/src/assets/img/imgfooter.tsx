@@ -87,5 +87,5 @@ function Icon(props: Props) {
   );
 }
 
-export { Icon as Icon } ;
+export default Icon ;
 

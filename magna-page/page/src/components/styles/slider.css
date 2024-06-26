@@ -60,11 +60,9 @@
 }
 
 .sliders {
-    background-image: linear-gradient(to bottom left, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.7) 35%, rgba(0, 0, 0, 0.8) 100%), url(./assets/img/app/slide-banner1.webp);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 100%;
+    position: absolute;
+    top: 0;
+    z-index: 2;
 }
 
 .llamado {
@@ -82,3 +80,30 @@
 .hidden {
     display: none;
 }
+
+.container-con-imagen {
+    position: relative;
+    display: inline-block; 
+    width: 100%;
+    height: 100vh;
+  }
+  
+  .container-con-imagen::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: linear-gradient(to bottom left, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.7) 35%, rgba(0, 0, 0, 0.8) 100%);
+    z-index: 1;
+  }
+  
+  .container-con-imagen img {
+    width: 100%; 
+    height: 100%;
+    object-fit: cover;
+    display: block; 
+    position: relative;
+    z-index: 0;
+  }

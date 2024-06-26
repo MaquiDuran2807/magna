@@ -1,64 +1,55 @@
-
-import { FaFacebook, FaInstagram, } from 'react-icons/fa';
+import { lazy,memo,Suspense } from 'react';
+import { FaFacebook, FaInstagram} from 'react-icons/fa';
 import { FaSquareXTwitter,FaTiktok} from "react-icons/fa6";
-import { BsLinkedin } from "react-icons/bs";
-import { Icon } from '../assets/img/imgfooter';
+import { BsLinkedin } from 'react-icons/bs';
+import { Link } from 'react-router-dom';
+// import  Icon  from '../assets/img/imgfooter';
+const LogoFooterLazy = lazy(() => import('../assets/img/imgfooter'));
 import "./styles/footer.css";
 import useIntersectionObserver from '../hooks/useLazyload';
-import { Link } from 'react-router-dom';
 
 
-const Footer1: React.FC = () => {
+const contactInfo = {
+    phone: '3015490115',
+    tel: '2706488',
+    email: 'info@magnaingenieriaytopografia.com',
+    address: 'Cl. 18 #7-27 Ibagué, Tolima. Colombia'
+};
+
+const socialLinks = [
+    { href: "https://m.facebook.com/MAGNAINGENIERIAYTOPOGRAFIA", icon: <FaFacebook size={35} />, name: "Facebook" },
+    { href: "https://www.twitter.com", icon: <FaSquareXTwitter size={35} />, name: "Twitter" },
+    { href: "https://www.instagram.com/magna_ingenieria/", icon: <FaInstagram size={35} />, name: "Instagram" },
+    { href: "https://www.tiktok.com", icon: <FaTiktok size={35} />, name: "TikTok" },
+    { href: "https://www.linkedin.com/in/magna-ingenier%C3%ADa-topograf%C3%ADa-b40a912a5/", icon: <BsLinkedin size={35} />, name: "LinkedIn" }
+];
+
+const Footer1: React.FC =memo( () => {
     return (
         <footer className="bg-footer text-white">
             <div className="container">
                 <div className="row">
-                    <div className="col-6 col-md-5 ">
-
+                    <div className="col-6 col-md-5">
                         <div className="row m-3">
-                            <div className="col-12 col-md-9 ">
-                                <Icon  className='logo-footer'/>
-                            </div>
+                        <Suspense fallback={<div>Cargando...</div>}>
+                            <LogoFooterLazy className='logo-footer'/>
+                        </Suspense>
+                            {/* <Icon className='logo-footer'/> */}
                         </div>
-
-                        <div className="row">
-                            <div className="col-12 col-md-9 ">
-                                <p className="text-white">Somos un equipo de profesionales integrales con gran experiencia, que ofrece servicios de ingeniería de alta calidad, brindando a nuestros clientes soluciones eficaces y concretas.</p>
-                            </div>
-                        </div>
+                        <p>Somos un equipo de profesionales integrales con gran experiencia, que ofrece servicios de ingeniería de alta calidad, brindando a nuestros clientes soluciones eficaces y concretas.</p>
                     </div>
-                    
-                    
-                <div className="col-6 col-md-3">
-                    <div className="row">
-                        <div className="col-12 ">
-                            <h5>Contacto</h5>
-                            <p className="text-white">Cel: 3015490115</p>
-                            <p className="text-white">Tel: 2706488</p>
-                            <a href='mailto:info@magnaingenieriaytopografia.com' className="text-white "  >
-                                <button className='boton-1 mb-2'>
-                                enviar correo
-                                </button>
-                            </a>
-                            <div className="overflow-auto" style={{scrollbarColor:"black",scrollbarWidth:"thin"}}>
+                    <div className="col-6 col-md-3">
+                        <h5>Contacto</h5>
+                        <p>Cel: {contactInfo.phone}</p>
+                        <p>Tel: {contactInfo.tel}</p>
+                        <div className="overflow-auto" style={{scrollbarColor:"black",scrollbarWidth:"thin"}}>
                             info@magnaingenieriaytopografia.com
-                            </div>
                         </div>
+                        <h5>Dirección</h5>
+                        <p>{contactInfo.address}</p>
                     </div>
-                    <div className="row">
-                        <div className="col-12">
-                            <h5>Dirección</h5>
-                            <p className="text-white">Cl. 18 #7-27</p>
-                            <p className="text-white">Ibagué, Tolima. Colombia</p>
-                        </div>
-                        </div>
-                    
-                    
-                </div>
-                
                     <div className="col-6 col-md-2">
                         <h5>Mapa del sitio</h5>
-                        {/* Add your site map here */}
                         <p><Link to="/" className="text-white">Inicio</Link></p>
                         <p><Link to="/projects" className="text-white">Proyectos</Link></p>
                         <p><Link to="/servicios" className="text-white">Servicios</Link></p>
@@ -67,31 +58,13 @@ const Footer1: React.FC = () => {
                     <div className="col-6 col-md-2">
                         <h5>Redes Sociales</h5>
                         <ul className="list-inline">
-                            <li className="list-inline-item">
-                                <a href="https://m.facebook.com/MAGNAINGENIERIAYTOPOGRAFIA" target="_blank">
-                                    <FaFacebook size={35} />
-                                </a>
-                            </li>
-                            <li className="list-inline-item">
-                                <a href="https://www.twitter.com" target="_blank">
-                                <FaSquareXTwitter size={35}/>
-                                </a>
-                            </li>
-                            <li className="list-inline-item">
-                                <a href="https://www.instagram.com/magna_ingenieria/" target="_blank">
-                                    <FaInstagram size={35}/>
-                                </a>
-                            </li>
-                            <li className="list-inline-item m-2">
-                                <a href="https://www.tiktok.com" target="_blank">
-                                    <FaTiktok size={35}/>
-                                </a>
-                            </li>
-                            <li className="list-inline-item">
-                                <a href="https://www.linkedin.com/in/magna-ingenier%C3%ADa-topograf%C3%ADa-b40a912a5/" target="_blank">
-                                    <BsLinkedin size={35}/>
-                                </a>
-                            </li>
+                            {socialLinks.map((link, index) => (
+                                <li key={index} className="list-inline-item">
+                                    <a href={link.href} target="_blank" rel="noopener noreferrer">
+                                        {link.icon}
+                                    </a>
+                                </li>
+                            ))}
                         </ul>
                     </div>
                 </div>
@@ -99,16 +72,13 @@ const Footer1: React.FC = () => {
             <div className="row elit">
                 <div className="col-12">
                     <a href="elitit.com" className="text-whithe col-12 copy-elit">
-                    {/* todos los derechos reservados */}
-                        <h6 className="text-white">
-                            @2023 Elit-it. Todos los derechos reservados.
-                        </h6>
+                        <h6>@2023 Elit-it. Todos los derechos reservados.</h6>
                     </a>
                 </div>
             </div>
         </footer>
     );
-};
+});
 
 // export default Footer1;
 

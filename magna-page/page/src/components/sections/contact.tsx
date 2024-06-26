@@ -1,6 +1,6 @@
 import { Formik, Form, Field,ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { useState } from 'react';
+import { memo, useReducer } from 'react';
 import Acordeon from '../acordeon';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -10,39 +10,69 @@ import useIntersectionObserver from "../../hooks/useLazyload"
 import { APIURL} from '../../apiClient';
 
 
-const Contact = () => {
+// Definición de acciones para useReducer
+const actionTypes = {
+  SUBMITTING: 'SUBMITTING',
+  SUCCESS: 'SUCCESS',
+  RESET: 'RESET',
+  ERROR: 'ERROR',
+};
+
+// Reducer para manejar el estado del formulario
+const formReducer = (state: any, action: { type: any; }) => {
+  switch (action.type) {
+    case actionTypes.SUBMITTING:
+      return { ...state, isSubmitting: true, isSuccess: false };
+    case actionTypes.SUCCESS:
+      return { ...state, isSubmitting: false, isSuccess: true };
+    case actionTypes.RESET:
+      return { ...state, isSubmitting: false, isSuccess: false };
+    case actionTypes.ERROR: // Manejar el estado de error
+      return { ...state, isSubmitting: false, isSuccess: false, error: true };
+    default:
+      return state;
+  }
+};
+
+const Contact = memo(() => {
+
   const { width } = useScreenSize();
   const isMobile = width <= 768;
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
-  const handleSubmit = async (values: any) => {
-    setIsSubmitting(true);
+  const [state, dispatch] = useReducer(formReducer, { isSubmitting: false, isSuccess: false });
 
+  const handleSubmit = async (values: any, { resetForm }: any) => {
+    dispatch({ type: actionTypes.SUBMITTING });
+    console.log(values, 'values', APIURL);
+    
     try {
-      // Perform the POST request to API_CONTACTO using the form data
-      // Replace the following line with your actual API call
-
-      await fetch(APIURL+"contact/", {
+      const response = await fetch(APIURL + "contact/", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          
         },
         body: JSON.stringify(values),
-      }).then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
       });
-        
+  
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status}`);
+      }
+  
       toast.success('Formulario enviado con éxito, nos comunicaremos pronto');
-      setIsSuccess(true);
+      dispatch({ type: actionTypes.SUCCESS });
+      resetForm({}); // Resetear el formulario aquí
     } catch (error) {
       toast.error('Hubo un error al enviar el formulario');
+      dispatch({ type: actionTypes.ERROR }); // Despachar acción de error
     } finally {
-      setIsSubmitting(false);
+      dispatch({ type: actionTypes.RESET }); // Cambiar a RESET para restablecer el estado
     }
   };
+  const validationSchema = Yup.object({
+    nombre: Yup.string().required('El nombre es requerido'),
+    telefono: Yup.string().matches(/^\d+$/, 'El teléfono debe ser numérico').required('El teléfono es requerido'),
+    email: Yup.string().email('El correo electrónico no es válido').required('El correo electrónico es requerido'),
+    mensaje: Yup.string().required('El mensaje es requerido'),
+  });
 
   return (
     <section className="contact">
@@ -63,27 +93,16 @@ const Contact = () => {
           <h5 className="my-3">¿Listos para trabajar juntos?</h5>
         </div>
         <div className="row">
-          <Formik
-            initialValues={{
-              nombre: '',
-              telefono: '',
-              email: '',
-              mensaje: '',
-            }}
-            validationSchema={Yup.object({
-              nombre: Yup.string().required('El nombre es requerido'),
-              telefono: Yup.string().required(
-                'El teléfono es requerido'
-              ),
-              email: Yup.string()
-                .email('El correo electrónico no es válido')
-                .required('El correo electrónico es requerido'),
-              mensaje: Yup.string().required(
-                'El mensaje es requerido'
-              ),
-            })}
-            onSubmit={handleSubmit}
-          >
+        <Formik
+          initialValues={{
+            nombre: '',
+            telefono: '',
+            email: '',
+            mensaje: '',
+          }}
+          validationSchema={validationSchema}
+          onSubmit={handleSubmit}
+        >
             <Form>
               <div className="form-group">
                 <label htmlFor="nombre">Nombre</label>
@@ -129,10 +148,14 @@ const Contact = () => {
               <br />
               <button
                 type="submit"
-                className="btn btn-primary"
-                disabled={isSubmitting}
+                className="btn btn-secondary"
+                onClick={() => {
+                  
+                  dispatch({ type: actionTypes.RESET });
+                }}
+                disabled={state.isSubmitting}
               >
-                {isSubmitting ? 'Enviando...' : 'Enviar'}
+                {state.isSubmitting ? 'Enviando...' : 'Enviar'}
               </button>
             </Form>
           </Formik>
@@ -157,10 +180,10 @@ const Contact = () => {
     </div>
   </div>
   <ToastContainer />
-  {isSuccess && 'Nos comunicaremos pronto'}
+  {state.isSuccess && 'Nos comunicaremos pronto'}
 </section>
 );
-}
+})
 
 export default function LazyContact () {
   const {  isVisible, ref } = useIntersectionObserver('100px');
