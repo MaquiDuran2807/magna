@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import ReactGA from 'react-ga4';
 import ProtectedRoute from "./routes/PrivateRoute";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
@@ -43,7 +44,11 @@ const router = createBrowserRouter([
     children: [{ path: '/cotizador', element: <React.Suspense fallback={<Spinner />}><LazyCotizador /></React.Suspense> }],
   },
 ]);
-console.log("main.tsx");
+// Inicializa Google Analytics con tu Measurement ID
+ReactGA.initialize('G-8DBBBFYVF4');
+
+// Envía un evento de vista de página
+ReactGA.send('pageview');
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
