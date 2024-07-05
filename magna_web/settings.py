@@ -12,11 +12,6 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from datetime import timedelta
 from pathlib import Path
-import os
-# import environ
-import dj_database_url
-
-
 # env = environ.Env()
 # environ.Env.read_env()
 

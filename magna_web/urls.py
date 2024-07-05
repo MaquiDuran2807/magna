@@ -51,7 +51,7 @@ urlpatterns = [
     path("blog/",include("blog.urls")),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += [re_path(r'^store/', storeView.as_view(), name='store')]
-urlpatterns += [re_path(r'^(?!media/).*$', indexView.as_view(), name='index')]
+urlpatterns += [re_path(r'^(?!media/|admin/).*$', indexView.as_view(), name='index')]
 
 
 admin.site.site_header = 'Administrador de Magna'

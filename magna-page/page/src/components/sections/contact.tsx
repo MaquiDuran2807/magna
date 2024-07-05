@@ -45,7 +45,7 @@ const Contact = memo(() => {
     console.log(values, 'values', APIURL);
     
     try {
-      const response = await fetch(APIURL + "contact/", {
+      const response = await fetch(APIURL + "/contact/", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
