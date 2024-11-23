@@ -208,13 +208,13 @@ const ServecesDetail: React.FC = () => {
                                     </motion.div>
                                 </AnimatePresence>
                                 <div></div>
-                                <div className='my-5'>
+                                {/* <div className='my-5'>
                                     <h3>Brochure</h3>
                                     <p>
                                         Para obtener una visión completa de nuestros servicios y ventajas, te invitamos a descargar nuestro brochure informativo. Aquí encontrarás detalles exhaustivos sobre nuestras ofertas, testimonios de clientes satisfechos y la información de contacto necesaria para dar el siguiente paso hacia una colaboración exitosa. ¡Descubre cómo podemos ayudarte a alcanzar tus objetivos hoy mismo!
                                     </p>
-                                    {/* <PdfViewer />  */}
-                                </div>
+                                    {/* <PdfViewer />  
+                                </div> */}
                             </div>
                         </div>
                         {servicio_elegido.length === 1 ? (
