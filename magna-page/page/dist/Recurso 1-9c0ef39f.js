@@ -1,2 +1,0 @@
-const o="/Recurso 1-bb89793b.svg";export{o as l};
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiUmVjdXJzbyAxLTljMGVmMzlmLmpzIiwic291cmNlcyI6WyIuLi9zcmMvYXNzZXRzL2ltZy9TVkcvUmVjdXJzbyAxLnN2ZyJdLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgZGVmYXVsdCBcIl9fVklURV9BU1NFVF9fOTg5ZTM1ZmFfX1wiIl0sIm5hbWVzIjpbImxvZ28iXSwibWFwcGluZ3MiOiJBQUFBLE1BQWVBLEVBQUEifQ==
