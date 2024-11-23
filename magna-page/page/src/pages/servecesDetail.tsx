@@ -15,7 +15,7 @@ import "./styles/servicesDetail.css";
 import Spinner from '../components/spinner';
 import useIntersectionObserver from '../hooks/useLazyload';
 import { useGetServices } from '../hooks/getInfoPage';
-const PdfViewer = lazy(() => import('../components/brochure'));
+// const PdfViewer = lazy(() => import('../components/brochure'));
 const LazyServicios = lazy(() => import('../components/sections/Servicios'));
 
 
@@ -213,7 +213,7 @@ const ServecesDetail: React.FC = () => {
                                     <p>
                                         Para obtener una visión completa de nuestros servicios y ventajas, te invitamos a descargar nuestro brochure informativo. Aquí encontrarás detalles exhaustivos sobre nuestras ofertas, testimonios de clientes satisfechos y la información de contacto necesaria para dar el siguiente paso hacia una colaboración exitosa. ¡Descubre cómo podemos ayudarte a alcanzar tus objetivos hoy mismo!
                                     </p>
-                                    <PdfViewer />
+                                    {/* <PdfViewer />  */}
                                 </div>
                             </div>
                         </div>

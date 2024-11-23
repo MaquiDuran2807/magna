@@ -11,10 +11,6 @@ export const FloatWhatsapp = () => {
         // Aquí puedes cambiar el estado del mensaje si es necesario
         setMessage(event.target.value);
         // capturar el mensaje y el destinatario para enviarlo a base de datos
-
-        console.log(value) ;
-        
-
         window.open(`https://wa.me/3015490115?text=${encodeURIComponent(message)}`);
 
     };
@@ -25,7 +21,7 @@ export const FloatWhatsapp = () => {
 
     return (
         <FloatingWhatsApp
-            phoneNumber="3132356306"
+            phoneNumber="3015490115"
             accountName="Magna"
             avatar={logo}
             allowClickAway
