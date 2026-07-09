@@ -9,6 +9,15 @@
   background-position: center;
 }
 
+.contact .title-servicios {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.contact .heading-divider {
+  background-color: #d69e2e;
+}
+
 .contact-izq {
   background-color: rgb(2, 19, 40);
 }
@@ -17,6 +26,7 @@
   font-size: 35px;
   font-weight: 700;
   margin: 10px 0 40px 0;
+  color: #ffffff;
 }
 
 .contact-izq h5 {
