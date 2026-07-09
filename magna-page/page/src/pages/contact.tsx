@@ -6,8 +6,13 @@ import { FaDirections } from 'react-icons/fa';
 import { FaSquarePhone } from 'react-icons/fa6';
 import { MdEmail } from 'react-icons/md';
 import { IoMdClock } from 'react-icons/io';
+import { FaMapMarkerAlt } from 'react-icons/fa';
 import imagen from '../assets/img/banner/projects.webp';
 import useIntersectionObserver from '../hooks/useLazyload';
+import ProgressiveBackground from '../components/ProgressiveBackground';
+import { SetionHeader } from '../components/setionHeader';
+import LogoCarrusel from '../components/LogoCarrusel';
+import mapaColombia from '../assets/img/app/mapa colombia cobertura trabajos.png';
 
 const LazyMapComponents = lazy(() => import('../components/maps'));
 const Contact = lazy(() => import('../components/sections/contact'));
@@ -46,14 +51,14 @@ const ContactPage: React.FC = () => {
     <div>
       <Helmet>
         <title>Contacto | Magna Ingeniería y Topografía</title>
-        <meta name="description" content="Contáctanos. Estamos ubicados en Ibagué, Tolima. Celular: 3015490115 / 3113394860. Escríbenos a info@magnaingenieriaytopografia.com" />
-        <meta name="keywords" content="Magna, Ingeniería, Topografía, Contacto, Ibagué, Tolima, Colombia" />
+        <meta name="description" content="Contáctanos. Oficina en Ibagué, Tolima. Trabajamos en todo Colombia. Celular: 3015490115 / 3113394860. Escríbenos a info@magnaingenieriaytopografia.com" />
+        <meta name="keywords" content="Magna, Ingeniería, Topografía, Contacto, Ibagué, Tolima, Colombia, cobertura nacional" />
         <meta property="og:title" content="Contacto | Magna Ingeniería y Topografía" />
-        <meta property="og:description" content="Comunícate con nosotros para proyectos de ingeniería y topografía en Ibagué, Tolima." />
+        <meta property="og:description" content="Oficina en Ibagué — Trabajamos en todo Colombia. Contáctanos para proyectos de ingeniería y topografía." />
         <meta property="og:url" content="https://magnaingenieriaytopografia.com/contact" />
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content="Contacto | Magna Ingeniería y Topografía" />
-        <meta name="twitter:description" content="Contáctanos. Ingeniería y Topografía en Ibagué, Tolima." />
+        <meta name="twitter:description" content="Contáctanos. Ingeniería y Topografía en Ibagué, Tolima — Cobertura nacional." />
       </Helmet>
 
       <PagesLayout>
@@ -77,6 +82,31 @@ const ContactPage: React.FC = () => {
                 </div>
               ))}
             </div>
+          </div>
+        </section>
+
+        <section className="coverage-banner">
+          <ProgressiveBackground src={mapaColombia} placeholder={mapaColombia}>
+            <div className="coverage-banner-overlay" />
+            <div className="coverage-banner-content">
+              <div className="coverage-banner-icon">
+                <FaMapMarkerAlt />
+              </div>
+              <h2 className="coverage-banner-title">
+                Oficina en Ibagué — Trabajamos en todo Colombia
+              </h2>
+              <div className="coverage-banner-divider" />
+              <p className="coverage-banner-subtitle">
+                No importa dónde esté tu proyecto. Nuestro equipo se desplaza a cualquier región del país para brindarte soluciones en ingeniería y topografía.
+              </p>
+            </div>
+          </ProgressiveBackground>
+        </section>
+
+        <section className="clientes-contact">
+          <div className="container">
+            <SetionHeader prefix="Nuestros" title="Clientes" />
+            <LogoCarrusel />
           </div>
         </section>
 

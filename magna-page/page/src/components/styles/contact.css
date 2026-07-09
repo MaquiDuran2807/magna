@@ -89,6 +89,9 @@
   letter-spacing: 1px;
   color: #888888;
   margin-bottom: 8px;
+  min-height: 1.2rem;
+  display: flex;
+  align-items: center;
 }
 
 .contact-card-value {
@@ -98,6 +101,10 @@
   margin-bottom: 0;
   line-height: 1.4;
   word-break: break-word;
+  min-height: 2.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .contact-card-subvalue {
@@ -105,6 +112,9 @@
   color: #555555;
   margin-top: 2px;
   margin-bottom: 0;
+  min-height: 1.4rem;
+  display: flex;
+  align-items: center;
 }
 
 .contact-card-link {
@@ -116,6 +126,89 @@
 .contact-card-link:hover {
   color: #1f5a9e;
   text-decoration: underline;
+}
+
+/* ==========================================================================
+   Banner de cobertura nacional
+   ========================================================================== */
+
+.coverage-banner {
+  position: relative;
+  min-height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.coverage-banner-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(2, 19, 40, 0.85) 0%, rgba(22, 62, 115, 0.75) 100%);
+  z-index: 1;
+}
+
+.coverage-banner-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: #ffffff;
+  padding: 60px 20px;
+  max-width: 800px;
+}
+
+.coverage-banner-icon {
+  font-size: 3rem;
+  color: #d69e2e;
+  margin-bottom: 20px;
+}
+
+.coverage-banner-title {
+  font-family: var(--font-heading, 'Poppins'), sans-serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: #ffffff;
+}
+
+.coverage-banner-subtitle {
+  font-size: 1.15rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+.coverage-banner-divider {
+  width: 80px;
+  height: 3px;
+  background: #d69e2e;
+  margin: 20px auto;
+  border-radius: 2px;
+}
+
+@media (max-width: 768px) {
+  .coverage-banner {
+    min-height: 240px;
+  }
+  .coverage-banner-title {
+    font-size: 1.6rem;
+  }
+  .coverage-banner-subtitle {
+    font-size: 1rem;
+  }
+  .coverage-banner-content {
+    padding: 40px 16px;
+  }
+}
+
+/* ==========================================================================
+   Sección de clientes en página de contacto
+   ========================================================================== */
+
+.clientes-contact {
+  background-color: #ffffff;
+  padding: 60px 0;
 }
 
 @media (max-width: 576px) {
