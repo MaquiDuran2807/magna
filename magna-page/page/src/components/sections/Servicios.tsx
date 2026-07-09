@@ -17,7 +17,7 @@ const Servicios = React.memo(() => {
         <section className="servicios   ">
             <div className="container servicios-container">
                 <div className="row ">
-                    <SetionHeader title="Servicios" />
+                    <SetionHeader prefix="Nuestros" title="Servicios" />
                 </div>
                 <div className="row">
                     {/* tarjetas */}
@@ -29,7 +29,7 @@ const Servicios = React.memo(() => {
                                         <div key={servicio.id} className="col-12 col-lg-4 col-md-6 order-md-1 ">
                                             <div className="card border-0 p-1 tarjeta">
                                                 <div className="card-body">
-                                                    <img src={`${servicio.icon}`} alt={servicio.nombre} /> 
+                                                    <img src={`${servicio.icon}`} alt={servicio.nombre} loading="lazy" /> 
                                                     <h4 className="card-title">{servicio.nombre}</h4>
                                                     <p className="card-title">{servicio.descripcion.slice(0, 150)}...</p>
                                                     <button className=' boton-1 '><Link to={`/servicios/${servicio.nombre}`}>Ver más</Link></button>

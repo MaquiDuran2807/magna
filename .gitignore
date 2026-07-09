@@ -156,3 +156,11 @@ migrations/
 
 # staticfiles
 /staticfiles
+
+# Build artifacts frontend
+magna-page/page/dist/
+magna-page/store/dist/
+
+# SQLite backups
+*.sqlite3.backup
+*.sqlite3

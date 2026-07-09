@@ -1,8 +1,7 @@
-import { memo} from 'react';
+import { memo } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Pagination, Navigation,A11y } from 'swiper/modules';
-import { useInView } from 'react-intersection-observer'
-import { motion} from 'framer-motion';
+import { Autoplay, Pagination, Navigation, A11y } from 'swiper/modules';
+import { motion } from 'framer-motion';
 import "./styles/slider.css"
 
 // Import Swiper styles
@@ -14,20 +13,32 @@ import { BotonesSwiper } from './BotonesSwiper';
 
 import { Link } from 'react-router-dom';
 import useIntersectionObserver from '../hooks/useLazyload';
-import { Servicio2 } from '../types/types';
+import useScreenSize from '../hooks/ScreenSize';
+import { Slide } from '../types/types';
 
 type SliderProps = {
-  services: Servicio2[] ;
+  slides: Slide[];
 };
 
+const SliderContent = memo(({ slide }: { slide: Slide }) => (
+  <div className="container-fluid px-4 px-lg-5">
+    <div className="row h-100">
+      <div className="col-12 col-lg-12 description">
+        <h1 className="title text-capitalize">{slide.nombre}</h1>
+        <p className="text-white">{slide.descripcion}</p>
+        <div className="col-12">
+          <Link to="/contact"><button className="llamado">Contactar</button></Link>
+        </div>
+        <BotonesSwiper />
+      </div>
+    </div>
+  </div>
+));
 
-const Slider=memo( ({services}: SliderProps) => {
+const Slider = memo(({ slides }: SliderProps) => {
+  const { width } = useScreenSize();
+  const isMobile = width <= 768;
 
-  const refs = services?.map(() => useInView({ triggerOnce: false, threshold: 0.5
-   }));
-   if (!services) {
-    return null;
-  }
   const variantes = {
     hidden: { opacity: 0, y: 50 },
     show: {
@@ -41,7 +52,6 @@ const Slider=memo( ({services}: SliderProps) => {
   };
 
   return (
-
     <Swiper
       spaceBetween={0}
       slidesPerView={1}
@@ -50,57 +60,41 @@ const Slider=memo( ({services}: SliderProps) => {
         disableOnInteraction: false,
         pauseOnMouseEnter: true,
       }}
-
-      modules={[Autoplay, Pagination, Navigation,A11y]}
+      modules={[Autoplay, Pagination, Navigation, A11y]}
       className="mySwiper"
-      
     >
-      {services?.map((servicio,index) => (
+      {slides?.map((slide, index) => (
         <SwiperSlide key={index}>
           <div className="container-con-imagen">
-                <img 
-                  srcSet={
-                    `${servicio.imagen_celular} 450w,
-                    ${servicio.imagen_tablet} 1024w,
-                    ${servicio.imagen} 5000w`
-                    }
-                  sizes="(max-width: 450px) 280px,
+            <img
+              srcSet={
+                `${slide.imagen_celular || slide.imagen} 450w,
+                ${slide.imagen_tablet || slide.imagen} 1024w,
+                ${slide.imagen} 5000w`
+              }
+              sizes="(max-width: 450px) 280px,
                   (max-width: 1023px) 736px,
                   (min-width: 1024px) 1024px"
-                  alt={`imagen de ${servicio.nombre}`} 
-                  loading='eager'
-                  decoding='async'
-                  className="img-fluid imagen"
-                  fetchPriority="high"
-                />
-              </div>
-          <div className={`container-fluid sliders`} >
-          
-            <motion.div
-              ref={refs && refs[index]?.ref}
-              variants={variantes}
-              initial='hidden'
-              animate={refs && refs[index]?.inView ? 'show' : 'hidden'}
-              exit='exit'
-            >
-              
-              <div className="container">
-                <div className="row">
-                  <div className="col-12 col-lg-8  description">
-                  
-                    <h1 className="title text-capitalize">{servicio.nombre}</h1>
-                    <br />
-                    <p className="text-white col-12 col-lg-10 ">{servicio.descripcion}</p>
-                    <div className="col-12 ">
-                      <br />
-                      <Link to="/contact"><button className="llamado">Contactar</button></Link>
-                    </div>
-                    <BotonesSwiper />
-                  </div>
-
-                </div>
-              </div>
-            </motion.div>
+              alt={`imagen de ${slide.nombre}`}
+              loading='eager'
+              decoding='async'
+              className="img-fluid imagen"
+              fetchPriority="high"
+            />
+          </div>
+          <div className="container-fluid sliders">
+            {isMobile ? (
+              <SliderContent slide={slide} />
+            ) : (
+              <motion.div
+                variants={variantes}
+                initial='hidden'
+                animate='show'
+                exit='exit'
+              >
+                <SliderContent slide={slide} />
+              </motion.div>
+            )}
           </div>
         </SwiperSlide>
       ))}
@@ -109,12 +103,11 @@ const Slider=memo( ({services}: SliderProps) => {
 });
 
 
-// Paso 1: Modificar LazySlider para aceptar services como prop
-export default function LazySlider({ services }: { services: Servicio2[]  }) {
+export default function LazySlider({ slides }: { slides: Slide[] }) {
   const { isVisible, ref } = useIntersectionObserver('100px');
   return (
       <div id="LazySlider" ref={ref} >
-          {isVisible ? <Slider services={services} /> : null}
+          {isVisible ? <Slider slides={slides} /> : null}
       </div>
   );
 }

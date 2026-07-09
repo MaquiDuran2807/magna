@@ -1,4 +1,5 @@
 import React, { lazy, useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { Link, useParams } from 'react-router-dom';
 import imagenBanner from '../assets/img/banner/projects.webp';
 import Banner from '../components/banner';
@@ -36,6 +37,10 @@ const ProjectDetail: React.FC= () => {
 
     return (
         <>
+        <Helmet>
+          <title>{project?.nombre ?? 'Proyecto'} | Magna Ingeniería y Topografía</title>
+          <meta name="description" content={project?.descripcion ? project.descripcion.substring(0, 160) : 'Detalle del proyecto de Magna Ingeniería y Topografía.'} />
+        </Helmet>
         <PagesLayout>
             <Banner title="Proyectos" paragraph='Proyectos' image={imagenBanner}/>
             <div className="container-fluid">

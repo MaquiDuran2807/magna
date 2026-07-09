@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from "react";
-import { useVerfyToken } from "../api/user";
+import { verfyToken } from "../api/user";
 
 // interfaz para el contexto
 interface AuthContextType {
@@ -15,8 +15,8 @@ const AuthContext = createContext<AuthContextType>({
   isTokenValid: false,
 //   firstView: 0,
 //   firstViewCount: () => {},
-  validateToken: async () => {},
-  logout: async () => {},
+  validateToken: async () => { return; },
+  logout: async () => { return; },
 });
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
@@ -41,7 +41,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setIsTokenValid(false);
       return;
     }
-    const successToken = await useVerfyToken();
+    const successToken = await verfyToken();
     if (successToken) {
       console.log('token valido');
       setIsTokenValid(true);

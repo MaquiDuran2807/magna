@@ -1,30 +1,132 @@
-.contact{
-    height: fit-content;
-    background: linear-gradient(0deg, rgba(2, 19, 40, 0.307) 0%, rgba(2, 19, 40, 0.256) 100%), url(../../assets/img/app/fondotopo.jpg), no-repeat;
-    background-size: cover;
-    background-position: center;
+/* ==========================================================================
+   Sección del formulario de contacto
+   ========================================================================== */
+
+.contact {
+  height: fit-content;
+  background: linear-gradient(0deg, rgba(2, 19, 40, 0.307) 0%, rgba(2, 19, 40, 0.256) 100%), url(../../assets/img/app/fondotopo.jpg), no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 
-.contact-izq{
-    background-color: rgb(2, 19, 40);
+.contact-izq {
+  background-color: rgb(2, 19, 40);
 }
 
-.contact-izq h3{
-    font-size: 35px;
-    font-weight: 700;
-    margin: 10px 0 40px 0;
+.contact-izq h3 {
+  font-size: 35px;
+  font-weight: 700;
+  margin: 10px 0 40px 0;
 }
 
-.contact-izq h5{
-    font-size: 1.2rem;
-    margin: 10px 0 40px 0;
+.contact-izq h5 {
+  font-size: 1.2rem;
+  margin: 10px 0 40px 0;
 }
 
-.toggle-icon{
-    color: #163E73;
-    font: 1em sans-serif;
-    font-size: 1.5rem;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    margin-left: 10px;
+.toggle-icon {
+  color: #163E73;
+  font: 1em sans-serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  margin-left: 10px;
+}
+
+/* ==========================================================================
+   Tarjetas de información de contacto (rediseño UX/UI)
+   ========================================================================== */
+
+.contact-info-section {
+  background-color: #f8f9fc;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' opacity='0.12'%3E%3Cpath d='M0 100 Q50 80 100 100 T200 100' fill='none' stroke='%23163E73' stroke-width='0.8'/%3E%3Cpath d='M0 120 Q50 100 100 120 T200 120' fill='none' stroke='%23163E73' stroke-width='0.8'/%3E%3Cpath d='M0 80 Q50 60 100 80 T200 80' fill='none' stroke='%23163E73' stroke-width='0.8'/%3E%3Cpath d='M0 140 Q50 130 100 140 T200 140' fill='none' stroke='%23163E73' stroke-width='0.8'/%3E%3Cpath d='M0 60 Q50 50 100 60 T200 60' fill='none' stroke='%23163E73' stroke-width='0.8'/%3E%3Cpath d='M0 170 Q60 150 120 170 T200 170' fill='none' stroke='%23163E73' stroke-width='0.6'/%3E%3Cpath d='M0 30 Q60 20 120 30 T200 30' fill='none' stroke='%23163E73' stroke-width='0.6'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 180px 180px;
+}
+
+.contact-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 28px 20px 24px;
+  text-align: center;
+  height: 100%;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(22, 62, 115, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 32px rgba(22, 62, 115, 0.12);
+  border-color: rgba(22, 62, 115, 0.2);
+}
+
+.contact-card-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #163E73 0%, #1f5a9e 100%);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  transition: transform 0.3s ease;
+}
+
+.contact-card:hover .contact-card-icon {
+  transform: scale(1.08);
+}
+
+.contact-card-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #888888;
+  margin-bottom: 8px;
+}
+
+.contact-card-value {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #163E73;
+  margin-bottom: 0;
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.contact-card-subvalue {
+  font-size: 0.9rem;
+  color: #555555;
+  margin-top: 2px;
+  margin-bottom: 0;
+}
+
+.contact-card-link {
+  color: #163E73;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.contact-card-link:hover {
+  color: #1f5a9e;
+  text-decoration: underline;
+}
+
+@media (max-width: 576px) {
+  .contact-card {
+    padding: 20px 16px;
+  }
+  .contact-card-icon {
+    width: 56px;
+    height: 56px;
+  }
+  .contact-card-value {
+    font-size: 0.95rem;
+  }
 }

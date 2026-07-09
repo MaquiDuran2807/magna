@@ -42,7 +42,7 @@ export const useSigninMutation = () =>
   })
 
 
-export const useRefreshToken = async () =>{
+export const refreshToken = async () =>{
   let successrefresh = false;
   await apiClient.post<refreshResponse>(`auth/jwt/refresh/`, {
     refresh: localStorage.getItem('refreshToken'),
@@ -53,7 +53,7 @@ export const useRefreshToken = async () =>{
     successrefresh = true;
   }
   ).catch((error) => {
-    console.log(error, 'error aqui estoy en useRefreshTokenMutation');
+    console.log(error, 'error aqui estoy en refreshTokenMutation');
     localStorage.removeItem('token');
     localStorage.removeItem('refreshToken');
     successrefresh = false;
@@ -61,7 +61,7 @@ export const useRefreshToken = async () =>{
   return  successrefresh;
 }
 
-export const useVerfyToken  = async () =>{
+export const verfyToken  = async () =>{
   let successVerfyToken = false;
   await apiClient.post(`auth/jwt/verify/`, {
     token: localStorage.getItem('token'),
@@ -69,9 +69,9 @@ export const useVerfyToken  = async () =>{
     successVerfyToken = true;
   }
   ).catch(async (error) => {
-    console.log(error, 'error aqui estoy en useVerfyTokenMutation');
-    const successrefresh = await useRefreshToken();
-    console.log(successrefresh, 'successrefresh aqui estoy en useVerfyTokenMutation');
+    console.log(error, 'error aqui estoy en verfyTokenMutation');
+    const successrefresh = await refreshToken();
+    console.log(successrefresh, 'successrefresh aqui estoy en verfyTokenMutation');
     if(successrefresh){
       successVerfyToken = true;
     }

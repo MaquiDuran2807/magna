@@ -1,7 +1,8 @@
 import React, { Suspense } from 'react';
+import { Helmet } from 'react-helmet-async';
 import PagesLayout from './layouts/pagesLayouts';
-import useIntersectionObserver from './hooks/useLazyload';
-import { useGetServices } from './hooks/getInfoPage';
+import { useGetServices, useGetSlides } from './hooks/getInfoPage';
+import type { Slide } from './types/types';
 import { Spinner } from 'react-bootstrap';
 
 // Agrupación de importaciones lazy
@@ -18,16 +19,19 @@ const LazySections = {
 
 function App() {
   const { services } = useGetServices();
-  if (!services) {
-    return null;
-  }
-  
+  const { slides } = useGetSlides();
   return (
     <>
+    <Helmet>
+      <title>Magna Ingeniería y Topografía — Inicio</title>
+      <meta name="description" content="Magna Ingeniería y Topografía S.A.S. — Servicios profesionales de ingeniería civil, topografía, estudios de suelos y consultoría en Ibagué, Tolima." />
+      <meta property="og:title" content="Magna Ingeniería y Topografía" />
+      <meta property="og:description" content="Servicios profesionales de ingeniería civil, topografía y consultoría en Ibagué, Tolima." />
+    </Helmet>
     <PagesLayout>
       <div style={{minHeight:"100vh"}}>
         <Suspense  fallback={<Spinner/>}>
-            <LazySections.Slider services={services}/>
+            <LazySections.Slider slides={slides.length ? slides : (services as Slide[])} />
         </Suspense>
       </div>
         
@@ -62,12 +66,4 @@ function App() {
 
 
 
-export default function LazyApp () {
-  const { isVisible, ref } = useIntersectionObserver('100px');
-
-  return (
-      <div id="LazyApp" ref={ref}>
-          {isVisible ? <App/> : null}
-      </div>
-  );
-}
+export default App;

@@ -6,7 +6,7 @@ import './styles/button.css'
 interface ButtonProps {
     content: string;
     direction: string;
-    button:Boolean;
+    button:boolean;
 }
 
 const Button: React.FC<ButtonProps> = ({ content, button }) => {

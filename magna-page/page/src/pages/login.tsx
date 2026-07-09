@@ -1,6 +1,7 @@
 // Date: 2/12/2023 started 2:20pm
 //       2/12/2023 ended 2:50pm
 //      1/02/2004 updated 9:00pm 15 minutos 150 a 84 lineas
+import { Helmet } from 'react-helmet-async';
 import { useState,useEffect } from 'react';
 import { useAuth } from "../auth/AuthProvider";
 import { Form, Button } from 'react-bootstrap';
@@ -36,6 +37,12 @@ const Login: React.FC =  () => {
         return <Navigate to="/cotizador" />;
     }
   return (
+    <>
+    <Helmet>
+      <title>Iniciar Sesión | Magna Ingeniería y Topografía</title>
+      <meta name="description" content="Inicia sesión en el portal de Magna Ingeniería y Topografía." />
+      <meta name="robots" content="noindex, nofollow" />
+    </Helmet>
     <div className=' contenedor-login'>
         <NavBar/>
         <section className='section-login' >
@@ -80,8 +87,9 @@ const Login: React.FC =  () => {
                 </Form>
             </div>
         </section>
-    </div>
-  );
+        </div>
+        </>
+    );
 };
 
 

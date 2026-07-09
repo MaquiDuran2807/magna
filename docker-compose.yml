@@ -1,0 +1,61 @@
+services:
+  db:
+    image: postgres:16-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=magna
+      - POSTGRES_USER=magna
+      - POSTGRES_PASSWORD=magna_secret
+    restart: unless-stopped
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - static_volume:/app/staticfiles
+      - media_volume:/app/media
+      - ./magna-page/page/dist:/app/magna-page/page/dist
+      - ./magna-page/store/dist:/app/magna-page/store/dist
+    env_file:
+      - .env
+    environment:
+      - DJANGO_SETTINGS_MODULE=magna_web.settings.prod
+      - DJANGO_ENV=production
+      - DB_ENGINE=django.db.backends.postgresql
+      - DB_NAME=magna
+      - DB_USER=magna
+      - DB_PASSWORD=magna_secret
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DJANGO_DEBUG=False
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_started
+    restart: unless-stopped
+
+  nginx:
+    build:
+      context: ./nginx
+    profiles:
+      - production
+    environment:
+      - DOMAIN=magnaingenieriaytopografia.com
+    volumes:
+      - static_volume:/static
+      - media_volume:/media
+      - ./nginx/ssl:/etc/letsencrypt
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - web
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  static_volume:
+  media_volume:

@@ -24,7 +24,7 @@ from django.conf import settings
 
 
 class indexView(TemplateView):
-    template_name = 'page/dist/magnapage.html'
+    template_name = 'page/dist/index.html'
 
 class storeView(TemplateView):
     template_name = 'store/dist/index.html'
@@ -49,6 +49,7 @@ urlpatterns = [
     path('contact/',include('contact.urls')),
     path("products/",include("products.urls")),
     path("blog/",include("blog.urls")),
+    path('about/',include('about.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += [re_path(r'^store/', storeView.as_view(), name='store')]
 urlpatterns += [re_path(r'^(?!media/|admin/).*$', indexView.as_view(), name='index')]

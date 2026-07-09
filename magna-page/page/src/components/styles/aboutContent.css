@@ -1,0 +1,63 @@
+.valores-section {
+    padding: 80px 0;
+    background-color: #f8f9fa;
+}
+
+.valor-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 32px 24px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.valor-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 32px rgba(26, 54, 93, 0.12);
+}
+
+.valor-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--color-primary, #1a365d), var(--color-primary-light, #2c5282));
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+}
+
+.valor-card:hover .valor-icon {
+    transform: scale(1.1);
+}
+
+.valor-nombre {
+    font-family: var(--font-heading, 'Poppins'), sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--color-primary, #1a365d);
+    margin-bottom: 12px;
+    text-transform: capitalize;
+}
+
+.valor-descripcion {
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: #4a5568;
+    line-height: 1.6;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .valores-section {
+        padding: 48px 0;
+    }
+}

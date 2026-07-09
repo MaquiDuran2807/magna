@@ -21,7 +21,7 @@ class BlogPostSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = BlogPost
-        fields = ['id', 'title','description' , 'content', 'date_posted', 'author', 'category', 'comments', 'image', 'important']
+        fields = ['id', 'title','description' , 'content', 'date_posted', 'author', 'category', 'comments', 'image_blog', 'important']
 
 class AllBlogPostSerializer(serializers.ModelSerializer):
     category = CategorySerializer(read_only=True)
@@ -29,11 +29,11 @@ class AllBlogPostSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = BlogPost
-        fields = ['id', 'title','description' , 'date_posted', 'author', 'category', 'image', 'important']
+        fields = ['id', 'title','description' , 'date_posted', 'author', 'category', 'image_blog', 'important']
 
 class ImportantBlogPostSerializer(serializers.ModelSerializer):
     category = CategorySerializer(read_only=True)
     author = UserInforSerializer(read_only=True)
     class Meta:
         model = BlogPost
-        fields = ['id', 'title', 'date_posted', 'author', 'category','important', 'image']
+        fields = ['id', 'title', 'date_posted', 'author', 'category','important', 'image_blog']

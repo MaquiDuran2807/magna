@@ -1,21 +1,48 @@
 import { useQuery } from '@tanstack/react-query';
-import { fetchProjects, fetchProjectsImages, fetchServices1, fetchWorkers } from '../api/pagesInfo';
+import { fetchAbout, fetchProjects, fetchProjectsImages, fetchServices1, fetchSlides, fetchWorkers } from '../api/pagesInfo';
+import type { Servicio2, Slide } from '../types/types';
+
+const DEFAULT_SERVICES: Servicio2[] = [{
+  id: 1,
+  nombre: "topografía",
+  descripcion: "Ofrecemos soluciones topográficas profesionales, con equipos de alta tecnología y personal calificado. Estamos presentes en cada momento del proyecto, desde el levantamiento inicial hasta el control de obra, pasando por el diseño, la planificación y la ejecución",
+  imagen: "/media/servicios/slide-banner1.webp",
+  icon: "",
+  imagen_tablet: "",
+  imagen_celular: "",
+  subservicios: [],
+  caracteristicas: [],
+}];
 
 export const useGetServices = () => {
-    const { data: services, error: errorServices, isLoading: isLoadingServices } = useQuery({
+    const { data: services = DEFAULT_SERVICES, error: errorServices, isLoading: isLoadingServices } = useQuery({
         queryKey: ['services'],
         queryFn: fetchServices1,
+        placeholderData: DEFAULT_SERVICES,
         staleTime: 1000 * 60 * 30,
         refetchOnWindowFocus: false,
         refetchInterval: 1000 * 60 * 30,
     });
-     services?.map((service) => {
-        const image = new Image();
-        image.src = service.imagen;
-        console.log(image.src, 'cargada');
+     if (!isLoadingServices && services !== DEFAULT_SERVICES) {
+        services?.map((service) => {
+            const image = new Image();
+            image.src = service.imagen;
+        });
     }
-    );
     return { services, errorServices, isLoadingServices };
+}
+
+const SLIDE_PLACEHOLDER: Slide[] = [];
+
+export const useGetSlides = () => {
+    const { data: slides = SLIDE_PLACEHOLDER, error: errorSlides, isLoading: isLoadingSlides } = useQuery({
+        queryKey: ['slides'],
+        queryFn: fetchSlides,
+        staleTime: 1000 * 60 * 30,
+        refetchOnWindowFocus: false,
+        refetchInterval: 1000 * 60 * 30,
+    });
+    return { slides, errorSlides, isLoadingSlides };
 }
 
 
@@ -55,5 +82,16 @@ export const useGetProjects = () => {
             {queryKey:['projectsImages'], queryFn: fetchProjectsImages,staleTime: 1000*60*30,refetchOnWindowFocus: false,refetchInterval: 1000*60*30,}
             );
     return { projects, errorProjects, isErrorProjects, refetchProjects, projectImages, errorProjectsImages, isErrorProjectsImages};
+};
+
+export const useGetAbout = () => {
+    const { data: about, error: errorAbout, isLoading: isLoadingAbout } = useQuery({
+        queryKey: ['about'],
+        queryFn: fetchAbout,
+        staleTime: 1000 * 60 * 30,
+        refetchOnWindowFocus: false,
+        refetchInterval: 1000 * 60 * 30,
+    });
+    return { about, errorAbout, isLoadingAbout };
 };
 

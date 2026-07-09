@@ -1,0 +1,7 @@
+all:
+  hosts:
+    magna:
+      ansible_host: 0.0.0.0
+      ansible_user: ubuntu
+      ansible_ssh_private_key_file: ~/.ssh/magna.pem
+      ansible_python_interpreter: /usr/bin/python3

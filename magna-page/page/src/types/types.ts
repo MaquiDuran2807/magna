@@ -76,8 +76,38 @@ export interface PreguntasyrespuestasMagna {
   respuesta: string;
 }
 
+export interface Slide {
+    id:           number;
+    tipo:         string;
+    nombre:       string;
+    descripcion:  string;
+    imagen:       string;
+    icon?:        string;
+    imagen_tablet:string;
+    imagen_celular:string;
+    orden:        number;
+    subservicios?: Subservicio[];
+    caracteristicas?: Caracteristica[];
+}
+
 export interface Brochure {
   nombre:  string;
   archivo: string;
+}
+
+export interface ValorData {
+  id: number;
+  nombre: string;
+  descripcion: string;
+  orden: number;
+}
+
+export interface AboutData {
+  id: number;
+  descripcion: string;
+  mision: string;
+  vision: string;
+  valores: ValorData[];
+  updated_at: string;
 }
 

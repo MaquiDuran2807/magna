@@ -2,10 +2,11 @@ import HeadingDivider from "./headingDivider"
 
 interface SetionHeaderProps {
     title: string;
+    prefix?: string;
 }
 
 export const SetionHeader = (
-    { title}: SetionHeaderProps
+    { title, prefix}: SetionHeaderProps
 ) => {
     
     return (
@@ -13,7 +14,7 @@ export const SetionHeader = (
         <div className="row ">
             <div className="col-12 text-center  ">
                 <h2 className='title-servicios'>
-                    <span>Nuestros</span> {title}
+                    {prefix && <span>{prefix}</span>} {title}
                 </h2>
                 <HeadingDivider/>
             </div>

@@ -9,9 +9,9 @@ interface Route {
 const createSitemap = (routes: Route[], domain: string): string => {
     const urls = routes.map((route: Route) => {
         const url = new URL(domain + route.path);
-        let changefreq: string = "monthly";
-        let priority: number = 0.5; // Por defecto
-        let lastmod: string = new Date().toISOString().split('T')[0]; // Fecha actual
+        const changefreq = "monthly";
+        let priority = 0.5; // Por defecto
+        const lastmod: string = new Date().toISOString().split('T')[0]; // Fecha actual
 
         // Ajustar changefreq, priority y lastmod según la ruta
         if (route.path === '/') {
@@ -32,7 +32,7 @@ const createSitemap = (routes: Route[], domain: string): string => {
         `;
     });
 
-    const sitemap: string = `
+    const sitemap = `
         <?xml version="1.0" encoding="UTF-8"?>
         <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
             ${urls.join('\n')}

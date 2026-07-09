@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { Helmet } from 'react-helmet-async';
 import NavBar from '../components/navbar2';
 import { FloatWhatsapp } from '../components/floawhatsapp';
 import { useLocation } from 'react-router-dom';
@@ -21,6 +22,10 @@ const BlogLayout: React.FC<BlogLayoutProps> = ({ children }) => {
     }, [location]);
     return (
         <>
+            <Helmet>
+              <title>Blog | Magna Ingeniería y Topografía</title>
+              <meta name="description" content="Blog de Magna Ingeniería y Topografía — Artículos, noticias y novedades del sector." />
+            </Helmet>
             <header ref={inicioDePaginaRef}>
 
                 <NavBar />

@@ -1,6 +1,6 @@
 import { lazy,memo,Suspense } from 'react';
-import { FaFacebook, FaInstagram} from 'react-icons/fa';
-import { FaSquareXTwitter,FaTiktok} from "react-icons/fa6";
+import { FaFacebook, FaInstagram } from 'react-icons/fa';
+import { FaSquareXTwitter, FaTiktok } from "react-icons/fa6";
 import { BsLinkedin } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 // import  Icon  from '../assets/img/imgfooter';
@@ -11,9 +11,9 @@ import useIntersectionObserver from '../hooks/useLazyload';
 
 const contactInfo = {
     phone: '3015490115',
-    tel: '2706488',
+    phone2: '3113394860',
     email: 'info@magnaingenieriaytopografia.com',
-    address: 'Cl. 18 #7-27 Ibagué, Tolima. Colombia'
+    address: 'Calle 98# 13B sur-150, T5- apto 101 Ibagué Tolima'
 };
 
 const socialLinks = [
@@ -40,8 +40,7 @@ const Footer1: React.FC =memo( () => {
                     </div>
                     <div className="col-6 col-md-3">
                         <h5>Contacto</h5>
-                        <p>Cel: {contactInfo.phone}</p>
-                        <p>Tel: {contactInfo.tel}</p>
+                        <p>Cel: {contactInfo.phone} / {contactInfo.phone2}</p>
                         <div className="overflow-auto" style={{scrollbarColor:"black",scrollbarWidth:"thin"}}>
                             info@magnaingenieriaytopografia.com
                         </div>

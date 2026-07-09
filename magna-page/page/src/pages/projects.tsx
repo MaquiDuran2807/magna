@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import { memo } from 'react';
 import imagen from '../assets/img/banner/projects.webp';
 import Banner from '../components/banner';
@@ -14,6 +15,11 @@ const Projects: React.FC = memo(() => {
         return null;
     }
     return (
+        <>
+        <Helmet>
+          <title>Proyectos | Magna Ingeniería y Topografía</title>
+          <meta name="description" content="Galería de proyectos de ingeniería y topografía realizados por Magna en Ibagué, Tolima y toda Colombia." />
+        </Helmet>
         <PagesLayout>
             <Banner title="Proyectos" paragraph='Proyectos' image={imagen} />
             <br />
@@ -30,6 +36,7 @@ const Projects: React.FC = memo(() => {
                 </div>
             </div>
         </PagesLayout>
+        </>
     );
 });
 

@@ -25,7 +25,7 @@ export default function PlaceOrderPage() {
   cart.taxPrice = round2(0.15 * cart.itemsPrice)
   cart.totalPrice = cart.itemsPrice + cart.shippingPrice + cart.taxPrice
 
-  const { mutateAsync: createOrder, isLoading } = useCreateOrderMutation()
+  const { mutateAsync: createOrder, isPending } = useCreateOrderMutation()
 
   const placeOrderHandler = async () => {
     try {
@@ -149,11 +149,11 @@ export default function PlaceOrderPage() {
                     <Button
                       type="button"
                       onClick={placeOrderHandler}
-                      disabled={cart.cartItems.length === 0 || isLoading}
+                      disabled={cart.cartItems.length === 0 || isPending}
                     >
                       Place Order
                     </Button>
-                    {isLoading && <LoadingBox></LoadingBox>}
+                    {isPending && <LoadingBox></LoadingBox>}
                   </div>
                 </ListGroup.Item>
               </ListGroup>

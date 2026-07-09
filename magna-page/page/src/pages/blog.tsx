@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import { useInfiniteQuery } from '@tanstack/react-query';
 const Spinner = React.lazy(() => import('../components/spinner'));
 import { useEffect, useState} from 'react';
@@ -51,6 +52,11 @@ const Blog =  () => {
     }
     const blogs: Result[] = data.pages.flatMap((page) => page?.blogs ?? []);
     return (
+        <>
+        <Helmet>
+          <title>Blog | Magna Ingeniería y Topografía</title>
+          <meta name="description" content="Blog de Magna Ingeniería y Topografía — Artículos, noticias y novedades del sector." />
+        </Helmet>
         <div className='blog-container pt-3'>
             <BlogLayout> 
                 <div className="container-fluid">
@@ -86,6 +92,7 @@ const Blog =  () => {
                 </div>
             </BlogLayout>
         </div>
+        </>
     );
 };
 

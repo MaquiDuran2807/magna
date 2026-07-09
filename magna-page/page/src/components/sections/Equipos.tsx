@@ -7,9 +7,12 @@ import useIntersectionObserver from '../../hooks/useLazyload';
 import { SetionHeader } from '../setionHeader';
 import '../styles/equipos.css';
 import TarjetaEquipo from '../tarjetaEquipo';
+import ProgressiveBackground from '../ProgressiveBackground';
+import grupoFull from '../../assets/img/equipos/grupo1.webp';
+import grupoThumb from '../../assets/img/equipos/grupo1-thumb.webp';
 
 
-const Equipos1 = memo(() => {;
+const Equipos1 = memo(() => {
     const [selectedCard, setSelectedCard] = useState('');
 
     const handleCardClick = (id: string,card:string) => {
@@ -26,7 +29,7 @@ const Equipos1 = memo(() => {;
         <section className="equipo">
             <div className="container">
                 <div className="row">
-                    <SetionHeader title="Equipos y Tecnología" />
+                    <SetionHeader prefix="Nuestros" title="Equipos y Tecnología" />
                 </div>
                 <div >
                     <div className="row  justify-content-center">
@@ -50,11 +53,13 @@ const Equipos1 = memo(() => {;
 
                     {/* personal */}
                     <div className="row my-4">
-                        {/* imagen del grupo de trabajadores y descripcion */}
-                        <div className="col-12 shadow workers ">
+                        <ProgressiveBackground src={grupoFull} placeholder={grupoThumb}>
                             <div className="" style={{border: 'none', boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)'}}>
                             </div>
-                        </div>
+                        </ProgressiveBackground>
+                    </div>
+                    <div className="row">
+                        <SetionHeader prefix="Nuestro" title="Personal Administrativo" />
                     </div>
                     <div className="row">
                         {workers?.equipos.map((equipo) => (

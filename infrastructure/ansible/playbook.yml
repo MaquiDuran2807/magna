@@ -1,0 +1,175 @@
+---
+- name: Provision Magna instance
+  hosts: all
+  become: yes
+  vars:
+    domain_name: "{{ domain_name | default('magnaingenieriaytopografia.com') }}"
+    dockerhub_user: "{{ lookup('env', 'DOCKERHUB_USER') | default('', true) }}"
+    dockerhub_token: "{{ lookup('env', 'DOCKERHUB_TOKEN') | default('', true) }}"
+    image_tag: "{{ lookup('env', 'IMAGE_TAG') | default('latest', true) }}"
+    db_password: "{{ lookup('env', 'DB_PASSWORD') | default('magna_secret', true) }}"
+    app_dir: /opt/magna
+
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+
+    - name: Install system dependencies
+      apt:
+        name:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - software-properties-common
+          - certbot
+        state: present
+
+    - name: Add Docker GPG key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: Add Docker repository
+      apt_repository:
+        repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
+        state: present
+
+    - name: Install Docker
+      apt:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+          - docker-compose-plugin
+        state: present
+
+    - name: Start and enable Docker
+      systemd:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Create app directories
+      file:
+        path: "{{ item }}"
+        state: directory
+        mode: '0755'
+      loop:
+        - "{{ app_dir }}"
+        - "{{ app_dir }}/nginx/ssl"
+        - "{{ app_dir }}/media"
+        - "{{ app_dir }}/staticfiles"
+
+    - name: Copy docker-compose.prod.yml
+      copy:
+        src: "{{ playbook_dir }}/../docker-compose.prod.yml"
+        dest: "{{ app_dir }}/docker-compose.yml"
+        mode: '0644'
+
+    - name: Copy nginx config
+      copy:
+        src: "{{ playbook_dir }}/../../nginx/nginx.conf"
+        dest: "{{ app_dir }}/nginx/nginx.conf"
+        mode: '0644'
+
+    - name: Create .env for containers
+      copy:
+        dest: "{{ app_dir }}/.env"
+        content: |
+          SECRET_KEY={{ lookup('env', 'SECRET_KEY') | default('change-me-in-production', true) }}
+          DJANGO_DEBUG=False
+          DJANGO_SETTINGS_MODULE=magna_web.settings.prod
+          DOMAIN={{ domain_name }}
+          ALLOWED_HOSTS={{ domain_name }},www.{{ domain_name }}
+          CORS_ORIGIN_WHITELIST=https://{{ domain_name }},https://www.{{ domain_name }}
+          CSRF_TRUSTED_ORIGINS=https://{{ domain_name }},https://www.{{ domain_name }}
+          EMAIL_HOST={{ lookup('env', 'EMAIL_HOST') | default('', true) }}
+          EMAIL_PORT={{ lookup('env', 'EMAIL_PORT') | default('587', true) }}
+          EMAIL_USE_TLS={{ lookup('env', 'EMAIL_USE_TLS') | default('True', true) }}
+          EMAIL_HOST_USER={{ lookup('env', 'EMAIL_HOST_USER') | default('', true) }}
+          EMAIL_HOST_PASSWORD={{ lookup('env', 'EMAIL_HOST_PASSWORD') | default('', true) }}
+        mode: '0644'
+
+    - name: Login to Docker Hub
+      community.docker.docker_login:
+        registry_url: https://index.docker.io/v1/
+        username: "{{ dockerhub_user }}"
+        password: "{{ dockerhub_token }}"
+      when: dockerhub_user != '' and dockerhub_token != ''
+
+    - name: Pull Docker image
+      community.docker.docker_image:
+        name: "{{ dockerhub_user }}/magna-web:{{ image_tag }}"
+        source: pull
+      when: dockerhub_user != '' and dockerhub_token != ''
+
+    - name: Run Docker Compose
+      community.docker.docker_compose_v2:
+        project_src: "{{ app_dir }}"
+        pull: missing
+        state: present
+        env:
+          DOCKERHUB_USER: "{{ dockerhub_user }}"
+          IMAGE_TAG: "{{ image_tag }}"
+          DB_PASSWORD: "{{ db_password }}"
+      environment:
+        DOCKERHUB_USER: "{{ dockerhub_user }}"
+        IMAGE_TAG: "{{ image_tag }}"
+        DB_PASSWORD: "{{ db_password }}"
+
+    - name: Wait for web container to be healthy
+      community.docker.docker_container_info:
+        name: "{{ app_dir | basename }}-web-1"
+      register: web_info
+      until: web_info.container is defined and web_info.container.State.Status == "running"
+      retries: 12
+      delay: 5
+
+    - name: Obtain SSL certificate (standalone)
+      command: >
+        certbot certonly --standalone
+        --non-interactive --agree-tos
+        --email admin@{{ domain_name }}
+        --domains {{ domain_name }}
+        --domains www.{{ domain_name }}
+      args:
+        creates: "/etc/letsencrypt/live/{{ domain_name }}/fullchain.pem"
+      register: certbot_result
+      ignore_errors: yes
+
+    - name: Copy SSL certs to nginx volume
+      copy:
+        src: "/etc/letsencrypt/{{ item.src }}"
+        dest: "{{ app_dir }}/nginx/ssl/{{ item.dest }}"
+        remote_src: yes
+        mode: '0644'
+      loop:
+        - { src: "live/{{ domain_name }}/fullchain.pem", dest: "fullchain.pem" }
+        - { src: "live/{{ domain_name }}/privkey.pem", dest: "privkey.pem" }
+      when: certbot_result is defined and not certbot_result.failed
+
+    - name: Update nginx config for SSL cert paths
+      replace:
+        path: "{{ app_dir }}/nginx/nginx.conf"
+        regexp: '/etc/letsencrypt/live/{{ domain_name }}/'
+        replace: '/etc/letsencrypt/'
+      when: certbot_result is defined and not certbot_result.failed
+
+    - name: Restart nginx container with SSL
+      community.docker.docker_compose_v2:
+        project_src: "{{ app_dir }}"
+        services:
+          - nginx
+        state: restarted
+
+    - name: Setup certbot auto-renewal
+      cron:
+        name: certbot-renew
+        job: "certbot renew --quiet --post-hook 'docker restart {{ app_dir | basename }}-nginx-1'"
+        minute: "0"
+        hour: "3"
+        day: "*"
+        month: "*"
+        weekday: "*"

@@ -11,7 +11,7 @@ const Proyectos = () => {
         <section className="proyectos">
             <div className="container">
                 <div className="row">
-                    <SetionHeader title="Proyectos" />
+                    <SetionHeader prefix="Nuestros" title="Proyectos" />
                 </div>
                 <div className="row">
                     <SwiperProjects />

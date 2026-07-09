@@ -1,6 +1,6 @@
 
-import { FaFacebook, FaInstagram, } from 'react-icons/fa';
-import { FaSquareXTwitter,FaTiktok} from "react-icons/fa6";
+import { FaFacebook, FaInstagram } from 'react-icons/fa';
+import { FaSquareXTwitter, FaTiktok } from "react-icons/fa6";
 import { BsLinkedin } from "react-icons/bs";
 import {Icon} from '../assets/imgfooter'
 import "./styles/footer.css"
@@ -33,16 +33,15 @@ const Footer1: React.FC = () => {
                     <div className="row">
                         <div className="col-12 ">
                             <h5>Contacto</h5>
-                            <p className="text-white">Cel: 3015490115</p>
-                            <p className="text-white">Tel: 2706488</p>
-                            <a href='mailto:magnaingenieriaytopografia@magna.co' className="text-white">Envíame un correo</a>
+                            <p className="text-white">Cel: 3015490115 / 3113394860</p>
+                            <a href='mailto:info@magnaingenieriaytopografia.com' className="text-white">Envíame un correo</a>
                         </div>
                     </div>
                     <div className="row">
                         <div className="col-12">
                             <h5>Dirección</h5>
-                            <p className="text-white">Cl. 18 #7-27</p>
-                            <p className="text-white">Ibagué, Tolima. Colombia</p>
+                            <p className="text-white">Calle 98# 13B sur-150</p>
+                            <p className="text-white">T5- apto 101, Ibagué, Tolima</p>
                         </div>
                         </div>
                     

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import PagesLayout from '../layouts/pagesLayouts';
 import { useAuth } from '../auth/AuthProvider';
 import useIntersectionObserver from '../hooks/useLazyload';
@@ -45,6 +46,11 @@ const Cotizador: React.FC = () => {
     };
 
     return (
+        <>
+        <Helmet>
+          <title>Cotizador | Magna Ingeniería y Topografía</title>
+          <meta name="description" content="Solicita una cotización personalizada para tus proyectos de ingeniería y topografía." />
+        </Helmet>
         <div>
         <PagesLayout >
             <button onClick={logout} style={{padding:"100px"}}>Logout</button>
@@ -88,6 +94,7 @@ const Cotizador: React.FC = () => {
             <button onClick={calcularCostoServicio}>Calcular Costo</button>
             </PagesLayout>
         </div>
+        </>
     );
 };
 

@@ -1,5 +1,0 @@
-User-agent: *
-Disallow: /login
-Disallow: /cotizador
-
-Sitemap: https://magnaingenieriaytopografia.com/sitemap.xml

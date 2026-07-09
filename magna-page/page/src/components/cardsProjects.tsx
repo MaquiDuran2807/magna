@@ -83,7 +83,7 @@ const CardsProjects =memo( ({ type, actualPage, imagenes, projects }: Props) => 
                 </div>
                 <div className="row">
                     {proyectosCardType.map((proyecto: Result) => {
-                        let firstImage = imagenesCard.find((imagen: ProyectImagesMagna) => imagen.proyecto === proyecto.id)?.imagen || "no hay imagen";
+                        const firstImage = imagenesCard.find((imagen: ProyectImagesMagna) => imagen.proyecto === proyecto.id)?.imagen || "no hay imagen";
                         return (
                             <Link to={`/projects/${proyecto.id}`} key={proyecto.id} className="col-md-6 col-lg-4 col-12 col-xl-3 text-decoration-none">
                                 <motion.div

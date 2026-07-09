@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import { AnimatePresence, motion } from 'framer-motion';
 import { lazy, useEffect, useRef, useState } from "react";
 import { AiFillCaretDown, AiOutlineDoubleRight } from "react-icons/ai";
@@ -23,8 +24,8 @@ const LazyServicios = lazy(() => import('../components/sections/Servicios'));
 const ServecesDetail: React.FC = () => {
     const { id } = useParams<{ id: string }>();
 
-    let [title, setTitle] = useState<String>("Nuestros Servicios");
-    let [imagen, setImagen] = useState<String>(imagenServicios);
+    const [title, setTitle] = useState<string>("Nuestros Servicios");
+    const [imagen, setImagen] = useState<string>(imagenServicios);
     const { services } = useGetServices();
     let dispositivo = "container";
     const [servicio_elegido, setServicio_elegido] = useState<Servicio2[]>();
@@ -119,6 +120,10 @@ const ServecesDetail: React.FC = () => {
 
     return (
         <>
+            <Helmet>
+              <title>{title?.toString() ?? 'Servicios'} | Magna Ingeniería y Topografía</title>
+              <meta name="description" content={servicio_elegido?.[0]?.descripcion?.substring(0, 160) ?? 'Servicios profesionales de ingeniería, topografía, estudios ambientales y más.'} />
+            </Helmet>
             <PagesLayout>
                 <Banner title={servicio_elegido.length == 1 ? servicio_elegido[0].nombre : "Servicios"} paragraph={title.toString()} image={imagen} />
                 <div className={dispositivo}>

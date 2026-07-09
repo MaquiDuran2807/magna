@@ -2,12 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { HelmetProvider, Helmet } from 'react-helmet-async';
 import ReactGA from 'react-ga4';
 import ProtectedRoute from "./routes/PrivateRoute";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import { AuthProvider } from './auth/AuthProvider';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 // Componentes importados de manera normal
 const App = React.lazy(() => import('./App'));
@@ -44,6 +44,7 @@ const router = createBrowserRouter([
     children: [{ path: '/cotizador', element: <React.Suspense fallback={<Spinner />}><LazyCotizador /></React.Suspense> }],
   },
 ]);
+const ReactQueryDevtoolsLazy = React.lazy(() => import('@tanstack/react-query-devtools').then(m => ({ default: m.ReactQueryDevtools })));
 // Inicializa Google Analytics con tu Measurement ID
 ReactGA.initialize('G-8DBBBFYVF4');
 
@@ -52,11 +53,21 @@ ReactGA.send('pageview');
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
+    <HelmetProvider>
+      <Helmet>
+        <title>Magna Ingeniería y Topografía</title>
+        <meta name="description" content="Magna Ingeniería y Topografía — Servicios de ingeniería, topografía, proyectos y consultoría en Ibagué, Tolima." />
+      </Helmet>
     <QueryClientProvider client={queryClient}>
         <AuthProvider>
           <RouterProvider router={router} />
-          <ReactQueryDevtools initialIsOpen={false} />
+          {import.meta.env.DEV && (
+            <React.Suspense fallback={null}>
+              <ReactQueryDevtoolsLazy />
+            </React.Suspense>
+          )}
         </AuthProvider>
     </QueryClientProvider>
+    </HelmetProvider>
   </React.StrictMode>
 );

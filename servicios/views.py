@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 # from django.views.generic import TemplateView
 from django.http import HttpResponse
 # importar rest_framework
@@ -6,8 +6,8 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.generics import ListAPIView
-from .models import Servicio, SubServicio, Brochure
-from .serializer import BrochureSerializer, ServicioSerializer, subServicesSerializer, GetIdServiciosSerializer,ServicesAndSubservicesSerializer
+from .models import Servicio, SubServicio, Brochure, Slide
+from .serializer import BrochureSerializer, ServicioSerializer, subServicesSerializer, GetIdServiciosSerializer,ServicesAndSubservicesSerializer, SlideSerializer, ServicioSlideSerializer
 from rest_framework import permissions
 
 
@@ -29,7 +29,7 @@ class ServicioViewSet(viewsets.ViewSet):
         })
     
     def retrieve(self, request, pk=None):
-        servicio = Servicio.objects.get(id=pk)
+        servicio = get_object_or_404(Servicio, id=pk)
         serializer = ServicioSerializer(servicio)
         return Response(serializer.data)
     
@@ -40,10 +40,11 @@ class ServicioViewSet(viewsets.ViewSet):
         return Response(serializer.data)
     
 class ServicioApiView(APIView):
-    # traer un solo servicio por id 
+    permission_classes = [permissions.AllowAny]
+
     def get(self, request, pk=None):
         if pk is not None:
-            servicio = Servicio.objects.get(id=pk)
+            servicio = get_object_or_404(Servicio, id=pk)
             subservicios= SubServicio.objects.filter(servicio=servicio)
             # id de los servicios y el nombre
             serializer = ServicioSerializer(servicio)
@@ -66,6 +67,8 @@ class ServicioApiView(APIView):
         return Response(serializer.data)
 
 class ServicioId(APIView):
+    permission_classes = [permissions.AllowAny]
+
     def get(self, request):
         servicios = Servicio.objects.filter().values('id', 'nombre')
         serializer = GetIdServiciosSerializer(servicios, many=True)
@@ -83,6 +86,22 @@ class ServiciosAndSubservices(ListAPIView):
         # Incluye los subservicios relacionados en el queryset
         return Servicio.objects.prefetch_related('subservicio_set').all()
     
+
+class SlidesAPIView(APIView):
+    permission_classes = [permissions.AllowAny]
+
+    def get(self, request):
+        servicios = Servicio.objects.all()
+        slides = Slide.objects.filter(activo=True)
+
+        servicio_serializer = ServicioSlideSerializer(servicios, many=True)
+        slide_serializer = SlideSerializer(slides, many=True)
+
+        combined = servicio_serializer.data + slide_serializer.data
+        combined.sort(key=lambda x: x.get('orden', 0))
+
+        return Response(combined)
+
 
 class BrochureApiView(APIView):
     permission_classes = [

@@ -48,7 +48,7 @@ export const SwiperProjects = () => {
         <SwiperSlide key={project.id}>
           <div className="projects border-0">
             {projectImageMap[project.id] && (
-              <img src={projectImageMap[project.id]} alt={`Imagen de ${project.nombre}`} className="img-fluid slider-project-img" />
+              <img src={projectImageMap[project.id]} alt={`Imagen de ${project.nombre}`} className="img-fluid slider-project-img" loading="lazy" />
             )}
             <div className="card-info">
               <h4>{project.nombre}</h4>

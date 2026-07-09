@@ -7,7 +7,7 @@ const Clients = () => {
         <section className='clientes'>
       <div className="container">
         <div className="row">
-          <SetionHeader title="Clientes" />
+          <SetionHeader prefix="Nuestros" title="Clientes" />
         </div>
       </div>
     <div className="container">

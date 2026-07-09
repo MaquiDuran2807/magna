@@ -1,0 +1,12 @@
+{
+  "category": "mobile",
+  "url": "http://localhost:4173/",
+  "date": "2026-06-24",
+  "version": "v1",
+  "categories": {
+    "performance": {"score": 0.68},
+    "accessibility": {"score": 0.84},
+    "best-practices": {"score": 1.0},
+    "seo": {"score": 1.0}
+  }
+}

@@ -1,4 +1,5 @@
 
+import { Helmet } from 'react-helmet-async';
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 import { Result } from '../types/blog';
@@ -13,15 +14,13 @@ import useIntersectionObserver from '../hooks/useLazyload';
 
 const BlogDetailPage: React.FC = () => {
     const { id } = useParams<{ id: string }>();
-    if (!id) {
-        return <p>No hay id</p>;
-    }
     const [blogDetail, setBlogDetail] = useState<Result | null>(null);
     const { mutateAsync: fechtBlog } = useFetchBlog()
     const { data: blog,isError,isLoading,refetch} = useQuery<Result[]>({
-        queryKey: ['blogDetail'],
+        queryKey: ['blogDetail', id],
         staleTime: 1000*60*30,refetchOnWindowFocus: false,refetchInterval: 1000*60*30,
-        queryFn: () => fechtBlog({id}),
+        queryFn: () => fechtBlog({id: id as string}),
+        enabled: !!id,
     });
     useEffect(() => {
         refetch();
@@ -33,6 +32,9 @@ const BlogDetailPage: React.FC = () => {
         }
     }, [blog]);
 
+    if (!id) {
+        return <p>No hay id</p>;
+    }
     if (isLoading) {
         return <p>Cargando...</p>;
     }
@@ -53,6 +55,11 @@ const BlogDetailPage: React.FC = () => {
     // const newContent2 = newContent.replace(/(<img [^>]*?)style="[^"]*?"([^>]*?>)/g, '$1$2');
     const newContent2 = newContent.replace(/(<img [^>]*?)style="([^"]*?)(?:\bheight\s*:\s*[^;]*;?)([^"]*?)"([^>]*?>)/g, '$1style="$2$3"$4');
     return (
+        <>
+        <Helmet>
+          <title>{blogDetail?.title ?? 'Blog'} | Magna Ingeniería y Topografía</title>
+          <meta name="description" content={blogDetail?.description ?? 'Artículo del blog de Magna Ingeniería y Topografía.'} />
+        </Helmet>
         <div className='blog-container '>
             <br />
             <BlogLayout>
@@ -124,6 +131,7 @@ const BlogDetailPage: React.FC = () => {
                 {/* <p>Author: {blog.author.first_name+" "+blog.author.last_name}</p> */}
             </BlogLayout>
         </div>
+        </>
     );
 };
 

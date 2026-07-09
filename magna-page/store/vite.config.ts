@@ -5,5 +5,7 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   base: '/static/',
-  // base: '/store/'
+  build: {
+    sourcemap: false,
+  },
 })

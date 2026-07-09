@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 interface BannerProps {
     title: string;
     paragraph: string;
-    image: String;
+    image: string;
 }
 
 const Banner: React.FC<BannerProps> = ({ title, paragraph,image }) => {

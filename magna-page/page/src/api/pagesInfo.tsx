@@ -1,5 +1,5 @@
 import apiClient from "../apiClient";
-import { Brochure, EquiposAndTech,  Servicio2 } from "../types/types";
+import { AboutData, Brochure, EquiposAndTech,  Servicio2, Slide } from "../types/types";
 import { ProyectosMagna,ProyectImagesMagna  } from "../types/projects";
 
 
@@ -47,9 +47,29 @@ export const fetchProjectsImages = async () => {
     }
 }
 
+export const fetchSlides = async () => {
+    try {
+        const response = await apiClient.get<Slide[]>('servicios/slides/')
+        return response.data
+    } catch (error) {
+        console.log(error);
+        return
+    }
+}
+
 export const fetchBrochure = async () => {
     try {
         const response = await apiClient.get<Brochure[]>('servicios/brochure/')
+        return response.data
+    } catch (error) {
+        console.log(error);
+        return
+    }
+}
+
+export const fetchAbout = async () => {
+    try {
+        const response = await apiClient.get<AboutData>('about/')
         return response.data
     } catch (error) {
         console.log(error);
