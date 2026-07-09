@@ -69,7 +69,7 @@ const Contact = memo(() => {
   });
 
   return (
-    <section className="contact">
+    <section className="contact" id="contact-form">
   <div className="container">
     <div className="row">
       <div className="col-12">
