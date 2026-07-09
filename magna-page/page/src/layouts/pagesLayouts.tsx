@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 const LazyNavBar = lazy(() => import('../components/navBar'));
 const LazyFloatWhatsapp = lazy(() => import('../components/floawhatsapp'));
+const LazyCtaFlotante = lazy(() => import('../components/ctaFlotante'));
 const LazyFooter1 = lazy(() => import('../components/footer1'));
 
 
@@ -45,6 +46,7 @@ const PagesLayout: React.FC<PagesLayoutProps> = ({ children }) => {
             <Suspense fallback={<div>Cargando...</div>}>
                 <LazyFooter1 />
                 <LazyFloatWhatsapp />
+                <LazyCtaFlotante />
             </Suspense>
         </motion.div>
     );

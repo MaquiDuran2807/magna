@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useCallback } from 'react';
+import React, { lazy, Suspense } from 'react';
 import { Helmet } from 'react-helmet-async';
 import PagesLayout from '../layouts/pagesLayouts';
 import Banner from '../components/banner';
@@ -7,8 +7,6 @@ import { FaSquarePhone } from 'react-icons/fa6';
 import { MdEmail } from 'react-icons/md';
 import { IoMdClock } from 'react-icons/io';
 import { FaMapMarkerAlt } from 'react-icons/fa';
-import { IoChatbubbleEllipses } from 'react-icons/io5';
-import { motion } from 'framer-motion';
 import '../components/styles/contact.css';
 import imagen from '../assets/img/banner/projects.webp';
 import useIntersectionObserver from '../hooks/useLazyload';
@@ -49,11 +47,6 @@ const contactInfo = [
 ];
 
 const ContactPage: React.FC = () => {
-  const scrollToForm = useCallback(() => {
-    const el = document.getElementById('contact-form');
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }, []);
-
   return (
     <div>
       <Helmet>
@@ -131,19 +124,6 @@ const ContactPage: React.FC = () => {
             </Suspense>
           </div>
         </section>
-
-        <motion.button
-          className="cta-flotante"
-          onClick={scrollToForm}
-          initial={{ scale: 0, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ delay: 1, type: 'spring', stiffness: 300 }}
-          whileHover={{ scale: 1.08 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          <IoChatbubbleEllipses size={22} />
-          <span>Cuéntanos tu proyecto</span>
-        </motion.button>
       </PagesLayout>
     </div>
   );
