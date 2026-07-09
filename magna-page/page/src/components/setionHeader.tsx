@@ -1,4 +1,5 @@
 import HeadingDivider from "./headingDivider"
+import './styles/setionHeader.css'
 
 interface SetionHeaderProps {
     title: string;

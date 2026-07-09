@@ -7,9 +7,9 @@ import { FaSquarePhone } from 'react-icons/fa6';
 import { MdEmail } from 'react-icons/md';
 import { IoMdClock } from 'react-icons/io';
 import { FaMapMarkerAlt } from 'react-icons/fa';
+import '../components/styles/contact.css';
 import imagen from '../assets/img/banner/projects.webp';
 import useIntersectionObserver from '../hooks/useLazyload';
-import ProgressiveBackground from '../components/ProgressiveBackground';
 import { SetionHeader } from '../components/setionHeader';
 import LogoCarrusel from '../components/LogoCarrusel';
 import mapaColombia from '../assets/img/app/mapa colombia cobertura trabajos.png';
@@ -85,22 +85,20 @@ const ContactPage: React.FC = () => {
           </div>
         </section>
 
-        <section className="coverage-banner">
-          <ProgressiveBackground src={mapaColombia} placeholder={mapaColombia}>
-            <div className="coverage-banner-overlay" />
-            <div className="coverage-banner-content">
-              <div className="coverage-banner-icon">
-                <FaMapMarkerAlt />
-              </div>
-              <h2 className="coverage-banner-title">
-                Oficina en Ibagué — Trabajamos en todo Colombia
-              </h2>
-              <div className="coverage-banner-divider" />
-              <p className="coverage-banner-subtitle">
-                No importa dónde esté tu proyecto. Nuestro equipo se desplaza a cualquier región del país para brindarte soluciones en ingeniería y topografía.
-              </p>
+        <section className="coverage-banner" style={{ backgroundImage: `url(${mapaColombia})` }}>
+          <div className="coverage-banner-overlay" />
+          <div className="coverage-banner-content">
+            <div className="coverage-banner-icon">
+              <FaMapMarkerAlt />
             </div>
-          </ProgressiveBackground>
+            <h2 className="coverage-banner-title">
+              Oficina en Ibagué — Trabajamos en todo Colombia
+            </h2>
+            <div className="coverage-banner-divider" />
+            <p className="coverage-banner-subtitle">
+              No importa dónde esté tu proyecto. Nuestro equipo se desplaza a cualquier región del país para brindarte soluciones en ingeniería y topografía.
+            </p>
+          </div>
         </section>
 
         <section className="clientes-contact">
