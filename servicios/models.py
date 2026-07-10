@@ -75,7 +75,7 @@ class SubServicio(models.Model):
         if self.imagen:
             pil_img = Image.open(self.imagen)
             ancho_original, altura_original = pil_img.size
-            altura_pantalla = 900
+            altura_pantalla = 1600
             proporcion = altura_pantalla / altura_original
             ancho_pantalla = int(ancho_original * proporcion)
 

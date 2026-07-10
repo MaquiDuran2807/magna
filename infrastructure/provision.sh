@@ -7,7 +7,7 @@ set -e
 # =============================================
 
 DOMAIN="${DOMAIN:-magnaingenieriaytopografia.com}"
-DOCKERHUB_USER="${DOCKERHUB_USER:-maquidev2807}"
+DOCKERHUB_USER="${DOCKERHUB_USER:-mquiroga2807}"
 IMAGE_TAG="${IMAGE_TAG:-latest}"
 DB_PASSWORD="${DB_PASSWORD:-magna_secret}"
 APP_DIR="/opt/magna"

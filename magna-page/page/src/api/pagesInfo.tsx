@@ -1,5 +1,5 @@
 import apiClient from "../apiClient";
-import { AboutData, Brochure, EquiposAndTech,  Servicio2, Slide } from "../types/types";
+import { AboutData, Brochure, EquiposAndTech,  Servicio2, Slide, Subservicio } from "../types/types";
 import { ProyectosMagna,ProyectImagesMagna  } from "../types/projects";
 
 
@@ -17,12 +17,13 @@ export const fetchWorkers = async () => {
 export const fetchServices1 = async () => {
     try {
         const response = await apiClient.get<Servicio2[]>('servicios/servicios-and-subservicios/')
-        console.log(response.data, 'aqui estoy en fetchServices');
-        console.log(response.data, 'aqui estoy en fetchServices');
-        
+        console.log('[API] servicios-and-subservicios raw response:', JSON.parse(JSON.stringify(response.data)));
+        response.data?.forEach((s: Servicio2) => {
+            console.log(`[API] servicio: "${s.nombre}" (id=${s.id}), subservicios:`, s.subservicios?.map((sub: Subservicio) => ({id: sub.id, nombre: sub.nombre, img: sub.imagen})));
+        });
         return response.data
     } catch (error) {
-        console.log(error);
+        console.log('[API] fetchServices1 ERROR:', error);
         return
     }
 }

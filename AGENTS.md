@@ -215,5 +215,25 @@ Before starting any work, ALWAYS:
 3. **Check design guidelines** — Refer to `DESIGN.md` or existing components for visual consistency
 4. **Follow style conventions** — Maintain Spanish naming, explicit fields, no superfluous comments
 
+## Credenciales Docker Hub
+
+- **Usuario:** `mquiroga2807`
+- **Token:** almacenado en `C:\Users\Janus\Documents\magna\docker hub token.txt`
+- **Login:** `Get-Content 'C:\Users\Janus\Documents\magna\docker hub token.txt' | Select-Object -Skip 1 | docker login -u mquiroga2807 --password-stdin`
+- **Repositorio:** `mquiroga2807/magna-web`
+
+## Deployment rápido (solo actualizar web)
+
+```powershell
+# 1. Build frontend page
+cd magna-page/page && npm run build
+# 2. Build + push Docker
+docker build -t mquiroga2807/magna-web:latest .
+Get-Content 'C:\Users\Janus\Documents\magna\docker hub token.txt' | Select-Object -Skip 1 | docker login -u mquiroga2807 --password-stdin
+docker push mquiroga2807/magna-web:latest
+# 3. Actualizar servidor
+ssh -i ~/.ssh/magna.pem ubuntu@13.223.147.116 "sudo docker compose -f /opt/magna/docker-compose.yml pull web && sudo docker compose -f /opt/magna/docker-compose.yml up -d --no-deps web && sudo docker compose -f /opt/magna/docker-compose.yml exec -T web python manage.py migrate --no-input"
+```
+
 Skills provide specialized instructions and workflows for specific tasks.
 Use the skill tool to load a skill when a task matches its description.

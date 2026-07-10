@@ -8,8 +8,8 @@ const DEFAULT_SERVICES: Servicio2[] = [{
   descripcion: "Ofrecemos soluciones topográficas profesionales, con equipos de alta tecnología y personal calificado. Estamos presentes en cada momento del proyecto, desde el levantamiento inicial hasta el control de obra, pasando por el diseño, la planificación y la ejecución",
   imagen: "/media/servicios/slide-banner1.webp",
   icon: "",
-  imagen_tablet: "",
-  imagen_celular: "",
+  imagen_tablet: "/media/servicios/slide-banner1.webp",
+  imagen_celular: "/media/servicios/slide-banner1.webp",
   subservicios: [],
   caracteristicas: [],
 }];
@@ -24,11 +24,14 @@ export const useGetServices = () => {
         refetchInterval: 1000 * 60 * 30,
     });
      if (!isLoadingServices && services !== DEFAULT_SERVICES) {
+        console.log('[getInfoPage] real data loaded, services count:', services?.length);
+        services?.forEach(s => console.log('[getInfoPage] service:', s.nombre, 'subservicios:', s.subservicios?.length));
         services?.map((service) => {
             const image = new Image();
             image.src = service.imagen;
         });
     }
+    console.log('[getInfoPage] services:', services?.length, 'isLoading:', isLoadingServices, 'isPlaceholder:', services === DEFAULT_SERVICES);
     return { services, errorServices, isLoadingServices };
 }
 

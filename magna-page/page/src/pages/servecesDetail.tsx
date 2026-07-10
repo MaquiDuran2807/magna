@@ -1,248 +1,231 @@
 import { Helmet } from 'react-helmet-async';
 import { AnimatePresence, motion } from 'framer-motion';
-import { lazy, useEffect, useRef, useState } from "react";
+import { lazy, useEffect, useMemo, useRef, useState } from "react";
 import { AiFillCaretDown, AiOutlineDoubleRight } from "react-icons/ai";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import imagenIngenieria from '../assets/img/banner/ingenieria.webp';
 import imagenMedioAmbiente from '../assets/img/banner/medio.webp';
 import imagenServicios from '../assets/img/banner/servicios.webp';
 import imagenTopografia from '../assets/img/banner/converted_topo.webp';
 import Banner from "../components/banner";
 import SliderServices from "../components/sliderServices";
-import useScreenSize from '../hooks/ScreenSize';
 import PagesLayout from "../layouts/pagesLayouts";
-import { Servicio2, Subservicio } from "../types/types";
+import { Subservicio } from "../types/types";
 import "./styles/servicesDetail.css";
 import Spinner from '../components/spinner';
 import useIntersectionObserver from '../hooks/useLazyload';
 import { useGetServices } from '../hooks/getInfoPage';
-// const PdfViewer = lazy(() => import('../components/brochure'));
 const LazyServicios = lazy(() => import('../components/sections/Servicios'));
 
+const fallbackImg = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    const img = e.currentTarget;
+    img.srcset = '';
+};
 
+const bannerImageMap: Record<string, string> = {
+    "Topografía": imagenTopografia,
+    "Ingeniería y Consultoría": imagenIngenieria,
+    "Medio Ambiente": imagenMedioAmbiente,
+};
+
+const RESET_TIMEOUT = 20000;
 
 const ServecesDetail: React.FC = () => {
     const { id } = useParams<{ id: string }>();
-
-    const [title, setTitle] = useState<string>("Nuestros Servicios");
-    const [imagen, setImagen] = useState<string>(imagenServicios);
+    const navigate = useNavigate();
     const { services } = useGetServices();
-    let dispositivo = "container";
-    const [servicio_elegido, setServicio_elegido] = useState<Servicio2[]>();
-    const [selectedSubServicio, setSelectedSubServicio] = useState<Subservicio[] | null>(null);
-    const [slider, setSlider] = useState<Subservicio[] | null>(null);
-    const [subtitle, setSubtitle] = useState<boolean>(true);
+    const [selectedSubServicio, setSelectedSubServicio] = useState<Subservicio | null>(null);
+    const [openServiceId, setOpenServiceId] = useState<number | null>(null);
+    const subServicioPaginaRef = useRef<HTMLDivElement>(null);
+    const navTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-    const filterServicio = (id: string) => {
-        if (!services) {
-            return;
-        }
-        const servicio: Servicio2[] = services.filter((servicio: Servicio2) => servicio.nombre === id);
-        setSlider(servicio[0].subservicios);
-        return servicio;
-    }
-
-    useEffect(() => {
-        if (services) {
-            if (id) {
-                const servicioElegido = filterServicio(id);
-                if (servicioElegido) {
-                    const titleString = "servicios de " + servicioElegido[0].nombre;
-                    setTitle(titleString);
-                    setServicio_elegido(servicioElegido);
-                    if (servicioElegido[0].nombre === "Topografía") {
-                        setImagen(imagenTopografia);
-                    }
-                    if (servicioElegido[0].nombre === "Ingeniería y Consultoría") {
-                        setImagen(imagenIngenieria);
-                    }
-                    if (servicioElegido[0].nombre === "Medio Ambiente") {
-                        setImagen(imagenMedioAmbiente);
-                    }
-                }
-            } else {
-                setServicio_elegido(services);
-                setTitle("Nuestros Servicios");
-                const subServicios = services.flatMap((subServicio) => subServicio.subservicios);
-                setSlider(subServicios);
-            }
-        }
+    const servicioElegido = useMemo(() => {
+        if (!services) return undefined;
+        if (!id) return services;
+        return services.filter(s => s.nombre === id);
     }, [services, id]);
 
-    const { width,height } = useScreenSize();
-    console.log(width,height);
-    const isMobile = width <= 1000;
-    const subServicioPaginaRef = useRef<HTMLDivElement>(null);
-    if (isMobile) {
-        dispositivo = "mobile";
-    }
+    const { title, imagen } = useMemo(() => {
+        if (!id || !servicioElegido?.[0]) {
+            return { title: "Nuestros Servicios", imagen: imagenServicios };
+        }
+        const s = servicioElegido[0];
+        return {
+            title: "servicios de " + s.nombre,
+            imagen: bannerImageMap[s.nombre] || imagenServicios,
+        };
+    }, [id, servicioElegido]);
 
-    const handleSubServicioClick = async (subServicio: Subservicio) => {
-        if (!subServicio) {
-            return;
+    const handleSubServicioClick = (subServicio: Subservicio) => {
+        if (!subServicio) return;
+        if (navTimerRef.current) {
+            clearTimeout(navTimerRef.current);
         }
-
-        const listSubservicios: Subservicio[] = []
-        listSubservicios.push(subServicio)
-        setSelectedSubServicio(listSubservicios);
-        setSubtitle(false);
-        if (!listSubservicios) {
-            return
+        setSelectedSubServicio(subServicio);
+        if (subServicioPaginaRef.current) {
+            const top = subServicioPaginaRef.current.getBoundingClientRect().top + window.pageYOffset;
+            window.scroll({ top: top - 100, behavior: 'smooth' });
         }
-        setSlider(listSubservicios);
-        if (!id) {
-            return
-        }
-        setTimeout(() => {
-            setSelectedSubServicio(null);
-            setSubtitle(true);
-            if (!services) {
-                return
-            }
-            filterServicio(id);
-        }, 20000);
     };
 
+    // Cuando se navega a un servicio especifico, reiniciar el timer
+    // para volver a /servicios mostrando todas las tarjetas
     useEffect(() => {
-        if (subServicioPaginaRef.current && !!selectedSubServicio) {
-            const elementPosition = subServicioPaginaRef.current.getBoundingClientRect().top + window.pageYOffset;
-            const offset = -300; // Ajusta este valor según cuánto más arriba quieras que sea el scroll
-            window.scroll({
-                top: elementPosition + offset,
-                behavior: 'smooth'
-            });
+        if (navTimerRef.current) {
+            clearTimeout(navTimerRef.current);
         }
-    }, [selectedSubServicio]);
+        setSelectedSubServicio(null);
+        if (id) {
+            navTimerRef.current = setTimeout(() => {
+                navigate('/servicios', { replace: true });
+            }, RESET_TIMEOUT);
+        }
+        return () => {
+            if (navTimerRef.current) {
+                clearTimeout(navTimerRef.current);
+            }
+        };
+    }, [id, navigate]);
 
-    if (!servicio_elegido) {
+    if (!servicioElegido) {
         return <Spinner/>;
     }
 
     return (
         <>
             <Helmet>
-              <title>{title?.toString() ?? 'Servicios'} | Magna Ingeniería y Topografía</title>
-              <meta name="description" content={servicio_elegido?.[0]?.descripcion?.substring(0, 160) ?? 'Servicios profesionales de ingeniería, topografía, estudios ambientales y más.'} />
+              <title>{title} | Magna Ingeniería y Topografía</title>
+              <meta name="description" content={servicioElegido[0]?.descripcion?.substring(0, 160) ?? 'Servicios profesionales de ingeniería, topografía, estudios ambientales y más.'} />
             </Helmet>
             <PagesLayout>
-                <Banner title={servicio_elegido.length == 1 ? servicio_elegido[0].nombre : "Servicios"} paragraph={title.toString()} image={imagen} />
-                <div className={dispositivo}>
-                    <div className="row servicio">
-                        {servicio_elegido.length === 1 ? (
-                            <div className="col-12">
-                                <h2 className="text-center">{title}</h2>
+                <Banner
+                    title={servicioElegido.length === 1 ? servicioElegido[0].nombre : "Servicios"}
+                    paragraph={title}
+                    image={imagen}
+                />
+                <div className="servicios-page-wrapper">
+                    {servicioElegido.length === 1 && (
+                        <h2 className="servicio-title">{title}</h2>
+                    )}
+
+                    <LazyServicios />
+
+                    <div className="servicios-layout">
+                        <aside className="servicios-sidebar">
+                            <div className="sidebar-header">
+                                <h2>Nuestros Servicios</h2>
                             </div>
-                        ) : (
-                            <div className="row">
-                                <LazyServicios />
-                            </div>
-                        )}
-                    </div>
-                    <div className="row content">
-                        <div className="col-12 col-md-4 ">
-                            <div className={`aside -template`} >
-                                {servicio_elegido.map((servicio) => {
-                                    return (
-                                        <div key={servicio.id}>
-                                            <div className="row px-2">
-                                                <div className="col-12">
-                                                    <motion.div
-                                                        initial={{ opacity: 0 }}
-                                                        animate={{ opacity: 1 }}
-                                                        transition={{ duration: 0.6 }}
-                                                        className="servicio"
-                                                        key={servicio.id}
-                                                    >
-                                                        <h3>{servicio?.nombre}</h3>
-                                                        <p className='px-2'>{servicio?.descripcion}</p>
-                                                    </motion.div>
-                                                </div>
-                                                <div>
-                                                    {servicio.subservicios.map((subServicio) => {
-                                                        return (
-                                                            <div key={subServicio.id} className="row">
-                                                                <div className="col-12">
-                                                                    <motion.div
-                                                                        onClick={() => handleSubServicioClick(subServicio)}
-                                                                        initial={{ opacity: 0 }}
-                                                                        animate={{ opacity: 1 }}
-                                                                        transition={{ duration: 0.3 }}
-                                                                        className="subservicio"
-                                                                        key={subServicio.id}
-                                                                    >
-                                                                        <div className="row items mx-3">
-                                                                            <span className="col-1 icon-row"><AiOutlineDoubleRight /></span>
-                                                                            <h5 className="col-10">{subServicio.nombre + "   "}<span><AiFillCaretDown /></span></h5>
-                                                                        </div>
-                                                                    </motion.div>
-                                                                </div>
-                                                            </div>
-                                                        );
-                                                    })}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    );
-                                })}
-                            </div>
-                        </div>
-                        <div className="col-12 col-md-8 " >
-                            <div className="row mb-5">
-                                <SliderServices subServicios={slider} subtitle={subtitle} />
-                            </div>
-                            
-                            <div className="row" ref={subServicioPaginaRef} key={selectedSubServicio && selectedSubServicio[0]?.descripcion}>
-                                <AnimatePresence>
-                                    <motion.div
-                                        initial={{ height: 0, opacity: 0 }}
-                                        animate={{ height: "auto", opacity: 1 }}
-                                        exit={{ height: 0, opacity: 0, scale: 0.5 }}
-                                        transition={{ duration: 0.3, delay: 1, delayChildren: 0.3, staggerChildren: 0.3 }}
-                                        key={selectedSubServicio && selectedSubServicio[0]?.id}
+                            {services?.map((servicio) => (
+                                <div key={servicio.id} className="servicio-accordion">
+                                    <button
+                                        className={`accordion-trigger ${openServiceId === servicio.id ? 'open' : ''}`}
+                                        onClick={() => setOpenServiceId(openServiceId === servicio.id ? null : servicio.id)}
                                     >
-                                        <h3>
-                                            {selectedSubServicio
-                                                ? selectedSubServicio[0].nombre
-                                                : "Servicios de calidad y con la más alta tecnología"}
-                                        </h3>
-                                        <p>
-                                            {selectedSubServicio
-                                                ? selectedSubServicio[0].descripcion
-                                                : "Somos una empresa con más de 10 años de experiencia en el mercado, con profesionales altamente calificados y con amplia experiencia en el sector público y privado, brindando servicios de calidad y con la más alta tecnología."}
-                                        </p>
-                                    </motion.div>
+                                        <span className="accordion-title">{servicio.nombre}</span>
+                                        <AiFillCaretDown className="accordion-icon" />
+                                    </button>
+                                    <AnimatePresence>
+                                        {openServiceId === servicio.id && (
+                                            <motion.div
+                                                initial={{ height: 0, opacity: 0 }}
+                                                animate={{ height: "auto", opacity: 1 }}
+                                                exit={{ height: 0, opacity: 0 }}
+                                                transition={{ duration: 0.3 }}
+                                                className="accordion-content"
+                                            >
+                                                <p className="servicio-description">{servicio.descripcion}</p>
+                                                <div className="subservicios-list">
+                                                    {servicio.subservicios.map((sub) => (
+                                                        <button
+                                                            key={sub.id}
+                                                            className="subservicio-item"
+                                                            onClick={() => handleSubServicioClick(sub)}
+                                                        >
+                                                            <AiOutlineDoubleRight className="subservicio-icon" />
+                                                            <span>{sub.nombre}</span>
+                                                        </button>
+                                                    ))}
+                                                </div>
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
+                                </div>
+                            ))}
+                        </aside>
+
+                        <main className="servicios-main">
+                            <section className="servicios-carousel">
+                                <SliderServices
+                                    serviceName={id}
+                                    onSubServicioClick={handleSubServicioClick}
+                                />
+                            </section>
+
+                            <section className="servicios-detail-panel" ref={subServicioPaginaRef}>
+                                <AnimatePresence mode="wait">
+                                    {selectedSubServicio ? (
+                                        <motion.div
+                                            key={selectedSubServicio.id}
+                                            initial={{ opacity: 0, y: 20 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            exit={{ opacity: 0, y: -20 }}
+                                            transition={{ duration: 0.4 }}
+                                            className="detail-content"
+                                        >
+                                            <div className="detail-image">
+                                                <img
+                                                    src={selectedSubServicio.imagen}
+                                                    srcSet={`
+                                                        ${selectedSubServicio.imagen_celular || selectedSubServicio.imagen} 450w,
+                                                        ${selectedSubServicio.imagen_tablet || selectedSubServicio.imagen} 1024w,
+                                                        ${selectedSubServicio.imagen} 2000w
+                                                    `}
+                                                    sizes="(max-width: 768px) 100vw, 800px"
+                                                    alt={selectedSubServicio.nombre}
+                                                    className="detail-img"
+                                                    onError={fallbackImg}
+                                                />
+                                            </div>
+                                            <div className="detail-text">
+                                                <h3>{selectedSubServicio.nombre}</h3>
+                                                <p>{selectedSubServicio.descripcion}</p>
+                                            </div>
+                                        </motion.div>
+                                    ) : (
+                                        <motion.div
+                                            key="default"
+                                            initial={{ opacity: 0 }}
+                                            animate={{ opacity: 1 }}
+                                            exit={{ opacity: 0 }}
+                                            className="detail-placeholder"
+                                        >
+                                            <h3>Servicios de calidad y con la más alta tecnología</h3>
+                                            <p>
+                                                Somos una empresa con más de 10 años de experiencia en el mercado,
+                                                con profesionales altamente calificados y con amplia experiencia en
+                                                el sector público y privado.
+                                            </p>
+                                            <p className="detail-hint">
+                                                Selecciona un subservicio del menú lateral o del carrusel para ver más detalles.
+                                            </p>
+                                        </motion.div>
+                                    )}
                                 </AnimatePresence>
-                                <div></div>
-                                {/* <div className='my-5'>
-                                    <h3>Brochure</h3>
-                                    <p>
-                                        Para obtener una visión completa de nuestros servicios y ventajas, te invitamos a descargar nuestro brochure informativo. Aquí encontrarás detalles exhaustivos sobre nuestras ofertas, testimonios de clientes satisfechos y la información de contacto necesaria para dar el siguiente paso hacia una colaboración exitosa. ¡Descubre cómo podemos ayudarte a alcanzar tus objetivos hoy mismo!
-                                    </p>
-                                    {/* <PdfViewer />  
-                                </div> */}
-                            </div>
-                        </div>
-                        {servicio_elegido.length === 1 ? (
-                            <div className="row">
-                                <LazyServicios />
-                            </div>
-                        ) : (
-                            ""
-                        )}
+                            </section>
+                        </main>
                     </div>
+
                 </div>
             </PagesLayout>
         </>
     );
 };
 
-
 export default function LazyServecesDetail () {
     const { isVisible, ref } = useIntersectionObserver('100px');
-  
     return (
         <div id="LazyServecesDetail" ref={ref}>
             {isVisible ? <ServecesDetail /> : null}
         </div>
     );
-  }
+}
