@@ -31,15 +31,15 @@ const CtaFlotante = () => {
     if (location.pathname === '/contact') {
       scrollToForm();
     } else {
-      navigate('/contact');
+      navigate('/contact', { state: { scrollToForm: true } });
     }
   }, [location.pathname, navigate, scrollToForm]);
 
   useEffect(() => {
-    if (location.pathname === '/contact') {
+    if (location.pathname === '/contact' && (location.state as any)?.scrollToForm) {
       setTimeout(scrollToForm, 500);
     }
-  }, [location.pathname, scrollToForm]);
+  }, [location.pathname, location.state, scrollToForm]);
 
   useEffect(() => {
     const timer = setTimeout(() => setShowHand(false), 5000);

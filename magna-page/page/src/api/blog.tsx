@@ -1,64 +1,27 @@
 import apiClient from "../apiClient";
-import { BlogMagna, BlogimportantMagna, Result, } from "../types/blog";
+import { BlogMagna, BlogimportantMagna, Result } from "../types/blog";
 
 
-import { useMutation } from '@tanstack/react-query';
+export const fetchBlogDetail = async (id: string): Promise<Result> => {
+    const response = await apiClient.get<Result>(`/blog/${id}/`);
+    return response.data;
+};
 
-
-
-export const useFetchBlog = () => {
-  
-  
-    return useMutation<Result[], Error, { id: string }>({
-        mutationKey: ['blog'],
-        mutationFn: async ({
-          id
-        }) =>{
-        const response = await apiClient.get<Result[]>(`/blog/${id}/`);
-        console.log('useFetchBlog', response.data, 'response.data', id);
-        return response.data;
-      } 
-    });
-
-  };
-
-export const fetchNextBlogs = async ( pageParam:any ) => {
-    try {
-      const response = await apiClient.get<BlogMagna>(`/blog/?page=${pageParam}`);
-      console.log(response.data);
-      const nextPage = response.data.next;
-      const blogs = response.data.results;
-      
-      return {
-        nextPage: nextPage,
-        blogs: blogs
-      }
-    } catch (error) {
-      console.log(error);
-      return
-    }
-  }
-
-export const fetchinfoImportantBlogs = async () => {
-  try {
-    const response = await apiClient.get<BlogimportantMagna[]>('/blog/recent/');
-    console.log(response.data);
-    const blogs = response.data;
-    return blogs;
-  } catch (error) {
-    console.log(error);
-    return
-  }
+export const fetchNextBlogs = async (pageParam: any) => {
+    const response = await apiClient.get<BlogMagna>(`/blog/?page=${pageParam}`);
+    const nextPage = response.data.next;
+    const blogs = response.data.results;
+    return { nextPage, blogs };
 }
 
-export const fetchBlogSearch = async (search:string) => {
-  try {
-    const response = await apiClient.get<Result[]>(`/blog/search/${search}/`);
-    console.log(response.data);
-    const blogs = response.data;
-    return blogs;
-  } catch (error) {
-    console.log(error);
-    return
-  }
+export const fetchinfoImportantBlogs = async () => {
+    const response = await apiClient.get<BlogimportantMagna[]>('/blog/recent/');
+    return response.data;
+}
+
+export const fetchBlogSearch = async (search: string): Promise<Result[]> => {
+    const response = await apiClient.get<Result[]>(`/blog/search/`, {
+        params: { q: search }
+    });
+    return response.data;
 }

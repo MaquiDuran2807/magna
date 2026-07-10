@@ -4,43 +4,43 @@ import { AiOutlineDoubleRight } from 'react-icons/ai';
 import { useQuery } from '@tanstack/react-query';
 import { fetchinfoImportantBlogs } from '../api/blog';
 
-
-
 const Sidebar: React.FC = () => {
     const { data: blogs } = useQuery({
         queryKey: ['importantBlogs'],
         queryFn: fetchinfoImportantBlogs,
-        staleTime: 1000*60*30,refetchOnWindowFocus: false,refetchInterval: 1000*60*30,
+        staleTime: 1000*60*30,refetchOnWindowFocus: false,
     });
     if (!blogs) {
-        return <p>Cargando...</p>;
+        return <p className="text-white text-center">Cargando...</p>;
+    }
+    if (blogs.length === 0) {
+        return (
+            <div className="blog-sidebar">
+                <h3 className="sidebar__title">Artículos destacados</h3>
+                <p className="text-white text-center opacity-75">No hay artículos destacados aún.</p>
+            </div>
+        );
     }
 
     return (
-        <div className="blog-sidebar ">
-            <h3 className='ml-5'>Artículos más importantes </h3>
-            <ul>
-                {
-                blogs.map((blog) => {
-                    return (
-                            <li key={blog.id}>
-                                <div className="row">
-                                <Link to={`/blog/${blog.id}`}>
-                                    <div className="col-3">
-                                        <img src={blog.image} alt={blog.title} style={{width:"120px",borderRadius:"10px"}} />
-                                    </div>
-                                    <div className="col-8 fs-4">
-                                        {blog.title} <AiOutlineDoubleRight />
-                                        <p className='text-white '> Autor :  {blog.author.last_name}</p>
-                                    </div>
-                                    <hr />
-                                    </Link>
-                                </div>
-                            </li>
-                    );
-                })
-                }
-            </ul>
+        <div className="blog-sidebar">
+            <h3 className="sidebar__title">Artículos destacados</h3>
+            <div className="sidebar__list">
+                {blogs.map((blog) => (
+                    <Link to={`/blog/${blog.id}`} key={blog.id} className="sidebar__item">
+                        <div className="sidebar__item-img-wrap">
+                            <img src={blog.image} alt={blog.title} className="sidebar__item-img" />
+                        </div>
+                        <div className="sidebar__item-body">
+                            <h4 className="sidebar__item-title">{blog.title}</h4>
+                            <span className="sidebar__item-date">
+                                {new Date(blog.date_posted).toLocaleDateString('es-CO')}
+                            </span>
+                        </div>
+                        <AiOutlineDoubleRight className="sidebar__item-icon" />
+                    </Link>
+                ))}
+            </div>
         </div>
     );
 };

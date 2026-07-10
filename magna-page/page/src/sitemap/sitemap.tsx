@@ -9,7 +9,12 @@ interface Route {
 const createSitemap = (routes: Route[], domain: string): string => {
     const urls = routes.map((route: Route) => {
         const url = new URL(domain + route.path);
-        const changefreq = "monthly";
+        let changefreq = "monthly";
+        if (route.path === '/blog') {
+            changefreq = "weekly";
+        } else if (route.path === '/blog/:id') {
+            changefreq = "monthly";
+        }
         let priority = 0.5; // Por defecto
         const lastmod: string = new Date().toISOString().split('T')[0]; // Fecha actual
 
@@ -20,6 +25,10 @@ const createSitemap = (routes: Route[], domain: string): string => {
             priority = 0.9;
         } else if (route.path === '/aboutUs') {
             priority = 0.8;
+        } else if (route.path === '/blog') {
+            priority = 0.8;
+        } else if (route.path === '/blog/:id') {
+            priority = 0.6;
         }
 
         return `

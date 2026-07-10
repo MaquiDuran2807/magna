@@ -1,9 +1,8 @@
-import React, { useEffect, useRef } from 'react';
-import { Helmet } from 'react-helmet-async';
-import NavBar from '../components/navbar2';
-import { FloatWhatsapp } from '../components/floawhatsapp';
+import React, { useEffect, useRef, lazy, Suspense } from 'react';
 import { useLocation } from 'react-router-dom';
 import LazyFooter1 from '../components/footer1';
+import { FloatWhatsapp } from '../components/floawhatsapp';
+const LazyNavBar = lazy(() => import('../components/navBar'));
 
 
 interface BlogLayoutProps {
@@ -22,16 +21,11 @@ const BlogLayout: React.FC<BlogLayoutProps> = ({ children }) => {
     }, [location]);
     return (
         <>
-            <Helmet>
-              <title>Blog | Magna Ingeniería y Topografía</title>
-              <meta name="description" content="Blog de Magna Ingeniería y Topografía — Artículos, noticias y novedades del sector." />
-            </Helmet>
-            <header ref={inicioDePaginaRef}>
-
-                <NavBar />
-                <div className="spand" id='header'>
+            <Suspense fallback={<div>Cargando...</div>}>
+                <div ref={inicioDePaginaRef}>
+                    <LazyNavBar />
                 </div>
-            </header>
+            </Suspense>
             
             {children}
             <LazyFooter1/>

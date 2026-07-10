@@ -6,7 +6,7 @@ from user.serializers import UserInforSerializer
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = '__all__'
+        fields = ['id', 'name', 'image']
 
 class CommentSerializer(serializers.ModelSerializer):
     author = UserInforSerializer(read_only=True)
@@ -15,25 +15,28 @@ class CommentSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class BlogPostSerializer(serializers.ModelSerializer):
+    image = serializers.ImageField(source='image_blog', read_only=True)
     comments = CommentSerializer(many=True, read_only=True)
     category = CategorySerializer(read_only=True)
     author = UserInforSerializer(read_only=True)
 
     class Meta:
         model = BlogPost
-        fields = ['id', 'title','description' , 'content', 'date_posted', 'author', 'category', 'comments', 'image_blog', 'important']
+        fields = ['id', 'title','description' , 'content', 'date_posted', 'author', 'category', 'comments', 'important', 'image']
 
 class AllBlogPostSerializer(serializers.ModelSerializer):
+    image = serializers.ImageField(source='image_blog', read_only=True)
     category = CategorySerializer(read_only=True)
     author = UserInforSerializer(read_only=True)
 
     class Meta:
         model = BlogPost
-        fields = ['id', 'title','description' , 'date_posted', 'author', 'category', 'image_blog', 'important']
+        fields = ['id', 'title','description' , 'date_posted', 'author', 'category', 'important', 'image']
 
 class ImportantBlogPostSerializer(serializers.ModelSerializer):
+    image = serializers.ImageField(source='image_blog', read_only=True)
     category = CategorySerializer(read_only=True)
     author = UserInforSerializer(read_only=True)
     class Meta:
         model = BlogPost
-        fields = ['id', 'title', 'date_posted', 'author', 'category','important', 'image_blog']
+        fields = ['id', 'title', 'date_posted', 'author', 'category','important', 'image']

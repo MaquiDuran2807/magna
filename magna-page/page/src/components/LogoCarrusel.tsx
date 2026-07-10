@@ -22,6 +22,14 @@ import bOccidente from "../assets/img/logos/occidente.png";
 import power from "../assets/img/logos/power 9.png";
 import ventus from "../assets/img/logos/ventus 2.png";
 import tpf from "../assets/img/logos/tpf 4.png";
+import canterSantaClara from "../assets/img/logos/CANTER SANTA CLARA.png";
+import ebisu from "../assets/img/logos/EBISU.png";
+import eiffage from "../assets/img/logos/EIFFAGE.png";
+import ibagueLimpia from "../assets/img/logos/IBAGUE LIMPIA.png";
+import interaseo from "../assets/img/logos/INTERASEO.png";
+import promisol from "../assets/img/logos/PROMISOL.png";
+import puertaDeOro from "../assets/img/logos/PUERTA DE ORO.png";
+import sanFelipeForestales from "../assets/img/logos/SAN FELIPE FORESTALES.png";
 
 
 
@@ -110,8 +118,16 @@ export default function LogoCarrusel() {
         <img src={varianz} alt="varianz" className="logos" />
         <img src={power} alt="powertis" className="logos" />
         <img src={orion} alt="salud total" className="logos" />
-        <img src={confenalco}alt="confenalco" className="logos" />
+        <img src={confenalco} alt="confenalco" className="logos" />
         <img src={saludtotal} alt="salud total" className="logos" />
+        <img src={canterSantaClara} alt="Canter Santa Clara" className="logos" />
+        <img src={ebisu} alt="Ebisu" className="logos" />
+        <img src={eiffage} alt="Eiffage" className="logos" />
+        <img src={ibagueLimpia} alt="Ibagué Limpia" className="logos" />
+        <img src={interaseo} alt="Interaseo" className="logos" />
+        <img src={promisol} alt="Promisol" className="logos" />
+        <img src={puertaDeOro} alt="Puerta de Oro" className="logos" />
+        <img src={sanFelipeForestales} alt="San Felipe Forestales" className="logos" />
 
 
 

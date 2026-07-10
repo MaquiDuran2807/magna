@@ -18,7 +18,7 @@ class BlogPost(models.Model):
     date_posted = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     important = models.BooleanField(default=False)
-    image_blog = models.ImageField(upload_to='comment_images', blank=True, null=True)
+    image_blog = models.ImageField(upload_to='blog_images/', blank=True, null=True)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
 
 
@@ -38,4 +38,4 @@ class Comment(models.Model):
     
 
     def __str__(self):
-        return self.text
+        return self.text[:50]

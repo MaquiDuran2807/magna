@@ -1,10 +1,11 @@
-from django.test import TestCase
+from django.test import TestCase, override_settings
 from rest_framework.test import APIClient
 from rest_framework import status
 from .models import BlogPost, Category
 from user.models import User
 
 
+@override_settings(CACHES={'default': {'BACKEND': 'django.core.cache.backends.dummy.DummyCache'}})
 class BlogTests(TestCase):
     def setUp(self):
         self.client = APIClient()
@@ -28,11 +29,12 @@ class BlogTests(TestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertIn('results', response.data)
         self.assertGreaterEqual(len(response.data['results']), 1)
+        self.assertIn('image', response.data['results'][0])
 
     def test_blog_post_detail(self):
         response = self.client.get(f'/blog/{self.post.id}/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data[0]['title'], self.post.title)
+        self.assertEqual(response.data['title'], self.post.title)
 
     def test_blog_post_recent(self):
         response = self.client.get('/blog/recent/')
@@ -52,24 +54,72 @@ class BlogTests(TestCase):
             self.assertTrue(post['important'])
 
     def test_blog_search(self):
-        response = self.client.get('/blog/search/total/')
+        response = self.client.get('/blog/search/?q=total')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertGreaterEqual(len(response.data), 1)
 
     def test_blog_search_no_results(self):
-        response = self.client.get('/blog/search/noexiste/')
+        response = self.client.get('/blog/search/?q=noexiste')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 0)
 
+    def test_blog_search_special_chars(self):
+        """Búsqueda con espacios y caracteres especiales debe funcionar"""
+        response = self.client.get('/blog/search/?q=estación+total')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertGreaterEqual(len(response.data), 1)
+
+    def test_blog_detail_not_found(self):
+        """ID inexistente debe retornar 404"""
+        response = self.client.get('/blog/9999/')
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+    def test_blog_post_has_image_field(self):
+        """El serializer debe exponer el campo como 'image', no 'image_blog'"""
+        response = self.client.get(f'/blog/{self.post.id}/')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertIn('image', response.data)
+        self.assertNotIn('image_blog', response.data)
+
+    def test_blog_list_query_count(self):
+        """Lista de blogs debe hacer queries óptimas (select_related)"""
+        cat2 = Category.objects.create(name='Geodesia')
+        BlogPost.objects.create(
+            title='Post con categoría',
+            description='Test',
+            content='<p>Content</p>',
+            author=self.author,
+            important=False,
+            category=cat2,
+        )
+        with self.assertNumQueries(2):
+            response = self.client.get('/blog/')
+            self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_blog_detail_full_data(self):
+        """Detail debe incluir todos los campos esperados"""
+        response = self.client.get(f'/blog/{self.post.id}/')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertIn('id', response.data)
+        self.assertIn('title', response.data)
+        self.assertIn('description', response.data)
+        self.assertIn('content', response.data)
+        self.assertIn('image', response.data)
+        self.assertIn('date_posted', response.data)
+        self.assertIn('important', response.data)
+        self.assertIn('author', response.data)
+        self.assertIn('category', response.data)
+        self.assertIn('comments', response.data)
+
     def test_blog_post_has_author_info(self):
         response = self.client.get(f'/blog/{self.post.id}/')
-        self.assertIn('author', response.data[0])
-        self.assertEqual(response.data[0]['author']['email'], 'author@example.com')
+        self.assertIn('author', response.data)
+        self.assertEqual(response.data['author']['email'], 'author@example.com')
 
     def test_blog_post_has_category_info(self):
         response = self.client.get(f'/blog/{self.post.id}/')
-        self.assertIn('category', response.data[0])
-        self.assertEqual(response.data[0]['category']['name'], 'Topografía')
+        self.assertIn('category', response.data)
+        self.assertEqual(response.data['category']['name'], 'Topografía')
 
     def test_blog_pagination_size(self):
         for i in range(10):
