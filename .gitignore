@@ -157,6 +157,9 @@ migrations/
 # staticfiles
 /staticfiles
 
+# Terraform
+.terraform/
+
 # Build artifacts frontend
 magna-page/page/dist/
 magna-page/store/dist/
