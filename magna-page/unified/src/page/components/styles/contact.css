@@ -1,0 +1,238 @@
+/* ==========================================================================
+   Sección del formulario de contacto
+   ========================================================================== */
+
+.contact {
+  height: fit-content;
+  background: linear-gradient(0deg, rgba(2, 19, 40, 0.307) 0%, rgba(2, 19, 40, 0.256) 100%), url(../../assets/img/app/fondotopo.jpg), no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.contact .title-servicios {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.contact .heading-divider {
+  background-color: #d69e2e;
+}
+
+.contact-izq {
+  background-color: rgb(2, 19, 40);
+}
+
+.contact-izq h3 {
+  font-size: 35px;
+  font-weight: 700;
+  margin: 10px 0 40px 0;
+  color: #ffffff;
+}
+
+.contact-izq h5 {
+  font-size: 1.2rem;
+  margin: 10px 0 40px 0;
+}
+
+.toggle-icon {
+  color: #163E73;
+  font: 1em sans-serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  margin-left: 10px;
+}
+
+/* ==========================================================================
+   Tarjetas de información de contacto (rediseño UX/UI)
+   ========================================================================== */
+
+.contact-info-section {
+  background-color: #f8f9fc;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' opacity='0.12'%3E%3Cpath d='M0 100 Q50 80 100 100 T200 100' fill='none' stroke='%23163E73' stroke-width='0.8'/%3E%3Cpath d='M0 120 Q50 100 100 120 T200 120' fill='none' stroke='%23163E73' stroke-width='0.8'/%3E%3Cpath d='M0 80 Q50 60 100 80 T200 80' fill='none' stroke='%23163E73' stroke-width='0.8'/%3E%3Cpath d='M0 140 Q50 130 100 140 T200 140' fill='none' stroke='%23163E73' stroke-width='0.8'/%3E%3Cpath d='M0 60 Q50 50 100 60 T200 60' fill='none' stroke='%23163E73' stroke-width='0.8'/%3E%3Cpath d='M0 170 Q60 150 120 170 T200 170' fill='none' stroke='%23163E73' stroke-width='0.6'/%3E%3Cpath d='M0 30 Q60 20 120 30 T200 30' fill='none' stroke='%23163E73' stroke-width='0.6'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 180px 180px;
+}
+
+.contact-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 28px 20px 24px;
+  text-align: center;
+  height: 100%;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(22, 62, 115, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 32px rgba(22, 62, 115, 0.12);
+  border-color: rgba(22, 62, 115, 0.2);
+}
+
+.contact-card-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #163E73 0%, #1f5a9e 100%);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  transition: transform 0.3s ease;
+}
+
+.contact-card:hover .contact-card-icon {
+  transform: scale(1.08);
+}
+
+.contact-card-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #888888;
+  margin-bottom: 8px;
+  min-height: 1.2rem;
+  display: flex;
+  align-items: center;
+}
+
+.contact-card-value {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #163E73;
+  margin-bottom: 0;
+  line-height: 1.4;
+  word-break: break-word;
+  min-height: 2.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-card-subvalue {
+  font-size: 0.9rem;
+  color: #555555;
+  margin-top: 2px;
+  margin-bottom: 0;
+  min-height: 1.4rem;
+  display: flex;
+  align-items: center;
+}
+
+.contact-card-link {
+  color: #163E73;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.contact-card-link:hover {
+  color: #1f5a9e;
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   Banner de cobertura nacional
+   ========================================================================== */
+
+.coverage-banner {
+  position: relative;
+  min-height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.coverage-banner-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(2, 19, 40, 0.85) 0%, rgba(22, 62, 115, 0.75) 100%);
+  z-index: 1;
+}
+
+.coverage-banner-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: #ffffff;
+  padding: 60px 20px;
+  max-width: 800px;
+}
+
+.coverage-banner-icon {
+  font-size: 3rem;
+  color: #d69e2e;
+  margin-bottom: 20px;
+}
+
+.coverage-banner-title {
+  font-family: var(--font-heading, 'Poppins'), sans-serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: #ffffff;
+}
+
+.coverage-banner-subtitle {
+  font-size: 1.15rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+.coverage-banner-divider {
+  width: 80px;
+  height: 3px;
+  background: #d69e2e;
+  margin: 20px auto;
+  border-radius: 2px;
+}
+
+@media (max-width: 768px) {
+  .coverage-banner {
+    min-height: 240px;
+  }
+  .coverage-banner-title {
+    font-size: 1.6rem;
+  }
+  .coverage-banner-subtitle {
+    font-size: 1rem;
+  }
+  .coverage-banner-content {
+    padding: 40px 16px;
+  }
+}
+
+/* ==========================================================================
+   Sección de clientes en página de contacto
+   ========================================================================== */
+
+.clientes-contact {
+  background-color: #ffffff;
+  padding: 60px 0;
+}
+
+@media (max-width: 576px) {
+  .contact-card {
+    padding: 20px 16px;
+  }
+  .contact-card-icon {
+    width: 56px;
+    height: 56px;
+  }
+  .contact-card-value {
+    font-size: 0.95rem;
+  }
+}

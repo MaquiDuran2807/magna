@@ -1,0 +1,133 @@
+:root {
+    --color-principal: #7ad9ff;
+    --color-fondo-llamado: #163E73;
+    --color-texto-llamado: #fcfbfb;
+    --color-texto-descripcion: #ffffff;
+}
+
+.title {
+    font-size: clamp(2rem, 10vw, 4.5rem);
+    font-weight: 700;
+    color: var(--color-principal);
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+    overflow-wrap: break-word;
+}
+
+@media screen and (min-height: 801px) {
+    .title {
+        font-size: clamp(3rem, 10vw, 7.5rem);
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .title {
+        font-size: clamp(1.6rem, 4.5vw, 2.8rem);
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .title {
+        font-size: clamp(1.3rem, 5vw, 1.8rem);
+    }
+}
+
+.custom-next-icon, .custom-prev-icon {
+    color: var(--color-principal);
+}
+
+@media screen and (max-width: 768px) {
+    .custom-next-icon {
+        position: absolute;
+        top: 85%;
+        left: 65%;
+    }
+
+    .custom-prev-icon {
+        position: absolute;
+        top: 85%;
+        left: 30%;
+    }
+
+    .description p {
+        font-size: clamp(0.85rem, 3.5vw, 1.1rem);
+        padding-bottom: 8px;
+    }
+
+    .llamado {
+        padding: 6px 18px;
+        font-size: 0.9rem;
+    }
+}
+
+@media screen and (max-width: 300px) {
+    .custom-next-icon, .custom-prev-icon {
+        display: none;
+    }
+}
+
+.description {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 10vh;
+    padding-bottom: 15vh;
+    padding-left: clamp(1rem, 3vw, 3rem);
+}
+
+.description p {
+    font-size: clamp(1rem, 2vw, 2.5rem);
+    font-weight: 500;
+    color: var(--color-texto-descripcion);
+    text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.7);
+}
+
+.sliders {
+    position: absolute;
+    top: 0;
+    z-index: 2;
+    height: 100vh;
+}
+
+.llamado {
+    background-color: var(--color-fondo-llamado);
+    color: var(--color-texto-llamado);
+    border-radius: 50px;
+    padding: 10px 30px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 2px solid #fff;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.hidden {
+    display: none;
+}
+
+.container-con-imagen {
+    position: relative;
+    display: inline-block; 
+    width: 100%;
+    height: 100vh;
+  }
+  
+  .container-con-imagen::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: linear-gradient(to bottom left, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.7) 35%, rgba(0, 0, 0, 0.8) 100%);
+    z-index: 1;
+  }
+  
+  .container-con-imagen img {
+    width: 100%; 
+    height: 100%;
+    object-fit: cover;
+    display: block; 
+    position: relative;
+    z-index: 0;
+  }

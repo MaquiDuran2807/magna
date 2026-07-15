@@ -1,0 +1,7 @@
+.heading-divider {
+  height: 2px;
+  width: 30%;
+  margin: 0 auto 30px;
+  background-color: #d69e2e;
+  border-radius: 1px;
+}

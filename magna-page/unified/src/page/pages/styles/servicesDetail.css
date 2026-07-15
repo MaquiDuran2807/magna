@@ -1,0 +1,329 @@
+
+/* ===== WRAPPER (reemplaza al container de Bootstrap) ===== */
+.servicios-page-wrapper {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 var(--space-2, 8px);
+}
+
+@media (min-width: 768px) {
+    .servicios-page-wrapper {
+        padding: 0 var(--space-4, 16px);
+    }
+}
+
+@media (min-width: 1200px) {
+    .servicios-page-wrapper {
+        padding: 0 var(--space-6, 24px);
+    }
+}
+
+/* ===== LAYOUT PRINCIPAL (CSS Grid) ===== */
+.servicios-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-4, 16px);
+    padding: var(--space-4, 16px) 0;
+}
+
+@media (min-width: 992px) {
+    .servicios-layout {
+        grid-template-columns: 300px 1fr;
+        gap: var(--space-6, 24px);
+    }
+}
+
+@media (min-width: 1400px) {
+    .servicios-layout {
+        grid-template-columns: 320px 1fr;
+    }
+}
+
+.servicios-sidebar {
+    order: 2;
+}
+
+@media (min-width: 992px) {
+    .servicios-sidebar {
+        order: 1;
+        position: sticky;
+        top: 100px;
+        max-height: calc(100vh - 120px);
+        overflow-y: auto;
+    }
+}
+
+.servicios-main {
+    order: 1;
+    min-width: 0;
+    overflow: hidden;
+}
+
+@media (min-width: 992px) {
+    .servicios-main {
+        order: 2;
+    }
+}
+
+/* ===== SIDEBAR ACORDEÓN ===== */
+.servicios-sidebar {
+    background: var(--color-white, #ffffff);
+    border-radius: var(--radius-lg, 8px);
+    box-shadow: var(--shadow-md, 0 4px 6px rgba(0,0,0,0.1));
+    padding: var(--space-6, 24px);
+}
+
+.sidebar-header h2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: var(--text-2xl, 24px);
+    font-weight: 600;
+    color: var(--color-primary, #1a365d);
+    margin-bottom: var(--space-6, 24px);
+    padding-bottom: var(--space-4, 16px);
+    border-bottom: 2px solid var(--color-secondary, #d69e2e);
+}
+
+.servicio-accordion {
+    margin-bottom: var(--space-4, 16px);
+    border-radius: var(--radius-md, 6px);
+    overflow: hidden;
+    border: 1px solid var(--color-gray-200, #e2e8f0);
+}
+
+.accordion-trigger {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-4, 16px);
+    background: var(--color-gray-50, #f7fafc);
+    border: none;
+    border-radius: var(--radius-md, 6px);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.accordion-trigger:hover {
+    background: var(--color-gray-100, #edf2f7);
+}
+
+.accordion-trigger.open {
+    background: var(--color-primary, #1a365d);
+    color: var(--color-white, #ffffff);
+    border-radius: var(--radius-md, 6px) var(--radius-md, 6px) 0 0;
+}
+
+.accordion-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: var(--text-lg, 18px);
+    font-weight: 600;
+    text-align: left;
+}
+
+.accordion-icon {
+    font-size: var(--text-xl, 20px);
+    transition: transform 0.3s ease;
+}
+
+.accordion-trigger.open .accordion-icon {
+    transform: rotate(180deg);
+}
+
+.accordion-content {
+    overflow: hidden;
+    background: var(--color-white, #ffffff);
+}
+
+.servicio-description {
+    padding: var(--space-4, 16px);
+    font-size: var(--text-sm, 14px);
+    color: var(--color-gray-600, #4a5568);
+    line-height: 1.6;
+    margin: 0;
+    border-bottom: 1px solid var(--color-gray-100, #edf2f7);
+}
+
+.subservicios-list {
+    padding: var(--space-3, 12px);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2, 8px);
+}
+
+.subservicio-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: var(--space-3, 12px);
+    padding: var(--space-3, 12px) var(--space-4, 16px);
+    background: var(--color-white, #ffffff);
+    border: 1px solid var(--color-gray-200, #e2e8f0);
+    border-radius: var(--radius-md, 6px);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+}
+
+.subservicio-item:hover {
+    background: var(--color-primary, #1a365d);
+    border-color: var(--color-primary, #1a365d);
+    transform: translateX(4px);
+}
+
+.subservicio-item:hover span,
+.subservicio-item:hover .subservicio-icon {
+    color: var(--color-white, #ffffff);
+}
+
+.subservicio-item span {
+    font-size: var(--text-base, 16px);
+    font-weight: 500;
+    color: var(--color-gray-700, #2d3748);
+    transition: color 0.2s ease;
+}
+
+.subservicio-icon {
+    font-size: var(--text-lg, 18px);
+    color: var(--color-secondary, #d69e2e);
+    transition: color 0.2s ease;
+    flex-shrink: 0;
+}
+
+/* ===== CARRUSEL ===== */
+.servicios-carousel {
+    margin-bottom: var(--space-8, 32px);
+}
+
+/* ===== PANEL DE DETALLE EXPANDIDO ===== */
+.servicios-detail-panel {
+    background: var(--color-white, #ffffff);
+    border-radius: var(--radius-lg, 8px);
+    box-shadow: var(--shadow-md, 0 4px 6px rgba(0,0,0,0.1));
+    padding: var(--space-8, 32px);
+    min-height: 300px;
+}
+
+.detail-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6, 24px);
+}
+
+.detail-image {
+    width: 100%;
+    height: 250px;
+    border-radius: var(--radius-md, 6px);
+    overflow: hidden;
+}
+
+@media (min-width: 768px) {
+    .detail-image {
+        height: 350px;
+    }
+}
+
+.detail-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+.detail-text h3 {
+    font-family: 'Poppins', sans-serif;
+    font-size: var(--text-2xl, 24px);
+    font-weight: 600;
+    color: var(--color-primary, #1a365d);
+    margin: 0 0 var(--space-4, 16px);
+    text-transform: none;
+    letter-spacing: normal;
+    text-shadow: none;
+    animation: none;
+}
+
+.detail-text p {
+    font-size: var(--text-base, 16px);
+    color: var(--color-gray-700, #2d3748);
+    line-height: 1.7;
+    margin: 0;
+}
+
+.detail-placeholder {
+    text-align: center;
+    padding: var(--space-12, 48px) var(--space-4, 16px);
+}
+
+.detail-placeholder h3 {
+    font-family: 'Poppins', sans-serif;
+    font-size: var(--text-2xl, 24px);
+    color: var(--color-primary, #1a365d);
+    margin: 0 0 var(--space-4, 16px);
+    text-transform: none;
+    letter-spacing: normal;
+    text-shadow: none;
+    animation: none;
+}
+
+.detail-placeholder p {
+    font-size: var(--text-base, 16px);
+    color: var(--color-gray-600, #4a5568);
+    line-height: 1.7;
+    max-width: 600px;
+    margin: 0 auto var(--space-4, 16px);
+}
+
+.detail-hint {
+    font-size: var(--text-sm, 14px);
+    color: var(--color-gray-500, #718096);
+    font-style: italic;
+}
+
+/* ===== SECCIÓN CROSS-NAVIGATION (grid de tarjetas al final) ===== */
+.servicios-cross-navigation {
+    margin-top: var(--space-16, 64px);
+    padding: var(--space-8, 32px) 0;
+    background: var(--color-gray-50, #f7fafc);
+    border-radius: var(--radius-lg, 8px);
+}
+
+/* ===== TÍTULO DE SERVICIO EN VISTA INDIVIDUAL ===== */
+.servicio-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: var(--text-2xl, 24px);
+    font-weight: 600;
+    color: var(--color-primary, #1a365d);
+    text-align: center;
+    margin: var(--space-8, 32px) 0;
+}
+
+/* ===== RESPONSIVE (tablet landscape) ===== */
+@media (min-width: 768px) {
+    .detail-content {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-8, 32px);
+    }
+
+    .servicios-detail-panel {
+        padding: var(--space-10, 40px);
+    }
+}
+
+/* ===== SCROLLBAR PERSONALIZADA ===== */
+.servicios-sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.servicios-sidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.servicios-sidebar::-webkit-scrollbar-thumb {
+    background: var(--color-gray-300, #cbd5e0);
+    border-radius: 3px;
+}
+
+.servicios-sidebar::-webkit-scrollbar-thumb:hover {
+    background: var(--color-gray-400, #a0aec0);
+}
