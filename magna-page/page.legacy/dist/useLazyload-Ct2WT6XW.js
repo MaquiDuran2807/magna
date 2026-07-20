@@ -1,0 +1,1 @@
+import{r}from"./vendor-react-B8HLdqXx.js";const u=(t="100px")=>{const[n,c]=r.useState(!1),e=r.useRef(null);return r.useEffect(()=>{const s=new IntersectionObserver(([i])=>{i.isIntersecting&&(c(!0),s.disconnect())},{rootMargin:t});return e.current&&s.observe(e.current),()=>{s.disconnect()}},[t]),{isVisible:n,ref:e}};export{u};
