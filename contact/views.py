@@ -46,6 +46,7 @@ class ContactoApiView(CreateAPIView):
             'telefono': datos['telefono'],
             'email': datos['email'],
             'mensaje': datos['mensaje'],
+            'consentimiento': datos.get('consentimiento_datos', False),
             'timestamp': datetime.now(),
         })
 

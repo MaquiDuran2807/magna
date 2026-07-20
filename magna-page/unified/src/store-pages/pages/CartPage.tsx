@@ -6,7 +6,7 @@ import { toast } from 'react-toastify'
 import MessageBox from '../components/MessageBox'
 import { Store } from '../Store'
 import { CartItem } from '../types/Cart'
-import apiClient, { APIURL } from '../apiClient'
+import apiClient from '../apiClient'
 
 export default function CartPage() {
   const navigate = useNavigate()
@@ -82,8 +82,8 @@ export default function CartPage() {
                         <i className="fas fa-plus-circle"></i>
                       </Button>
                     </Col>
-                    <Col md={3}>${item.price}</Col>
-                    <Col md={2}>
+                    <Col md={3}></Col>
+                    <Col md={3}>
                       <Button
                         onClick={() => removeItemHandler(item)}
                         variant={mode}
@@ -101,13 +101,6 @@ export default function CartPage() {
           <Card>
             <Card.Body>
               <ListGroup variant="flush">
-                <ListGroup.Item>
-                  <h3>
-                    Subtotal ({cartItems.reduce((a, c) => a + c.quantity, 0)}{' '}
-                    items) : $
-                    {cartItems.reduce((a, c) => a + c.price * c.quantity, 0)}
-                  </h3>
-                </ListGroup.Item>
                 <ListGroup.Item>
                   <div className="d-grid">
                     <Button

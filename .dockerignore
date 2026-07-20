@@ -9,6 +9,8 @@ __pycache__/
 *.sqlite3.backup
 magna-page/page/node_modules/
 magna-page/store/node_modules/
+magna-page/unified/node_modules/
+media/
 # dist se construye en el build o ya existe en staticfiles/
 staticfiles/
 nginx/ssl/

@@ -1,29 +1,20 @@
 import axios from 'axios'
 
-// export const APIURL = 'http://127.0.0.1:8000/'
-export const APIURL ="https://magnaingenieriaytopografia.com"
-
-
 const apiClient = axios.create({
-  baseURL:APIURL ,
-  headers: {
-    'Content-type': 'application/json',
-  },
+  baseURL: window.location.origin,
+  headers: { 'Content-Type': 'application/json' },
 })
 
 apiClient.interceptors.request.use(
-  async (config) => {
-    console.log(localStorage.getItem('userInfo'), 'localStorage.getItem(userInfo)');
-    
-    if (localStorage.getItem('userInfo'))
-      config.headers.authorization = `JWT ${
-        JSON.parse(localStorage.getItem('userInfo')!).access
-      }`
+  (config) => {
+    const userInfo = localStorage.getItem('userInfo')
+    if (userInfo) {
+      const { access } = JSON.parse(userInfo)
+      config.headers.Authorization = `JWT ${access}`
+    }
     return config
   },
-  (error) => {
-    Promise.reject(error)
-  }
+  (error) => Promise.reject(error)
 )
 
 export default apiClient

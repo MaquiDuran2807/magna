@@ -124,8 +124,7 @@ USE_I18N = True
 USE_TZ = True
 
 STATICFILES_DIRS = (
-    BASE_DIR.joinpath('magna-page', 'page/dist'),
-    BASE_DIR.joinpath('magna-page', 'store/dist'),
+    BASE_DIR.joinpath('magna-page', 'unified/dist'),
 )
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR.joinpath('staticfiles')

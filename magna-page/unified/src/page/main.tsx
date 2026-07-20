@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { HelmetProvider, Helmet } from 'react-helmet-async';
-import ReactGA from 'react-ga4';
 import ProtectedRoute from "./routes/PrivateRoute";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
@@ -20,6 +19,7 @@ const LazyProjectDetail = React.lazy(() => import('./pages/projecsDetail'));
 const LazyContactPage = React.lazy(() => import('./pages/contact'));
 const LazyBlogDetail = React.lazy(() => import('./pages/blogDetail'));
 const LazyBlog = React.lazy(() => import('./pages/blog'));
+const LazyPoliticaDatos = React.lazy(() => import('./pages/politicaDatos'));
 import Sitemap from './sitemap/sitemap';
 import Spinner from './components/spinner';
 
@@ -36,6 +36,7 @@ const router = createBrowserRouter([
   { path: '/projects', element: <React.Suspense fallback={<Spinner />}><LazyProjects /></React.Suspense> },
   { path: '/projects/:projectArg', element: <React.Suspense fallback={<Spinner />}><LazyProjectDetail /></React.Suspense> },
   { path: '/contact', element: <React.Suspense fallback={<Spinner />}><LazyContactPage /></React.Suspense> },
+  { path: '/politica-de-datos', element: <React.Suspense fallback={<Spinner />}><LazyPoliticaDatos /></React.Suspense> },
   { path: '/blog', element: <React.Suspense fallback={<Spinner />}><LazyBlog /></React.Suspense> },
   { path: '/blog/:id', element: <React.Suspense fallback={<Spinner />}><LazyBlogDetail /></React.Suspense> },
   {
@@ -45,12 +46,6 @@ const router = createBrowserRouter([
   },
 ]);
 const ReactQueryDevtoolsLazy = React.lazy(() => import('@tanstack/react-query-devtools').then(m => ({ default: m.ReactQueryDevtools })));
-// Inicializa Google Analytics con tu Measurement ID
-ReactGA.initialize('G-8DBBBFYVF4');
-
-// Envía un evento de vista de página
-ReactGA.send('pageview');
-
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <HelmetProvider>

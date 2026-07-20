@@ -17,8 +17,7 @@ function ProductItem({ product }: { product: Productos}) {
   const addToCartHandler = (item: CartItem) => {
     const existItem = cartItems.find((x) => x._id === product.id)
     const quantity = existItem ? existItem.quantity + 1 : 1
-    console.log('quantity', quantity, 'existItem', existItem, 'item', item);
-    
+
     if (product.countInStock < quantity) {
       alert('Sorry. Product is out of stock')
       return
@@ -31,50 +30,41 @@ function ProductItem({ product }: { product: Productos}) {
   }
 
   return (
-    <div className='my-3'>
-      <Card style={{ position: 'relative' }}>
-        <Link to={`/store/product/${product.slug}`}>
+    <div className="product-card-wrapper">
+      <Card className="product-card">
+        <Link to={`/store/product/${product.slug}`} className="card-img-wrapper">
           <img
             src={product.image}
-            className="card-img-top img-fluid card-img"
+            className="card-img-top"
             alt={product.name}
+            loading="lazy"
           />
-          <div
-            className="mask"
-            // style={{
-            //   position: 'absolute',
-            //   top: 0,
-            //   left: 0,
-            //   width: '100%',
-            //   height: '100%',
-            //   background: 'rgba(0, 0, 0, 0.6)', // Color de la máscara
-            //   display: 'flex',
-            //   justifyContent: 'center',
-            //   alignItems: 'center',
-            // }}
-          >
-            <p className="text-white mb-0">Ver detalles</p>
+          <div className="card-overlay">
+            <span className="view-details">Ver detalles</span>
           </div>
         </Link>
         <Card.Body>
           <Link to={`/store/product/${product.slug}`}>
-            <Card.Title>{product.name}</Card.Title>
+            <Card.Title className="card-title">{product.name}</Card.Title>
           </Link>
-          <Rating rating={parseInt(product.rating)} numReviews={product.numReviews} />
-          <Card.Text>${product.price}</Card.Text>
-          
-        </Card.Body>
-        
-      </Card>
-      {product.countInStock === 0 ? (
-            <Button variant="light" disabled className='w-100'>
+          <div className="card-rating">
+            <Rating rating={parseInt(product.rating)} numReviews={product.numReviews} />
+          </div>
+
+          {product.countInStock === 0 ? (
+            <button className="btn-disabled" disabled>
               Sin stock
-            </Button>
+            </button>
           ) : (
-            <Button onClick={() => addToCartHandler(convertProductToCartItem(product))} className='w-100'>
+            <button
+              className="btn-add-cart"
+              onClick={() => addToCartHandler(convertProductToCartItem(product))}
+            >
               Agregar al carrito
-            </Button>
+            </button>
           )}
+        </Card.Body>
+      </Card>
     </div>
   )
 }

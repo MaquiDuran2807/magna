@@ -8,6 +8,9 @@ import {
 } from 'react-router-dom'
 import { HelmetProvider } from 'react-helmet-async'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import '../../page/src/index.css'
+
+
 import App from './App'
 import HomePage from './pages/HomePage'
 import ProductPage from './pages/ProductPage'

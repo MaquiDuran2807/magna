@@ -51,6 +51,7 @@ const Footer1: React.FC =memo( () => {
                         <p><Link to="/projects" className="text-white">Proyectos</Link></p>
                         <p><Link to="/servicios" className="text-white">Servicios</Link></p>
                         <p><Link to="/contact" className="text-white">Contáctanos</Link></p>
+                        <p><Link to="/politica-de-datos" className="text-white">Política de datos</Link></p>
                     </div>
                     <div className="col-6 col-md-2">
                         <h5>Redes Sociales</h5>

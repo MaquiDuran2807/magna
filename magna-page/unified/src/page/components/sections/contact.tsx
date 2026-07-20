@@ -66,6 +66,7 @@ const Contact = memo(() => {
     telefono: Yup.string().matches(/^\d+$/, 'El teléfono debe ser numérico').required('El teléfono es requerido'),
     email: Yup.string().email('El correo electrónico no es válido').required('El correo electrónico es requerido'),
     mensaje: Yup.string().required('El mensaje es requerido'),
+    consentimiento_datos: Yup.boolean().oneOf([true], 'Debes aceptar la política de tratamiento de datos'),
   });
 
   return (
@@ -90,10 +91,12 @@ const Contact = memo(() => {
               telefono: '',
               email: '',
               mensaje: '',
+              consentimiento_datos: false,
             }}
             validationSchema={validationSchema}
             onSubmit={handleSubmit}
           >
+              {({ values }) => (
               <Form>
                 <div className="form-group">
                   <label htmlFor="nombre">Nombre</label>
@@ -136,6 +139,27 @@ const Contact = memo(() => {
                   />
                   <ErrorMessage name="mensaje" />
                 </div>
+                <div className="form-group form-check mt-3">
+                  <Field
+                    type="checkbox"
+                    className="form-check-input"
+                    id="consentimiento_datos"
+                    name="consentimiento_datos"
+                  />
+                  <label className="form-check-label" htmlFor="consentimiento_datos">
+                    Acepto la{' '}
+                    <a
+                      href="/politica-de-datos"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => { e.stopPropagation(); }}
+                      style={{ textDecoration: 'underline', cursor: 'pointer' }}
+                    >
+                      política de tratamiento de datos personales
+                    </a>
+                  </label>
+                  <ErrorMessage name="consentimiento_datos" component="div" className="text-danger" />
+                </div>
                 <button
                   type="submit"
                   className="btn btn-secondary mt-3"
@@ -147,6 +171,7 @@ const Contact = memo(() => {
                   {state.isSubmitting ? 'Enviando...' : 'Enviar'}
                 </button>
               </Form>
+              )}
             </Formik>
           </div>
         </div>

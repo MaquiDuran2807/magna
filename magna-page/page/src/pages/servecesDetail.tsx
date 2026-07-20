@@ -28,7 +28,7 @@ const bannerImageMap: Record<string, string> = {
     "Medio Ambiente": imagenMedioAmbiente,
 };
 
-const RESET_TIMEOUT = 20000;
+const RESET_TIMEOUT = 40000;
 
 const ServecesDetail: React.FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -86,6 +86,23 @@ const ServecesDetail: React.FC = () => {
             }
         };
     }, [id, navigate]);
+
+    // Scroll al slider cuando los datos están cargados y el DOM listo
+    useEffect(() => {
+        if (!id || !servicioElegido) return;
+        let attempts = 0;
+        const tryScroll = () => {
+            const slider = document.getElementById('servicios-carousel');
+            if (slider) {
+                slider.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                window.scrollBy(0, -80);
+            } else if (attempts < 10) {
+                attempts++;
+                setTimeout(tryScroll, 300);
+            }
+        };
+        setTimeout(tryScroll, 300);
+    }, [id, servicioElegido]);
 
     if (!servicioElegido) {
         return <Spinner/>;
@@ -154,7 +171,7 @@ const ServecesDetail: React.FC = () => {
                         </aside>
 
                         <main className="servicios-main">
-                            <section className="servicios-carousel">
+                            <section id="servicios-carousel" className="servicios-carousel">
                                 <SliderServices
                                     serviceName={id}
                                     onSubServicioClick={handleSubServicioClick}
@@ -174,11 +191,10 @@ const ServecesDetail: React.FC = () => {
                                         >
                                             <div className="detail-image">
                                                 <img
-                                                    src={selectedSubServicio.imagen}
+                                                    src={selectedSubServicio.imagen_tablet || selectedSubServicio.imagen}
                                                     srcSet={`
                                                         ${selectedSubServicio.imagen_celular || selectedSubServicio.imagen} 450w,
-                                                        ${selectedSubServicio.imagen_tablet || selectedSubServicio.imagen} 1024w,
-                                                        ${selectedSubServicio.imagen} 2000w
+                                                        ${selectedSubServicio.imagen_tablet || selectedSubServicio.imagen} 1024w
                                                     `}
                                                     sizes="(max-width: 768px) 100vw, 800px"
                                                     alt={selectedSubServicio.nombre}

@@ -24,13 +24,13 @@ from django.conf import settings
 
 
 class indexView(TemplateView):
-    template_name = 'page/dist/index.html'
+    template_name = 'unified/dist/index.page.html'
 
 class storeView(TemplateView):
-    template_name = 'store/dist/index.html'
+    template_name = 'unified/dist/index.store.html'
 
 class Robots(TemplateView):
-    template_name = 'page/dist/robot.txt'
+    template_name = 'unified/dist/robot.txt'
 
 
 

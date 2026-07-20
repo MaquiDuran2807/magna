@@ -1,3 +1,107 @@
+.about-destacado-wrapper {
+    position: relative;
+    background: linear-gradient(135deg, #f0f4fa 0%, #e8edf5 100%);
+    border-radius: 16px;
+    padding: 48px 32px;
+    margin-top: 40px;
+    overflow: hidden;
+    border: 1px solid rgba(22, 62, 115, 0.08);
+}
+
+.about-destacado-pattern {
+    position: absolute;
+    inset: 0;
+    opacity: 0.06;
+    background-image:
+        radial-gradient(circle at 20% 50%, #163E73 1px, transparent 1px),
+        radial-gradient(circle at 80% 30%, #163E73 1px, transparent 1px),
+        radial-gradient(circle at 40% 70%, #163E73 1px, transparent 1px),
+        radial-gradient(circle at 70% 80%, #163E73 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+}
+
+.about-destacado-icon-main {
+    font-size: 2.8rem;
+    color: #163E73;
+    opacity: 0.3;
+}
+
+.about-desc-secundaria {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #2d3748;
+    margin: 0;
+    position: relative;
+    z-index: 1;
+    text-align: justify;
+}
+
+.about-destacado-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 32px;
+    position: relative;
+    z-index: 1;
+}
+
+.destacado-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 28px 20px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(22, 62, 115, 0.06);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.destacado-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 32px rgba(22, 62, 115, 0.12);
+}
+
+.destacado-card-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--color-primary, #1a365d), #2c5282);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+}
+
+.destacado-card:hover .destacado-card-icon {
+    transform: scale(1.1);
+}
+
+.destacado-card-icon svg {
+    font-size: 1.5rem;
+}
+
+.destacado-card h4 {
+    font-family: var(--font-heading, 'Poppins'), sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--color-primary, #1a365d);
+    margin: 0;
+    line-height: 1.3;
+}
+
+.destacado-card p {
+    font-size: 0.82rem;
+    color: #4a5568;
+    line-height: 1.5;
+    margin: 0;
+}
+
 .valores-section {
     padding: 80px 0;
     background-color: #f8f9fa;
@@ -56,8 +160,33 @@
     margin: 0;
 }
 
+@media (max-width: 992px) {
+    .about-destacado-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
 @media (max-width: 768px) {
+    .about-destacado-wrapper {
+        padding: 28px 20px;
+    }
+    .about-destacado-cards {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+    .destacado-card {
+        padding: 20px 16px;
+    }
+    .destacado-card h4 {
+        font-size: 0.85rem;
+    }
     .valores-section {
         padding: 48px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-destacado-cards {
+        grid-template-columns: 1fr;
     }
 }

@@ -56,6 +56,19 @@
     margin: 0;
 }
 
+.about-desc-primera {
+    text-align: justify;
+}
+
+.about-desc-secundaria {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #4a5568;
+    text-align: justify;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
 @media (max-width: 768px) {
     .valores-section {
         padding: 48px 0;

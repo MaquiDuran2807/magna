@@ -1,38 +1,39 @@
-.bg-footer{
-    background-color:rgb(2, 19, 40);
+.bg-footer {
+  background-color: var(--color-primary, #1a365d);
 }
 
-footer{
-    color: rgb(20, 20, 20);
-    width: 100%;
-    padding: 20px 0 0 0;
+footer {
+  color: rgb(20, 20, 20);
+  width: 100%;
+  padding: 20px 0 0 0;
 }
 
-footer a{
-    color: aliceblue;
-    text-decoration: none;
-    transition: all 0.3s ease;
+footer a {
+  color: aliceblue;
+  text-decoration: none;
+  transition: all 0.3s ease;
 }
 
-.logo-footer{
-    position: relative;
-    width: 120%;
-    right: 15%;
-    @media screen and (max-width: 768px){
-        width: 180%;
-        right: 35%;
-    }
-    
+.logo-footer {
+  position: relative;
+  width: 120%;
+  right: 15%;
 }
 
-.elit{
-    background-color: rgb(1, 1, 1);
-    margin: 0;
-    padding: 0;
+@media screen and (max-width: 768px) {
+  .logo-footer {
+    width: 180%;
+    right: 35%;
+  }
 }
 
-.copy-elit{
-    margin: 0;
-    padding: 0;
+.elit {
+  background-color: var(--color-gray-900, #0a0c0e);
+  margin: 0;
+  padding: 0;
 }
 
+.copy-elit {
+  margin: 0;
+  padding: 0;
+}

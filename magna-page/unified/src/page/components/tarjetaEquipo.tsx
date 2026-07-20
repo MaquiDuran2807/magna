@@ -31,8 +31,8 @@ const TarjetaEquipo: React.FC<TarjetaEquipoProps> = ({ id, imagen, nombre, descr
                     <div className='text-center'>
                         <MdOutlineTouchApp  size={24} className='touch'/>
                     </div>
-                    <img src={arriba} alt="arriba" className="arriba" />
-                    <img src={abajo} alt="abajo" className="abajo" />
+                    {tipo === 'tecnologia' && <img src={arriba} alt="arriba" className="arriba" />}
+                    {tipo === 'tecnologia' && <img src={abajo} alt="abajo" className="abajo" />}
                 </div>
             </div>
             <div className="desplegable">

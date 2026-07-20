@@ -133,6 +133,17 @@
         <div class="field-value mensaje">{{ mensaje }}</div>
       </div>
 
+      <div class="field">
+        <div class="field-label">Consentimiento de datos</div>
+        <div class="field-value" style="{% if consentimiento %}border-left-color: #28a745;{% endif %}">
+          {% if consentimiento %}
+          ✅ El cliente aceptó la política de tratamiento de datos personales
+          {% else %}
+          ❌ El cliente NO aceptó la política de tratamiento de datos personales
+          {% endif %}
+        </div>
+      </div>
+
       <div class="timestamp">
         Recibido el {{ timestamp|date:"d/m/Y" }} a las {{ timestamp|date:"H:i" }}
       </div>

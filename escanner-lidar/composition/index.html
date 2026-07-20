@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html, body {
+        margin: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #0a0f1a;
+        font-family: 'Inter', sans-serif;
+      }
+      .clip { position: absolute; inset: 0; }
+      .bg-overlay {
+        position: absolute; inset: 0;
+        background: linear-gradient(135deg, #0a0f1a 0%, #1a2332 50%, #0d1520 100%);
+      }
+      .grid-bg {
+        position: absolute; inset: 0;
+        background-image:
+          linear-gradient(rgba(214, 158, 46, 0.03) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(214, 158, 46, 0.03) 1px, transparent 1px);
+        background-size: 60px 60px;
+      }
+      .accent-line {
+        position: absolute;
+        width: 80px; height: 4px;
+        background: linear-gradient(90deg, #d69e2e, #f6e05e);
+        border-radius: 2px;
+      }
+      .title-main {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 800;
+        font-size: 72px;
+        color: #ffffff;
+        text-align: center;
+        letter-spacing: -1px;
+        line-height: 1.1;
+      }
+      .title-main span {
+        background: linear-gradient(135deg, #d69e2e, #f6e05e);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .subtitle {
+        font-family: 'Inter', sans-serif;
+        font-weight: 300;
+        font-size: 22px;
+        color: #94a3b8;
+        text-align: center;
+        letter-spacing: 2px;
+      }
+      .section-label {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 600; font-size: 16px;
+        color: #d69e2e; letter-spacing: 3px;
+        text-transform: uppercase;
+      }
+      .section-title {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 700; font-size: 40px;
+        color: #ffffff; line-height: 1.2;
+      }
+      .section-desc {
+        font-family: 'Inter', sans-serif;
+        font-weight: 300; font-size: 18px;
+        color: #94a3b8; line-height: 1.5;
+      }
+      .img-frame {
+        position: absolute;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        border: 1px solid rgba(214, 158, 46, 0.15);
+      }
+      .img-frame img { width: 100%; height: 100%; object-fit: cover; }
+      .brand {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 700; font-size: 16px;
+        color: #d69e2e; letter-spacing: 4px;
+        text-transform: uppercase;
+      }
+      .corner-deco {
+        position: absolute; width: 30px; height: 30px;
+        border-color: rgba(214, 158, 46, 0.25);
+      }
+      .corner-deco.tl { top: 16px; left: 16px; border-left: 2px solid; border-top: 2px solid; }
+      .corner-deco.tr { top: 16px; right: 16px; border-right: 2px solid; border-top: 2px solid; }
+      .corner-deco.bl { bottom: 16px; left: 16px; border-left: 2px solid; border-bottom: 2px solid; }
+      .corner-deco.br { bottom: 16px; right: 16px; border-right: 2px solid; border-bottom: 2px solid; }
+      video { width: 100%; height: 100%; object-fit: cover; }
+
+      .permanent-header {
+        position: absolute; top: 0; left: 0; right: 0;
+        z-index: 100;
+        background: linear-gradient(180deg, rgba(10,15,26,0.85) 0%, rgba(10,15,26,0.6) 70%, transparent 100%);
+        padding: 24px 60px 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        pointer-events: none;
+      }
+      .permanent-footer {
+        position: absolute; bottom: 0; left: 0; right: 0;
+        z-index: 100;
+        background: linear-gradient(0deg, rgba(10,15,26,0.85) 0%, rgba(10,15,26,0.4) 70%, transparent 100%);
+        padding: 30px 60px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        pointer-events: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="20"
+      data-width="1920"
+      data-height="1080"
+    >
+      <!-- Videos: direct children of root -->
+      <video id="video-3d" muted playsinline src="assets/imagen-3d.mp4" data-start="9" data-duration="4" data-track-index="0"></video>
+      <video id="video-campo" muted playsinline src="assets/video-campo.mp4" data-start="13" data-duration="4" data-track-index="0"></video>
+
+      <!-- PERMANENT HEADER: always visible -->
+      <div id="header-overlay" class="permanent-header">
+        <div class="brand" style="font-size: 14px;">MAGNA</div>
+        <div style="display: flex; align-items: center; gap: 20px;">
+          <div id="perm-accent" class="accent-line" style="position: static; width: 40px;"></div>
+          <div id="perm-title" class="title-main" style="font-size: 36px;">
+            Escáner <span>LIDAR</span>
+          </div>
+          <div id="perm-accent2" class="accent-line" style="position: static; width: 40px;"></div>
+        </div>
+        <div id="perm-sub" class="subtitle" style="font-size: 14px; letter-spacing: 1px;">
+          Tecnología de escaneo 3D
+        </div>
+      </div>
+
+      <!-- PERMANENT FOOTER: always visible -->
+      <div id="footer-overlay" class="permanent-footer">
+        <div id="perm-tags" style="display: flex; gap: 12px;">
+          <div style="padding: 4px 14px; border: 1px solid rgba(214,158,46,0.2); border-radius: 16px; color: #d69e2e; font-family: 'Inter', sans-serif; font-size: 12px; letter-spacing: 1px;">Nube de Puntos</div>
+          <div style="padding: 4px 14px; border: 1px solid rgba(214,158,46,0.2); border-radius: 16px; color: #d69e2e; font-family: 'Inter', sans-serif; font-size: 12px; letter-spacing: 1px;">SLAM</div>
+          <div style="padding: 4px 14px; border: 1px solid rgba(214,158,46,0.2); border-radius: 16px; color: #d69e2e; font-family: 'Inter', sans-serif; font-size: 12px; letter-spacing: 1px;">Precisión mm</div>
+        </div>
+      </div>
+
+      <!-- SCENE 1: ARCHITECTURAL DRAWING (0s - 5s) -->
+      <div id="scene1" class="clip" data-start="0" data-duration="5" data-track-index="1">
+        <div class="bg-overlay"></div>
+        <div class="grid-bg"></div>
+        <div class="corner-deco tl"></div>
+        <div class="corner-deco tr"></div>
+        <div class="corner-deco bl"></div>
+        <div class="corner-deco br"></div>
+
+        <div class="img-frame" id="img-1" style="bottom: 100px; left: 60px; width: 820px; height: 520px;">
+          <img src="assets/dibujo-arquitectonico.jpeg" />
+        </div>
+
+        <div class="section-label" id="s1-label" style="position: absolute; top: 200px; right: 80px;">01 · Documentación</div>
+        <div class="section-title" id="s1-title" style="position: absolute; top: 240px; right: 80px; max-width: 460px; text-align: right;">Planos Arquitectónicos</div>
+        <div class="section-desc" id="s1-desc" style="position: absolute; top: 320px; right: 80px; max-width: 440px; text-align: right;">Escaneo láser de alta precisión para documentación de estructuras existentes con exactitud milimétrica.</div>
+
+        <div id="s1-stats" style="position: absolute; bottom: 160px; right: 80px; display: flex; gap: 30px;">
+          <div style="text-align: center;">
+            <div style="font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 36px; color: #d69e2e;">±2mm</div>
+            <div style="font-family: 'Inter', sans-serif; font-size: 12px; color: #64748b; letter-spacing: 1px;">PRECISIÓN</div>
+          </div>
+          <div style="text-align: center;">
+            <div style="font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 36px; color: #d69e2e;">360°</div>
+            <div style="font-family: 'Inter', sans-serif; font-size: 12px; color: #64748b; letter-spacing: 1px;">COBERTURA</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCENE 2: THERMAL IMAGE (5s - 9s) -->
+      <div id="scene2" class="clip" data-start="5" data-duration="4" data-track-index="2">
+        <div class="bg-overlay"></div>
+        <div class="grid-bg"></div>
+        <div class="corner-deco tl"></div>
+        <div class="corner-deco tr"></div>
+        <div class="corner-deco bl"></div>
+        <div class="corner-deco br"></div>
+
+        <div class="section-label" id="s2-label" style="position: absolute; top: 200px; left: 80px;">02 · Inspección</div>
+        <div class="section-title" id="s2-title" style="position: absolute; top: 240px; left: 80px; max-width: 460px;">Imagen Térmica</div>
+        <div class="section-desc" id="s2-desc" style="position: absolute; top: 320px; left: 80px; max-width: 440px;">Detección de anomalías térmicas, humedad y pérdidas energéticas con cámaras termográficas integradas.</div>
+
+        <div class="img-frame" id="img-2" style="bottom: 100px; right: 60px; width: 780px; height: 520px;">
+          <img src="assets/imagen-termica.jpeg" />
+        </div>
+      </div>
+
+      <!-- SCENE 3: 3D SCAN (9s - 13s) -->
+      <div id="scene3" class="clip" data-start="9" data-duration="4" data-track-index="3">
+        <div style="position: absolute; inset: 0; background: linear-gradient(0deg, rgba(10,15,26,0.7) 0%, transparent 40%, rgba(10,15,26,0.3) 100%);"></div>
+
+        <div class="section-label" id="s3-label" style="position: absolute; bottom: 180px; left: 80px;">03 · Visualización</div>
+        <div class="section-title" id="s3-title" style="position: absolute; bottom: 110px; left: 80px; max-width: 600px;">Nube de Puntos 3D</div>
+        <div class="section-desc" id="s3-desc" style="position: absolute; bottom: 50px; left: 80px; max-width: 550px; color: #cbd5e1;">Modelos tridimensionales para análisis estructural y rehabilitación.</div>
+      </div>
+
+      <!-- SCENE 4: FIELD VIDEO (13s - 17s) -->
+      <div id="scene4" class="clip" data-start="13" data-duration="4" data-track-index="4">
+        <div style="position: absolute; inset: 0; background: linear-gradient(135deg, rgba(10,15,26,0.5) 0%, transparent 50%, rgba(10,15,26,0.3) 100%);"></div>
+
+        <div class="section-label" id="s4-label" style="position: absolute; bottom: 180px; left: 80px;">04 · Campo</div>
+        <div class="section-title" id="s4-title" style="position: absolute; bottom: 110px; left: 80px; max-width: 600px;">Trabajo en Terreno</div>
+        <div class="section-desc" id="s4-desc" style="position: absolute; bottom: 50px; left: 80px; max-width: 550px; color: #cbd5e1;">Escaneo in situ con tecnología SLAM para captura de datos sin GPS.</div>
+      </div>
+
+      <!-- SCENE 5: CLOSING (17s - 20s) -->
+      <div id="scene5" class="clip" data-start="17" data-duration="3" data-track-index="5">
+        <div class="bg-overlay"></div>
+        <div class="grid-bg"></div>
+        <div class="corner-deco tl"></div>
+        <div class="corner-deco tr"></div>
+        <div class="corner-deco bl"></div>
+        <div class="corner-deco br"></div>
+
+        <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+          <div id="close-brand" class="brand" style="font-size: 14px; margin-bottom: 24px;">MAGNA · INGENIERÍA Y TOPOGRAFÍA</div>
+          <div id="close-title" class="title-main" style="font-size: 56px;">Precisión que <span>construye</span></div>
+          <div id="close-sub" class="subtitle" style="font-size: 16px; margin-top: 16px; color: #64748b;">Escáner LIDAR · SLAM · Topografía de precisión</div>
+          <div id="close-url" style="margin-top: 32px; padding: 12px 28px; background: linear-gradient(135deg, #d69e2e, #f6e05e); border-radius: 24px; color: #0a0f1a; font-family: 'Inter', sans-serif; font-weight: 500; font-size: 16px; letter-spacing: 1px;">
+            magnaingenieriaytopografia.com
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      // Permanent header entrance
+      tl.from("#header-overlay", { opacity: 0, y: -30, duration: 0.8, ease: "power3.out" }, 0.2);
+      tl.from("#perm-accent", { scaleX: 0, duration: 0.5, ease: "power2.out" }, 0.6);
+      tl.from("#perm-accent2", { scaleX: 0, duration: 0.5, ease: "power2.out" }, 0.6);
+      tl.from("#perm-title", { opacity: 0, y: -10, duration: 0.5, ease: "power2.out" }, 0.7);
+      tl.from("#perm-sub", { opacity: 0, duration: 0.4, ease: "power2.out" }, 1.0);
+      tl.from("#footer-overlay", { opacity: 0, y: 20, duration: 0.6, ease: "power3.out" }, 0.8);
+
+      // Scene 1: Architectural Drawing
+      tl.from("#img-1", { opacity: 0, x: -60, duration: 0.8, ease: "power3.out" }, 0.3);
+      tl.from("#s1-label", { opacity: 0, x: 30, duration: 0.5, ease: "power2.out" }, 0.6);
+      tl.from("#s1-title", { opacity: 0, x: 30, duration: 0.6, ease: "power2.out" }, 0.8);
+      tl.from("#s1-desc", { opacity: 0, x: 30, duration: 0.6, ease: "power2.out" }, 1.1);
+      tl.from("#s1-stats > div", { opacity: 0, y: 20, duration: 0.5, ease: "power2.out", stagger: 0.15 }, 1.5);
+      tl.to("#img-1", { scale: 1.04, duration: 5, ease: "none" }, 0.3);
+
+      // Scene 2: Thermal
+      tl.from("#s2-label", { opacity: 0, x: -30, duration: 0.5, ease: "power2.out" }, 5.3);
+      tl.from("#s2-title", { opacity: 0, x: -30, duration: 0.6, ease: "power2.out" }, 5.5);
+      tl.from("#s2-desc", { opacity: 0, x: -30, duration: 0.6, ease: "power2.out" }, 5.8);
+      tl.from("#img-2", { opacity: 0, x: 60, duration: 0.8, ease: "power3.out" }, 5.3);
+      tl.to("#img-2", { scale: 1.03, duration: 4, ease: "none" }, 5.3);
+
+      // Scene 3: 3D Scan
+      tl.from("#s3-label", { opacity: 0, y: 20, duration: 0.5, ease: "power2.out" }, 9.3);
+      tl.from("#s3-title", { opacity: 0, y: 20, duration: 0.6, ease: "power2.out" }, 9.5);
+      tl.from("#s3-desc", { opacity: 0, y: 15, duration: 0.5, ease: "power2.out" }, 9.8);
+
+      // Scene 4: Field Video
+      tl.from("#s4-label", { opacity: 0, y: 20, duration: 0.5, ease: "power2.out" }, 13.3);
+      tl.from("#s4-title", { opacity: 0, y: 20, duration: 0.6, ease: "power2.out" }, 13.5);
+      tl.from("#s4-desc", { opacity: 0, y: 15, duration: 0.5, ease: "power2.out" }, 13.8);
+
+      // Scene 5: Closing
+      tl.from("#close-brand", { opacity: 0, y: 20, duration: 0.5, ease: "power2.out" }, 17.3);
+      tl.from("#close-title", { opacity: 0, y: 30, duration: 0.7, ease: "power3.out" }, 17.6);
+      tl.from("#close-sub", { opacity: 0, y: 20, duration: 0.5, ease: "power2.out" }, 18.1);
+      tl.from("#close-url", { opacity: 0, y: 20, duration: 0.5, ease: "power2.out" }, 18.5);
+      tl.to("#close-url", { scale: 1.06, duration: 0.6, ease: "power1.inOut", yoyo: true, repeat: 1 }, 19.0);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

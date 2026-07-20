@@ -1,8 +1,9 @@
-import { FaCheck, FaBullseye } from "react-icons/fa6";
+import { FaCheck, FaBullseye, FaClipboardCheck, FaHandshake } from "react-icons/fa6";
 import { GiTrophy } from "react-icons/gi";
 import { IoLeafOutline } from "react-icons/io5";
 import { LiaHandshakeSolid } from "react-icons/lia";
-import { MdOutlinePeopleAlt } from "react-icons/md";
+import { MdOutlinePeopleAlt, MdPrecisionManufacturing } from "react-icons/md";
+import { RiGovernmentLine } from "react-icons/ri";
 import { SetionHeader } from "../setionHeader";
 import { useGetAbout } from "../../hooks/getInfoPage";
 import "../styles/aboutContent.css";
@@ -37,6 +38,10 @@ function AboutContent() {
 
     if (!about) return null;
 
+    const descParts = about.descripcion.split(/\n\n+/);
+    const descPrimera = descParts[0] || '';
+    const descSegunda = descParts.slice(1).join('\n\n');
+
     return (
         <div className="about-content">
             <div className="info container">
@@ -44,7 +49,7 @@ function AboutContent() {
                     <div className="col-md-6">
                         <div className="abautUs row">
                             <h4>¿Quiénes somos?</h4>
-                            <h2>{resaltarTexto(about.descripcion)}</h2>
+                            <h2 className="about-desc-primera">{resaltarTexto(descPrimera)}</h2>
                         </div>
                         <br />
                     </div>
@@ -70,10 +75,53 @@ function AboutContent() {
                             </details>
                         </div>
                     </div>
-                    <div className="row justify-content-center">
-                        <div className="col-4 text-center mt-4">
-                            <button className="boton-1">Contáctanos</button>
+                </div>
+                {descSegunda && (
+                    <div className="about-destacado-wrapper">
+                        <div className="about-destacado-pattern" />
+                        <div className="row align-items-center">
+                            <div className="col-lg-1 d-none d-lg-block text-center">
+                                <FaHandshake className="about-destacado-icon-main" />
+                            </div>
+                            <div className="col-lg-11">
+                                <p className="about-desc-secundaria">{descSegunda}</p>
+                            </div>
                         </div>
+                        <div className="about-destacado-cards">
+                            <div className="destacado-card">
+                                <div className="destacado-card-icon">
+                                    <MdPrecisionManufacturing />
+                                </div>
+                                <h4>Tecnología de vanguardia</h4>
+                                <p>Equipos de última generación para garantizar precisión y eficiencia en cada proyecto.</p>
+                            </div>
+                            <div className="destacado-card">
+                                <div className="destacado-card-icon">
+                                    <FaClipboardCheck />
+                                </div>
+                                <h4>Información confiable</h4>
+                                <p>Datos verificados y certificados que respaldan cada decisión técnica.</p>
+                            </div>
+                            <div className="destacado-card">
+                                <div className="destacado-card-icon">
+                                    <FaHandshake />
+                                </div>
+                                <h4>Acompañamiento técnico</h4>
+                                <p>Asesoría permanente desde el estudio inicial hasta la entrega final del proyecto.</p>
+                            </div>
+                            <div className="destacado-card">
+                                <div className="destacado-card-icon">
+                                    <RiGovernmentLine />
+                                </div>
+                                <h4>Altos estándares de calidad</h4>
+                                <p>Procesos certificados que cumplen con la normativa vigente del sector.</p>
+                            </div>
+                        </div>
+                    </div>
+                )}
+                <div className="row justify-content-center">
+                    <div className="col-4 text-center mt-4">
+                        <button className="boton-1">Contáctanos</button>
                     </div>
                 </div>
             </div>

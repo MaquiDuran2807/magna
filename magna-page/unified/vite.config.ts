@@ -46,7 +46,7 @@ export default defineConfig({
             if (id.includes('swiper') || id.includes('leaflet')) return 'vendor-ui'
             if (id.includes('@tanstack')) return 'vendor-query'
             if (id.includes('formik') || id.includes('yup')) return 'vendor-forms'
-            if (id.includes('axios') || id.includes('dompurify') || id.includes('react-ga4')) return 'vendor-utils'
+            if (id.includes('axios') || id.includes('dompurify')) return 'vendor-utils'
             if (id.includes('react-icons')) return 'vendor-icons'
             if (id.includes('react-toastify')) return 'vendor-toast'
             if (id.includes('react-pdf') || id.includes('pdfjs')) return 'vendor-pdf'

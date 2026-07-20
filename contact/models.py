@@ -8,6 +8,7 @@ class Contacto(models.Model):
     telefono = models.CharField(max_length=20)
     email = models.EmailField()
     mensaje = models.TextField()
+    consentimiento_datos = models.BooleanField(default=False, verbose_name='Aceptó política de datos')
     timestamp = models.DateTimeField(auto_now_add=True )
     fecha_respuesta = models.DateTimeField(null=True, blank=True)
     contestado = models.BooleanField(default=False)

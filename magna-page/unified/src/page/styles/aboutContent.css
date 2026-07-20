@@ -56,7 +56,97 @@
     margin: 0;
 }
 
+.about-desc-primera {
+    text-align: justify;
+}
+
+.about-destacado-wrapper {
+    position: relative;
+    background: linear-gradient(135deg, #f0f4fa 0%, #e8edf5 100%);
+    border-radius: 16px;
+    padding: 40px 32px;
+    margin-top: 32px;
+    overflow: hidden;
+    border: 1px solid rgba(22, 62, 115, 0.08);
+}
+
+.about-destacado-pattern {
+    position: absolute;
+    inset: 0;
+    opacity: 0.08;
+    background-image:
+        radial-gradient(circle at 20% 50%, #163E73 1px, transparent 1px),
+        radial-gradient(circle at 80% 30%, #163E73 1px, transparent 1px),
+        radial-gradient(circle at 40% 70%, #163E73 1px, transparent 1px),
+        radial-gradient(circle at 70% 80%, #163E73 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+}
+
+.about-destacado-icon-main {
+    font-size: 2.8rem;
+    color: #163E73;
+    opacity: 0.3;
+}
+
+.about-desc-secundaria {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #2d3748;
+    text-align: justify;
+    margin: 0;
+    position: relative;
+    z-index: 1;
+}
+
+.about-destacado-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 24px;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+}
+
+.badge-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #ffffff;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #163E73;
+    box-shadow: 0 2px 8px rgba(22, 62, 115, 0.08);
+    transition: all 0.2s ease;
+    border: 1px solid rgba(22, 62, 115, 0.06);
+}
+
+.badge-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(22, 62, 115, 0.12);
+    border-color: rgba(22, 62, 115, 0.15);
+}
+
+.badge-item svg {
+    font-size: 1.2rem;
+    color: #d69e2e;
+    flex-shrink: 0;
+}
+
 @media (max-width: 768px) {
+    .about-destacado-wrapper {
+        padding: 28px 20px;
+    }
+    .about-destacado-badges {
+        gap: 8px;
+    }
+    .badge-item {
+        padding: 8px 14px;
+        font-size: 0.8rem;
+    }
     .valores-section {
         padding: 48px 0;
     }

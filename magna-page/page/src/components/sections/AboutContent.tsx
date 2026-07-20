@@ -37,6 +37,10 @@ function AboutContent() {
 
     if (!about) return null;
 
+    const descParts = about.descripcion.split(/\n\n+/);
+    const descPrimera = descParts[0] || '';
+    const descSegunda = descParts.slice(1).join('\n\n');
+
     return (
         <div className="about-content">
             <div className="info container">
@@ -44,7 +48,7 @@ function AboutContent() {
                     <div className="col-md-6">
                         <div className="abautUs row">
                             <h4>¿Quiénes somos?</h4>
-                            <h2>{resaltarTexto(about.descripcion)}</h2>
+                            <h2 className="about-desc-primera">{resaltarTexto(descPrimera)}</h2>
                         </div>
                         <br />
                     </div>
@@ -70,10 +74,17 @@ function AboutContent() {
                             </details>
                         </div>
                     </div>
-                    <div className="row justify-content-center">
-                        <div className="col-4 text-center mt-4">
-                            <button className="boton-1">Contáctanos</button>
+                </div>
+                {descSegunda && (
+                    <div className="row mt-4">
+                        <div className="col-12">
+                            <p className="about-desc-secundaria">{descSegunda}</p>
                         </div>
+                    </div>
+                )}
+                <div className="row justify-content-center">
+                    <div className="col-4 text-center mt-4">
+                        <button className="boton-1">Contáctanos</button>
                     </div>
                 </div>
             </div>

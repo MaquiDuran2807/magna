@@ -52,7 +52,7 @@ export const SwiperProjects = () => {
             )}
             <div className="card-info">
               <h4>{project.nombre}</h4>
-              <p>{project.descripcion.slice(0, 90)}... <Link to={`/projects/${project.id}`}>ver más</Link></p>
+              <p>{project.descripcion.slice(0, 90)}... <Link to={`/projects/${project.id}`}>Ver más</Link></p>
             </div>
             <Link to={`/projects/${project.id}`}>
               <img src={iconarrow} alt={`Icono de flecha para ${project.nombre}`} className="icon-arrow" />

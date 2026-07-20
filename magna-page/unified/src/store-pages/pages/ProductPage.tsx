@@ -10,7 +10,7 @@ import { useGetProductDetailsBySlugQuery } from '../hooks/productHooks'
 import { Store } from '../Store'
 import { ApiError } from '../types/ApiError'
 import { convertProductToCartItem, getError } from '../utils'
-import { APIURL } from '../apiClient'
+const APIURL = window.location.origin
 
 export default function ProductPage() {
   const params = useParams()
@@ -67,7 +67,6 @@ export default function ProductPage() {
                 numReviews={product.numReviews}
               ></Rating>
             </ListGroup.Item>
-            <ListGroup.Item><span><strong>Price :</strong></span> ${product.price}</ListGroup.Item>
             <ListGroup.Item>
               <strong>Descripción:</strong>
               <p>{product.description}</p>
@@ -78,12 +77,6 @@ export default function ProductPage() {
           <Card>
             <Card.Body>
               <ListGroup variant="flush">
-                <ListGroup.Item>
-                  <Row>
-                    <Col>Precio:</Col>
-                    <Col>${product.price}</Col>
-                  </Row>
-                </ListGroup.Item>
                 <ListGroup.Item>
                   <Row>
                     <Col>Status:</Col>

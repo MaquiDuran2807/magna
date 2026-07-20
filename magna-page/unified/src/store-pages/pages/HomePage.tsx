@@ -16,20 +16,22 @@ export default function HomePage() {
     <MessageBox variant="danger">{getError(error)}</MessageBox>
   ) : (
     <>
-    <Container className='mb-5 text-center'>
-      <Slider />
-    </Container>
-    <Row>
       <Helmet>
-        <title>Magna store</title>
+        <title>Magna Store — Equipos de Ingeniería y Topografía</title>
       </Helmet>
-      
-      {products!.map((product) => (
-        <Col key={product.slug} sm={6} md={4} lg={3}>
-          <ProductItem product={product} />
-        </Col>
-      ))}
-    </Row>
+      <Container className="mb-4 px-0">
+        <Slider />
+      </Container>
+      <h2 className="mb-4 fw-bold" style={{ fontFamily: 'var(--font-heading, Poppins)', color: 'var(--color-primary, #1a365d)' }}>
+        Nuestros Productos
+      </h2>
+      <Row>
+        {products!.map((product) => (
+          <Col key={product.slug} sm={6} md={4} lg={3}>
+            <ProductItem product={product} />
+          </Col>
+        ))}
+      </Row>
     </>
   )
 }

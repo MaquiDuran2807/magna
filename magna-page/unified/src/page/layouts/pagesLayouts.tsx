@@ -1,5 +1,4 @@
-import React, { useEffect, useRef, lazy, Suspense } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useRef, lazy, Suspense } from 'react';
 import { motion } from 'framer-motion';
 const LazyNavBar = lazy(() => import('../components/navBar'));
 const LazyFloatWhatsapp = lazy(() => import('../../shared/components/FloatWhatsapp'));
@@ -14,13 +13,6 @@ interface PagesLayoutProps {
 
 const PagesLayout: React.FC<PagesLayoutProps> = ({ children }) => {
     const inicioDePaginaRef = useRef<HTMLDivElement | null>(null);
-    const location = useLocation();
-
-    useEffect(() => {
-        if (inicioDePaginaRef.current) {
-            inicioDePaginaRef.current.scrollIntoView({ behavior: 'smooth' });
-        }
-    }, [location]);
 
     const pageVariants = {
         initial: { opacity: 0 },

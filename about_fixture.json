@@ -1,0 +1,93 @@
+[
+{
+  "model": "about.about",
+  "pk": 1,
+  "fields": {
+    "descripcion": "MAGNA INGENIERIA Y TOPOGRAFIA S.A.S. es una empresa\r\nconformada por un equipo de profesionales integrales con gran\r\nexperiencia. Ofrecemos servicios de ingeniería de alta calidad, brindando\r\na nuestros clientes soluciones eficaces y concretas.",
+    "mision": "Proveer servicios de ingeniería y consultoría con los más altos estándares\r\nde precisión, calidad y confiabilidad, contamos con tecnología avanzada\r\ny personal altamente calificado, con el fin de optimizar procesos y\r\nsatisfacer oportunamente las necesidades del cliente, con apertura a\r\nnuevas iniciativas y retos.",
+    "vision": "Consolidarnos como una empresa líder en servicios de ingeniería,\r\nespecializada en la captura, tratamiento y análisis de la información\r\ngeoespacial, adoptando estándares de calidad, salud y seguridad en el\r\ntrabajo y protección y conservación del medio ambiente.",
+    "created_at": "2026-07-09T20:23:13.105Z",
+    "updated_at": "2026-07-09T20:23:13.105Z"
+  }
+},
+{
+  "model": "about.valor",
+  "pk": 1,
+  "fields": {
+    "about": 1,
+    "nombre": "Liderazgo",
+    "descripcion": "Actuamos con iniciativa, compromiso y capacidad para generar\r\nresultados.",
+    "orden": 0
+  }
+},
+{
+  "model": "about.valor",
+  "pk": 2,
+  "fields": {
+    "about": 1,
+    "nombre": "Conciencia ecológica",
+    "descripcion": "Desarrollamos nuestras actividades en armonía con el\r\nmedio ambiente, promoviendo prácticas sostenibles.",
+    "orden": 0
+  }
+},
+{
+  "model": "about.valor",
+  "pk": 3,
+  "fields": {
+    "about": 1,
+    "nombre": "Seguridad",
+    "descripcion": "Priorizamos la protección de las personas, los recursos y los\r\nprocesos.",
+    "orden": 0
+  }
+},
+{
+  "model": "about.valor",
+  "pk": 4,
+  "fields": {
+    "about": 1,
+    "nombre": "Innovación",
+    "descripcion": "Incorporamos nuevas tecnologías y metodologías para ofrecer\r\nsoluciones eficientes y competitivas.",
+    "orden": 0
+  }
+},
+{
+  "model": "about.valor",
+  "pk": 5,
+  "fields": {
+    "about": 1,
+    "nombre": "Honestidad",
+    "descripcion": "Actuamos con transparencia, ética e integridad en todas nuestras\r\nrelaciones.",
+    "orden": 0
+  }
+},
+{
+  "model": "about.valor",
+  "pk": 6,
+  "fields": {
+    "about": 1,
+    "nombre": "Lealtad",
+    "descripcion": "Construimos relaciones basadas en la confianza y el compromiso\r\nmutuo.",
+    "orden": 0
+  }
+},
+{
+  "model": "about.valor",
+  "pk": 7,
+  "fields": {
+    "about": 1,
+    "nombre": "Responsabilidad",
+    "descripcion": "Cumplimos nuestros compromisos con profesionalismo y\r\nexcelencia.",
+    "orden": 0
+  }
+},
+{
+  "model": "about.valor",
+  "pk": 8,
+  "fields": {
+    "about": 1,
+    "nombre": "Respeto",
+    "descripcion": "Valoramos a las personas, las ideas y el entorno en el que\r\ndesarrollamos nuestras actividades.",
+    "orden": 0
+  }
+}
+]

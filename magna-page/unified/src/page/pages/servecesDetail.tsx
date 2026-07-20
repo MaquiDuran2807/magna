@@ -28,7 +28,7 @@ const bannerImageMap: Record<string, string> = {
     "Medio Ambiente": imagenMedioAmbiente,
 };
 
-const RESET_TIMEOUT = 20000;
+const RESET_TIMEOUT = 40000;
 
 const ServecesDetail: React.FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -86,6 +86,25 @@ const ServecesDetail: React.FC = () => {
             }
         };
     }, [id, navigate]);
+
+    // Scroll al carrusel cuando el DOM está listo
+    useEffect(() => {
+        if (!id) return;
+        let attempts = 0;
+        const scrollToCarousel = () => {
+            const carousel = document.querySelector<HTMLElement>('.servicios-carousel');
+            const serviciosLoaded = document.querySelector('.servicios-grid');
+            if (carousel && serviciosLoaded) {
+                const rect = carousel.getBoundingClientRect();
+                const top = rect.top + window.pageYOffset - 80;
+                window.scrollTo({ top, behavior: 'smooth' });
+            } else if (attempts < 15) {
+                attempts++;
+                setTimeout(scrollToCarousel, 150);
+            }
+        };
+        scrollToCarousel();
+    }, [id, servicioElegido]);
 
     if (!servicioElegido) {
         return <Spinner/>;
@@ -174,11 +193,10 @@ const ServecesDetail: React.FC = () => {
                                         >
                                             <div className="detail-image">
                                                 <img
-                                                    src={selectedSubServicio.imagen}
+                                                    src={selectedSubServicio.imagen_tablet || selectedSubServicio.imagen}
                                                     srcSet={`
                                                         ${selectedSubServicio.imagen_celular || selectedSubServicio.imagen} 450w,
-                                                        ${selectedSubServicio.imagen_tablet || selectedSubServicio.imagen} 1024w,
-                                                        ${selectedSubServicio.imagen} 2000w
+                                                        ${selectedSubServicio.imagen_tablet || selectedSubServicio.imagen} 1024w
                                                     `}
                                                     sizes="(max-width: 768px) 100vw, 800px"
                                                     alt={selectedSubServicio.nombre}

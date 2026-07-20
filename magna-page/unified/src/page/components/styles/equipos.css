@@ -77,7 +77,7 @@
     margin-top: 10px;
 }
 
-.workers-equip img{
+.workers-equip img:not(.logo-1){
     width: 270px;
     height: 370px;
     object-fit: cover;
@@ -86,6 +86,7 @@
 .logo-1{
     position: absolute;
     width: 50px;
+    height: auto;
     bottom: 85%;
     left: 75%;
 }
