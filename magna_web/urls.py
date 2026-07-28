@@ -55,7 +55,6 @@ urlpatterns = [
 urlpatterns += [re_path(r'^static/(?P<path>.*)$', static_serve, {'document_root': Path(settings.BASE_DIR) / 'magna-page' / 'unified' / 'dist'})]
 urlpatterns += [re_path(r'^store/', storeView.as_view(), name='store')]
 
-# Ruta /ssg/ para comparación (el view mismo quita el prefijo)
 urlpatterns += [re_path(r'^ssg/', indexView.as_view(), name='index-ssg')]
 
 # Catch-all principal — debe ir al final
