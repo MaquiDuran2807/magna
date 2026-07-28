@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.text import slugify
 from servicios.models import Servicio,SubServicio
 from equipos.models import Equipo
 
@@ -58,6 +59,8 @@ class Ciudad (models.Model):
 class Proyecto(models.Model):
     nombre = models.CharField(max_length=150)
     descripcion = models.TextField()
+    meta_description = models.TextField(blank=True, verbose_name='Meta Description (SEO)')
+    slug = models.SlugField(max_length=150, blank=True, db_index=True)
     tipo = models.ForeignKey(TypeProject, on_delete=models.CASCADE)
     fecha_inicio = models.DateField()
     fecha_fin = models.DateField()
@@ -69,6 +72,12 @@ class Proyecto(models.Model):
     servicios = models.ManyToManyField(Servicio)
     subservicios = models.ManyToManyField(SubServicio)
     ciudad = models.ForeignKey(Ciudad, on_delete=models.CASCADE)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.nombre)
+        super().save(*args, **kwargs)
+
     def __str__(self):
         return self.nombre
     class Meta:

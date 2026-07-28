@@ -5,9 +5,9 @@ from django.http import HttpResponse
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework.generics import ListAPIView
+from rest_framework.generics import ListAPIView, RetrieveAPIView
 from .models import Servicio, SubServicio, Brochure, Slide
-from .serializer import BrochureSerializer, ServicioSerializer, subServicesSerializer, GetIdServiciosSerializer,ServicesAndSubservicesSerializer, SlideSerializer, ServicioSlideSerializer
+from .serializer import BrochureSerializer, ServicioSerializer, subServicesSerializer, GetIdServiciosSerializer,ServicesAndSubservicesSerializer, SlideSerializer, ServicioSlideSerializer, SubServicioDetailSerializer
 from rest_framework import permissions
 
 
@@ -102,6 +102,12 @@ class SlidesAPIView(APIView):
 
         return Response(combined)
 
+
+class SubServicioDetailView(RetrieveAPIView):
+    queryset = SubServicio.objects.all()
+    serializer_class = SubServicioDetailSerializer
+    lookup_field = 'slug'
+    permission_classes = [permissions.AllowAny]
 
 class BrochureApiView(APIView):
     permission_classes = [

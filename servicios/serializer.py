@@ -6,19 +6,37 @@ from django.core.files.base import ContentFile
 class subServicesSerializer(serializers.ModelSerializer):
     class Meta:
         model = SubServicio
-        fields = '__all__'
+        fields = ['id', 'nombre', 'descripcion', 'meta_description', 'slug', 'imagen', 'imagen_tablet', 'imagen_celular', 'servicio']
 
 class CharacteristicSerializer(serializers.ModelSerializer):
     class Meta:
         model = Characteristic
         fields = '__all__'
 
+class SubServicioDetailSerializer(serializers.ModelSerializer):
+    servicio_padre = serializers.SerializerMethodField()
+
+    class Meta:
+        model = SubServicio
+        fields = [
+            'id', 'nombre', 'descripcion', 'meta_description',
+            'slug', 'imagen', 'imagen_tablet', 'imagen_celular',
+            'servicio', 'servicio_padre',
+        ]
+
+    def get_servicio_padre(self, obj):
+        return {
+            'nombre': obj.servicio.nombre,
+            'slug': obj.servicio.slug,
+            'id': obj.servicio.id,
+        }
+
 class ServicioSerializer(serializers.ModelSerializer):
     subservicios = subServicesSerializer(many=True, read_only=True,source='subservicio_set')
     caracteristicas = CharacteristicSerializer(many=True, read_only=True,source='characteristic_set')
     class Meta:
         model = Servicio
-        fields = ['id','nombre', 'descripcion', 'imagen', 'icon','imagen_tablet', 'imagen_celular', 'subservicios', 'caracteristicas']
+        fields = ['id','nombre', 'descripcion', 'imagen', 'icon','imagen_tablet', 'imagen_celular', 'slug', 'subservicios', 'caracteristicas']
 
 class GetIdServiciosSerializer(serializers.ModelSerializer):
     class Meta:
@@ -30,7 +48,7 @@ class ServicesAndSubservicesSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Servicio
-        fields = ['id', 'nombre','descripcion', 'imagen', 'icon', 'imagen_tablet', 'imagen_celular']
+        fields = ['id', 'nombre','descripcion', 'imagen', 'icon', 'imagen_tablet', 'imagen_celular', 'slug']
 
 class SlideSerializer(serializers.ModelSerializer):
     tipo = serializers.SerializerMethodField()

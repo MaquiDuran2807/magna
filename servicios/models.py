@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.text import slugify
 from PIL import Image
 import io
 from django.core.files.uploadedfile import InMemoryUploadedFile
@@ -12,8 +13,11 @@ class Servicio(models.Model):
     imagen_tablet = models.ImageField(upload_to='imagenes/tablet/', null=True, blank=True)
     imagen_celular = models.ImageField(upload_to='imagenes/celular/', null=True, blank=True)
     icon = models.FileField(upload_to='servicios', null=True, blank=True)
+    slug = models.SlugField(max_length=100, blank=True, db_index=True)
 
     def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.nombre)
         if self.imagen and not self._state.adding:
             existing = Servicio.objects.filter(pk=self.pk).first()
             if existing and existing.imagen.name == self.imagen.name:
@@ -61,11 +65,15 @@ class SubServicio(models.Model):
     servicio = models.ForeignKey(Servicio, on_delete=models.CASCADE)
     nombre = models.CharField(max_length=100)
     descripcion = models.TextField()
+    meta_description = models.TextField(blank=True, verbose_name='Meta Description (SEO)')
     imagen = models.ImageField(upload_to='servicios', null=True, blank=True)
     imagen_tablet = models.ImageField(upload_to='imagenes/tablet/', null=True, blank=True)
     imagen_celular = models.ImageField(upload_to='imagenes/celular/', null=True, blank=True)
+    slug = models.SlugField(max_length=100, blank=True, db_index=True)
 
     def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.nombre)
         if self.imagen and not self._state.adding:
             existing = SubServicio.objects.filter(pk=self.pk).first()
             if existing and existing.imagen.name == self.imagen.name:
