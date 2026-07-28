@@ -346,26 +346,3 @@ Si Accessibility < 93:
 > **Nota:** Best Practices quedó en 90, no 93. La causa es que algunas imágenes del banner
 > no tienen `width`/`height` explícitos. Es un tema menor que no afecta SEO ni Performance.
 
----
-
-## Git
-
-```bash
-# Continuar desde el branch anterior (fase-04-django) o crear desde main si ya está mergeado
-git checkout -b seo-ssg/fase-05-tests
-
-# Implementar todo lo anterior...
-
-# Ejecutar todo para verificar
-python manage.py test magna_web.tests
-cd magna-page/unified && node test-prerender.mjs
-
-git add -A
-git commit -m "seo-ssg: fase 5 — tests + lighthouse comparison scripts + resultados"
-git push origin seo-ssg/fase-05-tests
-
-# Opcional: crear PR
-gh pr create --base main --head seo-ssg/fase-05-tests \
-  --title "Fase 5: Tests + Lighthouse Measurement" \
-  --body "Scripts de comparación Lighthouse. Test de integración prerender. Targets ≥ 93. Resultados documentados."
-```

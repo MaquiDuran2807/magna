@@ -303,28 +303,3 @@ curl -s http://localhost:8000/servicios | head -5
 | tests | ~15s |
 | **Total** | **~2 minutos** |
 
----
-
-## Git
-
-```bash
-# Continuar desde el branch anterior (fase-05-tests) o crear desde main si ya está mergeado
-git checkout -b seo-ssg/fase-06-build
-
-# Crear los scripts...
-
-# Dar permisos (Linux/Mac)
-chmod +x build-and-update.sh
-
-# Probar
-.\build-and-update.bat
-
-git add -A
-git commit -m "seo-ssg: fase 6 — build command automatizado (build-and-update)"
-git push origin seo-ssg/fase-06-build
-
-# Opcional: crear PR
-gh pr create --base main --head seo-ssg/fase-06-build \
-  --title "Fase 6: Build automatizado" \
-  --body "build-and-update.bat/.sh — un solo comando para build:ssg + migrate + collectstatic + tests + verificación."
-```

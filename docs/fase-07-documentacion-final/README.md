@@ -203,47 +203,6 @@ STATICFILES_DIRS = (
 # Ya no hay referencias a magna-page/page/dist o magna-page/store/dist
 ```
 
-### 7.4 Merge final a main
-
-```bash
-# 1. Asegurar que todas las ramas están actualizadas
-git checkout main
-git pull origin main
-
-# 2. Merge de cada fase en orden
-git merge seo-ssg/fase-01-backend --no-ff -m "seo-ssg: merge fase 1 — modelos + API"
-git merge seo-ssg/fase-02-frontend --no-ff -m "seo-ssg: merge fase 2 — frontend subservicio detail"
-git merge seo-ssg/fase-03-ssg --no-ff -m "seo-ssg: merge fase 3 — prerendering pipeline"
-git merge seo-ssg/fase-04-django --no-ff -m "seo-ssg: merge fase 4 — Django sirve prerendered"
-git merge seo-ssg/fase-05-tests --no-ff -m "seo-ssg: merge fase 5 — tests + lighthouse"
-git merge seo-ssg/fase-06-build --no-ff -m "seo-ssg: merge fase 6 — build automatizado"
-
-# 3. Último commit de documentación y limpieza
-git add -A
-git commit -m "seo-ssg: fase 7 — documentacion final, limpieza legacy, merge completo"
-
-# 4. Push a GitHub
-git push origin main
-
-# 5. Limpiar ramas remotas
-git push origin --delete seo-ssg/fase-01-backend
-git push origin --delete seo-ssg/fase-02-frontend
-git push origin --delete seo-ssg/fase-03-ssg
-git push origin --delete seo-ssg/fase-04-django
-git push origin --delete seo-ssg/fase-05-tests
-git push origin --delete seo-ssg/fase-06-build
-
-# 6. Limpiar ramas locales
-git branch -d seo-ssg/fase-01-backend
-git branch -d seo-ssg/fase-02-frontend
-git branch -d seo-ssg/fase-03-ssg
-git branch -d seo-ssg/fase-04-django
-git branch -d seo-ssg/fase-05-tests
-git branch -d seo-ssg/fase-06-build
-```
-
----
-
 ## Documentación del resultado
 
 ### Qué se hizo
@@ -285,45 +244,3 @@ git branch -d seo-ssg/fase-06-build
 | Tests | 56 | 61 (+5) | +9% |
 | Cobertura meta tags | 1 para todo el sitio | Por página + BD editable | — |
 
----
-
-## Git
-
-```bash
-# Último paso: merge final a main
-git checkout main
-git pull origin main
-
-# Merge de cada fase
-for branch in \
-    seo-ssg/fase-01-backend \
-    seo-ssg/fase-02-frontend \
-    seo-ssg/fase-03-ssg \
-    seo-ssg/fase-04-django \
-    seo-ssg/fase-05-tests \
-    seo-ssg/fase-06-build; do
-    echo "Merging $branch..."
-    git merge $branch --no-ff --no-edit || echo "Conflict in $branch, resolve manually"
-done
-
-# Commit final de documentación
-git add -A
-git commit -m "seo-ssg: documentacion final, limpieza legacy frontends, actualizacion AGENTS.md + DESIGN.md"
-
-# Push
-git push origin main
-
-# Limpiar ramas
-for branch in \
-    seo-ssg/fase-01-backend \
-    seo-ssg/fase-02-frontend \
-    seo-ssg/fase-03-ssg \
-    seo-ssg/fase-04-django \
-    seo-ssg/fase-05-tests \
-    seo-ssg/fase-06-build; do
-    git branch -d $branch 2>/dev/null
-    git push origin --delete $branch 2>/dev/null || true
-done
-
-echo "✅ Proyecto SEO-SSG completado y mergeado a main"
-```

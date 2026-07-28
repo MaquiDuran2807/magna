@@ -65,11 +65,3 @@ python manage.py test magna_web.tests.test_seo_views
 python manage.py test
 ```
 
-## Git
-
-```bash
-git checkout -b seo-ssg/fase-04-django
-git add -A
-git commit -m "seo-ssg: fase 4 — Django sirve prerendered + fallback SPA + ruta /ssg/ dev"
-git push origin seo-ssg/fase-04-django
-```

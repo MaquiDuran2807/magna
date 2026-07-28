@@ -148,38 +148,6 @@ seo-ssg/fase-06-build
 seo-ssg/fase-07-docs
 ```
 
-### Proceso por fase
-
-```bash
-# 1. Crear rama (desde el branch anterior si acumulamos, o desde main si es fase 1)
-git checkout -b seo-ssg/fase-N-nombre
-
-# 2. Implementar cambios
-# ... (código, tests, etc.)
-
-# 3. Commit + Push
-git add .
-git commit -m "seo-ssg: fase N — descripción breve"
-git push origin seo-ssg/fase-N-nombre
-
-# 4. (Opcional) Crear PR para revisión
-gh pr create --base main --head seo-ssg/fase-N-nombre --title "Fase N: descripción" --body "Ver docs/fase-N-nombre/README.md"
-```
-
-### Al finalizar todas las fases
-
-```bash
-# Merge fase-07-docs → main
-git checkout main
-git merge seo-ssg/fase-07-docs
-git push origin main
-
-# Limpiar ramas remotas
-git push origin --delete seo-ssg/fase-01-backend
-git push origin --delete seo-ssg/fase-02-frontend
-# ... etc
-```
-
 ---
 
 ## 7. Limpieza post-implementación
