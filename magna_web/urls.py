@@ -1,40 +1,39 @@
 """
 URL configuration for magna_web project.
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/5.0/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from pathlib import Path
 from django.contrib import admin
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, View
 from django.views.static import serve as static_serve
 from django.urls import include, path, re_path
 from django.conf.urls.static import static
-from django.http import JsonResponse
+from django.http import HttpResponse
 from django.conf import settings
 
 
+class indexView(View):
+    def get(self, request, *args, **kwargs):
+        path = request.path.strip('/')
 
-class indexView(TemplateView):
-    template_name = 'unified/dist/index.page.html'
+        if path.startswith('ssg/'):
+            path = path[4:]
+
+        prerender_dir = Path(settings.BASE_DIR) / 'magna-page' / 'unified' / 'dist' / 'prerendered'
+        candidate = prerender_dir / 'index.html' if not path else prerender_dir / path / 'index.html'
+
+        if candidate.exists():
+            return HttpResponse(candidate.read_bytes(), content_type='text/html; charset=utf-8')
+
+        spa = Path(settings.BASE_DIR) / 'magna-page' / 'unified' / 'dist' / 'index.page.html'
+        return HttpResponse(spa.read_bytes(), content_type='text/html; charset=utf-8')
+
 
 class storeView(TemplateView):
-    template_name = 'store/dist/index.html'
+    template_name = 'unified/dist/index.store.html'
+
 
 class Robots(TemplateView):
-    template_name = 'page/dist/robot.txt'
-
-
+    template_name = 'unified/dist/robot.txt'
 
 
 urlpatterns = [
@@ -44,17 +43,23 @@ urlpatterns = [
     re_path('auth/', include('djoser.urls.jwt')),
     re_path('auth/', include('djoser.social.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
-    path('servicios/',include('servicios.urls')),
-    path('equipos/',include('equipos.url')),
-    path('proyectos/',include('proyectos.urls')),
-    path('frequentQuestions/',include('frequentQuestions.urls')), 
-    path('contact/',include('contact.urls')),
-    path("products/",include("products.urls")),
-    path("blog/",include("blog.urls")),
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-BASE_DIR = Path(__file__).resolve().parent.parent
-urlpatterns += [re_path(r'^static/(?P<path>.*)$', static_serve, {'document_root': BASE_DIR.joinpath('magna-page', 'unified', 'dist')})]
+    path('servicios/', include('servicios.urls')),
+    path('equipos/', include('equipos.url')),
+    path('proyectos/', include('proyectos.urls')),
+    path('frequentQuestions/', include('frequentQuestions.urls')),
+    path('contact/', include('contact.urls')),
+    path("products/", include("products.urls")),
+    path("blog/", include("blog.urls")),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+urlpatterns += [re_path(r'^static/(?P<path>.*)$', static_serve, {'document_root': Path(settings.BASE_DIR) / 'magna-page' / 'unified' / 'dist'})]
 urlpatterns += [re_path(r'^store/', storeView.as_view(), name='store')]
+
+# Ruta /ssg/ para comparación (solo dev)
+if settings.DEBUG:
+    urlpatterns += [re_path(r'^ssg/', indexView.as_view(), name='index-ssg')]
+
+# Catch-all principal — debe ir al final
 urlpatterns += [re_path(r'^(?!media/|admin/|static/).*$', indexView.as_view(), name='index')]
 
 
