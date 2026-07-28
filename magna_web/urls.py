@@ -14,8 +14,10 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from pathlib import Path
 from django.contrib import admin
 from django.views.generic import TemplateView
+from django.views.static import serve as static_serve
 from django.urls import include, path, re_path
 from django.conf.urls.static import static
 from django.http import JsonResponse
@@ -24,7 +26,7 @@ from django.conf import settings
 
 
 class indexView(TemplateView):
-    template_name = 'page/dist/magnapage.html'
+    template_name = 'unified/dist/index.page.html'
 
 class storeView(TemplateView):
     template_name = 'store/dist/index.html'
@@ -50,8 +52,10 @@ urlpatterns = [
     path("products/",include("products.urls")),
     path("blog/",include("blog.urls")),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+BASE_DIR = Path(__file__).resolve().parent.parent
+urlpatterns += [re_path(r'^static/(?P<path>.*)$', static_serve, {'document_root': BASE_DIR.joinpath('magna-page', 'unified', 'dist')})]
 urlpatterns += [re_path(r'^store/', storeView.as_view(), name='store')]
-urlpatterns += [re_path(r'^(?!media/|admin/).*$', indexView.as_view(), name='index')]
+urlpatterns += [re_path(r'^(?!media/|admin/|static/).*$', indexView.as_view(), name='index')]
 
 
 admin.site.site_header = 'Administrador de Magna'

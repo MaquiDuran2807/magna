@@ -31,7 +31,7 @@ SECRET_KEY = 'django-insecure-3gc^^v-mqu9hjtgz148b)5q2+b9%ng8#j2f62mr=-75@uayss$
 DEBUG = False
 DOMAIN="localhost:5173 " #'localhost:8000/auth/users' # os.environ.get('DOMAIN_DEV') if DEBUG else os.environ.get('DOMAIN_PROD')
 
-ALLOWED_HOSTS = ["magnaingenieriaytopografia.com","www.magnaingenieriaytopografia.com","127.0.0.1"]  #env.list("ALLOWED_HOSTS_DEV") if DEBUG else env.list("ALLOWED_HOSTS_PROD")
+ALLOWED_HOSTS = ["magnaingenieriaytopografia.com","www.magnaingenieriaytopografia.com","127.0.0.1","localhost"]  #env.list("ALLOWED_HOSTS_DEV") if DEBUG else env.list("ALLOWED_HOSTS_PROD")
 
 
 # Application definition
@@ -167,7 +167,7 @@ USE_TZ = True
 
 
 STATICFILES_DIRS = (
-    BASE_DIR.joinpath('magna-page','page/dist'),
+    BASE_DIR.joinpath('magna-page','unified/dist'),
     BASE_DIR.joinpath('magna-page','store/dist'),
 )
 STATIC_URL = 'static/'

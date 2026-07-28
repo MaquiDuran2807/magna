@@ -18,6 +18,7 @@ class BlogPostSerializer(serializers.ModelSerializer):
     comments = CommentSerializer(many=True, read_only=True)
     category = CategorySerializer(read_only=True)
     author = UserInforSerializer(read_only=True)
+    image = serializers.ImageField(source='image_blog', read_only=True)
 
     class Meta:
         model = BlogPost
@@ -26,6 +27,7 @@ class BlogPostSerializer(serializers.ModelSerializer):
 class AllBlogPostSerializer(serializers.ModelSerializer):
     category = CategorySerializer(read_only=True)
     author = UserInforSerializer(read_only=True)
+    image = serializers.ImageField(source='image_blog', read_only=True)
 
     class Meta:
         model = BlogPost
@@ -34,6 +36,8 @@ class AllBlogPostSerializer(serializers.ModelSerializer):
 class ImportantBlogPostSerializer(serializers.ModelSerializer):
     category = CategorySerializer(read_only=True)
     author = UserInforSerializer(read_only=True)
+    image = serializers.ImageField(source='image_blog', read_only=True)
+
     class Meta:
         model = BlogPost
         fields = ['id', 'title', 'date_posted', 'author', 'category','important', 'image']
