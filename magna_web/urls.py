@@ -6,7 +6,6 @@ from django.contrib import admin
 from django.views.generic import TemplateView, View
 from django.views.static import serve as static_serve
 from django.urls import include, path, re_path
-from django.conf.urls.static import static
 from django.http import HttpResponse
 from django.conf import settings
 
@@ -21,10 +20,12 @@ class indexView(View):
         prerender_dir = Path(settings.BASE_DIR) / 'magna-page' / 'unified' / 'dist' / 'prerendered'
         candidate = prerender_dir / 'index.html' if not path else prerender_dir / path / 'index.html'
 
-        if candidate.exists():
+        if candidate.exists() and candidate.stat().st_size > 100:
             return HttpResponse(candidate.read_bytes(), content_type='text/html; charset=utf-8')
 
         spa = Path(settings.BASE_DIR) / 'magna-page' / 'unified' / 'dist' / 'index.page.html'
+        if not spa.exists():
+            return HttpResponse('Frontend no construido. Ejecute npm run build en magna-page/unified/', status=503)
         return HttpResponse(spa.read_bytes(), content_type='text/html; charset=utf-8')
 
 
@@ -50,8 +51,9 @@ urlpatterns = [
     path('contact/', include('contact.urls')),
     path("products/", include("products.urls")),
     path("blog/", include("blog.urls")),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
 
+urlpatterns += [re_path(r'^media/(?P<path>.*)$', static_serve, {'document_root': settings.MEDIA_ROOT})]
 urlpatterns += [re_path(r'^static/(?P<path>.*)$', static_serve, {'document_root': Path(settings.BASE_DIR) / 'magna-page' / 'unified' / 'dist'})]
 urlpatterns += [re_path(r'^store/', storeView.as_view(), name='store')]
 

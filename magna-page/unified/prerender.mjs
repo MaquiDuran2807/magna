@@ -5,7 +5,7 @@ import { spawn } from 'child_process';
 
 const DIST_DIR = resolve(import.meta.dirname, 'dist');
 const PRERENDER_DIR = resolve(DIST_DIR, 'prerendered');
-const DJANGO_PORT = 8000;
+const DJANGO_PORT = parseInt(process.env.PRERENDER_PORT, 10) || 8000;
 const BASE_URL = `http://localhost:${DJANGO_PORT}`;
 
 const STATIC_ROUTES = [
@@ -92,7 +92,17 @@ async function discoverDynamicRoutes() {
     return routes;
 }
 
+function parseArgs() {
+    const args = process.argv.slice(2);
+    if (args.length === 0) return { mode: 'all' };
+    if (args[0] === '--route' && args[1]) return { mode: 'route', path: args[1] };
+    if (args[0] === '--batch' && args[1]) return { mode: 'batch', batch: args[1] };
+    console.error('Uso: node prerender.mjs [--route /path | --batch servicios|projects|blog]');
+    process.exit(1);
+}
+
 async function prerender() {
+    const opts = parseArgs();
     const consoleErrors = [];
 
     console.log('[prerender] Iniciando Django...');
@@ -116,8 +126,22 @@ async function prerender() {
     page.setDefaultNavigationTimeout(20000);
     page.setDefaultTimeout(15000);
 
-    const allRoutes = [...STATIC_ROUTES, ...(await discoverDynamicRoutes())];
-    console.log(`[prerender] ${allRoutes.length} rutas totales\n`);
+    let allRoutes;
+    if (opts.mode === 'route') {
+        const path = opts.path;
+        const file = path === '/' ? 'index.html' : `${path.slice(1)}/index.html`;
+        allRoutes = [{ path, file }];
+        console.log(`[prerender] Ruta única: ${path}\n`);
+    } else if (opts.mode === 'batch') {
+        const dynamicRoutes = await discoverDynamicRoutes();
+        const staticFiltered = STATIC_ROUTES.filter(r => r.path.startsWith('/' + opts.batch));
+        const dynamicFiltered = dynamicRoutes.filter(r => r.path.startsWith('/' + opts.batch));
+        allRoutes = [...staticFiltered, ...dynamicFiltered];
+        console.log(`[prerender] Lote "${opts.batch}": ${allRoutes.length} rutas\n`);
+    } else {
+        allRoutes = [...STATIC_ROUTES, ...(await discoverDynamicRoutes())];
+        console.log(`[prerender] ${allRoutes.length} rutas totales\n`);
+    }
 
     let success = 0;
     let failed = 0;
@@ -126,42 +150,57 @@ async function prerender() {
         const route = allRoutes[idx];
         const url = `${BASE_URL}${route.path}`;
         const outputPath = resolve(PRERENDER_DIR, route.file);
+        const maxAttempts = route.path === '/' ? 3 : 1;
 
         process.stdout.write(`[${idx + 1}/${allRoutes.length}] ${route.path}... `);
 
-        try {
-            await page.goto(url, { waitUntil: 'networkidle0' });
-
-            await page.waitForFunction(
-                () => (document.querySelector('#root')?.children?.length ?? 0) > 0,
-                { timeout: 10000 }
-            );
-
-            await sleep(200);
-
-            const html = await page.content();
-            mkdirSync(dirname(outputPath), { recursive: true });
-            writeFileSync(outputPath, html, 'utf-8');
-
-            console.log('✓');
-            success++;
-        } catch (err) {
-            console.log('✗');
-            console.warn(`  Error: ${err.message}`);
-
-            if (consoleErrors.length > 0) {
-                for (const ce of [...new Set(consoleErrors)].slice(-5)) {
-                    console.warn(`  Console error: ${ce.slice(0, 200)}`);
-                }
-                consoleErrors.length = 0;
-            }
-
+        let ok = false;
+        for (let attempt = 1; attempt <= maxAttempts; attempt++) {
             try {
+                if (attempt > 1) {
+                    await sleep(2000);
+                    process.stdout.write(` (intento ${attempt})... `);
+                }
+
+                await page.goto(url, { waitUntil: 'networkidle0' });
+
+                await page.waitForFunction(
+                    () => (document.querySelector('#root')?.children?.length ?? 0) > 0,
+                    { timeout: 10000 }
+                );
+
+                await sleep(200);
+
                 const html = await page.content();
                 mkdirSync(dirname(outputPath), { recursive: true });
                 writeFileSync(outputPath, html, 'utf-8');
-            } catch {}
-            failed++;
+
+                console.log('✓');
+                success++;
+                ok = true;
+                break;
+            } catch (err) {
+                if (attempt === maxAttempts) {
+                    console.log('✗');
+                    console.warn(`  Error: ${err.message}`);
+
+                    if (consoleErrors.length > 0) {
+                        for (const ce of [...new Set(consoleErrors)].slice(-5)) {
+                            console.warn(`  Console error: ${ce.slice(0, 200)}`);
+                        }
+                        consoleErrors.length = 0;
+                    }
+
+                    try {
+                        const html = await page.content();
+                        if (html && html.length > 100) {
+                            mkdirSync(dirname(outputPath), { recursive: true });
+                            writeFileSync(outputPath, html, 'utf-8');
+                        }
+                    } catch {}
+                    failed++;
+                }
+            }
         }
     }
 
