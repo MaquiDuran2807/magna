@@ -39,3 +39,7 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.text
+
+import os
+if os.environ.get('PRERENDER_AUTO', '1') == '1':
+    import blog.signals

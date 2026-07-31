@@ -156,3 +156,21 @@ migrations/
 
 # staticfiles
 /staticfiles
+
+# Test/backup artifacts
+media/brochures/test_*.pdf
+media/brochures/test.pdf
+.opencode/
+backup/
+magna-page/unified/dist/
+magna-page/unified/node_modules/
+magna-page/unified/.vite/
+.vite/
+*.pyc
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+terraform.tfstate
+terraform.tfvars

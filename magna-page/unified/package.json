@@ -8,7 +8,6 @@
     "dev:page": "vite --open /index.page.html",
     "dev:store": "vite --open /index.store.html",
     "build": "tsc && vite build",
-    "build:ssg": "tsc && vite build && node prerender.mjs",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },

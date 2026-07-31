@@ -244,3 +244,7 @@ STATICFILES_DIRS = (
 | Tests | 56 | 61 (+5) | +9% |
 | Cobertura meta tags | 1 para todo el sitio | Por página + BD editable | — |
 
+---
+
+Al terminar, crear resumen ejecutivo (que se hizo, por que, impacto, tests, como probar) en docs/seo/fase-07-documentacion-final.md.
+

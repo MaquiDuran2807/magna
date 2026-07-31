@@ -1,6 +1,6 @@
 
 from django.urls import include, path, re_path
-from .views import ServicioApiView, ServicioId,ServiciosAndSubservices,BrochureApiView
+from .views import ServicioApiView, ServicioId, ServiciosAndSubservices, BrochureApiView, SubServicioDetailView, SlidesAPIView
 from .routes import router
 
 urlpatterns = [
@@ -8,6 +8,8 @@ urlpatterns = [
     path('servicio/', ServicioApiView.as_view()),
     path('servicios-id/', ServicioId.as_view()),
     path('servicios-and-subservicios/', ServiciosAndSubservices.as_view()),
+    path('subservicio/<slug:slug>/', SubServicioDetailView.as_view()),
+    path('slides/', SlidesAPIView.as_view()),
     path('brochure/', BrochureApiView.as_view()),
 ]
 

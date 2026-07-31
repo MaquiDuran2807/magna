@@ -346,3 +346,7 @@ Si Accessibility < 93:
 > **Nota:** Best Practices quedó en 90, no 93. La causa es que algunas imágenes del banner
 > no tienen `width`/`height` explícitos. Es un tema menor que no afecta SEO ni Performance.
 
+---
+
+Al terminar, crear resumen ejecutivo (que se hizo, por que, impacto, tests, como probar) en docs/seo/fase-05-tests-medicion.md.
+

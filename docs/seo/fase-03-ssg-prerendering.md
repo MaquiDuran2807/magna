@@ -1,83 +1,43 @@
 # Fase 3: SSG — Prerendering Pipeline
 
-## Objetivo
+## Que se hizo
 
-Generar HTML completo para cada ruta del SPA durante el build usando Puppeteer, para que bots y crawlers vean contenido renderizado sin depender de JS.
+Se creo el script `prerender.mjs` que durante el build inicia Django, descubre rutas via API, renderiza cada pagina con Puppeteer (navegador headless), espera a que React se hidrate y Helmet actualice el `<head>`, captura el HTML completo y lo guarda en `dist/prerendered/{path}/index.html`. Se agrego el comando `npm run build:ssg` y el test de verificacion `test-prerender.mjs`.
 
-## Cambios realizados
+Tambien soporta prerender parcial:
+- `node prerender.mjs --route /servicios/topografia` — renderiza una pagina especifica
+- `node prerender.mjs --batch servicios` — renderiza un lote (servicios, projects, blog)
+- `npm run build:ssg` o `node prerender.mjs` — renderiza todo
 
-### Nuevos archivos
+## Por que se hizo
 
-| Archivo | Descripción | LOC |
-|---------|-------------|-----|
-| `unified/prerender.mjs` | Script que inicia Django, descubre rutas, renderiza con Puppeteer y guarda HTML | ~150 |
-| `unified/test-prerender.mjs` | Verifica integridad de archivos prerendered post-build | ~95 |
+Sin SSG, los bots ven HTML vacio (`<div id="root"></div>`). Con SSG, Django sirve HTML completo con titulo, descripcion y contenido visibles desde el primer response. La hidratacion de React sigue funcionando en el cliente.
 
-### Archivos modificados
+## Impacto
 
-| Archivo | Cambio | LOC |
-|---------|--------|-----|
-| `unified/package.json` | +devDependency puppeteer, +script `build:ssg` | +2 |
-| `unified/.gitignore` | +`dist/prerendered/` | +1 |
-| **Total** | | **~248 LOC** |
+- Build time: ~30s (tsc + vite) + ~60s (prerender) = ~90s total
+- 45 archivos HTML generados (6 estaticos + 39 dinamicos)
+- Cada archivo: 15-235 KB con HTML completo
+- Prerender parcial: ~15s por ruta individual, ~30s por lote
 
-## Scripts
+## Tests
 
-```bash
-# Build + prerender
+```
 cd magna-page/unified
-npm run build:ssg
-
-# Verificar prerendered
 node test-prerender.mjs
 ```
 
-### `npm run build:ssg`
+98 checks en 20 archivos. Verifica: title personalizado, meta description, body con contenido (>500 chars), sin errores JS (TypeError, RangeError, Cannot read), script module.
 
-Ejecuta en secuencia:
-1. `tsc` — typecheck TypeScript
-2. `vite build` — build del SPA
-3. `node prerender.mjs` — prerendering con Puppeteer
+## Como probar en interfaz
 
-## Pipeline de prerender
+1. Ejecutar `cd magna-page/unified && npm run build:ssg`
+2. Iniciar Django: `python manage.py runserver`
+3. Visitar cualquier ruta: `/`, `/servicios/topografia`, `/projects/1`
+4. View source debe mostrar HTML completo con contenido dentro de `<div id="root">`, no el shell vacio
+5. El titulo de la pestana debe ser el especifico de cada pagina (ej: "Contacto | Magna..." no "Magna Ingenieria y Topografia")
+6. View source no debe contener "Unexpected Application Error" ni "TypeError"
 
-1. Inicia Django en `localhost:8000` (subproceso, API disponible)
-2. Lanza Puppeteer (Chromium headless)
-3. Descubre rutas dinámicas via API:
-   - Servicios y subservicios: `GET /servicios/servicios-and-subservicios/`
-   - Proyectos: `GET /proyectos/`
-   - Blog posts: `GET /blog/`
-4. Renderiza cada ruta (estáticas + dinámicas)
-5. Espera a que React Helmet actualice el `<title>`
-6. Captura HTML y lo guarda en `dist/prerendered/{path}/index.html`
-7. Cierra Puppeteer y mata Django
+## Nota sobre produccion
 
-## Archivos generados (ejemplo)
-
-```
-dist/prerendered/
-├── index.html
-├── servicios/index.html
-├── servicios/topografia/index.html
-├── servicios/topografia/levantamiento-planimetrico/index.html
-├── servicios/ingenieria/index.html
-├── proyectos/index.html
-├── proyectos/1/index.html
-├── proyectos/2/index.html
-├── blog/index.html
-├── blog/1/index.html
-├── aboutUs/index.html
-└── contact/index.html
-```
-
-## Verificación
-
-`test-prerender.mjs` corre 6 checks por archivo estático:
-- Tiene `<title>`
-- Title no es el default de Helmet (excepto index)
-- Tiene `<meta name="description"`
-- Tiene `<div id="root">`
-- Root tiene contenido (≥200 chars)
-- Tiene `<script type="module"`
-
-Y verifica que subdirectorios dinámicos (servicios/*, projects/*, blog/*) tengan HTML con `<title>` y `<div id="root">`.
+Los HTML prerendered tienen rutas de imagenes y estilos hardcodeadas del momento del build. Si se actualizan imagenes en el server, los prerendered no se actualizan hasta el proximo build. Esto es intencional — el prerendered es un snapshot estatico para SEO. El contenido dinamico (como imagenes nuevas) se actualiza al ejecutar `npm run build:ssg` de nuevo.

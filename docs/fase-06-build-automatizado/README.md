@@ -303,3 +303,7 @@ curl -s http://localhost:8000/servicios | head -5
 | tests | ~15s |
 | **Total** | **~2 minutos** |
 
+---
+
+Al terminar, crear resumen ejecutivo (que se hizo, por que, impacto, tests, como probar) en docs/seo/fase-06-build-automatizado.md.
+

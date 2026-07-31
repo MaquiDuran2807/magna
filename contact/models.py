@@ -8,9 +8,10 @@ class Contacto(models.Model):
     telefono = models.CharField(max_length=20)
     email = models.EmailField()
     mensaje = models.TextField()
-    timestamp = models.DateTimeField(auto_now_add=True )
+    timestamp = models.DateTimeField(auto_now_add=True)
     fecha_respuesta = models.DateTimeField(null=True, blank=True)
     contestado = models.BooleanField(default=False)
+    consentimiento_datos = models.BooleanField(default=True)
 
     def __str__(self):
         return self.nombre

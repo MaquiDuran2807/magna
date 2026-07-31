@@ -283,3 +283,7 @@ proyectos/migrations/XXXX_add_slug_meta.py
 - El nuevo endpoint es una consulta simple: `SELECT * FROM subservicio WHERE slug = ?` (con índice único)
 - Sin impacto medible en rendimiento
 
+---
+
+Al terminar, crear resumen ejecutivo (que se hizo, por que, impacto, tests, como probar) en docs/seo/fase-01-backend-modelos-api.md.
+

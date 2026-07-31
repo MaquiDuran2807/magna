@@ -1,69 +1,29 @@
-# Fase 2: Frontend — Página de detalle de subservicio
+# Fase 2: Frontend — Pagina de detalle de subservicio
 
-## Objetivo
+## Que se hizo
 
-Crear página individual por subservicio con URL única indexable por Google, meta description desde BD, breadcrumbs, JSON-LD y canonical URL.
+Se creo la pagina `/servicios/:serviceSlug/:subServiceSlug` con Helmet que lee `meta_description` desde la BD, breadcrumbs con JSON-LD, canonical URL, OG tags, y enlaces a proyectos relacionados.
 
-## Cambios realizados
+## Por que se hizo
 
-### Tipos TypeScript
+Cada subservicio necesita una URL unica indexable por Google con su propia meta description, breadcrumbs y JSON-LD para que los buscadores entiendan la jerarquia del sitio.
 
-| Archivo | Cambio |
-|---------|--------|
-| `unified/src/page/types/types.ts` | +slug/meta_description en `Subservicio` y `Servicio2` |
-| `unified/src/page/types/types.ts` | +`SubServicioDetailResponse` con `servicio_padre` anidado |
+## Impacto
 
-### API y hooks
+- 1 nueva pagina (lazy-loaded)
+- 1 nueva consulta API por visita (`GET /servicios/subservicio/<slug>/`)
+- Meta description editable desde admin
+- Breadcrumbs visibles para usuario y crawlers
 
-| Archivo | Cambio |
-|---------|--------|
-| `unified/src/page/api/pagesInfo.tsx` | +`fetchSubServicioDetail(slug)` |
-| `unified/src/page/hooks/getInfoPage.tsx` | +`useGetSubServicioDetail(slug)` |
+## Tests
 
-### Página nueva
+Verificar manualmente:
+1. Navegar a `/servicios/topografia/levantamiento-planimetrico` (o cualquier subservicio con slug)
+2. View source debe mostrar `<title>` personalizado, `<meta name="description">` con el texto de la BD, JSON-LD BreadcrumbList, y canonical URL
 
-**Archivo:** `unified/src/page/pages/subServicioDetail.tsx`
+## Como probar en interfaz
 
-- Helmet con `meta_description` desde BD (con fallback a primeros 160 chars de descripción)
-- JSON-LD BreadcrumbList (Servicios > Servicio Padre > Subservicio)
-- Canonical URL
-- OG tags
-- Breadcrumbs visibles para usuario
-- Contenido completo (imagen responsive srcSet, descripción)
-- Enlaces a proyectos relacionados (hasta 4)
-
-### Router
-
-**Archivo:** `unified/src/page/main.tsx`
-
-- Lazy import de `LazySubServicioDetail`
-- Nueva ruta: `/servicios/:serviceSlug/:subServiceSlug`
-
-### Navegación actualizada
-
-| Archivo | Cambio |
-|---------|--------|
-| `unified/src/page/components/sliderServices.tsx` | Slides navegan a `/servicios/:serSlug/:subSlug` cuando tienen slug |
-| `unified/src/page/pages/servecesDetail.tsx` | Sidebar navega a detalle con slug si existe |
-
-### Archivos modificados/creados
-
-| Archivo | Cambio | LOC |
-|---------|--------|-----|
-| `unified/src/page/types/types.ts` | +SubServicioDetailResponse, +slug/meta | +25 |
-| `unified/src/page/api/pagesInfo.tsx` | +fetchSubServicioDetail | +5 |
-| `unified/src/page/hooks/getInfoPage.tsx` | +useGetSubServicioDetail | +10 |
-| `unified/src/page/pages/subServicioDetail.tsx` | NUEVO | ~130 |
-| `unified/src/page/main.tsx` | +ruta lazy | +2 |
-| `unified/src/page/components/sliderServices.tsx` | navegación a detalle | +10 |
-| `unified/src/page/pages/servecesDetail.tsx` | sidebar navega a detalle | +5 |
-| **Total** | | **~187 LOC** |
-
-### Notas técnicas
-
-- La página es lazy-loaded (solo se descarga cuando se visita)
-- Una consulta API adicional (`GET /servicios/subservicio/<slug>/`) por visita
-- Sin impacto en páginas existentes
-- La meta description es editable desde admin (no hardcodeada)
-- Los breadcrumbs ayudan a Google a entender la jerarquía del sitio
-- Los proyectos relacionados mejoran el internal linking y la relevancia temática
+1. Ir a cualquier pagina de servicio: `/servicios/topografia`
+2. Hacer click en un subservicio del sidebar
+3. La pagina debe mostrar: breadcrumbs (Servicios > Topografia > Subservicio), titulo personalizado, descripcion, imagen, y proyectos relacionados
+4. View source debe tener: meta description desde BD, JSON-LD, canonical URL, OG tags

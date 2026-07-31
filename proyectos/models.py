@@ -63,12 +63,14 @@ class Proyecto(models.Model):
     fecha_fin = models.DateField()
     estado = models.CharField(max_length=50, choices=estado)
     presupuesto = models.IntegerField(null=True, blank=True)
-    cliente = models.ForeignKey(Client, on_delete=models.CASCADE,null=True, blank=True)
-    lider = models.ForeignKey(Equipo, on_delete=models.CASCADE, related_name='proyectos_lider',null=True, blank=True)
+    cliente = models.ForeignKey(Client, on_delete=models.CASCADE, null=True, blank=True)
+    lider = models.ForeignKey(Equipo, on_delete=models.CASCADE, related_name='proyectos_lider', null=True, blank=True)
     equipo = models.ManyToManyField(Equipo, related_name='proyectos_equipo', blank=True)
     servicios = models.ManyToManyField(Servicio)
     subservicios = models.ManyToManyField(SubServicio)
     ciudad = models.ForeignKey(Ciudad, on_delete=models.CASCADE)
+    slug = models.SlugField(max_length=150, blank=True, default='')
+    meta_description = models.CharField(max_length=160, blank=True, default='')
     def __str__(self):
         return self.nombre
     class Meta:
@@ -80,7 +82,6 @@ class Proyecto(models.Model):
 class ProyectoImagen(models.Model):
     proyecto = models.ForeignKey(Proyecto, on_delete=models.CASCADE)
     imagen = models.ImageField(upload_to='proyectos')
-    # campos para referenciar las imagenes y deben admitir blank y null
     references_url =models.URLField(max_length=200, blank=True, null=True)
     references_name = models.CharField(max_length=150, blank=True, null=True)
     def __str__(self):
@@ -89,3 +90,7 @@ class ProyectoImagen(models.Model):
         verbose_name = 'ProyectoImagen'
         verbose_name_plural = 'ProyectoImagenes'
         ordering = ['proyecto']
+
+import os
+if os.environ.get('PRERENDER_AUTO', '1') == '1':
+    import proyectos.signals

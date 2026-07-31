@@ -10,10 +10,15 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
+import os
 from datetime import timedelta
 from pathlib import Path
-# env = environ.Env()
-# environ.Env.read_env()
+
+try:
+    from dotenv import load_dotenv
+    load_dotenv(Path(__file__).resolve().parent.parent / '.env')
+except ImportError:
+    pass
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,14 +27,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-3gc^^v-mqu9hjtgz148b)5q2+b9%ng8#j2f62mr=-75@uayss$' #os.environ.get("SECRET_KEY")
-# SECRET_KEY = os.environ.get("SECRET_KEY",default='your secret key')
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-DOMAIN="localhost:5173 " #'localhost:8000/auth/users' # os.environ.get('DOMAIN_DEV') if DEBUG else os.environ.get('DOMAIN_PROD')
+SECRET_KEY = os.environ.get("SECRET_KEY", default='django-insecure-3gc^^v-mqu9hjtgz148b)5q2+b9%ng8#j2f62mr=-75@uayss$')
+DEBUG = os.environ.get("DJANGO_DEBUG", "True").lower() in ("true", "1", "yes")
+DOMAIN = os.environ.get("DOMAIN", "localhost:8080")
 
 ALLOWED_HOSTS = ["magnaingenieriaytopografia.com","www.magnaingenieriaytopografia.com","127.0.0.1","localhost"]  #env.list("ALLOWED_HOSTS_DEV") if DEBUG else env.list("ALLOWED_HOSTS_PROD")
 
@@ -62,6 +63,7 @@ INSTALLED_APPS = [
     "frequentQuestions",
     "products",
     "blog",
+    "about",
 ]
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
@@ -168,7 +170,6 @@ USE_TZ = True
 
 STATICFILES_DIRS = (
     BASE_DIR.joinpath('magna-page','unified/dist'),
-    BASE_DIR.joinpath('magna-page','store/dist'),
 )
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR.joinpath('staticfiles')
@@ -199,11 +200,22 @@ SIMPLE_JWT = {
 
 AUTH_USER_MODEL = 'user.User'
 
-CORS_ORIGIN_WHITELIST =  ["http://localhost:8000","http://54.211.37.134:8000","http://localhost:5173","https://magnaingenieriaytopografia.com","https://www.magnaingenieriaytopografia.com","http://localhost:5174"]    #env.list("CORS_ORIGIN_WHITELIST_DEV") if DEBUG else env.list("CORS_ORIGIN_WHITELIST_PROD")
-CSRF_TRUSTED_ORIGINS = ["http://localhost:8000","http://54.211.37.134:8000","http://localhost:5173","https://magnaingenieriaytopografia.com","https://www.magnaingenieriaytopografia.com","http://localhost:5174"]
+CORS_ORIGIN_WHITELIST =  ["http://localhost:8000","http://54.211.37.134:8000","http://localhost:5173","https://magnaingenieriaytopografia.com","https://www.magnaingenieriaytopografia.com","http://localhost:5174","http://localhost:8080"]
+CSRF_TRUSTED_ORIGINS = ["http://localhost:8000","http://54.211.37.134:8000","http://localhost:5173","https://magnaingenieriaytopografia.com","https://www.magnaingenieriaytopografia.com","http://localhost:5174","http://localhost:8080"]
 
 # Email settings
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+if os.environ.get('EMAIL_HOST'):
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = os.environ.get('EMAIL_HOST')
+    EMAIL_PORT = int(os.environ.get('EMAIL_PORT', 587))
+    EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS', 'True') == 'True'
+    EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '')
+    EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+CONTACT_NOTIFICATION_EMAIL = os.environ.get('CONTACT_NOTIFICATION_EMAIL', '')
+DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER', 'noreply@magnaingenieriaytopografia.com')
 
 DJOSER = {
     'LOGIN_FIELD': 'email',

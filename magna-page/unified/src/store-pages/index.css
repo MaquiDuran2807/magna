@@ -1,0 +1,200 @@
+:root {
+  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+.product-image {
+  max-width: 400px;
+  width: 100%;
+}
+
+.rating span {
+  color: #021328;
+}
+
+img.large {
+  max-width: 100%;
+}
+img.thumbnail {
+  height: 80px;
+}
+
+.small-container {
+  max-width: 600px;
+}
+
+.checkout-steps > div {
+  border-bottom: 0.2rem solid #d1d1d1;
+  color: #c1bfbf;
+}
+.checkout-steps > div.active {
+  border-bottom: 0.2rem solid #021328;
+  color: #021328;
+}
+
+.dropdown-menu[data-bs-popper] {
+  left: auto;
+  right: 0;
+}
+.btn-primary,
+.btn-outline-primary {
+  background-color: #fefefd;
+  color: #000000;
+}
+
+/* header */
+
+.navbar-brand {
+  font-weight: bold;
+  font-size: 1.8rem;
+}
+
+a.header-link,
+.header-link > a {
+  color: white !important;
+  font-weight: bold;
+}
+
+a.header-link:hover,
+.header-link > a:hover {
+  color: white;
+  border: 1px white solid;
+}
+
+.header .dropdown-menu,
+.header .dropdown-item {
+  color: black !important;
+  background-color: white;
+}
+.header .dropdown-item a:hover {
+  border: 1px rgb(33, 37, 41) solid;
+}
+.sub-header {
+  background-color: #0e243f;
+}
+
+.cart-badge {
+  position: absolute;
+  color: #fbfaf9;
+  font-weight: bold;
+  margin-left: 10px;
+  margin-top: -8px;
+}
+
+/* Sidebar */
+.side-navbar-backdrop {
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0, 0, 0, 0.6); /* Black w/ opacity */
+}
+
+.side-navbar {
+  width: 340px;
+  height: 100%;
+  position: absolute;
+  left: -350px;
+  background-color: #f5f5f5;
+  transition: 0.5s;
+  z-index: 2;
+}
+
+.active-nav {
+  left: 0;
+}
+
+.side-navbar-user {
+  background-color: #232f3e !important;
+  color: white;
+  font-weight: bold;
+}
+
+button.side-navbar-user:hover {
+  color: white;
+}
+
+.navbar{
+  background-color: #021328;
+}
+.logo-footer{
+  position: relative;
+  width: 90%;
+}
+
+.mySwiper{
+  width: 100%;
+  /* background: linear-gradient(to bottom, rgba(11, 10, 101) 0%, rgba(0,0,0) 100%); */
+}
+
+.mySwiper .swiper-image{
+  width: 80%;
+  
+}
+
+.card{
+  /* background-color: #f0f0f0; */
+  border: none;
+  height: 400px;
+  overflow: hidden; /* Oculta el contenido que desborda */
+
+}
+
+.dark-mode{
+  background-color: #021328;
+  color: white;
+}
+
+.dark-mode .card-text{
+  color: rgb(3, 3, 3);
+}
+
+.dark-mode .checkout-steps > div {
+  border-bottom: 0.2rem solid #636363;
+  color: #797979;
+}
+.dark-mode .checkout-steps > div.active {
+  border-bottom: 0.2rem solid #ffffff;
+  color: #ffffff;
+}
+
+.card-img-top{
+  height: 200px;
+  object-fit: cover;
+}
+
+
+.card-img-top:hover{
+  transform: scale(1.1);
+  transition: 0.5s;
+}
+
+.mask {
+  background-color: rgba(0, 0, 0, 0);
+  height: 100%; /* Comenzamos con altura cero */
+  width: 100%;
+  position: absolute;
+  top: 100%; /* Inicialmente fuera de la tarjeta */
+  left: 0;
+  overflow: hidden; /* Oculta el contenido que desborda */
+  transition: all 0.3s ease-in-out; /* Transición de altura suave */
+}
+
+/* Mostrar la máscara al pasar el ratón por encima de la tarjeta */
+.card:hover .mask {
+  background-color: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%; /* Ajusta la altura para cubrir la tarjeta */
+  top: 0; /* Muestra la máscara completamente */
+  
+  /* transition: height 0.5s ease; */
+}

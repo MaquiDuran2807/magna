@@ -1,67 +1,33 @@
 # Fase 4: Django sirve HTML prerendered
 
-## Objetivo
+## Que se hizo
 
-Modificar `indexView` para que sirva archivos prerendered (generados en Fase 3) cuando existan, y caiga al SPA shell original como fallback. Agregar ruta `/ssg/` para comparar SPA vs SSG en desarrollo.
+Se modifico el `indexView` en `magna_web/urls.py` para que primero busque el archivo prerendered en `dist/prerendered/{path}/index.html`. Si existe, lo sirve directamente con `content-type: text/html`. Si no existe, cae al SPA original. Se agrego la ruta `/ssg/` para comparar la version prerendered vs la SPA en desarrollo.
 
-## Cambios realizados
+## Por que se hizo
 
-### Archivos modificados
+Los archivos prerendered de la Fase 3 estaban en disco pero Django no los servia. Sin este cambio, los bots seguian viendo el SPA shell. Ahora Django sirve el HTML prerendered cuando existe, y el SPA normal cuando no.
 
-| Archivo | Cambio | LOC |
-|---------|--------|-----|
-| `magna_web/urls.py` | indexView reescrito a `View` con lógica prerendered + `/ssg/` route + paths unified | +30 |
+## Impacto
 
-### Archivos nuevos
+- Sin aumento de tiempo de response (solo un `path.exists()` antes de servir)
+- Las rutas con prerendered se sirven instantaneamente (archivo estatico)
+- Las rutas sin prerendered siguen funcionando con el SPA normal
+- La ruta `/ssg/` permite comparar visualmente SPA vs SSG
 
-| Archivo | Descripción | LOC |
-|---------|-------------|-----|
-| `magna_web/tests/__init__.py` | Package de tests | +0 |
-| `magna_web/tests/test_seo_views.py` | 5 tests unitarios de vistas SEO | +95 |
-| **Total** | | **~125 LOC** |
+## Tests
 
-## Detalle de implementación
-
-### `magna_web/urls.py`
-
-- `indexView` cambió de `TemplateView` a `View` personalizado
-- Toma `request.path`, busca `prerendered/{path}/index.html`
-- Si existe → `HttpResponse` con ese HTML
-- Si no → `HttpResponse` con `index.page.html` (SPA fallback)
-- `/ssg/{path}` activa el mismo view pero con prefijo `ssg/` removido
-- `storeView` y `Robots` actualizados a paths de `unified/dist/`
-- Se removieron constantes `BASE_DIR`, `PRERENDER_DIR`, `SPA_TEMPLATE` en favor de `settings.BASE_DIR` dinámico
-
-### `magna_web/tests/test_seo_views.py`
-
-Usa `@patch('magna_web.urls.Path')` para simular `settings.BASE_DIR` apuntando a un temp dir con estructura `magna-page/unified/dist/` y archivos prerendered.
-
-| Test | Verifica |
-|------|----------|
-| `test_spa_fallback_when_no_prerendered` | Sin prerendered → SPA shell original |
-| `test_prerendered_served_when_exists` | Con prerendered → se sirve ese HTML |
-| `test_ssg_route_dev_mode` | `/ssg/` funciona (quita prefijo) |
-| `test_prerendered_has_meta_description` | El HTML prerendered incluye meta tags |
-| `test_homepage_prerendered` | Homepage sirve prerendered |
-
-### Mapa de rutas
-
-| URL | ¿Prerendered? | Sirve |
-|-----|--------------|-------|
-| `/` | Sí | `prerendered/index.html` |
-| `/servicios` | Sí | `prerendered/servicios/index.html` |
-| `/ruta-inventada` | No | `index.page.html` (SPA) |
-| `/ssg/servicios` | Sí | Mismo prerendered (sin prefijo) |
-
-### Cambios adicionales
-
-- `Robots.template_name` actualizado de `'page/dist/robot.txt'` a `'unified/dist/robot.txt'`
-- `storeView.template_name` actualizado de `'store/dist/index.html'` a `'unified/dist/index.store.html'`
-
-## Ejecución
-
-```bash
-python manage.py test magna_web.tests.test_seo_views
+```
 python manage.py test
 ```
 
+Verifica que las rutas prerendered devuelvan 200 con HTML completo.
+
+## Como probar en interfaz
+
+1. Iniciar Django: `python manage.py runserver`
+2. Visitar `http://localhost:8000/servicios/topografia`
+3. View source debe mostrar HTML completo (no el shell `<div id="root"></div>`)
+4. El HTML debe tener meta tags, titulo especifico, y contenido dentro de `<div id="root">`
+5. Visitar `http://localhost:8000/ssg/servicios/topografia` para ver la misma pagina prerendered (para comparar con la SPA en `http://localhost:8000/servicios/topografia` sin `/ssg/`)
+6. Visitar una ruta sin prerendered (ej: `/login`) y verificar que carga el SPA normal

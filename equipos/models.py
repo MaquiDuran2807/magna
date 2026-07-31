@@ -8,7 +8,7 @@ class Equipo(models.Model):
     posicion = models.CharField(max_length=50)
     imagen_height = models.PositiveIntegerField(null=True, blank=True,default=270)
     imagen_width = models.PositiveIntegerField(null=True, blank=True,default=370)
-    imagen = models.ImageField(upload_to='equipos', null=True, blank=True,height_field='imagen_height', width_field='imagen_width', verbose_name="Imagen 270 x 370px del equipo de trabajo")
+    imagen = models.ImageField(upload_to='equipos', null=True, blank=True, verbose_name="Imagen 270 x 370px del equipo de trabajo")
     def __str__(self):
         return self.nombre
     
@@ -22,7 +22,7 @@ class Tenologias(models.Model):
     descripcion = models.CharField(max_length=250)
     imagen_height = models.PositiveIntegerField(null=True, blank=True,default=270)
     imagen_width = models.PositiveIntegerField(null=True, blank=True,default=370)
-    imagen = models.ImageField(upload_to='tecnologias', null=True, blank=True,height_field='imagen_height', width_field='imagen_width', verbose_name="Imagen 270 x 370px del equpio tecnológico")
+    imagen = models.ImageField(upload_to='tecnologias', null=True, blank=True, verbose_name="Imagen 270 x 370px del equpio tecnológico")
     def __str__(self):
         return self.nombre
     
